@@ -32,6 +32,7 @@ void PID::set_constants(float kP, float kI, float kD){
 int16_t PID::step(float error){
     uint32_t new_time = micros();
     uint8_t dt = new_time - old_time_;
+    old_time_ = new_time;
 
     // Riemann Sum
     integral_ += error * dt;
