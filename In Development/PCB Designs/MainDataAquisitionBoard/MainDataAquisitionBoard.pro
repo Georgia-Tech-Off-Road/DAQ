@@ -1,4 +1,4 @@
-update=11/12/2019 8:20:46 PM
+update=1/16/2020 8:39:27 PM
 version=1
 last_client=kicad
 [general]
@@ -25,7 +25,7 @@ ERC_TestSimilarLabels=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
-LastNetListRead=ECVTProtoBoard.net
+LastNetListRead=MainDataAquisitionBoard.net
 CopperLayerCount=2
 BoardThickness=1.6
 AllowMicroVias=0
