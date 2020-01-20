@@ -214,63 +214,12 @@ Connection ~ 4450 3650
 Wire Wire Line
 	3850 3550 4450 3550
 Connection ~ 4450 3550
-$Comp
-L Device:R R1
-U 1 1 5E2406ED
-P 3750 4450
-F 0 "R1" H 3680 4404 50  0000 R CNN
-F 1 "4.7k" H 3680 4495 50  0000 R CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 3680 4450 50  0001 C CNN
-F 3 "~" H 3750 4450 50  0001 C CNN
-	1    3750 4450
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:R R2
-U 1 1 5E2442B2
-P 3750 4850
-F 0 "R2" H 3680 4804 50  0000 R CNN
-F 1 "8.2k" H 3680 4895 50  0000 R CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 3680 4850 50  0001 C CNN
-F 3 "~" H 3750 4850 50  0001 C CNN
-	1    3750 4850
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:R R3
-U 1 1 5E246794
-P 4100 4450
-F 0 "R3" H 4030 4404 50  0000 R CNN
-F 1 "4.7k" H 4030 4495 50  0000 R CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 4030 4450 50  0001 C CNN
-F 3 "~" H 4100 4450 50  0001 C CNN
-	1    4100 4450
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:R R4
-U 1 1 5E248DA4
-P 4100 4850
-F 0 "R4" H 4030 4804 50  0000 R CNN
-F 1 "8.2k" H 4030 4895 50  0000 R CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 4030 4850 50  0001 C CNN
-F 3 "~" H 4100 4850 50  0001 C CNN
-	1    4100 4850
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3750 4600 3750 4650
-Wire Wire Line
-	4100 4600 4100 4650
 Wire Wire Line
 	4100 4650 4350 4650
 Wire Wire Line
 	4350 4650 4350 5150
 Wire Wire Line
 	4350 5150 4450 5150
-Connection ~ 4100 4650
-Wire Wire Line
-	4100 4650 4100 4700
 Connection ~ 4450 5150
 Wire Wire Line
 	4450 5150 4800 5150
@@ -280,20 +229,10 @@ Wire Wire Line
 	4000 4650 4000 5250
 Wire Wire Line
 	4000 5250 4450 5250
-Connection ~ 3750 4650
-Wire Wire Line
-	3750 4650 3750 4700
 Connection ~ 4450 5250
-Wire Wire Line
-	3650 4100 3650 5000
-Wire Wire Line
-	3650 5000 3750 5000
 Connection ~ 3650 4100
 Wire Wire Line
 	3650 4100 4150 4100
-Connection ~ 3750 5000
-Wire Wire Line
-	3750 5000 4100 5000
 Wire Wire Line
 	4150 2950 4150 4100
 Wire Wire Line
@@ -313,7 +252,7 @@ Connection ~ 6850 3100
 Wire Wire Line
 	6850 3100 6850 3200
 Wire Wire Line
-	6850 2800 6350 2800
+	6850 2800 6650 2800
 Wire Wire Line
 	6350 2800 6350 3650
 Wire Wire Line
@@ -401,7 +340,7 @@ Wire Wire Line
 Wire Wire Line
 	6500 3150 6500 3400
 Wire Wire Line
-	6500 4500 6850 4500
+	6500 4500 6800 4500
 Connection ~ 5950 3150
 Wire Wire Line
 	6500 4300 6850 4300
@@ -713,11 +652,7 @@ Wire Wire Line
 Wire Wire Line
 	4100 3400 3450 3400
 Wire Wire Line
-	4100 3400 4100 4300
-Wire Wire Line
 	3750 3500 3450 3500
-Wire Wire Line
-	3750 3500 3750 4300
 Wire Wire Line
 	4250 4200 3600 4200
 Wire Wire Line
@@ -761,4 +696,47 @@ F 3 "~" H 4600 6100 50  0001 C CNN
 	1    4600 6100
 	0    1    1    0   
 $EndComp
+Wire Wire Line
+	6800 4500 6800 6050
+Wire Wire Line
+	6800 6050 5350 6050
+Wire Wire Line
+	5350 6050 5350 5900
+Wire Wire Line
+	5350 5900 4900 5900
+Connection ~ 6800 4500
+Wire Wire Line
+	6800 4500 6850 4500
+Wire Wire Line
+	3650 5600 4800 5600
+Wire Wire Line
+	4800 5600 4800 5900
+Wire Wire Line
+	6650 2800 6650 2550
+Wire Wire Line
+	6650 2550 8300 2550
+Wire Wire Line
+	8300 2550 8300 6200
+Wire Wire Line
+	8300 6200 4700 6200
+Wire Wire Line
+	4700 6200 4700 5900
+Connection ~ 6650 2800
+Wire Wire Line
+	6650 2800 6350 2800
+Wire Wire Line
+	7300 2700 8400 2700
+Wire Wire Line
+	8400 2700 8400 6300
+Wire Wire Line
+	8400 6300 4600 6300
+Wire Wire Line
+	4600 6300 4600 5900
+Connection ~ 7300 2700
+Wire Wire Line
+	4100 3400 4100 4650
+Wire Wire Line
+	3750 3500 3750 4650
+Wire Wire Line
+	3650 4100 3650 5600
 $EndSCHEMATC
