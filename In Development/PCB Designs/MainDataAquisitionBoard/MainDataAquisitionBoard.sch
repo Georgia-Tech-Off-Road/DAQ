@@ -17,8 +17,6 @@ $EndDescr
 Wire Wire Line
 	4450 3050 4800 3050
 Wire Wire Line
-	4450 3150 4800 3150
-Wire Wire Line
 	4450 3250 4800 3250
 Wire Wire Line
 	4450 3350 4800 3350
@@ -739,4 +737,82 @@ Wire Wire Line
 	3750 3500 3750 4650
 Wire Wire Line
 	3650 4100 3650 5600
+$Comp
+L Connector_Generic:Conn_01x10 J16
+U 1 1 5E2846AA
+P 2950 6050
+F 0 "J16" H 3030 6042 50  0000 L CNN
+F 1 "XbeeL" H 2750 5400 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical" H 2950 6050 50  0001 C CNN
+F 3 "~" H 2950 6050 50  0001 C CNN
+	1    2950 6050
+	1    0    0    -1  
+$EndComp
+NoConn ~ 3550 5650
+NoConn ~ 3550 5750
+NoConn ~ 3550 5850
+NoConn ~ 3550 5950
+NoConn ~ 3550 6050
+NoConn ~ 3550 6150
+NoConn ~ 3550 6250
+NoConn ~ 3550 6350
+NoConn ~ 3550 6450
+NoConn ~ 3550 6550
+NoConn ~ 2750 6450
+NoConn ~ 2750 6350
+NoConn ~ 2750 6250
+NoConn ~ 2750 6150
+NoConn ~ 2750 6050
+NoConn ~ 2750 5950
+Wire Wire Line
+	2750 6550 2300 6550
+Wire Wire Line
+	2300 6550 2300 2450
+Wire Wire Line
+	2300 2450 4150 2450
+Connection ~ 4150 2450
+$Comp
+L Connector_Generic:Conn_01x10 J17
+U 1 1 5E28781E
+P 3350 6050
+F 0 "J17" H 3430 6042 50  0000 L CNN
+F 1 "XbeeR" H 3100 5400 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical" H 3350 6050 50  0001 C CNN
+F 3 "~" H 3350 6050 50  0001 C CNN
+	1    3350 6050
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 5650 2750 2050
+Wire Wire Line
+	2750 2050 7050 2050
+Wire Wire Line
+	7050 2050 7050 2400
+Wire Wire Line
+	7050 2400 6800 2400
+Connection ~ 6800 2400
+Wire Wire Line
+	2750 5750 2650 5750
+Wire Wire Line
+	2650 5750 2650 2800
+Wire Wire Line
+	2650 2800 4000 2800
+Wire Wire Line
+	4000 2800 4000 3050
+Wire Wire Line
+	4000 3050 4450 3050
+Connection ~ 4450 3050
+Wire Wire Line
+	2750 5850 2550 5850
+Wire Wire Line
+	2550 5850 2550 2700
+Wire Wire Line
+	2550 2700 3900 2700
+Wire Wire Line
+	3900 2700 3900 3150
+Wire Wire Line
+	3900 3150 4450 3150
+Connection ~ 4450 3150
+Wire Wire Line
+	4450 3150 4800 3150
 $EndSCHEMATC
