@@ -20,21 +20,23 @@ bool writeSerialMonitor = true; //Set to true if you want to troubleshoot values
 uint16_t serialInterval  = 50 * 1000;   //us (50  ms)
 uint32_t serialTime = micros(), oldTime = micros();
 
-PoluluG2MotorDriver ecvt_driver(0.0,0.0,0.0,-255, 255);
-LDS MotorLDS(A0, 50); //inputPin, travelMM, isReversed = false #####NOTE: need to check the actual travel distance of this LDS
-PressureSensor BrakeFront(A1, 2000), BrakeBack(A2, 2000); //inputPin, scale (PSI), offset = 0
-HallEffectSpeedSensor EngineSpeed(6, 20), WheelSpeed(5, 20); //inputPin, toneWheelTeeth, intervalLength = 50us, averagingAmount = 200
+const uint16_t target_enigine_speed = 2750; 
+PoluluG2MotorDriver ecvt_driver(2.0,0.0,0.0,-255, 255);
+
+LDS ecvt_lds(A0, 50); //inputPin, travelMM, isReversed = false #####NOTE: need to check the actual travel distance of this LDS
+PressureSensor brake_front_sensor(A1, 2000), brake_back_sensor(A2, 2000); //inputPin, scale (PSI), offset = 0
+HallEffectSpeedSensor engine_speed_sensor(6, 20), wheel_speed_sensor(5, 20); //inputPin, toneWheelTeeth, intervalLength = 50us, averagingAmount = 200
 
 void setup() {
   Serial.begin(115200); //For serial monitor
   Serial2.begin(9600);  //For data transmission with DAQ Teensy
 
-  ecvt_driver.begin(2,3);
-  MotorLDS.begin();
-  BrakeFront.begin();
-  BrakeBack.begin();
-  EngineSpeed.begin();
-  WheelSpeed.begin();
+  ecvt_driver.begin(3,2);
+  ecvt_lds.begin();
+  brake_front_sensor.begin();
+  brake_back_sensor.begin();
+  engine_speed_sensor.begin();
+  wheel_speed_sensor.begin();
  
   delay(200);
 }
@@ -46,8 +48,10 @@ void loop() {
     oldTime = micros();
   }
   
-  EngineSpeed.updateSensor();
-  WheelSpeed.updateSensor();
+  engine_speed_sensor.updateSensor();
+  wheel_speed_sensor.updateSensor();
+  
+  ecvt_driver.step_pid(512 - ecvt_lds.getRawAnalog());
   
 
   /**
@@ -58,11 +62,11 @@ void loop() {
   if (abs(micros() - serialTime) > serialInterval && writeSerialMonitor){
     collectAllData();
     Serial.print("Time: "  + String(data.currTime)   + "\t");
-    Serial.print("MotorLDS: "  + String(data.lds)  + "\t");
-    Serial.print("BrakeFront: "+ String(data.brkf)  + "\t");
-    Serial.print("BrakeBack: "+ String(data.brkb)  + "\t");
-    Serial.print("EngineSpeed: "+ String(data.espd)  + "\t");
-    Serial.print("WheelSpeed: " + String(data.wspd)  + "\t");
+    Serial.print("ecvt_lds: "  + String(data.lds)  + "\t");
+    Serial.print("brake_front_sensor: "+ String(data.brkf)  + "\t");
+    Serial.print("brake_back_sensor: "+ String(data.brkb)  + "\t");
+    Serial.print("engine_speed_sensor: "+ String(data.espd)  + "\t");
+    Serial.print("wheel_speed_sensor: " + String(data.wspd)  + "\t");
     Serial.println();
 
     serialTime = micros();
@@ -71,10 +75,10 @@ void loop() {
 }
 
 inline void collectAllData(){
-  data.lds  = MotorLDS.getRawAnalog();
-  data.espd  = EngineSpeed.getSpeed();
-  data.wspd  = WheelSpeed.getSpeed();
-  data.brkf  = BrakeFront.getPressurePSI();
-  data.brkb  = BrakeBack.getPressurePSI();
+  data.lds  = ecvt_lds.getRawAnalog();
+  data.espd  = engine_speed_sensor.getSpeed();
+  data.wspd  = wheel_speed_sensor.getSpeed();
+  data.brkf  = brake_front_sensor.getPressurePSI();
+  data.brkb  = brake_back_sensor.getPressurePSI();
   data.currTime = micros();
 }

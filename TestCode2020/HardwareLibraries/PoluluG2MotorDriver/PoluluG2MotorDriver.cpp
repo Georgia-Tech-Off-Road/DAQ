@@ -11,7 +11,7 @@ void PoluluG2MotorDriver::begin(uint8_t p_pwm, uint8_t p_dir){
     p_pwm_ = p_pwm;
     p_dir_ = p_dir;
     pinMode(p_pwm_, OUTPUT);
-    pinMode(p_pwm_, OUTPUT);
+    pinMode(p_dir_, OUTPUT);
 }
 
 void PoluluG2MotorDriver::set_power(int16_t power){
@@ -27,7 +27,7 @@ void PoluluG2MotorDriver::set_power(int16_t power){
 }
 
 void PoluluG2MotorDriver::step_pid(float error){
-    pid_.step(error);
+    set_power(pid_.step(error));
 }
 
 #endif
