@@ -42,7 +42,7 @@ int16_t PID::step(float error){
     prev_error_ = error;
 
     // Adding the three terms
-    int power = error * kP_ + integral_ * kI_ + derivative_ * kD_;
+    int16_t power = error * kP_ + integral_ * kI_ + derivative_ * kD_;
 
     // Capping the power at max_power
     power = (power >  max_power_) ?  max_power_ : power;
