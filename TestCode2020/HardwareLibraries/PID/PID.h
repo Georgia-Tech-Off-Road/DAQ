@@ -15,9 +15,10 @@ class PID {
 private:
     float kP_, kI_, kD_;
     uint32_t old_time_;
-    float integral_;
+    float integral_, integral_cap_;
     float derivative_, prev_error_;
     int16_t min_power_, max_power_;
+    int16_t min_threshold_, max_threshold_;
 
 public:
     /**
@@ -28,6 +29,9 @@ public:
 
     void set_constants(float kP, float kI, float kD);
     void set_bounds(int16_t min_power, int16_t max_power);
+    void set_integral_cap(float integral_cap);
+    void set_power_bounds(int16_t min_power, int16_t max_power);
+    void set_threshold_bounds(int16_t min_threshold, int16_t max_threshold);
 
     /**
      * The step function is an instantaneous step that calculates and returns a new power value.

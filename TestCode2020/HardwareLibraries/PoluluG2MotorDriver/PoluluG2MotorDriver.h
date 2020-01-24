@@ -16,6 +16,7 @@ public:
     void begin(uint8_t p_pwm, uint8_t p_dir);
     void set_power(int16_t power);
     void step_pid(float error);
+    PID * get_pid();
 };
 
 
