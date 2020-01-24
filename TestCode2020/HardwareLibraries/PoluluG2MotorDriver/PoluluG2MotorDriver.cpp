@@ -30,4 +30,8 @@ void PoluluG2MotorDriver::step_pid(float error){
     set_power(pid_.step(error));
 }
 
+PID * PoluluG2MotorDriver::get_pid(){
+    return &pid_;
+}
+
 #endif
