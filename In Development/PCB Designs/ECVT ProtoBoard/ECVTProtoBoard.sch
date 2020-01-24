@@ -415,13 +415,9 @@ Wire Wire Line
 Wire Wire Line
 	6200 4650 3950 4650
 Wire Wire Line
-	3950 4650 3950 3700
-Wire Wire Line
 	3950 3550 4450 3550
 Connection ~ 7550 3650
 Connection ~ 4450 3550
-Wire Wire Line
-	3850 4950 3850 4100
 Wire Wire Line
 	3850 3650 4450 3650
 Wire Wire Line
@@ -438,16 +434,6 @@ NoConn ~ 3200 3000
 Wire Wire Line
 	6100 4550 3600 4550
 Connection ~ 6100 4550
-Wire Wire Line
-	3850 4100 3200 4100
-Connection ~ 3850 4100
-Wire Wire Line
-	3850 4100 3850 3650
-Wire Wire Line
-	3950 3700 3200 3700
-Connection ~ 3950 3700
-Wire Wire Line
-	3950 3700 3950 3550
 Wire Wire Line
 	6300 4150 6300 4750
 Connection ~ 6300 4150
@@ -539,13 +525,13 @@ Connection ~ 6600 2950
 $Comp
 L Connector_Generic:Conn_01x02 J20
 U 1 1 5E2EAEE4
-P 8800 3300
-F 0 "J20" V 8764 3112 50  0000 R CNN
-F 1 "BrakeIn" V 8673 3112 50  0000 R CNN
-F 2 "CustomKiCADLibrary:PinHeader_1x02_P5.08mm_Vertical" H 8800 3300 50  0001 C CNN
-F 3 "~" H 8800 3300 50  0001 C CNN
-	1    8800 3300
-	0    -1   -1   0   
+P 8900 3300
+F 0 "J20" V 8864 3112 50  0000 R CNN
+F 1 "BrakeIn" V 8773 3112 50  0000 R CNN
+F 2 "CustomKiCADLibrary:PinHeader_1x02_P5.08mm_Vertical" H 8900 3300 50  0001 C CNN
+F 3 "~" H 8900 3300 50  0001 C CNN
+	1    8900 3300
+	0    1    -1   0   
 $EndComp
 $Comp
 L Device:R R8
@@ -636,10 +622,6 @@ Wire Wire Line
 	8450 4000 8450 2600
 Wire Wire Line
 	8450 2600 3550 2600
-Wire Wire Line
-	3550 2600 3550 3400
-Wire Wire Line
-	3550 3400 3200 3400
 Connection ~ 8450 4000
 Wire Wire Line
 	8450 4000 8750 4000
@@ -647,10 +629,6 @@ Wire Wire Line
 	8600 3950 8600 2500
 Wire Wire Line
 	8600 2500 3450 2500
-Wire Wire Line
-	3450 2500 3450 3300
-Wire Wire Line
-	3450 3300 3200 3300
 Connection ~ 8600 3950
 Wire Wire Line
 	8600 3950 9100 3950
@@ -680,17 +658,39 @@ Wire Wire Line
 Wire Wire Line
 	5950 2950 6500 2950
 Wire Wire Line
-	3200 4200 4350 4200
-Wire Wire Line
-	3200 4400 4400 4400
-Wire Wire Line
-	4350 4200 4350 3850
-Wire Wire Line
 	4350 3850 4450 3850
 Connection ~ 4450 3850
-Wire Wire Line
-	4400 4400 4400 3750
-Wire Wire Line
-	4400 3750 4450 3750
 Connection ~ 4450 3750
+Wire Wire Line
+	3850 3650 3850 4200
+Wire Wire Line
+	3450 3750 3450 4100
+Wire Wire Line
+	3450 4100 3200 4100
+Wire Wire Line
+	3450 3750 4450 3750
+Wire Wire Line
+	4350 3850 4350 3700
+Wire Wire Line
+	4350 3700 3200 3700
+Wire Wire Line
+	3950 3550 3950 4400
+Wire Wire Line
+	3850 4200 3200 4200
+Connection ~ 3850 4200
+Wire Wire Line
+	3850 4200 3850 4950
+Wire Wire Line
+	3200 4400 3950 4400
+Connection ~ 3950 4400
+Wire Wire Line
+	3950 4400 3950 4650
+Wire Wire Line
+	3450 3400 3200 3400
+Wire Wire Line
+	3450 2500 3450 3400
+Wire Wire Line
+	3550 3300 3200 3300
+Wire Wire Line
+	3550 2600 3550 3300
 $EndSCHEMATC
