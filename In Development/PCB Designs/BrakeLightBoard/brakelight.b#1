@@ -1710,16 +1710,16 @@ design rules under a new name.</description>
 <attribute name="NAME" x="37.2375" y="24.3975" size="1.27" layer="25" ratio="12"/>
 <attribute name="VALUE" x="48.6675" y="14.2375" size="1.27" layer="27" ratio="12" rot="R90"/>
 </element>
-<element name="INO_READ" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="50.6222" y="31.7754" smashed="yes">
-<attribute name="MF" value="" x="40.2082" y="43.9674" size="1.778" layer="27" display="off"/>
-<attribute name="MPN" value="237-102" x="40.2082" y="43.9674" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="46.776" y="26.7716" size="1.27" layer="25" ratio="10"/>
-<attribute name="OC_FARNELL" value="unknown" x="40.2082" y="43.9674" size="1.778" layer="27" display="off"/>
-<attribute name="OC_NEWARK" value="70K9898" x="40.2082" y="43.9674" size="1.778" layer="27" display="off"/>
-<attribute name="POPULARITY" value="32" x="40.2082" y="43.9674" size="1.778" layer="27" display="off"/>
-<attribute name="PT1READ" value="" x="50.6222" y="31.7754" size="1.778" layer="27" display="off"/>
-<attribute name="PT2READ" value="" x="50.6222" y="31.7754" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="45.5822" y="24.1554" size="1.27" layer="27" ratio="10"/>
+<element name="INO_READ" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="50.5206" y="32.1818" smashed="yes">
+<attribute name="MF" value="" x="40.1066" y="44.3738" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="237-102" x="40.1066" y="44.3738" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="46.6744" y="27.178" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="40.1066" y="44.3738" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="70K9898" x="40.1066" y="44.3738" size="1.778" layer="27" display="off"/>
+<attribute name="POPULARITY" value="32" x="40.1066" y="44.3738" size="1.778" layer="27" display="off"/>
+<attribute name="PT1READ" value="" x="50.5206" y="32.1818" size="1.778" layer="27" display="off"/>
+<attribute name="PT2READ" value="" x="50.5206" y="32.1818" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="45.4806" y="24.5618" size="1.27" layer="27" ratio="10"/>
 </element>
 <element name="U$1" library="GTOR" package="DIL08" value="LM311" x="19.1262" y="21.3106" smashed="yes" rot="R180">
 <attribute name="VALUE" x="12.5984" y="23.9268" size="1.27" layer="27" ratio="10" rot="R270"/>
@@ -1826,8 +1826,8 @@ design rules under a new name.</description>
 <wire x1="36.333" y1="30.964" x2="40.2906" y2="27.0064" width="0.381" layer="1"/>
 <wire x1="40.2906" y1="27.0064" x2="41.5414" y2="25.7556" width="0.381" layer="1"/>
 <wire x1="50.2158" y1="25.7556" x2="41.5414" y2="25.7556" width="0.381" layer="1"/>
-<wire x1="50.2158" y1="25.7556" x2="53.1222" y2="28.662" width="0.381" layer="1"/>
-<wire x1="53.1222" y1="28.662" x2="53.1222" y2="30.5054" width="0.381" layer="1"/>
+<wire x1="50.2158" y1="25.7556" x2="53.0206" y2="28.5604" width="0.381" layer="1"/>
+<wire x1="53.0206" y1="28.5604" x2="53.0206" y2="30.9118" width="0.381" layer="1"/>
 <contactref element="U$2" pad="3"/>
 <wire x1="35.2552" y1="21.9456" x2="40.2906" y2="26.981" width="0.381" layer="1"/>
 <wire x1="40.2906" y1="26.981" x2="40.2906" y2="27.0064" width="0.381" layer="1"/>
@@ -1840,8 +1840,8 @@ design rules under a new name.</description>
 <wire x1="32.1564" y1="28.448" x2="33.274" y2="29.5656" width="0.381" layer="1"/>
 <wire x1="33.274" y1="29.5656" x2="33.274" y2="32.8422" width="0.381" layer="1"/>
 <wire x1="33.274" y1="32.8422" x2="35.0012" y2="34.5694" width="0.381" layer="1"/>
-<wire x1="44.0582" y1="34.5694" x2="48.1222" y2="30.5054" width="0.381" layer="1"/>
-<wire x1="35.0012" y1="34.5694" x2="44.0582" y2="34.5694" width="0.381" layer="1"/>
+<wire x1="44.363" y1="34.5694" x2="48.0206" y2="30.9118" width="0.381" layer="1"/>
+<wire x1="35.0012" y1="34.5694" x2="44.363" y2="34.5694" width="0.381" layer="1"/>
 <contactref element="U$1" pad="3"/>
 <wire x1="20.28" y1="30.9" x2="17.8562" y2="28.4762" width="0.381" layer="1"/>
 <wire x1="17.8562" y1="28.4762" x2="17.8562" y2="25.1206" width="0.381" layer="1"/>

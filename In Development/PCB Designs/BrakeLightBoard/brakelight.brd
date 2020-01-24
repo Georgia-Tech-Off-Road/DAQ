@@ -1871,17 +1871,16 @@ design rules under a new name.</description>
 <contactref element="BRAKELIGHT" pad="1"/>
 <contactref element="5V_LINREG" pad="IN"/>
 <contactref element="LIPO_CONN" pad="1"/>
-<wire x1="5.905" y1="18.659" x2="4.4572" y2="18.659" width="0.762" layer="1"/>
-<wire x1="4.4572" y1="18.659" x2="1.5522" y2="21.564" width="0.762" layer="1"/>
-<wire x1="1.5522" y1="21.564" x2="1.5522" y2="25.5522" width="0.762" layer="1"/>
-<wire x1="1.5522" y1="25.5522" x2="5.488" y2="29.488" width="0.762" layer="1"/>
-<wire x1="5.488" y1="29.488" x2="5.948" y2="29.488" width="0.762" layer="1"/>
-<wire x1="5.905" y1="18.659" x2="2" y2="14.754" width="0.762" layer="1"/>
-<wire x1="2" y1="3" x2="3" y2="2" width="0.762" layer="1"/>
-<wire x1="3" y1="2" x2="20" y2="2" width="0.762" layer="1"/>
+<wire x1="5.948" y1="29.488" x2="9.35" y2="26.086" width="0.762" layer="1"/>
+<wire x1="9.35" y1="26.086" x2="9.35" y2="22.104" width="0.762" layer="1"/>
+<wire x1="5.905" y1="18.659" x2="9.35" y2="22.104" width="0.762" layer="1"/>
+<wire x1="5.905" y1="18.659" x2="5.905" y2="18.405" width="0.762" layer="1"/>
+<wire x1="5.905" y1="18.405" x2="2.4572" y2="14.9572" width="0.762" layer="1"/>
+<wire x1="2.4572" y1="2.5428" x2="2.6698" y2="2.3302" width="0.762" layer="1"/>
+<wire x1="2.6698" y1="2.3302" x2="20.3302" y2="2.3302" width="0.762" layer="1"/>
 <wire x1="22.426" y1="4.426" x2="22.426" y2="6.194" width="0.762" layer="1"/>
-<wire x1="2" y1="14.754" x2="2" y2="3" width="0.762" layer="1"/>
-<wire x1="20" y1="2" x2="22.426" y2="4.426" width="0.762" layer="1"/>
+<wire x1="2.4572" y1="14.9572" x2="2.4572" y2="2.5428" width="0.762" layer="1"/>
+<wire x1="20.3302" y1="2.3302" x2="22.426" y2="4.426" width="0.762" layer="1"/>
 </signal>
 <signal name="THRESH1">
 <contactref element="TRIMPOT1" pad="2"/>
