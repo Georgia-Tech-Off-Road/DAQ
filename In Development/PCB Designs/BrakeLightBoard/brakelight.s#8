@@ -3377,16 +3377,14 @@ Source:  Data sheet</description>
 <plain>
 </plain>
 <instances>
-<instance part="IC1" gate="A" x="50.8" y="71.12" smashed="yes">
-<attribute name="NAME" x="53.34" y="76.835" size="1.778" layer="95"/>
-<attribute name="VALUE" x="53.34" y="66.04" size="1.778" layer="96"/>
+<instance part="IC1" gate="A" x="48.26" y="71.12" smashed="yes">
+<attribute name="VALUE" x="50.8" y="76.2" size="1.778" layer="96"/>
 </instance>
 <instance part="IC2" gate="A" x="48.26" y="30.48" smashed="yes">
-<attribute name="NAME" x="50.8" y="36.195" size="1.778" layer="95"/>
-<attribute name="VALUE" x="50.8" y="25.4" size="1.778" layer="96"/>
+<attribute name="VALUE" x="50.8" y="35.56" size="1.778" layer="96"/>
 </instance>
-<instance part="Q1" gate="G$1" x="76.2" y="73.66" smashed="yes">
-<attribute name="VALUE" x="73.605" y="73.2" size="1.778" layer="96" rot="R90"/>
+<instance part="Q1" gate="G$1" x="73.66" y="73.66" smashed="yes">
+<attribute name="VALUE" x="71.065" y="73.2" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="Q2" gate="G$1" x="73.66" y="33.02" smashed="yes">
 <attribute name="VALUE" x="70.899" y="32.561" size="1.778" layer="96" rot="R90"/>
@@ -3413,7 +3411,7 @@ Source:  Data sheet</description>
 <segment>
 <pinref part="IC1" gate="A" pin="OUT"/>
 <pinref part="Q1" gate="G$1" pin="G"/>
-<wire x1="58.42" y1="71.12" x2="71.12" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="71.12" x2="68.58" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -3426,8 +3424,8 @@ Source:  Data sheet</description>
 <net name="5V" class="0">
 <segment>
 <pinref part="IC1" gate="A" pin="V+"/>
-<wire x1="48.26" y1="78.74" x2="48.26" y2="79.772" width="0.1524" layer="91"/>
-<label x="48.26" y="79.772" size="1.778" layer="95" rot="R90" xref="yes"/>
+<wire x1="45.72" y1="78.74" x2="45.72" y2="79.772" width="0.1524" layer="91"/>
+<label x="45.72" y="79.772" size="1.778" layer="95" rot="R90" xref="yes"/>
 </segment>
 <segment>
 <pinref part="IC2" gate="A" pin="V+"/>
@@ -3454,13 +3452,13 @@ Source:  Data sheet</description>
 </segment>
 <segment>
 <pinref part="IC1" gate="A" pin="GND"/>
-<wire x1="50.8" y1="63.5" x2="50.8" y2="62.912" width="0.1524" layer="91"/>
-<label x="50.8" y="62.912" size="1.778" layer="95" rot="R270" xref="yes"/>
+<wire x1="48.26" y1="63.5" x2="48.26" y2="62.912" width="0.1524" layer="91"/>
+<label x="48.26" y="62.912" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 <segment>
 <pinref part="Q1" gate="G$1" pin="S"/>
-<wire x1="81.28" y1="71.12" x2="81.28" y2="68.58" width="0.1524" layer="91"/>
-<label x="81.28" y="68.58" size="1.778" layer="95" rot="R270" xref="yes"/>
+<wire x1="78.74" y1="71.12" x2="78.74" y2="68.58" width="0.1524" layer="91"/>
+<label x="78.74" y="68.58" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 <segment>
 <pinref part="Q2" gate="G$1" pin="S"/>
@@ -3495,12 +3493,6 @@ Source:  Data sheet</description>
 <label x="-17" y="67" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="N$5" class="0">
-<segment>
-<pinref part="Q1" gate="G$1" pin="D"/>
-<wire x1="88.476" y1="76.152" x2="81.28" y2="76.2" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="THRESH" class="0">
 <segment>
 <pinref part="TRIMPOT" gate="G$1" pin="S"/>
@@ -3509,19 +3501,13 @@ Source:  Data sheet</description>
 </segment>
 <segment>
 <pinref part="IC1" gate="A" pin="+IN"/>
-<wire x1="43.18" y1="73.66" x2="40.64" y2="73.66" width="0.1524" layer="91"/>
-<label x="40.64" y="73.66" size="1.778" layer="95" rot="R180" xref="yes"/>
+<wire x1="40.64" y1="73.66" x2="38.1" y2="73.66" width="0.1524" layer="91"/>
+<label x="38.1" y="73.66" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="IC2" gate="A" pin="+IN"/>
 <wire x1="40.64" y1="33.02" x2="38.1" y2="33.02" width="0.1524" layer="91"/>
 <label x="38.1" y="33.02" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-</net>
-<net name="N$8" class="0">
-<segment>
-<pinref part="Q2" gate="G$1" pin="D"/>
-<wire x1="78.74" y1="35.56" x2="88.9" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="PT2" class="0">
@@ -3534,8 +3520,17 @@ Source:  Data sheet</description>
 <net name="PT1" class="0">
 <segment>
 <pinref part="IC1" gate="A" pin="-IN"/>
-<wire x1="43.18" y1="68.58" x2="40.64" y2="68.58" width="0.1524" layer="91"/>
-<label x="40.64" y="68.58" size="1.778" layer="95" rot="R180" xref="yes"/>
+<wire x1="40.64" y1="68.58" x2="38.1" y2="68.58" width="0.1524" layer="91"/>
+<label x="38.1" y="68.58" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="Q1" gate="G$1" pin="D"/>
+<wire x1="78.74" y1="76.2" x2="83.82" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="83.82" y1="76.2" x2="83.82" y2="35.56" width="0.1524" layer="91"/>
+<pinref part="Q2" gate="G$1" pin="D"/>
+<wire x1="83.82" y1="35.56" x2="78.74" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
