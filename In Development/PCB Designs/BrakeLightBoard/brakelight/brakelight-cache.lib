@@ -1,0 +1,178 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# brakelight-eagle-import_78XXL
+#
+DEF brakelight-eagle-import_78XXL IC 0 40 Y Y 1 L N
+F0 "IC" 100 -300 59 H V L BNN
+F1 "brakelight-eagle-import_78XXL" 100 -400 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+T 0 -80 -170 51 0 1 0 GND Normal 0 L B
+T 0 -175 -25 51 0 1 0 IN Normal 0 L B
+T 0 25 -25 51 0 1 0 OUT Normal 0 L B
+P 2 1 0 0 -200 -200 200 -200 N
+P 2 1 0 0 -200 100 -200 -200 N
+P 2 1 0 0 200 -200 200 100 N
+P 2 1 0 0 200 100 -200 100 N
+X GND GND 0 -300 100 U 0 0 1 0 I
+X IN IN -300 0 100 R 0 0 1 0 I
+X OUT OUT 300 0 100 L 0 0 1 0 P
+ENDDRAW
+ENDDEF
+#
+# brakelight-eagle-import_GND
+#
+DEF brakelight-eagle-import_GND #GND 0 40 Y Y 1 L P
+F0 "#GND" 0 0 50 H I C CNN
+F1 "brakelight-eagle-import_GND" -100 -100 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -75 0 75 0 N
+X GND 1 0 100 100 D 0 0 1 0 W
+ENDDRAW
+ENDDEF
+#
+# brakelight-eagle-import_LM311N
+#
+DEF brakelight-eagle-import_LM311N IC 0 40 Y Y 1 L N
+F0 "IC" 100 225 59 H V L BNN
+F1 "brakelight-eagle-import_LM311N" 100 -200 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+T 900 50 -200 27 0 1 0 GND Normal 0 L B
+T 900 50 125 27 0 1 0 ON Normal 0 L B
+T 900 125 100 27 0 1 0 ON/STR Normal 0 L B
+T 900 -50 175 27 0 1 0 V+ Normal 0 L B
+T 900 -50 -225 27 0 1 0 V- Normal 0 L B
+P 2 1 0 0 -200 -200 200 0 N
+P 2 1 0 0 -200 200 -200 -200 N
+P 2 1 0 0 -200 200 200 0 N
+P 2 1 0 0 -175 -100 -125 -100 N
+P 2 1 0 0 -175 100 -125 100 N
+P 2 1 0 0 -150 125 -150 75 N
+P 2 1 0 0 -100 -153 -100 -200 N
+P 2 1 0 0 -100 200 -100 153 N
+P 2 1 0 0 0 -200 0 -103 N
+P 2 1 0 0 0 200 0 103 N
+P 2 1 0 0 104 51 200 100 N
+X GND 1 0 -300 100 U 50 0 1 0 P
+X +IN 2 -300 100 100 R 50 0 1 0 I
+X -IN 3 -300 -100 100 R 50 0 1 0 I
+X V- 4 -100 -300 100 U 50 0 1 0 W
+X ON 5 0 300 100 D 50 0 1 0 P
+X ON/STR 6 300 100 100 L 50 0 1 0 P
+X OUT 7 300 0 100 L 50 0 1 0 O
+X V+ 8 -100 300 100 D 50 0 1 0 W
+ENDDRAW
+ENDDEF
+#
+# brakelight-eagle-import_PINHD-1X2
+#
+DEF brakelight-eagle-import_PINHD-1X2 JP 0 40 Y Y 1 L N
+F0 "JP" -250 225 59 H V L BNN
+F1 "brakelight-eagle-import_PINHD-1X2" -250 -200 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -250 -100 50 -100 N
+P 2 1 0 0 -250 200 -250 -100 N
+P 2 1 0 0 50 -100 50 200 N
+P 2 1 0 0 50 200 -250 200 N
+X 1 1 -100 100 100 R 50 0 1 0 P I
+X 2 2 -100 0 100 R 50 0 1 0 P I
+ENDDRAW
+ENDDEF
+#
+# brakelight-eagle-import_R-TRIMM74W
+#
+DEF brakelight-eagle-import_R-TRIMM74W R 0 40 Y Y 1 L N
+F0 "R" -235 -150 59 V V L BNN
+F1 "brakelight-eagle-import_R-TRIMM74W" -150 -150 59 V V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -100 -100 -100 -20 N
+P 2 1 0 0 -100 -20 -120 -60 N
+P 2 1 0 0 -100 -20 -80 -60 N
+P 2 1 0 0 -90 50 -65 95 N
+P 2 1 0 0 -30 -100 30 -100 N
+P 2 1 0 0 -30 100 -30 -100 N
+P 2 1 0 0 0 100 -30 100 N
+P 2 1 0 0 0 100 0 200 N
+P 2 1 0 0 30 -100 30 100 N
+P 2 1 0 0 30 100 0 100 N
+P 2 1 0 0 65 0 -74 69 N
+P 2 1 0 0 100 0 65 0 N
+X A 1 0 -200 100 U 50 0 1 0 P
+X S 2 200 0 100 L 50 0 1 0 P
+X E 3 0 200 100 D 50 0 1 0 P
+ENDDRAW
+ENDDEF
+#
+# brakelight-eagle-import_R-US_0204_2V
+#
+DEF brakelight-eagle-import_R-US_0204_2V R 0 40 Y Y 1 L N
+F0 "R" -150 59 59 H V L BNN
+F1 "brakelight-eagle-import_R-US_0204_2V" -150 -130 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -100 0 -85 40 N
+P 2 1 0 0 -85 40 -60 -40 N
+P 2 1 0 0 -60 -40 -35 40 N
+P 2 1 0 0 -35 40 -10 -40 N
+P 2 1 0 0 -10 -40 15 40 N
+P 2 1 0 0 15 40 40 -40 N
+P 2 1 0 0 40 -40 65 40 N
+P 2 1 0 0 65 40 90 -40 N
+P 2 1 0 0 90 -40 100 0 N
+X 1 1 -200 0 100 R 0 0 1 0 P
+X 2 2 200 0 100 L 0 0 1 0 P
+ENDDRAW
+ENDDEF
+#
+# brakelight-eagle-import_SUP75N06-08
+#
+DEF brakelight-eagle-import_SUP75N06-08 Q 0 40 Y Y 1 L N
+F0 "Q" -450 100 59 H V L BNN
+F1 "brakelight-eagle-import_SUP75N06-08" -450 0 59 H V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -100 -100 -48 -100 N
+P 2 1 0 0 -45 100 -45 -100 N
+P 2 1 0 0 0 -55 0 -145 N
+P 2 1 0 0 0 0 0 -30 N
+P 2 1 0 0 0 0 25 0 N
+P 2 1 0 0 0 30 0 0 N
+P 2 1 0 0 0 145 0 55 N
+P 2 1 0 0 25 0 100 0 N
+P 2 1 0 0 75 -25 25 0 N
+P 2 1 0 0 75 25 25 0 N
+P 2 1 0 0 100 0 100 -100 N
+X G 1 -200 -100 100 R 0 0 1 0 P
+X D 2 200 100 200 L 0 0 1 0 P
+X S 3 200 -100 200 L 0 0 1 0 P
+ENDDRAW
+ENDDEF
+#
+# brakelight-eagle-import_V+
+#
+DEF brakelight-eagle-import_V+ #P+ 0 40 Y Y 1 L P
+F0 "#P+" 0 0 50 H I C CNN
+F1 "brakelight-eagle-import_V+" -100 -100 59 V V L BNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 1 0 0 -35 -50 35 -50 N
+P 2 1 0 0 0 5 -35 -50 N
+P 2 1 0 0 35 -50 0 5 N
+X V+ 1 0 -100 100 U 0 0 1 0 W
+ENDDRAW
+ENDDEF
+#
+#End Library
