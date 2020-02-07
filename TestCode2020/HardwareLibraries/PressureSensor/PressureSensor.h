@@ -13,15 +13,15 @@ private:
      * 
      */
     uint8_t _inputPin;
-    uint16_t _scale;
-    uint16_t _offset;
-    bool _isReversed;
+    uint16_t _maxPressure;
+    uint16_t _r1;
+    uint16_t _r2;
 
 public:
     /**
      * Constructor for the PressureSensor sensor
      */
-    PressureSensor(int inputPin, uint16_t scale, uint16_t offset = 0);
+    PressureSensor(int inputPin, uint16_t maxPressure, uint16_t r1, uint16_t r2);
 
     /**
      * Configures hardware; required in setup

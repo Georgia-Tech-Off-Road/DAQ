@@ -9,10 +9,12 @@
 #include <Arduino.h>
 
 
-PressureSensor::PressureSensor(int inputPin, uint16_t scale, uint16_t offset = 0){
+PressureSensor::PressureSensor(int inputPin, uint16_t maxPressure, uint16_t r1, uint16_t r2){
   _inputPin = inputPin;
-  _scale = scale;
-  _offset = offset;
+  _maxPressure = maxPressure;
+  _r1 = r1; //ohms; This is the resistor that goes from the signal to the middle of the voltage divide
+  _r2 = r2; //ohms; This is the resistor that goes to ground
+
 }
 
 void PressureSensor::begin(){
@@ -21,7 +23,7 @@ void PressureSensor::begin(){
 
 
 uint16_t PressureSensor::getPressurePSI(){
-  return round(analogRead(_inputPin) * _scale / 1023) + _offset;
+  return map(analogRead(_inputPin), 1023*0.5*_r2/(3.3*(_r1 + _r2)), 1023*4.5*_r2/(3.3*(_r1 + _r2)), 0, _maxPressure);
 }
 
 
