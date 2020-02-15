@@ -14,7 +14,7 @@ struct Data{
   uint8_t bls;   //Value needs to be bigger if travel is more than 255mm
   uint8_t steer; //Value needs to be bigger if travel is more than 255mm
   uint8_t ecvt;  //Value needs to be bigger if travel is more than 255mm
-  uint8_t throttle; //Throttle position ###Parameters currently unknown###
+  uint8_t throttle; //Throttle position 0-55 degrees
   uint16_t espd; //Engine speed in rpm
   uint16_t wspd; //Wheel speed in rpm
   uint16_t brkf; //Brake pressure in psi
