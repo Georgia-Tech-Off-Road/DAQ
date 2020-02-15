@@ -6,6 +6,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
+#include <DS3232RTC.h>        // https://github.com/JChristensen/DS3232RTC
 
 struct Data{
   uint8_t frs;   //Value needs to be bigger if travel is more than 255mm
@@ -149,6 +150,7 @@ void setup() {
   BrakeBack.begin();
   EngineSpeed.begin();
   WheelSpeed.begin();
+  setSyncProvider(RTC.get);   // the function to get the time from the RTC
 
   pinMode(throttlePin, INPUT);
 
@@ -293,6 +295,9 @@ inline void collectAllData(){
   data.wspd  = WheelSpeed.getSpeed();
   data.brkf  = BrakeFront.getPressurePSI();
   data.brkb  = BrakeBack.getPressurePSI();
+  data.hrs   = hour();
+  data.mins  = minute();
+  data.secs  = second();
 
   data.throttle = map(analogRead(throttlePin),0,1023,55,0);
 
