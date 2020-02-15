@@ -33,6 +33,7 @@ void setup() {
 
   ecvt_driver.begin(3,2);
   PID * ecvt_pid = ecvt_driver.get_pid();
+  
   ecvt_pid->set_constants(2.0,0.001,0.0);
   ecvt_pid->set_integral_cap(100000);
   ecvt_pid->set_power_bounds(-255,255);
@@ -71,11 +72,14 @@ void loop() {
   if(engine_speed < threshold_rpm){
     // ECVT IS DISENGAGED
     const uint16_t disengaged_lds_pos = 1000;
+    ecvt_driver.set_power(-127);
     ecvt_driver.step_pid(disengaged_lds_pos - lds_pos);
   } else if(lds_pos >= min_lds_pos && lds_pos <= max_lds_pos) {  
     // ECVT IS ENGAGED
     ecvt_driver.set_power(ecvt_speed_pid.step(target_enigine_speed - engine_speed));
   }
+  Serial.print("Engine Speed: " + String(engine_speed) + "\t");
+  Serial.println("LDS: " + String(lds_pos));
 
   /**
    * If the time since last writing is greater than the interval time,
