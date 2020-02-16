@@ -6,18 +6,19 @@ long timeout = 2000000; //2 Seconds in microseconds
 
 void setup() {
   Serial.begin(9600);
+  Serial1.begin(9600);
 
 }
 
 void loop() {
-  Serial.write(1);
+  Serial1.write(1);
   initTime = micros();
-  while(!Serial.available() && ((micros() - initTime) < timeout)){
+  while(!Serial1.available() && ((micros() - initTime) < timeout)){
     
   }
-  if(Serial.available()){
+  if(Serial1.available()){
     TOF = (micros() - initTime) / 2;
-    incomingByte = Serial.read();
+    incomingByte = Serial1.read();
     Serial.print("Time of Flight: ");
     Serial.println(TOF);
   }
@@ -25,7 +26,7 @@ void loop() {
     Serial.println("No data received: Timeout occured");
   }
   delay(500);
-  while(Serial.available()){
-    Serial.read();
+  while(Serial1.available()){
+    Serial1.read();
   }
 }

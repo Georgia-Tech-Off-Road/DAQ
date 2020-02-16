@@ -2,13 +2,13 @@
 int incomingByte = 0;
 
 void setup() {
-  Serial.begin(9600);
+  Serial1.begin(9600);
 
 }
 
 void loop() {
-  if(Serial.available()){
-    incomingByte = Serial.read();
-    Serial.write(incomingByte);
+  if(Serial1.available()){
+    incomingByte = Serial1.read();
+    Serial1.write(incomingByte);
   }
 }
