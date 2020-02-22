@@ -27,6 +27,7 @@ struct Data{
   imu::Vector<3> accel2;
   imu::Vector<3> gyro1;
   imu::Vector<3> gyro2;
+  imu::Vector<3> euler1;
 
   uint8_t hrs; //RTC hours (0-24)
   uint8_t mins; //RTC minutes (0-60)
@@ -37,66 +38,66 @@ struct Data{
   uint8_t allDataXBee[64] = {0};
 
   inline void packDataSD(){    
-    allDataSD[0] = (byte) frs;
-    allDataSD[1] = (byte) fls;
-    allDataSD[2] = (byte) brs;
-    allDataSD[3] = (byte) bls;
-    allDataSD[4] = (byte) steer;
-    allDataSD[5] = (byte) ecvt;
-    allDataSD[6] = (byte) throttle;
-    allDataSD[7] = (byte) hrs;
-    allDataSD[8] = (byte) mins;
-    allDataSD[9] = (byte) secs;
-    allDataSD[10] = (byte) espd;
-    allDataSD[11] = (byte) espd >> 8;
-    allDataSD[12] = (byte) wspd;
-    allDataSD[13] = (byte) wspd >> 8;
-    allDataSD[14] = (byte) brkf;
-    allDataSD[15] = (byte) brkf >> 8;
-    allDataSD[16] = (byte) brkb;
-    allDataSD[17] = (byte) brkb >> 8;
-    allDataSD[18] = (byte)((int16_t)(imu1.w()*(1 << 14)));
-    allDataSD[19] = (byte)((int16_t)(imu1.w()*(1 << 14))) >> 8;
-    allDataSD[20] = (byte)((int16_t)(imu1.x()*(1 << 14)));
-    allDataSD[21] = (byte)((int16_t)(imu1.x()*(1 << 14))) >> 8;
-    allDataSD[22] = (byte)((int16_t)(imu1.y()*(1 << 14)));
-    allDataSD[23] = (byte)((int16_t)(imu1.y()*(1 << 14))) >> 8;
-    allDataSD[24] = (byte)((int16_t)(imu1.z()*(1 << 14)));
-    allDataSD[25] = (byte)((int16_t)(imu1.z()*(1 << 14))) >> 8;
-    allDataSD[26] = (byte)((int16_t)(imu2.w()*(1 << 14)));
-    allDataSD[27] = (byte)((int16_t)(imu2.w()*(1 << 14))) >> 8;
-    allDataSD[28] = (byte)((int16_t)(imu2.x()*(1 << 14)));
-    allDataSD[29] = (byte)((int16_t)(imu2.x()*(1 << 14))) >> 8;
-    allDataSD[30] = (byte)((int16_t)(imu2.y()*(1 << 14)));
-    allDataSD[31] = (byte)((int16_t)(imu2.y()*(1 << 14))) >> 8;
-    allDataSD[32] = (byte)((int16_t)(imu2.z()*(1 << 14)));
-    allDataSD[33] = (byte)((int16_t)(imu2.z()*(1 << 14))) >> 8;
-    allDataSD[34] = (byte)((int16_t)(accel1.x()*100));
-    allDataSD[35] = (byte)((int16_t)(accel1.x()*100)) >> 8;
-    allDataSD[36] = (byte)((int16_t)(accel1.y()*100));
-    allDataSD[37] = (byte)((int16_t)(accel1.y()*100)) >> 8;
-    allDataSD[38] = (byte)((int16_t)(accel1.z()*100));
-    allDataSD[39] = (byte)((int16_t)(accel1.z()*100)) >> 8;
-    allDataSD[40] = (byte)((int16_t)(accel2.x()*100));
-    allDataSD[41] = (byte)((int16_t)(accel2.x()*100)) >> 8;
-    allDataSD[42] = (byte)((int16_t)(accel2.y()*100));
-    allDataSD[43] = (byte)((int16_t)(accel2.y()*100)) >> 8;
-    allDataSD[44] = (byte)((int16_t)(accel2.z()*100));
-    allDataSD[45] = (byte)((int16_t)(accel2.z()*100)) >> 8;
-    allDataSD[46] = (byte)((int16_t)(gyro1.x()*100));
-    allDataSD[47] = (byte)((int16_t)(gyro1.x()*100)) >> 8;
-    allDataSD[48] = (byte)((int16_t)(gyro1.y()*100));
-    allDataSD[49] = (byte)((int16_t)(gyro1.y()*100)) >> 8;
-    allDataSD[50] = (byte)((int16_t)(gyro1.z()*100));
-    allDataSD[51] = (byte)((int16_t)(gyro1.z()*100)) >> 8;
-    allDataSD[52] = (byte) 0;
-    allDataSD[53] = (byte) 0;
-    allDataSD[54] = (byte) 0;
-    allDataSD[55] = (byte) 0;
-    allDataSD[56] = (byte) atime;
-    allDataSD[57] = (byte) atime >> 8;
-    allDataSD[58] = (byte) atime >> 16;
-    allDataSD[59] = (byte) atime >> 24;
+    allDataSD[0]  = frs;
+    allDataSD[1]  = fls;
+    allDataSD[2]  = brs;
+    allDataSD[3]  = bls;
+    allDataSD[4]  = steer;
+    allDataSD[5]  = ecvt;
+    allDataSD[6]  = throttle;
+    allDataSD[7]  = hrs;
+    allDataSD[8]  = mins;
+    allDataSD[9]  = secs;
+    allDataSD[10] = espd;
+    allDataSD[11] = espd >> 8;
+    allDataSD[12] = wspd;
+    allDataSD[13] = wspd >> 8;
+    allDataSD[14] = brkf;
+    allDataSD[15] = brkf >> 8;
+    allDataSD[16] = brkb;
+    allDataSD[17] = brkb >> 8;
+    allDataSD[18] = ((int16_t)(imu1.w()*(1 << 14)));
+    allDataSD[19] = ((int16_t)(imu1.w()*(1 << 14))) >> 8;
+    allDataSD[20] = ((int16_t)(imu1.x()*(1 << 14)));
+    allDataSD[21] = ((int16_t)(imu1.x()*(1 << 14))) >> 8;
+    allDataSD[22] = ((int16_t)(imu1.y()*(1 << 14)));
+    allDataSD[23] = ((int16_t)(imu1.y()*(1 << 14))) >> 8;
+    allDataSD[24] = ((int16_t)(imu1.z()*(1 << 14)));
+    allDataSD[25] = ((int16_t)(imu1.z()*(1 << 14))) >> 8;
+    allDataSD[26] = ((int16_t)(imu2.w()*(1 << 14)));
+    allDataSD[27] = ((int16_t)(imu2.w()*(1 << 14))) >> 8;
+    allDataSD[28] = ((int16_t)(imu2.x()*(1 << 14)));
+    allDataSD[29] = ((int16_t)(imu2.x()*(1 << 14))) >> 8;
+    allDataSD[30] = ((int16_t)(imu2.y()*(1 << 14)));
+    allDataSD[31] = ((int16_t)(imu2.y()*(1 << 14))) >> 8;
+    allDataSD[32] = ((int16_t)(imu2.z()*(1 << 14)));
+    allDataSD[33] = ((int16_t)(imu2.z()*(1 << 14))) >> 8;
+    allDataSD[34] = ((int16_t)(accel1.x()*100));
+    allDataSD[35] = ((int16_t)(accel1.x()*100)) >> 8;
+    allDataSD[36] = ((int16_t)(accel1.y()*100));
+    allDataSD[37] = ((int16_t)(accel1.y()*100)) >> 8;
+    allDataSD[38] = ((int16_t)(accel1.z()*100));
+    allDataSD[39] = ((int16_t)(accel1.z()*100)) >> 8;
+    allDataSD[40] = ((int16_t)(euler1.x()*100));
+    allDataSD[41] = ((int16_t)(euler1.x()*100)) >> 8;
+    allDataSD[42] = ((int16_t)(euler1.y()*100));
+    allDataSD[43] = ((int16_t)(euler1.y()*100)) >> 8;
+    allDataSD[44] = ((int16_t)(euler1.z()*100));
+    allDataSD[45] = ((int16_t)(euler1.z()*100)) >> 8;
+    allDataSD[46] = ((int16_t)(gyro1.x()*100));
+    allDataSD[47] = ((int16_t)(gyro1.x()*100)) >> 8;
+    allDataSD[48] = ((int16_t)(gyro1.y()*100));
+    allDataSD[49] = ((int16_t)(gyro1.y()*100)) >> 8;
+    allDataSD[50] = ((int16_t)(gyro1.z()*100));
+    allDataSD[51] = ((int16_t)(gyro1.z()*100)) >> 8;
+    allDataSD[52] = 0;
+    allDataSD[53] = 0;
+    allDataSD[54] = 0;
+    allDataSD[55] = 0;
+    allDataSD[56] = atime;
+    allDataSD[57] = atime >> 8;
+    allDataSD[58] = atime >> 16;
+    allDataSD[59] = atime >> 24;
 
 
   }
@@ -109,7 +110,7 @@ struct Data{
     allDataXBee[60] = 0xF0;
     allDataXBee[61] = 0x00;
     allDataXBee[62] = 0x00;
-    allDataXBee[63] = 0x00;
+    allDataXBee[63] = 0x0F;
   }
   
 } data;
@@ -125,13 +126,14 @@ const int chipSelect = BUILTIN_SDCARD;
 bool hasSD = false; //Keep false, will auto-set to true if it detects an SD card present
 bool useXbee = true; //Set to true if you want to use XBee
 bool writeSerialMonitor = false; //Set to true if you want to troubleshoot values using Serial Monitor
+bool SDWorking = false, XbeeWorking = false, LEDState = 0;
 
 
 //##########  Definition of all timer objects  ############
 uint16_t xbeeInterval   = 50 * 1000; //us  (50 ms) max polling speed is about 10ms * # of 9DOF IMU's used + appropriate tolerance
 uint16_t sdInterval     = 50 * 1000; //us  (50  ms)
 uint16_t serialInterval = 50 * 1000; //us  (50  ms)
-uint32_t xbeeTime = micros(), sdTime = micros(), serialTime = micros(), oldTime = micros();
+uint32_t xbeeTime = micros(), sdTime = micros(), serialTime = micros(), oldTime = micros(), LEDTime = micros();
 
 
 //##########  Definition of all pin assignments and sensor objects  ############
@@ -198,12 +200,13 @@ void setup() {
 void loop() {
 
   if (false){ //Set to true if you want to print out the time in microseconds that each loop iteration takes
+    oldTime = micros();
     uint32_t low = (micros() - oldTime) % 0xFFFFFFFF;
     Serial.print(low);
     Serial.println("us");
-    oldTime = micros();
   }
-  
+
+  //These update the speed sensor values
   EngineSpeed.updateSensor();
   WheelSpeed.updateSensor();
   
@@ -212,17 +215,15 @@ void loop() {
    * and if serial port has enough room in tx buffer and if useXbee
    * is set to true then send xbee data
    */
-  if ((abs(micros() - xbeeTime) > xbeeInterval) && (Serial1.availableForWrite() >= sizeof(data.allDataXBee)) && useXbee){
-//    collectAllData();
-//    data.packDataXBee();
-//    Serial1.write(data.allDataXBee, sizeof(data.allDataXBee));
-//    xbeeTime = micros();
-  }
-
-  if ((abs(micros() - xbeeTime) > xbeeInterval) && useXbee){
-    collectAllData();
-    Serial1.write(data.espd);
+  if ((abs(micros() - xbeeTime) > xbeeInterval) && (Serial1.availableForWrite() >= (sizeof(data.allDataXBee) - 1)) && useXbee){
     xbeeTime = micros();
+    collectAllData();
+    data.packDataXBee();
+    Serial1.write(data.allDataXBee, sizeof(data.allDataXBee));
+    XbeeWorking = true;
+  }
+  else if (abs(micros() - xbeeTime) > xbeeInterval){
+    XbeeWorking = false;
   }
 
   /**
@@ -230,20 +231,21 @@ void loop() {
    * and if there is an SD card available to write to the write data
    */
   if (abs(micros() - sdTime) > sdInterval && hasSD){
+    sdTime = micros();
     dataFile = SD.open(fileName.c_str(), FILE_WRITE);
     if (dataFile) {
       collectAllData();
       data.packDataSD();
       dataFile.write(data.allDataSD, sizeof(data.allDataSD));
-      dataFile.println();
-      digitalWrite(LEDPin, HIGH);
+      SDWorking = true;
     } else {
-      Serial.println("Error opening test.txt");
-      digitalWrite(LEDPin, LOW);
+      SDWorking = false;
     }
     dataFile.close();
-    sdTime = micros();
-  }  
+  }
+  else if (abs(micros() - sdTime) > sdInterval){
+    SDWorking = false;
+  }
 
   /**
    * If the time since last writing is greater than the interval time,
@@ -251,6 +253,7 @@ void loop() {
    * THIS IS SOLELY FOR TESTING! COMMENT OUT BEFORE DOWNLOADING TO CAR
    */
   if (abs(micros() - serialTime) > serialInterval && writeSerialMonitor){
+    serialTime = micros();
     collectAllData();
 //    Serial.print("Time: "  + String(data.atime)   + "\t");
 //    Serial.print("FRS: "   + String(data.frs)   + "\t");
@@ -284,31 +287,39 @@ void loop() {
 //    Serial.print("Z2: " + String(data.accel2z) + "\t");
     Serial.println();
 
-    serialTime = micros();
   }
 
   /**
-   * For writing to SD card
-   * THIS IS SOLELY FOR TESTING! COMMENT OUT BEFORE DOWNLOADING TO CAR
+   * Controls the blinking of the LED on the Teensy
+   * ON: The Xbee is transmitting and the SD card is writing
+   * SLOW BLINK: The Xbee is transmitting
+   * FAST BLINK: The SD Card is writing
+   * OFF: Neither the Xbee is transmitting or SD card is writing (or the Teensy is not powered)
    */
-  if (abs(micros() - sdTime) > sdInterval && hasSD){
-//    dataFile = SD.open(fileName.c_str(), FILE_WRITE);
-//    if (dataFile) {
-//      collectAllData();
-//      dataFile.print(data.atime);
-//      dataFile.print(",");
-//      dataFile.print(data.espd);
-//      dataFile.println();
-//    } else {
-//      Serial.println("Error opening test.txt");
-//    }
-//    dataFile.close();
-//    sdTime = micros();
-  }  
+  if (XbeeWorking && SDWorking){
+    digitalWrite(LEDPin, HIGH);
+    LEDState = 1;
+  }
+  else if (XbeeWorking){
+    if (abs(micros() - LEDTime) > 500000){
+      LEDState = !LEDState;
+      LEDState ? digitalWrite(LEDPin, HIGH) : digitalWrite(LEDPin, LOW);
+    }
+  }
+  else if (SDWorking){
+    if (abs(micros() - LEDTime) > 200000){
+      LEDState = !LEDState;
+      LEDState ? digitalWrite(LEDPin, HIGH) : digitalWrite(LEDPin, LOW);
+    }
+  }
+  else {
+    digitalWrite(LEDPin, LOW);
+    LEDState = 0;
+  }
+ 
 }
 
-inline void fileNameCreator()
-{
+inline void fileNameCreator(){
   //Initializes SD card, checks how many existing files are on the card, numbers file accordingly
   root = SD.open("/");
   while (thisFile = root.openNextFile()) {
@@ -328,8 +339,8 @@ inline void collectAllData(){
   data.bls   = BLShock.getPositionMM();
   data.steer = Steer.getPositionMM();
   data.ecvt  = ECVT.getPositionMM();
-  data.espd  = EngineSpeed.getSpeed() * (86/25); //Scale by the number of teeth of measured gear vs. input shaft
-  data.wspd  = WheelSpeed.getSpeed();
+  data.espd  = EngineSpeed.getSpeed();
+  data.wspd  = WheelSpeed.getSpeed() * (86/25); //Scale by the number of teeth of measured gear vs. input shaft
   data.brkf  = BrakeFront.getPressurePSI();
   data.brkb  = BrakeBack.getPressurePSI();
   data.hrs   = hour();
@@ -342,12 +353,13 @@ inline void collectAllData(){
   if(hasbno1){
     data.imu1  = bno1.getQuat();
     data.accel1= bno1.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER); //Make sure to change back to VECTOR_ACCELEROMETER
-    data.gyro1=bno1.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE); 
+    data.gyro1 = bno1.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
+    data.euler1= bno1.getVector(Adafruit_BNO055::VECTOR_EULER); 
   }
   if(hasbno2){
     data.imu2  = bno1.getQuat();
     data.accel2= bno1.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
-    data.gyro1=bno1.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
+    data.gyro1 = bno1.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
   }
 
   data.atime = micros();

@@ -27,7 +27,7 @@ function [dataArr, logging_f] = txtByteReader_2_15(filename)
     % [29, 30] = IMU2 X
     % [31, 32] = IMU2 Y
     % [33, 34] = IMU2 Z
-    % [35, 36] = ACCEL1 X (in g's * 100)
+    % [35, 36] = ACCEL1 X (in m/s^2 * 100)
     % [37, 38] = ACCEL1 Y
     % [39, 40] = ACCEL1 Z
     % [41, 42] = ACCEL2 X
@@ -38,7 +38,8 @@ function [dataArr, logging_f] = txtByteReader_2_15(filename)
     % [51, 52] = GYRO1 Z
     % [53, 54, 55, 56] = 0
     % [57, 58, 59, 60] = Time (Microseconds)
-    %for a total of 60 bytes per data writing event
+    % [61, 62, 63, 64] = 0
+    %for a total of 64 bytes per data writing event
     
 %File must be in the current directory of this function!!!!
 
@@ -46,8 +47,7 @@ function [dataArr, logging_f] = txtByteReader_2_15(filename)
 %for each time interval, in the same order as the input stream above
 
 %% Function body
-for k = 1:62
-dataSize = k;
+dataSize = 64;
 fr = matlab.io.datastore.DsFileReader(filename); %creat IO object
 s = dir(filename);
 sz60 = floor(s.bytes/dataSize);
@@ -56,28 +56,36 @@ dataVec = read(fr, sz); %read in the data
 dataVec = reshape(dataVec, [dataSize, sz60]); %reshape the byte data into a 60 row, sz60 sized array
     %Now, each column of DataVec is a 60 byte 'line of data'
 
-n_items = dataSize;
+n_items = 34;
 dataArr = zeros(sz60, n_items); %initialise array for final data
     for i = 1:sz60
         %covert single byte data (10 items)
-            dataArr(i,1:dataSize) = typecast(dataVec(1:dataSize, i), 'uint8');
+            dataArr(i,1:10) = typecast(dataVec(1:10, i), 'uint8');
         %convert unsigned 2-byte data (4 items)
-        %    dataArr(i, 11:14) = typecast(dataVec(11:18, i), 'uint16');
+            dataArr(i, 11:14) = typecast(dataVec(11:18, i), 'uint16');
         %convert signed 2-byte data (17 items)
-        %    dataArr(i, 15:23) = typecast(dataVec(19:36, i), 'int16');
+            dataArr(i, 15:31) = typecast(dataVec(19:52, i), 'int16');
         %convert 4-byte data (2 items)
-        %    dataArr(i, 32) = typecast(dataVec(53:, i), 'uint32');
+            dataArr(i, 32:34) = typecast(dataVec(53:64, i), 'uint32');
+            %dataArr(i, 35) = typecast(dataVec(65:66, i), 'uint16');
     end
 
-    for i = 1:dataSize
-        if dataArr(:,i) == 0;
-            found = 1;
-        end
-    end
-end
+logging_f = sz60/((dataArr(end, 33)-dataArr(1, 33))/1e6);
 %% Unit conversions
-%dataArr(:,15:22) = dataArr(:,15:22) / (2^14);
-%dataArr(:,23:31) = dataArr(:,23:31) / 100;
+dataArr(:,15:22) = dataArr(:,15:22) / (2^14);
+dataArr(:,23:31) = dataArr(:,23:31) / 100;
+
+%Get only IMU Data
+%dataArr = [dataArr(:,15:18), dataArr(:,23:31), dataArr(:,33)];
+
+%Get all relevant data
+dataArr = [dataArr(:,6), dataArr(:,11:12), dataArr(:,15:18), dataArr(:,23:31), dataArr(:,33)];
+
+
+%% Other stuffs
+
+%Write the data to an excel file
+%writematrix(dataArr,"2_22MechCVTTest.xlsx")
 
 end
 
