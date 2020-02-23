@@ -33,12 +33,14 @@ void setup() {
 
   ecvt_driver.begin(3,-2);
   PID * ecvt_pid = ecvt_driver.get_pid();
-  
+
+  //PID of just the motor
   ecvt_pid->set_constants(2.0,0.001,0.0);
   ecvt_pid->set_integral_cap(100000);
   ecvt_pid->set_power_bounds(-255,255);
   ecvt_pid->set_threshold_bounds(-50,25);
-  
+
+  //PID of the entire system
   ecvt_speed_pid.set_constants(2, 0.0, 1);
   ecvt_speed_pid.set_integral_cap(0);
   ecvt_speed_pid.set_derivative_bounds(-10000,0);
@@ -54,7 +56,8 @@ void setup() {
   delay(200);
 }
 
-//#define TESTING
+#define TESTING
+#define CLOSING
 
 void loop() {
   if (false){ //Set to true if you want to print out the time in microseconds that each loop iteration takes
@@ -67,9 +70,9 @@ void loop() {
   wheel_speed_sensor.updateSensor();
 
   const uint16_t target_enigine_speed = 2850;
-  const uint16_t min_lds_pos = 410;
-  const uint16_t max_lds_pos = 1024;
-  const uint16_t disengaged_target = 620;
+  const uint16_t min_lds_pos = 389;
+  const uint16_t max_lds_pos = 710;
+  const uint16_t disengaged_target = 710;
   const uint16_t threshold_rpm = 1800;
   uint16_t engine_speed = engine_speed_sensor.getSpeed();
   uint16_t lds_pos = ecvt_lds.getRawAnalog();
@@ -77,30 +80,53 @@ void loop() {
   int16_t desired_power = ecvt_speed_pid.step(target_enigine_speed - engine_speed);
   
 #ifdef TESTING
+
+#ifdef CLOSING
   Serial.println("Testing");
+  lds_pos = ecvt_lds.getRawAnalog();
   ecvt_driver.set_power(127);
-  delay(3000);
-//  while(lds_pos <= max_lds_pos){
-//    lds_pos = ecvt_lds.getRawAnalog();
-//    delayMicroseconds(1);
-//  }
+  delay(500);
   ecvt_driver.set_power(0);
   delay(500);
   ecvt_driver.set_power(-127);
   while(lds_pos >= min_lds_pos){
     lds_pos = ecvt_lds.getRawAnalog();
     Serial.println(lds_pos);
-    delayMicroseconds(1);
+    delayMicroseconds(3);
   }
   ecvt_driver.set_power(0);
+  while(true){
+    lds_pos = ecvt_lds.getRawAnalog();
+    Serial.println(lds_pos);
+    delay(100);
+  }
+#else
+  Serial.println("Testing");
+  lds_pos = ecvt_lds.getRawAnalog();
+  ecvt_driver.set_power(-127);
   delay(500);
+  ecvt_driver.set_power(0);
+  delay(500);
+  ecvt_driver.set_power(127);
+  while(lds_pos <= max_lds_pos){
+    lds_pos = ecvt_lds.getRawAnalog();
+    Serial.println(lds_pos);
+    delayMicroseconds(3);
+  }
+  ecvt_driver.set_power(0);
+  while(true){
+    lds_pos = ecvt_lds.getRawAnalog();
+    Serial.println(lds_pos);
+    delay(100);
+  }
+#endif
 #else
 //  Serial.println("Desired: " + String(desired_power));
   if(engine_speed < threshold_rpm){
     // ECVT IS DISENGAGED
     ecvt_driver.set_power(127);
-//    ecvt_driver.step_pid(disengaged_target - lds_pos);
-  } else if(lds_pos >= min_lds_pos){// && (lds_pos <= max_lds_pos || desired_power < 0)) {  
+    ecvt_driver.step_pid(disengaged_target - lds_pos);
+  } else if(lds_pos >= min_lds_pos && (lds_pos <= max_lds_pos || desired_power < 0)) {  
     // ECVT IS ENGAGED
     Serial.println("---------");
     ecvt_driver.set_power(desired_power);

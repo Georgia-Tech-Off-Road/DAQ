@@ -79,8 +79,10 @@ dataArr(:,23:31) = dataArr(:,23:31) / 100;
 %dataArr = [dataArr(:,15:18), dataArr(:,23:31), dataArr(:,33)];
 
 %Get all relevant data
-dataArr = [dataArr(:,6), dataArr(:,11:12), dataArr(:,15:18), dataArr(:,23:31), dataArr(:,33)];
+%dataArr = [dataArr(:,6), dataArr(:,11:12), dataArr(:,15:18), dataArr(:,23:31), dataArr(:,33)];
 
+%Get only engine Data
+dataArr = [dataArr(:,11:12)];
 
 %% Other stuffs
 
