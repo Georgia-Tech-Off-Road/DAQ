@@ -17,6 +17,7 @@ private:
     uint32_t old_time_;
     float integral_, integral_cap_;
     float derivative_, prev_error_;
+    float min_derivative_, max_derivative_;
     int16_t min_power_, max_power_;
     int16_t min_threshold_, max_threshold_;
 
@@ -30,6 +31,7 @@ public:
     void set_constants(float kP, float kI, float kD);
     void set_bounds(int16_t min_power, int16_t max_power);
     void set_integral_cap(float integral_cap);
+    void set_derivative_bounds(float min_derivative, float max_derivative);
     void set_power_bounds(int16_t min_power, int16_t max_power);
     void set_threshold_bounds(int16_t min_threshold, int16_t max_threshold);
 

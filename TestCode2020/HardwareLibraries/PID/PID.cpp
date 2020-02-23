@@ -34,6 +34,11 @@ void PID::set_integral_cap(float integral_cap){
     integral_cap_ = integral_cap;
 }
 
+void PID::set_derivative_bounds(float min_derivative, float max_derivative){
+    min_derivative_ = min_derivative;
+    max_derivative_ = max_derivative;
+}
+
 void PID::set_power_bounds(int16_t min_power, int16_t max_power){
     min_power_ = min_power;
     max_power_ = max_power;
@@ -58,6 +63,9 @@ int16_t PID::step(float error){
     // Slope Formula
     derivative_ = (error - prev_error_) / dt;
     prev_error_ = error;
+    Serial.println("D: " + String(derivative_));
+    derivative_ = (derivative_ > max_derivative_) ? max_derivative_ : derivative_;
+    derivative_ = (derivative_ < min_derivative_) ? min_derivative_ : derivative_;
 
     // Adding the three terms
     int16_t power = error * kP_ + integral_ * kI_ + derivative_ * kD_;
