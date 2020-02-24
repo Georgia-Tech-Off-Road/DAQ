@@ -149,8 +149,11 @@ Drill hole thickness: 1.4 mm</description>
 <text x="-3.556" y="-0.635" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
 <package name="0_OHM_RESISTOR">
-<hole x="-1.27" y="0" drill="1.016"/>
-<hole x="1.27" y="0" drill="1.016"/>
+<hole x="-3.81" y="0" drill="0.8128"/>
+<hole x="3.81" y="0" drill="0.8128"/>
+<wire x1="-3.81" y1="0" x2="3.81" y2="0" width="0.1524" layer="21"/>
+<pad name="P$1" x="-3.81" y="0" drill="0.6"/>
+<pad name="P$2" x="3.81" y="0" drill="0.6"/>
 </package>
 </packages>
 <symbols>
@@ -305,6 +308,17 @@ Comparator</description>
 <connect gate="G$1" pin="V+" pad="7"/>
 <connect gate="G$1" pin="V-" pad="4"/>
 </connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="0_OHM_RESISTOR">
+<gates>
+</gates>
+<devices>
+<device name="" package="0_OHM_RESISTOR">
 <technologies>
 <technology name=""/>
 </technologies>
