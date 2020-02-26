@@ -11,17 +11,28 @@ struct Data{
   uint16_t wspd; //Wheel speed in rpm
   uint16_t brkf; //Brake pressure in psi
   uint16_t brkb; //Brake pressure in psi
+  uint16_t current; //Current (0-1023) V = I*20mV/A + 50mV
 
   uint32_t currTime; //Time in microseconds
+
+  byte allData[4] = {0};
+
+  void compressData(){
+    allData[0] = lds;
+    allData[1] = current >> 8;
+    allData[2] = 0xFF;
+    allData[3] = 0xFF;
+  }
 } data;
 
 
 bool writeSerialMonitor = false; //Set to true if you want to troubleshoot values using Serial Monitor
-uint16_t serialInterval  = 50 * 1000;   //us (50  ms)
-uint32_t serialTime = micros(), oldTime = micros();
+uint16_t serialInterval  = 50 * 1000, daqInterval = 50 * 1000;   //us (50  ms)
+uint32_t serialTime = micros(), daqTime = micros(), oldTime = micros();
 
 PoluluG2MotorDriver ecvt_driver;
 
+uint8_t currSense = A1;
 LDS ecvt_lds(A0, 50); //inputPin, travelMM, isReversed = false #####NOTE: need to check the actual travel distance of this LDS
 PID ecvt_speed_pid;
 // PressureSensor brake_front_sensor(A1, 2000), brake_back_sensor(A2, 2000); //inputPin, scale (PSI), offset = 0
@@ -46,6 +57,7 @@ void setup() {
   ecvt_speed_pid.set_derivative_bounds(-10000,0);
   ecvt_speed_pid.set_power_bounds(-255,255);
   ecvt_speed_pid.set_threshold_bounds(-50,25);
+
   
   ecvt_lds.begin();
 //  brake_front_sensor.begin();
@@ -138,6 +150,20 @@ void loop() {
   Serial.print("Engine Speed: " + String(engine_speed) + "\t");
   Serial.println("LDS: " + String(lds_pos));
 
+
+/**
+   * If the time since last writing is greater than the interval time,
+   * and if writeSerialMonitor is set to true then write data
+   * THIS IS SOLELY FOR TESTING! COMMENT OUT BEFORE DOWNLOADING TO CAR
+   */
+  if (abs(micros() - daqTime) > daqInterval){
+    collectAllData();
+    data.compressData();
+    Serial2.write(data.allData, sizeof(data.allData));
+
+    daqTime = micros();
+  }
+  
   /**
    * If the time since last writing is greater than the interval time,
    * and if writeSerialMonitor is set to true then write data
@@ -164,5 +190,6 @@ inline void collectAllData(){
   data.wspd  = wheel_speed_sensor.getSpeed();
 //  data.brkf  = brake_front_sensor.getPressurePSI();
 //  data.brkb  = brake_back_sensor.getPressurePSI();
+  data.current = analogRead(currSense);
   data.currTime = micros();
 }

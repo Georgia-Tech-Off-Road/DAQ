@@ -20,6 +20,7 @@ struct Data{
   uint16_t wspd; //Wheel speed in rpm
   uint16_t brkf; //Brake pressure in psi
   uint16_t brkb; //Brake pressure in psi
+  uint8_t current; //Current
 
   imu::Quaternion imu1;
   imu::Quaternion imu2;
@@ -36,6 +37,7 @@ struct Data{
 
   uint8_t allDataSD[64] = {0};
   uint8_t allDataXBee[64] = {0};
+  uint8_t incomingECVTData[4] = {0};
 
   inline void packDataSD(){    
     allDataSD[0]  = frs;
@@ -112,6 +114,11 @@ struct Data{
     allDataXBee[62] = 0x00;
     allDataXBee[63] = 0x0F;
   }
+
+  inline void unpackECVTData(){
+    incomingECVTData[0] = ecvt;
+    incomingECVTData[1] = current;
+  }
   
 } data;
 
@@ -130,10 +137,10 @@ bool SDWorking = false, XbeeWorking = false, LEDState = 0;
 
 
 //##########  Definition of all timer objects  ############
-uint16_t xbeeInterval   = 50 * 1000; //us  (50 ms) max polling speed is about 10ms * # of 9DOF IMU's used + appropriate tolerance
+uint16_t xbeeInterval   = 100 * 1000; //us  (50 ms) max polling speed is about 10ms * # of 9DOF IMU's used + appropriate tolerance
 uint16_t sdInterval     = 50 * 1000; //us  (50  ms)
 uint16_t serialInterval = 50 * 1000; //us  (50  ms)
-uint32_t xbeeTime = micros(), sdTime = micros(), serialTime = micros(), oldTime = micros(), LEDTime = micros();
+uint32_t xbeeTime = micros(), sdTime = micros(), serialTime = micros(), oldTime = micros(), LEDTime = micros(), currTime = micros();
 
 
 //##########  Definition of all pin assignments and sensor objects  ############
@@ -148,10 +155,16 @@ uint8_t throttlePin = A7;
 uint8_t LEDPin = 13;
 
 
+uint8_t indexer = 0;
+uint16_t tempCode = 0;
+const uint16_t endCode = 0xFFFF;
+bool byteArrayFull = false, isError = false, isOverflow = false;
+
 
 void setup() {
   Serial.begin(115200); //For serial monitor
   Serial1.begin(9600);  //For XBee
+  Serial2.begin(9600);  //For getting data from eCVT
 
   FRShock.begin();
   FLShock.begin();
@@ -209,20 +222,21 @@ void loop() {
   //These update the speed sensor values
   EngineSpeed.updateSensor();
   WheelSpeed.updateSensor();
+  currTime = micros();
   
   /**
    * If the time since last sending is greater than the interval time,
    * and if serial port has enough room in tx buffer and if useXbee
    * is set to true then send xbee data
    */
-  if ((abs(micros() - xbeeTime) > xbeeInterval) && (Serial1.availableForWrite() >= (sizeof(data.allDataXBee) - 1)) && useXbee){
+  if ((abs(currTime - xbeeTime) > xbeeInterval) && (Serial1.availableForWrite() >= (sizeof(data.allDataXBee) - 1)) && useXbee){
     xbeeTime = micros();
     collectAllData();
     data.packDataXBee();
     Serial1.write(data.allDataXBee, sizeof(data.allDataXBee));
     XbeeWorking = true;
   }
-  else if (abs(micros() - xbeeTime) > xbeeInterval){
+  else if (abs(currTime - xbeeTime) > xbeeInterval){
     XbeeWorking = false;
   }
 
@@ -230,7 +244,7 @@ void loop() {
    * If the time since last writing is greater than the interval time,
    * and if there is an SD card available to write to the write data
    */
-  if (abs(micros() - sdTime) > sdInterval && hasSD){
+  if (abs(currTime - sdTime) > sdInterval && hasSD){
     sdTime = micros();
     dataFile = SD.open(fileName.c_str(), FILE_WRITE);
     if (dataFile) {
@@ -243,7 +257,7 @@ void loop() {
     }
     dataFile.close();
   }
-  else if (abs(micros() - sdTime) > sdInterval){
+  else if (abs(currTime - sdTime) > sdInterval){
     SDWorking = false;
   }
 
@@ -279,12 +293,6 @@ void loop() {
 //    Serial.print(data.accel1.y());
 //    Serial.print(',');
 //    Serial.print(data.accel1.z());
-//    Serial.print("Roll2: " + String(data.imu2r) + "\t");
-//    Serial.print("Pitch2: " + String(data.imu2p) + "\t");
-//    Serial.print("Yaw2: " + String(data.imu2y) + "\t");
-//    Serial.print("X2: " + String(data.accel2x) + "\t");
-//    Serial.print("Y2: " + String(data.accel2y) + "\t");
-//    Serial.print("Z2: " + String(data.accel2z) + "\t");
     Serial.println();
 
   }
@@ -295,28 +303,68 @@ void loop() {
    * SLOW BLINK: The Xbee is transmitting
    * FAST BLINK: The SD Card is writing
    * OFF: Neither the Xbee is transmitting or SD card is writing (or the Teensy is not powered)
-   */
+   */ 
   if (XbeeWorking && SDWorking){
     digitalWrite(LEDPin, HIGH);
     LEDState = 1;
+    Serial.println("Both working");
   }
   else if (XbeeWorking){
-    if (abs(micros() - LEDTime) > 500000){
+    if (abs(micros() - LEDTime) > 800000){
+      LEDTime = micros();
       LEDState = !LEDState;
       LEDState ? digitalWrite(LEDPin, HIGH) : digitalWrite(LEDPin, LOW);
     }
+    Serial.println("Xbee");
   }
   else if (SDWorking){
-    if (abs(micros() - LEDTime) > 200000){
+    if (abs(micros() - LEDTime) > 300000){
+      LEDTime = micros();
       LEDState = !LEDState;
       LEDState ? digitalWrite(LEDPin, HIGH) : digitalWrite(LEDPin, LOW);
     }
+    Serial.println("SD");
   }
   else {
     digitalWrite(LEDPin, LOW);
     LEDState = 0;
   }
- 
+
+  /**
+   * Recieves data from the DAQ platform
+   */ 
+ if(Serial2.available()){
+    data.incomingECVTData[indexer] = Serial2.read();
+    if(indexer >= 1) {
+      tempCode = (uint16_t)data.incomingECVTData[indexer - 1] << 8 | (uint16_t)data.incomingECVTData[indexer];
+      if(tempCode == endCode and indexer == 3){
+        byteArrayFull = true;
+      }
+      else if(tempCode == endCode){
+        isError = true;
+      }
+      else if(indexer == 3){
+        isOverflow = true;
+      }
+    }
+        
+    indexer++;
+    if(isError){
+      Serial.println("Early endCode Error");
+      isError = false;
+      indexer = 0;
+    }
+    if(isOverflow){
+      Serial.println("Overflow Error");
+      isOverflow = false;
+      indexer = 0;
+    }
+    if(byteArrayFull){
+      byteArrayFull = false;
+      indexer = 0;
+      data.unpackECVTData();
+    }
+  }
 }
 
 inline void fileNameCreator(){
@@ -349,10 +397,9 @@ inline void collectAllData(){
 
   data.throttle = map(analogRead(throttlePin),0,1023,55,0);
 
-
   if(hasbno1){
     data.imu1  = bno1.getQuat();
-    data.accel1= bno1.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER); //Make sure to change back to VECTOR_ACCELEROMETER
+    data.accel1= bno1.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL); //Make sure to change back to VECTOR_ACCELEROMETER
     data.gyro1 = bno1.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);
     data.euler1= bno1.getVector(Adafruit_BNO055::VECTOR_EULER); 
   }

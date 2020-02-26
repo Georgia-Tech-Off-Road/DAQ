@@ -1,4 +1,4 @@
-function [dataArr, logging_f] = txtByteReader_2_15(filename)
+function [dataArr, tt, logging_f] = txtByteReader_2_15(filename)
 %% Function info
 % Version configured testing day 2/15 data collection
 % Andrew Hellrigel
@@ -30,9 +30,9 @@ function [dataArr, logging_f] = txtByteReader_2_15(filename)
     % [35, 36] = ACCEL1 X (in m/s^2 * 100)
     % [37, 38] = ACCEL1 Y
     % [39, 40] = ACCEL1 Z
-    % [41, 42] = ACCEL2 X
-    % [43, 44] = ACCEL2 Y
-    % [45, 46] = ACCEL2 Z
+    % [41, 42] = EULER1 X
+    % [43, 44] = EULER1 Y
+    % [45, 46] = EULER1 Z
     % [47, 48] = GYRO1 X
     % [49, 50] = GYRO1 Y
     % [51, 52] = GYRO1 Z
@@ -75,19 +75,31 @@ logging_f = sz60/((dataArr(end, 33)-dataArr(1, 33))/1e6);
 dataArr(:,15:22) = dataArr(:,15:22) / (2^14);
 dataArr(:,23:31) = dataArr(:,23:31) / 100;
 
-%Get only IMU Data
-%dataArr = [dataArr(:,15:18), dataArr(:,23:31), dataArr(:,33)];
-
 %Get all relevant data
 %dataArr = [dataArr(:,6), dataArr(:,11:12), dataArr(:,15:18), dataArr(:,23:31), dataArr(:,33)];
 
-%Get only engine Data
-dataArr = [dataArr(:,11:12)];
+%Get only IMU data
+%dataArr = [dataArr(:,15:18), dataArr(:,23:31), dataArr(:,33)];
 
-%% Other stuffs
+%Get only engine data
+%dataArr = [dataArr(:,11:12)];
+
+%Get only eCVT data
+%dataArr = [dataArr(:,6), dataArr(:,11:12)];
+
+%Get only IMU and engine data
+dataArr = [dataArr(:,11:12), dataArr(:,15:18), dataArr(:,23:31), dataArr(:,33)];
+
+%% Write to Excel
 
 %Write the data to an excel file
-%writematrix(dataArr,"2_22MechCVTTest.xlsx")
+%writematrix(dataArr,"2_23BiasBarTesting.xlsx")
+
+
+%% Plotting
+tt = 1:1/20:length(dataArr(:,1))/20 + 0.95;
+
+
 
 end
 
