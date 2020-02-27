@@ -6,7 +6,7 @@
 
 
 struct Data{
-  uint16_t lds;  //Value needs to be bigger if travel is more than 255mm
+  uint16_t lds;  //(0-1023 Raw analog position)
   uint16_t espd; //Engine speed in rpm
   uint16_t wspd; //Wheel speed in rpm
   uint16_t brkf; //Brake pressure in psi
@@ -25,22 +25,34 @@ struct Data{
   }
 } data;
 
-
-bool writeSerialMonitor = false; //Set to true if you want to troubleshoot values using Serial Monitor
-uint16_t serialInterval  = 50 * 1000, daqInterval = 50 * 1000;   //us (50  ms)
+//#################################### DEFINITION OF ALL I/0 VARIABLES #####################################//
+bool writeSerialMonitor = true; //Set to true if you want to troubleshoot values using Serial Monitor
+uint32_t serialInterval  = 50 * 1000, daqInterval = 50 * 1000;   //us (50  ms)
 uint32_t serialTime = micros(), daqTime = micros(), oldTime = micros();
 
-PoluluG2MotorDriver ecvt_driver;
 
+//############################## DEFINITION OF ALL PIN ASSIGNMENTS AND OBJECTS ##############################//
 uint8_t currSense = A1;
 LDS ecvt_lds(A0, 50); //inputPin, travelMM, isReversed = false #####NOTE: need to check the actual travel distance of this LDS
 PID ecvt_speed_pid;
-// PressureSensor brake_front_sensor(A1, 2000), brake_back_sensor(A2, 2000); //inputPin, scale (PSI), offset = 0
+PressureSensor brake_front_sensor(A2, 2000, 8200, 4700), brake_back_sensor(A3, 2000, 8200, 4700); //inputPin, scale (PSI), offset = 0
 HallEffectSpeedSensor engine_speed_sensor(5, 6), wheel_speed_sensor(6, 86); //inputPin, toneWheelTeeth, intervalLength = 50us, averagingAmount = 200
+PoluluG2MotorDriver ecvt_driver;
+
+//################################# DEFINITION OF ALL ECVT RELATED VARIABLES ################################//
+const uint16_t target_enigine_speed = 2850;
+const uint16_t min_lds_pos = 389;
+const uint16_t max_lds_pos = 710;
+const uint16_t disengaged_target = 710;
+const uint16_t threshold_rpm = 1800;
+int16_t desired_power = 0;
+bool hasRunFunction = false;
+
+
 
 void setup() {
   Serial.begin(115200); //For serial monitor
-  Serial2.begin(9600);  //For data transmission with DAQ Teensy
+  Serial3.begin(9600);  //For data transmission with DAQ Teensy
 
   ecvt_driver.begin(3,-2);
   PID * ecvt_pid = ecvt_driver.get_pid();
@@ -60,16 +72,14 @@ void setup() {
 
   
   ecvt_lds.begin();
-//  brake_front_sensor.begin();
-//  brake_back_sensor.begin();
+  brake_front_sensor.begin();
+  brake_back_sensor.begin();
   engine_speed_sensor.begin();
   wheel_speed_sensor.begin();
  
   delay(200);
 }
 
-#define TESTING
-#define CLOSING
 
 void loop() {
   if (false){ //Set to true if you want to print out the time in microseconds that each loop iteration takes
@@ -81,74 +91,10 @@ void loop() {
   engine_speed_sensor.updateSensor();
   wheel_speed_sensor.updateSensor();
 
-  const uint16_t target_enigine_speed = 2850;
-  const uint16_t min_lds_pos = 389;
-  const uint16_t max_lds_pos = 710;
-  const uint16_t disengaged_target = 710;
-  const uint16_t threshold_rpm = 1800;
-  uint16_t engine_speed = engine_speed_sensor.getSpeed();
-  uint16_t lds_pos = ecvt_lds.getRawAnalog();
-  
-  int16_t desired_power = ecvt_speed_pid.step(target_enigine_speed - engine_speed);
-  
-#ifdef TESTING
-
-#ifdef CLOSING
-  Serial.println("Testing");
-  lds_pos = ecvt_lds.getRawAnalog();
-  ecvt_driver.set_power(127);
-  delay(500);
-  ecvt_driver.set_power(0);
-  delay(500);
-  ecvt_driver.set_power(-127);
-  while(lds_pos >= min_lds_pos){
-    lds_pos = ecvt_lds.getRawAnalog();
-    Serial.println(lds_pos);
-    delayMicroseconds(3);
-  }
-  ecvt_driver.set_power(0);
-  while(true){
-    lds_pos = ecvt_lds.getRawAnalog();
-    Serial.println(lds_pos);
-    delay(100);
-  }
-#else
-  Serial.println("Testing");
-  lds_pos = ecvt_lds.getRawAnalog();
-  ecvt_driver.set_power(-127);
-  delay(500);
-  ecvt_driver.set_power(0);
-  delay(500);
-  ecvt_driver.set_power(127);
-  while(lds_pos <= max_lds_pos){
-    lds_pos = ecvt_lds.getRawAnalog();
-    Serial.println(lds_pos);
-    delayMicroseconds(3);
-  }
-  ecvt_driver.set_power(0);
-  while(true){
-    lds_pos = ecvt_lds.getRawAnalog();
-    Serial.println(lds_pos);
-    delay(100);
-  }
-#endif
-#else
-//  Serial.println("Desired: " + String(desired_power));
-  if(engine_speed < threshold_rpm){
-    // ECVT IS DISENGAGED
-    ecvt_driver.set_power(127);
-    ecvt_driver.step_pid(disengaged_target - lds_pos);
-  } else if(lds_pos >= min_lds_pos && (lds_pos <= max_lds_pos || desired_power < 0)) {  
-    // ECVT IS ENGAGED
-    Serial.println("---------");
-    ecvt_driver.set_power(desired_power);
-  } else {
-    ecvt_driver.set_power(0);
-  }
-#endif
-  
-  Serial.print("Engine Speed: " + String(engine_speed) + "\t");
-  Serial.println("LDS: " + String(lds_pos));
+  //Only set one true at a time
+  tuneClosingPosition(false);
+  tuneOpeningPosition(false);
+  runController(false);
 
 
 /**
@@ -157,11 +103,11 @@ void loop() {
    * THIS IS SOLELY FOR TESTING! COMMENT OUT BEFORE DOWNLOADING TO CAR
    */
   if (abs(micros() - daqTime) > daqInterval){
+    daqTime = micros();
     collectAllData();
     data.compressData();
-    Serial2.write(data.allData, sizeof(data.allData));
-
-    daqTime = micros();
+    Serial3.write(data.allData, sizeof(data.allData));
+    //Serial.println("Full send");
   }
   
   /**
@@ -171,12 +117,12 @@ void loop() {
    */
   if (abs(micros() - serialTime) > serialInterval && writeSerialMonitor){
     collectAllData();
-    Serial.print("Time: "  + String(data.currTime)   + "\t");
-    Serial.print("ecvt_lds: "  + String(data.lds)  + "\t");
+//    Serial.print("Time: "  + String(data.currTime)   + "\t");
+    Serial.print("LDS: "  + String(data.lds)  + "\t");
 //    Serial.print("brake_front_sensor: "+ String(data.brkf)  + "\t");
 //    Serial.print("brake_back_sensor: "+ String(data.brkb)  + "\t");
-    Serial.print("engine_speed_sensor: "+ String(data.espd)  + "\t");
-    Serial.print("wheel_speed_sensor: " + String(data.wspd)  + "\t");
+//    Serial.print("Engine Speed: "+ String(data.espd)  + "\t");
+//    Serial.print("Wheel Speed: " + String(data.wspd)  + "\t");
     Serial.println();
 
     serialTime = micros();
@@ -184,7 +130,7 @@ void loop() {
 
 }
 
-inline void collectAllData(){
+inline void collectAllData(){ 
   data.lds  = ecvt_lds.getRawAnalog();
   data.espd  = engine_speed_sensor.getSpeed();
   data.wspd  = wheel_speed_sensor.getSpeed();
@@ -192,4 +138,92 @@ inline void collectAllData(){
 //  data.brkb  = brake_back_sensor.getPressurePSI();
   data.current = analogRead(currSense);
   data.currTime = micros();
+}
+
+inline void tuneClosingPosition(bool runFunction){
+  uint16_t i = 0;
+  uint32_t j = 0;
+  if(runFunction  && !hasRunFunction){
+    delay(5000);
+    Serial.println("Testing");
+    data.lds = ecvt_lds.getRawAnalog();
+    ecvt_driver.set_power(127);
+    delay(500);
+    ecvt_driver.set_power(0);
+    delay(500);
+    ecvt_driver.set_power(-127);
+    while(j < 10){
+      data.lds = ecvt_lds.getRawAnalog();
+      if(data.lds >= min_lds_pos){
+        ecvt_driver.set_power(-127);
+        delayMicroseconds(3);
+        j = 0;
+      }
+      else{
+        ecvt_driver.set_power(0);
+        delayMicroseconds(3);
+        j++;
+      }
+      if(i > 100){
+        Serial.println(data.lds);
+        i = 0;
+      }
+      i++;
+    }
+    ecvt_driver.set_power(0);
+    hasRunFunction = true;
+  }
+}
+
+inline void tuneOpeningPosition(bool runFunction){
+  uint16_t i = 0;
+  uint32_t j = 0;
+  if(runFunction && !hasRunFunction){
+    delay(5000);
+    Serial.println("Testing");
+    data.lds = ecvt_lds.getRawAnalog();
+    ecvt_driver.set_power(-127);
+    delay(500);
+    ecvt_driver.set_power(0);
+    delay(500);
+    ecvt_driver.set_power(127);
+    while(j < 1000){
+      data.lds = ecvt_lds.getRawAnalog();
+      if(data.lds <= max_lds_pos){
+        ecvt_driver.set_power(127);
+        delayMicroseconds(3);
+        j = 0;
+      }
+      else{
+        ecvt_driver.set_power(0);
+        delayMicroseconds(3);
+        j++;
+      }
+      if(i > 100){
+        Serial.println(data.lds);
+        i = 0;
+      }
+      i++;
+    }
+    ecvt_driver.set_power(0);
+    hasRunFunction = true;
+  }
+}
+
+inline void runController(bool runFunction){
+  if(runFunction){
+    desired_power = ecvt_speed_pid.step(target_enigine_speed - data.espd);
+    collectAllData();
+    if(data.espd < threshold_rpm){
+      // ECVT IS DISENGAGED
+      ecvt_driver.set_power(127);
+      ecvt_driver.step_pid(disengaged_target - data.lds);
+    } else if(data.lds >= min_lds_pos && (data.lds <= max_lds_pos || desired_power < 0)) {  
+      // ECVT IS ENGAGED
+      Serial.println("---------");
+      ecvt_driver.set_power(desired_power);
+    } else {
+      ecvt_driver.set_power(0);
+    }
+  }
 }

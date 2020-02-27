@@ -21,6 +21,7 @@ struct Data{
   uint16_t brkf; //Brake pressure in psi
   uint16_t brkb; //Brake pressure in psi
   uint8_t current; //Current
+  uint16_t voltage;
 
   imu::Quaternion imu1;
   imu::Quaternion imu2;
@@ -137,9 +138,9 @@ bool SDWorking = false, XbeeWorking = false, LEDState = 0;
 
 
 //##########  Definition of all timer objects  ############
-uint16_t xbeeInterval   = 100 * 1000; //us  (50 ms) max polling speed is about 10ms * # of 9DOF IMU's used + appropriate tolerance
-uint16_t sdInterval     = 50 * 1000; //us  (50  ms)
-uint16_t serialInterval = 50 * 1000; //us  (50  ms)
+uint32_t xbeeInterval   = 100 * 1000; //us  (100 ms) max polling speed is about 10ms * # of 9DOF IMU's used + appropriate tolerance
+uint32_t sdInterval     = 50 * 1000; //us  (50  ms)
+uint32_t serialInterval = 50 * 1000; //us  (50  ms)
 uint32_t xbeeTime = micros(), sdTime = micros(), serialTime = micros(), oldTime = micros(), LEDTime = micros(), currTime = micros();
 
 
@@ -153,6 +154,7 @@ Adafruit_BNO055 bno2 = Adafruit_BNO055(29, BNO055_ADDRESS_B); //0x29 address (AD
 bool hasbno1 = false, hasbno2 = false;
 uint8_t throttlePin = A7;
 uint8_t LEDPin = 13;
+uint8_t batteryPin = A20;
 
 
 uint8_t indexer = 0;
@@ -237,6 +239,7 @@ void loop() {
     XbeeWorking = true;
   }
   else if (abs(currTime - xbeeTime) > xbeeInterval){
+    Serial.println(Serial1.availableForWrite());
     XbeeWorking = false;
   }
 
@@ -314,8 +317,8 @@ void loop() {
       LEDTime = micros();
       LEDState = !LEDState;
       LEDState ? digitalWrite(LEDPin, HIGH) : digitalWrite(LEDPin, LOW);
+      Serial.println("Xbee");
     }
-    Serial.println("Xbee");
   }
   else if (SDWorking){
     if (abs(micros() - LEDTime) > 300000){
@@ -328,6 +331,7 @@ void loop() {
   else {
     digitalWrite(LEDPin, LOW);
     LEDState = 0;
+    //Serial.println("Neither Working");
   }
 
   /**
@@ -338,13 +342,16 @@ void loop() {
     if(indexer >= 1) {
       tempCode = (uint16_t)data.incomingECVTData[indexer - 1] << 8 | (uint16_t)data.incomingECVTData[indexer];
       if(tempCode == endCode and indexer == 3){
+        Serial.println("Got data!");
         byteArrayFull = true;
       }
       else if(tempCode == endCode){
         isError = true;
+        Serial.println("Early end code");
       }
       else if(indexer == 3){
         isOverflow = true;
+        Serial.println("Overflow error");
       }
     }
         
@@ -394,7 +401,8 @@ inline void collectAllData(){
   data.hrs   = hour();
   data.mins  = minute();
   data.secs  = second();
-
+  
+  data.voltage =  analogRead(batteryPin);
   data.throttle = map(analogRead(throttlePin),0,1023,55,0);
 
   if(hasbno1){
