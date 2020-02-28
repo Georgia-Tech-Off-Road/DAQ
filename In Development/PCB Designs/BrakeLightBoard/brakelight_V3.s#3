@@ -487,7 +487,7 @@ Grid 5.00 mm&lt;p&gt;
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="LM741CN">
+<deviceset name="LM741">
 <gates>
 <gate name="G$1" symbol="LM741CN" x="0" y="0"/>
 </gates>
@@ -7650,8 +7650,10 @@ Source: http://www.bourns.com/data/global/PDFs/3223.PDF</description>
 <attribute name="PT1READ" value=""/>
 <attribute name="PT2READ" value=""/>
 </part>
-<part name="U$1" library="GTOR" deviceset="LM741CN" device=""/>
-<part name="U$2" library="GTOR" deviceset="LM741CN" device=""/>
+<part name="U$1" library="GTOR" deviceset="LM741" device=""/>
+<part name="U$2" library="GTOR" deviceset="LM741" device="">
+<attribute name="SPICEPREFIX" value="X"/>
+</part>
 <part name="R1" library="0ohmresistor" deviceset="R-US_" device="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1" value="5.1k"/>
 <part name="R2" library="0ohmresistor" deviceset="R-US_" device="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1" value="5.1k"/>
 <part name="R3" library="pot" library_urn="urn:adsk.eagle:library:331" deviceset="TRIM_EU-" device="RS3" package3d_urn="urn:adsk.eagle:package:22701/1" value="10k"/>
