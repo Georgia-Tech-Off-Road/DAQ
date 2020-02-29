@@ -41,12 +41,14 @@ PoluluG2MotorDriver ecvt_driver;
 
 //################################# DEFINITION OF ALL ECVT RELATED VARIABLES ################################//
 const uint16_t target_enigine_speed = 3400;
-const uint16_t min_lds_pos = 470;
-const uint16_t max_lds_pos = 600;
-const uint16_t disengaged_target = 600;
+const uint16_t min_lds_pos = 540;
+const uint16_t max_lds_pos = 627;
+const uint16_t disengaged_target = 627;
 const uint16_t threshold_rpm = 1800;
 int16_t desired_power = 0;
 bool hasRunFunction = false;
+
+
 
 
 
@@ -64,7 +66,7 @@ void setup() {
   ecvt_pid->set_threshold_bounds(-50,25);
 
   //PID of the entire system
-  ecvt_speed_pid.set_constants(5, 0.0, 1);
+  ecvt_speed_pid.set_constants(5, 0.0, 0);
   ecvt_speed_pid.set_integral_cap(0);
   ecvt_speed_pid.set_derivative_bounds(-10000,10000);
   ecvt_speed_pid.set_power_bounds(-255,255);
@@ -90,7 +92,8 @@ void loop() {
   
   engine_speed_sensor.updateSensor();
   wheel_speed_sensor.updateSensor();
-
+  collectAllData();
+  
   //Only set one true at a time
   tuneClosingPosition(0);
   tuneOpeningPosition(0);
@@ -117,7 +120,7 @@ void loop() {
   if (abs(micros() - serialTime) > serialInterval && writeSerialMonitor){
     collectAllData();
 //    Serial.print("Time: "  + String(data.currTime)   + "\t");
-//    Serial.print("LDS: "  + String(data.lds)  + "\t");
+    Serial.print("LDS: "  + String(data.lds)  + "\t");
 //    Serial.print("brake_front_sensor: "+ String(data.brkf)  + "\t");
 //    Serial.print("brake_back_sensor: "+ String(data.brkb)  + "\t");
     Serial.print("Engine Speed: "+ String(data.espd)  + "\t");
@@ -173,7 +176,6 @@ inline void tuneClosingPosition(bool runFunction){
     hasRunFunction = true;
   }
 }
-
 inline void tuneOpeningPosition(bool runFunction){
   uint16_t i = 0;
   uint32_t j = 0;
@@ -182,11 +184,11 @@ inline void tuneOpeningPosition(bool runFunction){
     Serial.println("Testing");
     data.lds = ecvt_lds.getRawAnalog();
     ecvt_driver.set_power(-127);
-    delay(2000);
+    delay(500);
     ecvt_driver.set_power(0);
     delay(500);
     ecvt_driver.set_power(127);
-    while(j < 1000){
+    while(j < 10000){
       data.lds = ecvt_lds.getRawAnalog();
       if(data.lds <= max_lds_pos){
         ecvt_driver.set_power(127);

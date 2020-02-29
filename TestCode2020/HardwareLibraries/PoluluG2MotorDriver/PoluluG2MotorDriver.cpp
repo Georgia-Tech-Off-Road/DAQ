@@ -32,7 +32,6 @@ void PoluluG2MotorDriver::set_power(int16_t power){
 
 void PoluluG2MotorDriver::step_pid(float error){
     int p__ = pid_.step(error);
-    Serial.println(p__);
     set_power(p__);
 }
 

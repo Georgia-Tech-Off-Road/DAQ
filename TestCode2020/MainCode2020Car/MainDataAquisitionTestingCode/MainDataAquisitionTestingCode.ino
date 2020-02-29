@@ -133,7 +133,7 @@ int numFiles = 1;
 const int chipSelect = BUILTIN_SDCARD;
 bool hasSD = false; //Keep false, will auto-set to true if it detects an SD card present
 bool useXbee = true; //Set to true if you want to use XBee
-bool writeSerialMonitor = false; //Set to true if you want to troubleshoot values using Serial Monitor
+bool writeSerialMonitor = true; //Set to true if you want to troubleshoot values using Serial Monitor
 bool SDWorking = false, XbeeWorking = false, LEDState = 0;
 
 
@@ -145,7 +145,7 @@ uint32_t xbeeTime = micros(), sdTime = micros(), serialTime = micros(), oldTime 
 
 
 //##########  Definition of all pin assignments and sensor objects  ############
-LDS FRShock(A0, 225), FLShock(A2, 225, true), BRShock(A1, 200), BLShock(A3, 200), Steer(A6, 50), ECVT(A14, 50); //inputPin, travelMM, isReversed = false
+LDS FRShock(A0, 225), FLShock(A2, 225, true), BRShock(A1, 200), BLShock(A6, 200), Steer(A3, 50), ECVT(A14, 50); //inputPin, travelMM, isReversed = false
 PressureSensor BrakeFront(A12, 2000, 4600, 8200), BrakeBack(A13, 2000, 4600, 8200); //inputPin, maxPressure (PSI), r1 (Ohms), r2 (Ohms)
 HallEffectSpeedSensor EngineSpeed(5, 6), WheelSpeed(6, 86); //inputPin, toneWheelTeeth, intervalLength = 50us, averagingAmount = 200
 DS3232RTC RTC;
@@ -317,7 +317,7 @@ void loop() {
       LEDTime = micros();
       LEDState = !LEDState;
       LEDState ? digitalWrite(LEDPin, HIGH) : digitalWrite(LEDPin, LOW);
-      Serial.println("Xbee");
+      //Serial.println("Xbee");
     }
   }
   else if (SDWorking){
@@ -342,7 +342,7 @@ void loop() {
     if(indexer >= 1) {
       tempCode = (uint16_t)data.incomingECVTData[indexer - 1] << 8 | (uint16_t)data.incomingECVTData[indexer];
       if(tempCode == endCode and indexer == 3){
-        Serial.println("Got data!");
+        //Serial.println("Got data!");
         byteArrayFull = true;
       }
       else if(tempCode == endCode){
