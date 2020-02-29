@@ -80,11 +80,11 @@
 <wire x1="68.58" y1="0" x2="68.58" y2="38.1" width="0" layer="20"/>
 <wire x1="68.58" y1="38.1" x2="0" y2="38.1" width="0" layer="20"/>
 <wire x1="0" y1="38.1" x2="0" y2="0" width="0" layer="20"/>
-<dimension x1="2.2352" y1="38.9636" x2="2.2352" y2="0.8636" x3="-1.6509875" y3="19.9136" textsize="1.778" layer="47" unit="inch"/>
-<dimension x1="2.2352" y1="38.9636" x2="70.8152" y2="38.9636" x3="36.5252" y3="41.71496875" textsize="1.778" textratio="0" layer="47" unit="inch"/>
-<dimension x1="58.6994" y1="40.894" x2="2.3876" y2="41.0464" x3="30.552646875" y3="44.349853125" textsize="1.778" layer="47" unit="inch"/>
 <hole x="64.77" y="34.6964" drill="3.3528"/>
-<hole x="64.8208" y="34.6456" drill="1"/>
+<circle x="64.7954" y="34.7218" radius="2.794" width="0" layer="43"/>
+<circle x="64.7954" y="34.7218" radius="2.794" width="0" layer="42"/>
+<dimension x1="0" y1="38.1" x2="0" y2="0" x3="-4.7752" y3="19.05" textsize="1.778" layer="47" unit="inch" visible="yes"/>
+<dimension x1="0" y1="38.1" x2="68.58" y2="38.1" x3="34.29" y3="42.164" textsize="1.778" layer="47" unit="inch" visible="yes"/>
 </plain>
 <libraries>
 <library name="v-reg" urn="urn:adsk.eagle:library:409">
