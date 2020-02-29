@@ -1,5 +1,5 @@
 #include <LDS.h>
-#include <PressureSensor.h>
+//#include <PressureSensor.h>
 #include <HallEffectSpeedSensor.h>
 #include <PoluluG2MotorDriver.h>
 #include <Arduino.h>
@@ -35,15 +35,15 @@ uint32_t serialTime = micros(), daqTime = micros(), oldTime = micros();
 uint8_t currSense = A1;
 LDS ecvt_lds(A0, 50); //inputPin, travelMM, isReversed = false #####NOTE: need to check the actual travel distance of this LDS
 PID ecvt_speed_pid;
-PressureSensor brake_front_sensor(A2, 2000, 8200, 4700), brake_back_sensor(A3, 2000, 8200, 4700); //inputPin, scale (PSI), offset = 0
+//PressureSensor brake_front_sensor(A2, 2000, 8200, 4700), brake_back_sensor(A3, 2000, 8200, 4700); //inputPin, scale (PSI), offset = 0
 HallEffectSpeedSensor engine_speed_sensor(5, 6), wheel_speed_sensor(6, 86); //inputPin, toneWheelTeeth, intervalLength = 50us, averagingAmount = 200
 PoluluG2MotorDriver ecvt_driver;
 
 //################################# DEFINITION OF ALL ECVT RELATED VARIABLES ################################//
-const uint16_t target_enigine_speed = 2850;
-const uint16_t min_lds_pos = 389;
-const uint16_t max_lds_pos = 710;
-const uint16_t disengaged_target = 710;
+const uint16_t target_enigine_speed = 3400;
+const uint16_t min_lds_pos = 470;
+const uint16_t max_lds_pos = 600;
+const uint16_t disengaged_target = 600;
 const uint16_t threshold_rpm = 1800;
 int16_t desired_power = 0;
 bool hasRunFunction = false;
@@ -64,16 +64,16 @@ void setup() {
   ecvt_pid->set_threshold_bounds(-50,25);
 
   //PID of the entire system
-  ecvt_speed_pid.set_constants(2, 0.0, 1);
+  ecvt_speed_pid.set_constants(5, 0.0, 1);
   ecvt_speed_pid.set_integral_cap(0);
-  ecvt_speed_pid.set_derivative_bounds(-10000,0);
+  ecvt_speed_pid.set_derivative_bounds(-10000,10000);
   ecvt_speed_pid.set_power_bounds(-255,255);
   ecvt_speed_pid.set_threshold_bounds(-50,25);
 
   
   ecvt_lds.begin();
-  brake_front_sensor.begin();
-  brake_back_sensor.begin();
+//  brake_front_sensor.begin();
+//  brake_back_sensor.begin();
   engine_speed_sensor.begin();
   wheel_speed_sensor.begin();
  
@@ -92,12 +92,11 @@ void loop() {
   wheel_speed_sensor.updateSensor();
 
   //Only set one true at a time
-  tuneClosingPosition(false);
-  tuneOpeningPosition(false);
-  runController(false);
+  tuneClosingPosition(0);
+  tuneOpeningPosition(0);
+  runController(1);
 
-
-/**
+  /**
    * If the time since last writing is greater than the interval time,
    * and if writeSerialMonitor is set to true then write data
    * THIS IS SOLELY FOR TESTING! COMMENT OUT BEFORE DOWNLOADING TO CAR
@@ -118,11 +117,11 @@ void loop() {
   if (abs(micros() - serialTime) > serialInterval && writeSerialMonitor){
     collectAllData();
 //    Serial.print("Time: "  + String(data.currTime)   + "\t");
-    Serial.print("LDS: "  + String(data.lds)  + "\t");
+//    Serial.print("LDS: "  + String(data.lds)  + "\t");
 //    Serial.print("brake_front_sensor: "+ String(data.brkf)  + "\t");
 //    Serial.print("brake_back_sensor: "+ String(data.brkb)  + "\t");
-//    Serial.print("Engine Speed: "+ String(data.espd)  + "\t");
-//    Serial.print("Wheel Speed: " + String(data.wspd)  + "\t");
+    Serial.print("Engine Speed: "+ String(data.espd)  + "\t");
+    Serial.print("Wheel Speed: " + String(data.wspd)  + "\t");
     Serial.println();
 
     serialTime = micros();
@@ -148,7 +147,7 @@ inline void tuneClosingPosition(bool runFunction){
     Serial.println("Testing");
     data.lds = ecvt_lds.getRawAnalog();
     ecvt_driver.set_power(127);
-    delay(500);
+    delay(2000);
     ecvt_driver.set_power(0);
     delay(500);
     ecvt_driver.set_power(-127);
@@ -183,7 +182,7 @@ inline void tuneOpeningPosition(bool runFunction){
     Serial.println("Testing");
     data.lds = ecvt_lds.getRawAnalog();
     ecvt_driver.set_power(-127);
-    delay(500);
+    delay(2000);
     ecvt_driver.set_power(0);
     delay(500);
     ecvt_driver.set_power(127);
@@ -216,11 +215,9 @@ inline void runController(bool runFunction){
     collectAllData();
     if(data.espd < threshold_rpm){
       // ECVT IS DISENGAGED
-      ecvt_driver.set_power(127);
       ecvt_driver.step_pid(disengaged_target - data.lds);
     } else if(data.lds >= min_lds_pos && (data.lds <= max_lds_pos || desired_power < 0)) {  
       // ECVT IS ENGAGED
-      Serial.println("---------");
       ecvt_driver.set_power(desired_power);
     } else {
       ecvt_driver.set_power(0);

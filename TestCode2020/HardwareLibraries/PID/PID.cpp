@@ -63,7 +63,6 @@ int16_t PID::step(float error){
     // Slope Formula
     derivative_ = (error - prev_error_) / dt;
     prev_error_ = error;
-    Serial.println("D: " + String(derivative_));
     derivative_ = (derivative_ > max_derivative_) ? max_derivative_ : derivative_;
     derivative_ = (derivative_ < min_derivative_) ? min_derivative_ : derivative_;
 
