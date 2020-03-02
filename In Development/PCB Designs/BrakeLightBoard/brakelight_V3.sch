@@ -8881,16 +8881,6 @@ high speed (Philips)</description>
 <wire x1="-43.18" y1="-30.48" x2="-40.64" y2="-30.48" width="0.1524" layer="91"/>
 <label x="-40.64" y="-30.48" size="1.778" layer="95" xref="yes"/>
 </segment>
-<segment>
-<pinref part="U$1" gate="G$1" pin="OUT"/>
-<wire x1="43.18" y1="10.16" x2="48.26" y2="10.16" width="0.1524" layer="91"/>
-<pinref part="R3" gate="1" pin="A"/>
-<wire x1="48.26" y1="10.16" x2="48.26" y2="25.4" width="0.1524" layer="91"/>
-<wire x1="48.26" y1="25.4" x2="25.4" y2="25.4" width="0.1524" layer="91"/>
-<junction x="48.26" y="10.16"/>
-<wire x1="48.26" y1="10.16" x2="53.34" y2="10.16" width="0.1524" layer="91"/>
-<pinref part="D1" gate="G$1" pin="C"/>
-</segment>
 </net>
 <net name="PT2" class="0">
 <segment>
@@ -9117,6 +9107,18 @@ high speed (Philips)</description>
 <pinref part="Q2" gate="G$1" pin="G"/>
 <wire x1="88.9" y1="-15.24" x2="83.82" y2="-15.24" width="0.1524" layer="91"/>
 <junction x="83.82" y="-15.24"/>
+</segment>
+</net>
+<net name="N$8" class="0">
+<segment>
+<pinref part="R3" gate="1" pin="A"/>
+<wire x1="25.4" y1="25.4" x2="45.72" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="OUT"/>
+<wire x1="45.72" y1="25.4" x2="45.72" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="10.16" x2="43.18" y2="10.16" width="0.1524" layer="91"/>
+<pinref part="D1" gate="G$1" pin="C"/>
+<wire x1="53.34" y1="10.16" x2="45.72" y2="10.16" width="0.1524" layer="91"/>
+<junction x="45.72" y="10.16"/>
 </segment>
 </net>
 </nets>

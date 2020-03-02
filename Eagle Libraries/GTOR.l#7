@@ -149,9 +149,10 @@ Drill hole thickness: 1.4 mm</description>
 <text x="-3.556" y="-0.635" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
 <package name="0_OHM_RESISTOR">
-<hole x="-3.81" y="0" drill="0.8128"/>
-<hole x="3.81" y="0" drill="0.8128"/>
-<wire x1="-3.81" y1="0" x2="3.81" y2="0" width="0.1524" layer="21"/>
+<pad name="P$1" x="-2.54" y="3.81" drill="0.6"/>
+<pad name="P$2" x="6.35" y="0" drill="0.6"/>
+<wire x1="-6.35" y1="0" x2="3.81" y2="0" width="0.1524" layer="21"/>
+<wire x1="6.35" y1="0" x2="3.81" y2="0" width="0.1524" layer="21"/>
 </package>
 </packages>
 <symbols>
@@ -305,6 +306,22 @@ Comparator</description>
 <connect gate="G$1" pin="OUT" pad="6"/>
 <connect gate="G$1" pin="V+" pad="7"/>
 <connect gate="G$1" pin="V-" pad="4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="0_OHM_RESISTOR">
+<gates>
+<gate name="G$1" symbol="R-US" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="0_OHM_RESISTOR">
+<connects>
+<connect gate="G$1" pin="1" pad="P$1"/>
+<connect gate="G$1" pin="2" pad="P$2"/>
 </connects>
 <technologies>
 <technology name=""/>
