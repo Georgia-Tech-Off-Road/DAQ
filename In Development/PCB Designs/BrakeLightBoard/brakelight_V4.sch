@@ -6047,15 +6047,9 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <label x="15.24" y="-17.78" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 <segment>
-<label x="40.64" y="-12.7" size="1.778" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
 <pinref part="U$2" gate="G$1" pin="V-"/>
 <wire x1="10.16" y1="45.72" x2="10.16" y2="43.18" width="0.1524" layer="91"/>
 <label x="10.16" y="43.18" size="1.778" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
-<label x="40.64" y="2.54" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 <segment>
 <pinref part="Q2" gate="G$1" pin="S"/>
@@ -6067,6 +6061,16 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <label x="86.36" y="-25.4" size="1.778" layer="95" rot="R270" xref="yes"/>
 <pinref part="Q1" gate="G$1" pin="S"/>
 <wire x1="93.98" y1="-17.78" x2="93.98" y2="-20.32" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="38.1" y1="2.54" x2="40.64" y2="2.54" width="0.1524" layer="91"/>
+<pinref part="R5" gate="G$1" pin="2"/>
+<label x="40.64" y="2.54" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<wire x1="38.1" y1="-12.7" x2="40.64" y2="-12.7" width="0.1524" layer="91"/>
+<pinref part="R3" gate="G$1" pin="2"/>
+<label x="40.64" y="-12.7" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="VCC" class="0">
@@ -6110,12 +6114,6 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <label x="5.08" y="5.08" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="N$1" class="0">
-<segment>
-<wire x1="38.1" y1="-12.7" x2="40.64" y2="-12.7" width="0.1524" layer="91"/>
-<pinref part="R3" gate="G$1" pin="2"/>
-</segment>
-</net>
 <net name="N$6" class="0">
 <segment>
 <pinref part="U$2" gate="G$1" pin="1OUT"/>
@@ -6138,12 +6136,6 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <wire x1="33.02" y1="58.42" x2="33.02" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="33.02" y1="53.34" x2="17.78" y2="53.34" width="0.1524" layer="91"/>
 <junction x="17.78" y="53.34"/>
-</segment>
-</net>
-<net name="N$3" class="0">
-<segment>
-<wire x1="38.1" y1="2.54" x2="40.64" y2="2.54" width="0.1524" layer="91"/>
-<pinref part="R5" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="N$2" class="0">
@@ -6196,20 +6188,6 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 </nets>
 </sheet>
 </sheets>
-<errors>
-<approved hash="202,1,55.88,66.04,U$1,COL_OUT,,,,"/>
-<approved hash="104,1,45.72,71.12,U$1,V+,5V,,,"/>
-<approved hash="202,1,55.88,25.4,U$2,COL_OUT,,,,"/>
-<approved hash="104,1,45.72,30.48,U$2,V+,5V,,,"/>
-<approved hash="113,1,-33.4,69.5502,5V_LINREG,,,,,"/>
-<approved hash="113,1,102.15,55.88,BRAKELIGHT,,,,,"/>
-<approved hash="113,1,3.47943,66.04,PT1,,,,,"/>
-<approved hash="113,1,3.47943,25.4,PT2,,,,,"/>
-<approved hash="113,1,-44.2383,94.0664,LIPO_CONN,,,,,"/>
-<approved hash="113,1,-33.02,41.6738,TRIMPOT1,,,,,"/>
-<approved hash="113,1,-33.02,11.1938,TRIMPOT2,,,,,"/>
-<approved hash="113,1,-4.48733,91.7804,INO_READ,,,,,"/>
-</errors>
 </schematic>
 </drawing>
 <compatibility>

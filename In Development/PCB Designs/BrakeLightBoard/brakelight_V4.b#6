@@ -8,7 +8,7 @@
 </settings>
 <grid distance="1" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
 <layer number="3" name="Route3" color="17" fill="1" visible="no" active="no"/>
 <layer number="4" name="Route4" color="18" fill="1" visible="no" active="no"/>
@@ -1583,20 +1583,20 @@ design rules under a new name.</description>
 <board_group name="HOLE"/>
 </groups>
 <elements>
-<element name="5V_LINREG" library="v-reg" package="78XXS" package3d_urn="urn:adsk.eagle:package:30342/1" value="" x="18.3664" y="8.6142" smashed="yes" rot="R270">
-<attribute name="NAME" x="11.4464" y="15.4242" size="1.778" layer="25" ratio="10" rot="R270"/>
-<attribute name="POPULARITY" value="18" x="18.3664" y="8.6142" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="20.9064" y="12.5512" size="1.778" layer="27" ratio="10" rot="R270"/>
+<element name="5V_LINREG" library="v-reg" package="78XXS" package3d_urn="urn:adsk.eagle:package:30342/1" value="" x="14.171" y="7.1846" smashed="yes" rot="R90">
+<attribute name="NAME" x="21.091" y="0.3746" size="1.778" layer="25" ratio="10" rot="R90"/>
+<attribute name="POPULARITY" value="18" x="14.171" y="7.1846" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="11.631" y="3.2476" size="1.778" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="Q2" library="FQP30N06L" package="TO220V" value="30N06L" x="46.0502" y="7.7376" smashed="yes" rot="R270">
-<attribute name="AVAILABILITY" value="Unavailable" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="DESCRIPTION" value=" N-Channel 60V 32A _Tc_ 79W _Tc_ Through Hole TO-220-3 " x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MF" value="ON Semiconductor" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MP" value="FQP30N06L" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="PACKAGE" value="TO-220 ON Semiconductor" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="PRICE" value="None" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="SPICEPREFIX" value="Q" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="39.6796" y="11.954" size="1.778" layer="27" ratio="10" rot="R270"/>
+<element name="Q2" library="FQP30N06L" package="TO220V" value="30N06L" x="42.5196" y="7.5598" smashed="yes" rot="R270">
+<attribute name="AVAILABILITY" value="Unavailable" x="42.5196" y="7.5598" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="DESCRIPTION" value=" N-Channel 60V 32A _Tc_ 79W _Tc_ Through Hole TO-220-3 " x="42.5196" y="7.5598" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MF" value="ON Semiconductor" x="42.5196" y="7.5598" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MP" value="FQP30N06L" x="42.5196" y="7.5598" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PACKAGE" value="TO-220 ON Semiconductor" x="42.5196" y="7.5598" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PRICE" value="None" x="42.5196" y="7.5598" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="Q" x="42.5196" y="7.5598" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="36.149" y="11.7762" size="1.778" layer="27" ratio="10" rot="R270"/>
 </element>
 <element name="BRAKELIGHT" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="5.7194" y="31.6578" smashed="yes" rot="R90">
 <attribute name="IN" value="" x="5.7194" y="31.6578" size="1.778" layer="27" rot="R90" display="off"/>
@@ -1673,11 +1673,11 @@ design rules under a new name.</description>
 <attribute name="NAME" x="40.9321" y="17.1577" size="1.27" layer="25" ratio="12" rot="R90"/>
 <attribute name="VALUE" x="51.0921" y="28.5877" size="1.27" layer="27" ratio="12" rot="R180"/>
 </element>
-<element name="R3" library="0ohmresistor" package="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1" value="" x="45.7454" y="12.954" smashed="yes">
-<attribute name="NAME" x="44.6024" y="13.843" size="1.27" layer="25" ratio="10"/>
-<attribute name="POPULARITY" value="0" x="45.7454" y="12.954" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="45.7454" y="12.954" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="44.6024" y="10.795" size="1.27" layer="27" ratio="10"/>
+<element name="R3" library="0ohmresistor" package="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1" value="" x="44.323" y="7.5692" smashed="yes" rot="R270">
+<attribute name="NAME" x="45.212" y="8.7122" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="POPULARITY" value="0" x="44.323" y="7.5692" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="44.323" y="7.5692" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="42.164" y="8.7122" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
 <element name="R4" library="0ohmresistor" package="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1" value="" x="62.8904" y="20.3454" smashed="yes">
 <attribute name="NAME" x="61.7474" y="21.2344" size="1.27" layer="25" ratio="10"/>
@@ -1692,22 +1692,22 @@ design rules under a new name.</description>
 <element name="U$3" library="GTOR" package="SOLE_HOLE" value="" x="64.7954" y="34.7218" smashed="yes"/>
 <element name="U$4" library="GTOR" package="SOLE_HOLE" value="" x="62.0522" y="6.9596" smashed="yes"/>
 <element name="U$5" library="GTOR" package="SOLE_HOLE" value="" x="9.6774" y="9.5758" smashed="yes"/>
-<element name="Q1" library="FQP30N06L" package="TO220V" value="30N06L" x="-2.3114" y="-1.9812" smashed="yes">
-<attribute name="AVAILABILITY" value="Unavailable" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" N-Channel 60V 32A _Tc_ 79W _Tc_ Through Hole TO-220-3 " x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="ON Semiconductor" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="FQP30N06L" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-7.39323125" y="-8.02858125" size="1.270459375" layer="25" ratio="10"/>
-<attribute name="PACKAGE" value="TO-220 ON Semiconductor" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="Q" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-7.39708125" y="-9.60971875" size="1.27141875" layer="27" ratio="10"/>
+<element name="Q1" library="FQP30N06L" package="TO220V" value="30N06L" x="35.5854" y="7.493" smashed="yes" rot="R270">
+<attribute name="AVAILABILITY" value="Unavailable" x="36.6014" y="7.493" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="DESCRIPTION" value=" N-Channel 60V 32A _Tc_ 79W _Tc_ Through Hole TO-220-3 " x="36.6014" y="7.493" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MF" value="ON Semiconductor" x="36.6014" y="7.493" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MP" value="FQP30N06L" x="36.6014" y="7.493" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="NAME" x="29.53801875" y="12.57483125" size="1.270459375" layer="25" ratio="10" rot="R270"/>
+<attribute name="PACKAGE" value="TO-220 ON Semiconductor" x="36.6014" y="7.493" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PRICE" value="None" x="36.6014" y="7.493" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="Q" x="36.6014" y="7.493" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="27.95688125" y="12.57868125" size="1.27141875" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="R5" library="0ohmresistor" package="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1" value="" x="-4.0386" y="-12.8524" smashed="yes">
-<attribute name="NAME" x="-5.1816" y="-11.9634" size="1.27" layer="25" ratio="10"/>
-<attribute name="POPULARITY" value="0" x="-4.0386" y="-12.8524" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-4.0386" y="-12.8524" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-5.1816" y="-15.0114" size="1.27" layer="27" ratio="10"/>
+<element name="R5" library="0ohmresistor" package="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1" value="" x="29.337" y="7.4168" smashed="yes" rot="R270">
+<attribute name="NAME" x="30.226" y="8.5598" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="POPULARITY" value="0" x="29.337" y="7.4168" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="29.337" y="7.4168" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="27.178" y="8.5598" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
 </elements>
 <signals>
@@ -1731,7 +1731,7 @@ design rules under a new name.</description>
 <wire x1="32.2072" y1="18.8214" x2="48.8696" y2="19.3802" width="0" layer="19" extent="1-1"/>
 <wire x1="32.9332" y1="32.4626" x2="32.2072" y2="18.8214" width="0" layer="19" extent="1-1"/>
 <wire x1="16.8148" y1="24.7142" x2="13.8938" y2="24.7396" width="0" layer="19" extent="16-16"/>
-<wire x1="15.8264" y1="6.0742" x2="16.8148" y2="24.7142" width="0" layer="19" extent="1-1"/>
+<wire x1="16.711" y1="9.7246" x2="16.8148" y2="24.7142" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="PT2">
 <contactref element="PT2" pad="2"/>
@@ -1772,8 +1772,8 @@ design rules under a new name.</description>
 <vertex x="68.6054" y="-0.4318"/>
 <vertex x="0" y="-0.4318"/>
 </polygon>
-<contactref element="Q1" pad="2"/>
 <contactref element="Q2" pad="3"/>
+<contactref element="Q1" pad="3"/>
 <wire x1="61.6712" y1="23.5966" x2="62.1284" y2="29.0068" width="0" layer="19" extent="1-1"/>
 <wire x1="60.3504" y1="20.3454" x2="61.6712" y2="23.5966" width="0" layer="19" extent="1-1"/>
 <wire x1="65.4304" y1="20.3454" x2="61.6712" y2="23.5966" width="0" layer="19" extent="1-1"/>
@@ -1784,9 +1784,9 @@ design rules under a new name.</description>
 <wire x1="16.8148" y1="19.6342" x2="26.8732" y2="21.463" width="0" layer="19" extent="1-1"/>
 <wire x1="6.9464" y1="23.3288" x2="16.8148" y2="19.6342" width="0" layer="19" extent="1-1"/>
 <wire x1="26.8802" y1="32.3986" x2="26.8732" y2="21.463" width="0" layer="19" extent="1-1"/>
-<wire x1="15.8264" y1="8.6142" x2="16.8148" y2="19.6342" width="0" layer="19" extent="1-1"/>
-<wire x1="43.5102" y1="5.1976" x2="48.8696" y2="24.4602" width="0" layer="19" extent="1-1"/>
-<wire x1="-2.3114" y1="-4.5212" x2="15.8264" y2="8.6142" width="0" layer="19" extent="1-1"/>
+<wire x1="16.711" y1="7.1846" x2="16.8148" y2="19.6342" width="0" layer="19" extent="1-1"/>
+<wire x1="33.0454" y1="4.953" x2="26.8732" y2="21.463" width="0" layer="19" extent="1-1"/>
+<wire x1="39.9796" y1="5.0198" x2="33.0454" y2="4.953" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VCC">
 <contactref element="LIPO_CONN" pad="1"/>
@@ -1795,7 +1795,7 @@ design rules under a new name.</description>
 <wire x1="6.9894" y1="29.1578" x2="4.0894" y2="26.2578" width="0.762" layer="16"/>
 <wire x1="4.0894" y1="21.1858" x2="6.9464" y2="18.3288" width="0.762" layer="16"/>
 <wire x1="4.0894" y1="26.2578" x2="4.0894" y2="21.1858" width="0.762" layer="16"/>
-<wire x1="6.9464" y1="18.3288" x2="15.8264" y2="11.1542" width="0" layer="19" extent="1-1"/>
+<wire x1="6.9464" y1="18.3288" x2="16.711" y2="4.6446" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VREF1">
 <contactref element="TRIMPOT1" pad="2"/>
@@ -1831,23 +1831,30 @@ design rules under a new name.</description>
 <signal name="N$2">
 <contactref element="BRAKELIGHT" pad="2"/>
 <contactref element="Q2" pad="2"/>
-<contactref element="Q1" pad="3"/>
-<wire x1="0.2286" y1="-4.5212" x2="43.5102" y2="7.7376" width="0" layer="19" extent="1-1"/>
-<wire x1="6.9894" y1="34.1578" x2="0.2286" y2="-4.5212" width="0" layer="19" extent="1-1"/>
+<contactref element="Q1" pad="2"/>
+<wire x1="6.9894" y1="34.1578" x2="3.9064" y2="34.1578" width="0.762" layer="16"/>
+<wire x1="3.9064" y1="34.1578" x2="1.8034" y2="32.0548" width="0.762" layer="16"/>
+<wire x1="1.8034" y1="32.0548" x2="1.8034" y2="4.318" width="0.762" layer="16"/>
+<wire x1="4.5974" y1="1.524" x2="1.8034" y2="4.318" width="0.762" layer="16"/>
+<wire x1="33.0454" y1="7.493" x2="27.813" y2="7.493" width="0.762" layer="16"/>
+<wire x1="27.813" y1="7.493" x2="21.844" y2="1.524" width="0.762" layer="16"/>
+<wire x1="21.844" y1="1.524" x2="4.5974" y2="1.524" width="0.762" layer="16"/>
+<wire x1="33.0454" y1="7.493" x2="33.1122" y2="7.5598" width="0.762" layer="16"/>
+<wire x1="33.1122" y1="7.5598" x2="39.9796" y2="7.5598" width="0.762" layer="16"/>
 </signal>
 <signal name="ACTIVATE1">
 <contactref element="Q2" pad="1"/>
 <contactref element="R3" pad="1"/>
 <contactref element="U$1" pad="7"/>
-<wire x1="43.5102" y1="10.2776" x2="43.2054" y2="12.954" width="0" layer="19" extent="1-1"/>
-<wire x1="32.2072" y1="21.3614" x2="43.2054" y2="12.954" width="0" layer="19" extent="1-1"/>
+<wire x1="39.9796" y1="10.0998" x2="44.323" y2="10.1092" width="0" layer="19" extent="1-1"/>
+<wire x1="32.2072" y1="21.3614" x2="39.9796" y2="10.0998" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="ACTIVATE2">
-<contactref element="Q1" pad="1"/>
 <contactref element="R5" pad="1"/>
 <contactref element="U$1" pad="1"/>
-<wire x1="-4.8514" y1="-4.5212" x2="39.8272" y2="18.8214" width="0" layer="19" extent="1-1"/>
-<wire x1="-6.5786" y1="-12.8524" x2="-4.8514" y2="-4.5212" width="0" layer="19" extent="1-1"/>
+<contactref element="Q1" pad="1"/>
+<wire x1="33.0454" y1="10.033" x2="39.8272" y2="18.8214" width="0" layer="19" extent="1-1"/>
+<wire x1="29.337" y1="9.9568" x2="33.0454" y2="10.033" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>

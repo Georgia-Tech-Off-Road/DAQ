@@ -6137,11 +6137,10 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <pinref part="U$2" gate="G$1" pin="1IN-"/>
 <wire x1="17.78" y1="68.58" x2="2.54" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="68.58" x2="2.54" y2="66.04" width="0.1524" layer="91"/>
-<wire x1="17.78" y1="68.58" x2="22.86" y2="68.58" width="0.1524" layer="91"/>
-<junction x="17.78" y="68.58"/>
 <pinref part="INO_READ" gate="-1" pin="KL"/>
-<wire x1="22.86" y1="68.58" x2="22.86" y2="63.5" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="63.5" x2="33.02" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="68.58" x2="33.02" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="68.58" x2="33.02" y2="63.5" width="0.1524" layer="91"/>
+<junction x="17.78" y="68.58"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -6150,11 +6149,10 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <pinref part="U$2" gate="G$1" pin="2IN-"/>
 <wire x1="17.78" y1="53.34" x2="2.54" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="53.34" x2="2.54" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="17.78" y1="53.34" x2="22.86" y2="53.34" width="0.1524" layer="91"/>
-<junction x="17.78" y="53.34"/>
 <pinref part="INO_READ" gate="-2" pin="KL"/>
-<wire x1="33.02" y1="58.42" x2="22.86" y2="58.42" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="58.42" x2="22.86" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="58.42" x2="33.02" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="53.34" x2="17.78" y2="53.34" width="0.1524" layer="91"/>
+<junction x="17.78" y="53.34"/>
 </segment>
 </net>
 <net name="N$3" class="0">

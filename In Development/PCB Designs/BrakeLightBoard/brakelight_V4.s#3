@@ -5875,12 +5875,12 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <attribute name="VALUE" x="-78.74" y="62.357" size="1.778" layer="96"/>
 <attribute name="GND" x="-82.042" y="66.04" size="1.778" layer="96" display="name"/>
 </instance>
-<instance part="INO_READ" gate="-1" x="38.1" y="58.42" smashed="yes" rot="R180">
-<attribute name="PT1READ" x="50.8" y="58.42" size="1.778" layer="96" rot="R180" display="name"/>
+<instance part="INO_READ" gate="-1" x="38.1" y="63.5" smashed="yes" rot="R180">
+<attribute name="PT1READ" x="50.8" y="63.5" size="1.778" layer="96" rot="R180" display="name"/>
 </instance>
-<instance part="INO_READ" gate="-2" x="38.1" y="63.5" smashed="yes" rot="R180">
-<attribute name="VALUE" x="40.64" y="67.183" size="1.778" layer="96" rot="R180"/>
-<attribute name="PT2READ" x="50.8" y="63.5" size="1.778" layer="96" rot="R180" display="name"/>
+<instance part="INO_READ" gate="-2" x="38.1" y="58.42" smashed="yes" rot="R180">
+<attribute name="VALUE" x="40.64" y="62.103" size="1.778" layer="96" rot="R180"/>
+<attribute name="PT2READ" x="50.8" y="58.42" size="1.778" layer="96" rot="R180" display="name"/>
 </instance>
 <instance part="R1" gate="G$1" x="-30.48" y="7.62" smashed="yes" rot="R270">
 <attribute name="NAME" x="-28.9814" y="11.43" size="1.778" layer="95" rot="R270"/>
@@ -6137,10 +6137,11 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <pinref part="U$2" gate="G$1" pin="1IN-"/>
 <wire x1="17.78" y1="68.58" x2="2.54" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="68.58" x2="2.54" y2="66.04" width="0.1524" layer="91"/>
-<pinref part="INO_READ" gate="-2" pin="KL"/>
 <wire x1="17.78" y1="68.58" x2="22.86" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="68.58" x2="33.02" y2="63.5" width="0.1524" layer="91"/>
 <junction x="17.78" y="68.58"/>
+<pinref part="INO_READ" gate="-1" pin="KL"/>
+<wire x1="22.86" y1="68.58" x2="22.86" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="63.5" x2="33.02" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$7" class="0">
@@ -6149,10 +6150,11 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <pinref part="U$2" gate="G$1" pin="2IN-"/>
 <wire x1="17.78" y1="53.34" x2="2.54" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="53.34" x2="2.54" y2="50.8" width="0.1524" layer="91"/>
-<pinref part="INO_READ" gate="-1" pin="KL"/>
 <wire x1="17.78" y1="53.34" x2="22.86" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="53.34" x2="33.02" y2="58.42" width="0.1524" layer="91"/>
 <junction x="17.78" y="53.34"/>
+<pinref part="INO_READ" gate="-2" pin="KL"/>
+<wire x1="33.02" y1="58.42" x2="22.86" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="22.86" y1="58.42" x2="22.86" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$3" class="0">
