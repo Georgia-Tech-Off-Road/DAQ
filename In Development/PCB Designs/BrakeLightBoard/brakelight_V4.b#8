@@ -84,58 +84,6 @@
 <dimension x1="0" y1="38.1" x2="68.58" y2="38.1" x3="34.29" y3="42.164" textsize="1.778" layer="47" unit="inch" visible="yes"/>
 </plain>
 <libraries>
-<library name="v-reg" urn="urn:adsk.eagle:library:409">
-<description>&lt;b&gt;Voltage Regulators&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="78XXL" urn="urn:adsk.eagle:footprint:30303/1" library_version="1">
-<description>&lt;b&gt;VOLTAGE REGULATOR&lt;/b&gt;</description>
-<wire x1="-5.207" y1="-1.27" x2="5.207" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="5.207" y1="14.605" x2="-5.207" y2="14.605" width="0.1524" layer="21"/>
-<wire x1="5.207" y1="-1.27" x2="5.207" y2="11.176" width="0.1524" layer="21"/>
-<wire x1="5.207" y1="11.176" x2="4.318" y2="11.176" width="0.1524" layer="21"/>
-<wire x1="4.318" y1="11.176" x2="4.318" y2="12.7" width="0.1524" layer="21"/>
-<wire x1="4.318" y1="12.7" x2="5.207" y2="12.7" width="0.1524" layer="21"/>
-<wire x1="5.207" y1="12.7" x2="5.207" y2="14.605" width="0.1524" layer="21"/>
-<wire x1="-5.207" y1="-1.27" x2="-5.207" y2="11.176" width="0.1524" layer="21"/>
-<wire x1="-5.207" y1="11.176" x2="-4.318" y2="11.176" width="0.1524" layer="21"/>
-<wire x1="-4.318" y1="11.176" x2="-4.318" y2="12.7" width="0.1524" layer="21"/>
-<wire x1="-4.318" y1="12.7" x2="-5.207" y2="12.7" width="0.1524" layer="21"/>
-<wire x1="-5.207" y1="12.7" x2="-5.207" y2="14.605" width="0.1524" layer="21"/>
-<wire x1="-4.572" y1="-0.635" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
-<wire x1="4.572" y1="7.62" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
-<wire x1="4.572" y1="7.62" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
-<wire x1="-4.572" y1="-0.635" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
-<circle x="0" y="11.176" radius="1.8034" width="0.1524" layer="21"/>
-<circle x="0" y="11.176" radius="4.191" width="0" layer="42"/>
-<circle x="0" y="11.176" radius="4.191" width="0" layer="43"/>
-<pad name="IN" x="-2.54" y="-3.81" drill="1.016" shape="long" rot="R90"/>
-<pad name="GND" x="0" y="-3.81" drill="1.016" shape="long" rot="R90"/>
-<pad name="OUT" x="2.54" y="-3.81" drill="1.016" shape="long" rot="R90"/>
-<text x="-3.81" y="5.08" size="1.778" layer="25" ratio="10">&gt;NAME</text>
-<text x="-3.937" y="2.54" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
-<text x="-4.445" y="7.874" size="0.9906" layer="21" ratio="10">A15,2mm</text>
-<text x="-0.508" y="0" size="1.27" layer="51" ratio="10">-</text>
-<text x="-3.048" y="0" size="1.27" layer="51" ratio="10">I</text>
-<text x="2.032" y="0" size="1.27" layer="51" ratio="10">O</text>
-<rectangle x1="1.905" y1="-2.159" x2="3.175" y2="-1.27" layer="21"/>
-<rectangle x1="1.905" y1="-3.81" x2="3.175" y2="-2.159" layer="51"/>
-<rectangle x1="-0.635" y1="-2.159" x2="0.635" y2="-1.27" layer="21"/>
-<rectangle x1="-3.175" y1="-2.159" x2="-1.905" y2="-1.27" layer="21"/>
-<rectangle x1="-0.635" y1="-3.81" x2="0.635" y2="-2.159" layer="51"/>
-<rectangle x1="-3.175" y1="-3.81" x2="-1.905" y2="-2.159" layer="51"/>
-<hole x="0" y="11.176" drill="3.302"/>
-</package>
-</packages>
-<packages3d>
-<package3d name="78XXL" urn="urn:adsk.eagle:package:30361/1" type="box" library_version="1">
-<description>VOLTAGE REGULATOR</description>
-<packageinstances>
-<packageinstance name="78XXL"/>
-</packageinstances>
-</package3d>
-</packages3d>
-</library>
 <library name="con-wago-500" urn="urn:adsk.eagle:library:195">
 <description>&lt;b&gt;Wago Screw Clamps&lt;/b&gt;&lt;p&gt;
 Grid 5.00 mm&lt;p&gt;
@@ -1398,6 +1346,47 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 </package>
 </packages>
 </library>
+<library name="v-reg">
+<description>&lt;b&gt;Voltage Regulators&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="78XXS" urn="urn:adsk.eagle:footprint:30278/1">
+<description>&lt;b&gt;VOLTAGE REGULATOR&lt;/b&gt;</description>
+<wire x1="4.826" y1="-4.318" x2="5.08" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-4.318" x2="-4.826" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="-4.064" x2="-4.826" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="5.08" y1="-1.143" x2="5.08" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="-4.064" x2="-5.08" y2="-1.143" width="0.1524" layer="21"/>
+<circle x="-4.6228" y="-3.7084" radius="0.254" width="0" layer="21"/>
+<pad name="IN" x="-2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<pad name="GND" x="0" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<pad name="OUT" x="2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<text x="-5.08" y="-6.0452" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-5.08" y="-7.62" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-0.635" y="-3.81" size="1.27" layer="51" ratio="10">-</text>
+<text x="-3.175" y="-3.81" size="1.27" layer="51" ratio="10">I</text>
+<text x="1.905" y="-3.81" size="1.27" layer="51" ratio="10">O</text>
+<rectangle x1="-5.334" y1="-1.27" x2="-3.429" y2="0" layer="21"/>
+<rectangle x1="-3.429" y1="-0.762" x2="-1.651" y2="0" layer="21"/>
+<rectangle x1="-1.651" y1="-1.27" x2="-0.889" y2="0" layer="21"/>
+<rectangle x1="-0.889" y1="-0.762" x2="0.889" y2="0" layer="21"/>
+<rectangle x1="0.889" y1="-1.27" x2="1.651" y2="0" layer="21"/>
+<rectangle x1="1.651" y1="-0.762" x2="3.429" y2="0" layer="21"/>
+<rectangle x1="3.429" y1="-1.27" x2="5.334" y2="0" layer="21"/>
+<rectangle x1="-3.429" y1="-1.27" x2="-1.651" y2="-0.762" layer="51"/>
+<rectangle x1="-0.889" y1="-1.27" x2="0.889" y2="-0.762" layer="51"/>
+<rectangle x1="1.651" y1="-1.27" x2="3.429" y2="-0.762" layer="51"/>
+</package>
+</packages>
+<packages3d>
+<package3d name="78XXS" urn="urn:adsk.eagle:package:30342/1" type="box">
+<description>VOLTAGE REGULATOR</description>
+<packageinstances>
+<packageinstance name="78XXS"/>
+</packageinstances>
+</package3d>
+</packages3d>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1594,19 +1583,20 @@ design rules under a new name.</description>
 <board_group name="HOLE"/>
 </groups>
 <elements>
-<element name="5V_LINREG" library="v-reg" library_urn="urn:adsk.eagle:library:409" package="78XXL" package3d_urn="urn:adsk.eagle:package:30361/1" value="" x="18.468" y="6.7092" smashed="yes" rot="R270">
-<attribute name="NAME" x="11.548" y="13.5192" size="1.778" layer="25" ratio="10" rot="R270"/>
-<attribute name="VALUE" x="21.008" y="10.6462" size="1.778" layer="27" ratio="10" rot="R270"/>
+<element name="5V_LINREG" library="v-reg" package="78XXS" package3d_urn="urn:adsk.eagle:package:30342/1" value="" x="18.3664" y="8.6142" smashed="yes" rot="R270">
+<attribute name="NAME" x="11.4464" y="15.4242" size="1.778" layer="25" ratio="10" rot="R270"/>
+<attribute name="POPULARITY" value="18" x="18.3664" y="8.6142" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="20.9064" y="12.5512" size="1.778" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="Q2" library="FQP30N06L" package="TO220V" value="30N06L" x="43.434" y="6.62" smashed="yes" rot="R270">
-<attribute name="AVAILABILITY" value="Unavailable" x="43.434" y="6.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="DESCRIPTION" value=" N-Channel 60V 32A _Tc_ 79W _Tc_ Through Hole TO-220-3 " x="43.434" y="6.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MF" value="ON Semiconductor" x="43.434" y="6.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MP" value="FQP30N06L" x="43.434" y="6.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="PACKAGE" value="TO-220 ON Semiconductor" x="43.434" y="6.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="PRICE" value="None" x="43.434" y="6.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="SPICEPREFIX" value="Q" x="43.434" y="6.62" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="32.974" y="10.176" size="1.778" layer="27" ratio="10" rot="R270"/>
+<element name="Q2" library="FQP30N06L" package="TO220V" value="30N06L" x="46.0502" y="7.7376" smashed="yes" rot="R270">
+<attribute name="AVAILABILITY" value="Unavailable" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="DESCRIPTION" value=" N-Channel 60V 32A _Tc_ 79W _Tc_ Through Hole TO-220-3 " x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MF" value="ON Semiconductor" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MP" value="FQP30N06L" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PACKAGE" value="TO-220 ON Semiconductor" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PRICE" value="None" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="Q" x="46.0502" y="7.7376" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="39.6796" y="11.954" size="1.778" layer="27" ratio="10" rot="R270"/>
 </element>
 <element name="BRAKELIGHT" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="5.7194" y="31.6578" smashed="yes" rot="R90">
 <attribute name="IN" value="" x="5.7194" y="31.6578" size="1.778" layer="27" rot="R90" display="off"/>
@@ -1702,6 +1692,23 @@ design rules under a new name.</description>
 <element name="U$3" library="GTOR" package="SOLE_HOLE" value="" x="64.7954" y="34.7218" smashed="yes"/>
 <element name="U$4" library="GTOR" package="SOLE_HOLE" value="" x="62.0522" y="6.9596" smashed="yes"/>
 <element name="U$5" library="GTOR" package="SOLE_HOLE" value="" x="9.6774" y="9.5758" smashed="yes"/>
+<element name="Q1" library="FQP30N06L" package="TO220V" value="30N06L" x="-2.3114" y="-1.9812" smashed="yes">
+<attribute name="AVAILABILITY" value="Unavailable" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" N-Channel 60V 32A _Tc_ 79W _Tc_ Through Hole TO-220-3 " x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="ON Semiconductor" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="FQP30N06L" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-7.39323125" y="-8.02858125" size="1.270459375" layer="25" ratio="10"/>
+<attribute name="PACKAGE" value="TO-220 ON Semiconductor" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
+<attribute name="SPICEPREFIX" value="Q" x="-2.3114" y="-0.9652" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-7.39708125" y="-9.60971875" size="1.27141875" layer="27" ratio="10"/>
+</element>
+<element name="R5" library="0ohmresistor" package="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1" value="" x="-4.0386" y="-12.8524" smashed="yes">
+<attribute name="NAME" x="-5.1816" y="-11.9634" size="1.27" layer="25" ratio="10"/>
+<attribute name="POPULARITY" value="0" x="-4.0386" y="-12.8524" size="1.778" layer="27" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="-4.0386" y="-12.8524" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-5.1816" y="-15.0114" size="1.27" layer="27" ratio="10"/>
+</element>
 </elements>
 <signals>
 <signal name="5V">
@@ -1724,7 +1731,7 @@ design rules under a new name.</description>
 <wire x1="32.2072" y1="18.8214" x2="48.8696" y2="19.3802" width="0" layer="19" extent="1-1"/>
 <wire x1="32.9332" y1="32.4626" x2="32.2072" y2="18.8214" width="0" layer="19" extent="1-1"/>
 <wire x1="16.8148" y1="24.7142" x2="13.8938" y2="24.7396" width="0" layer="19" extent="16-16"/>
-<wire x1="14.658" y1="4.1692" x2="13.8938" y2="24.7396" width="0" layer="19" extent="16-16"/>
+<wire x1="15.8264" y1="6.0742" x2="16.8148" y2="24.7142" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="PT2">
 <contactref element="PT2" pad="2"/>
@@ -1750,7 +1757,6 @@ design rules under a new name.</description>
 <contactref element="PT1" pad="3"/>
 <contactref element="PT2" pad="3"/>
 <contactref element="5V_LINREG" pad="GND"/>
-<contactref element="Q2" pad="3"/>
 <contactref element="LIPO_CONN" pad="2"/>
 <contactref element="R1" pad="2"/>
 <contactref element="R2" pad="2"/>
@@ -1766,6 +1772,8 @@ design rules under a new name.</description>
 <vertex x="68.6054" y="-0.4318"/>
 <vertex x="0" y="-0.4318"/>
 </polygon>
+<contactref element="Q1" pad="2"/>
+<contactref element="Q2" pad="3"/>
 <wire x1="61.6712" y1="23.5966" x2="62.1284" y2="29.0068" width="0" layer="19" extent="1-1"/>
 <wire x1="60.3504" y1="20.3454" x2="61.6712" y2="23.5966" width="0" layer="19" extent="1-1"/>
 <wire x1="65.4304" y1="20.3454" x2="61.6712" y2="23.5966" width="0" layer="19" extent="1-1"/>
@@ -1776,13 +1784,9 @@ design rules under a new name.</description>
 <wire x1="16.8148" y1="19.6342" x2="26.8732" y2="21.463" width="0" layer="19" extent="1-1"/>
 <wire x1="6.9464" y1="23.3288" x2="16.8148" y2="19.6342" width="0" layer="19" extent="1-1"/>
 <wire x1="26.8802" y1="32.3986" x2="26.8732" y2="21.463" width="0" layer="19" extent="1-1"/>
-<wire x1="14.658" y1="6.7092" x2="16.8148" y2="19.6342" width="0" layer="19" extent="1-1"/>
-<wire x1="40.894" y1="4.08" x2="48.8696" y2="24.4602" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$2">
-<contactref element="BRAKELIGHT" pad="2"/>
-<contactref element="Q2" pad="2"/>
-<wire x1="6.9894" y1="34.1578" x2="40.894" y2="6.62" width="0" layer="19" extent="1-1"/>
+<wire x1="15.8264" y1="8.6142" x2="16.8148" y2="19.6342" width="0" layer="19" extent="1-1"/>
+<wire x1="43.5102" y1="5.1976" x2="48.8696" y2="24.4602" width="0" layer="19" extent="1-1"/>
+<wire x1="-2.3114" y1="-4.5212" x2="15.8264" y2="8.6142" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VCC">
 <contactref element="LIPO_CONN" pad="1"/>
@@ -1791,16 +1795,7 @@ design rules under a new name.</description>
 <wire x1="6.9894" y1="29.1578" x2="4.0894" y2="26.2578" width="0.762" layer="16"/>
 <wire x1="4.0894" y1="21.1858" x2="6.9464" y2="18.3288" width="0.762" layer="16"/>
 <wire x1="4.0894" y1="26.2578" x2="4.0894" y2="21.1858" width="0.762" layer="16"/>
-<wire x1="6.9464" y1="18.3288" x2="14.658" y2="9.2492" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$3">
-<contactref element="U$1" pad="1"/>
-<contactref element="U$1" pad="7"/>
-<contactref element="Q2" pad="1"/>
-<contactref element="R3" pad="1"/>
-<wire x1="43.2054" y1="12.954" x2="39.8272" y2="18.8214" width="0" layer="19" extent="1-1"/>
-<wire x1="40.894" y1="9.16" x2="43.2054" y2="12.954" width="0" layer="19" extent="1-1"/>
-<wire x1="32.2072" y1="21.3614" x2="39.8272" y2="18.8214" width="0" layer="19" extent="1-1"/>
+<wire x1="6.9464" y1="18.3288" x2="15.8264" y2="11.1542" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VREF1">
 <contactref element="TRIMPOT1" pad="2"/>
@@ -1829,6 +1824,30 @@ design rules under a new name.</description>
 <contactref element="INO_READ" pad="1"/>
 <wire x1="54.5084" y1="26.4668" x2="49.6208" y2="32.4104" width="0" layer="19" extent="1-1"/>
 <wire x1="54.5084" y1="23.9268" x2="54.5084" y2="26.4668" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$3">
+<contactref element="R5" pad="2"/>
+</signal>
+<signal name="N$2">
+<contactref element="BRAKELIGHT" pad="2"/>
+<contactref element="Q2" pad="2"/>
+<contactref element="Q1" pad="3"/>
+<wire x1="0.2286" y1="-4.5212" x2="43.5102" y2="7.7376" width="0" layer="19" extent="1-1"/>
+<wire x1="6.9894" y1="34.1578" x2="0.2286" y2="-4.5212" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="ACTIVATE1">
+<contactref element="Q2" pad="1"/>
+<contactref element="R3" pad="1"/>
+<contactref element="U$1" pad="7"/>
+<wire x1="43.5102" y1="10.2776" x2="43.2054" y2="12.954" width="0" layer="19" extent="1-1"/>
+<wire x1="32.2072" y1="21.3614" x2="43.2054" y2="12.954" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="ACTIVATE2">
+<contactref element="Q1" pad="1"/>
+<contactref element="R5" pad="1"/>
+<contactref element="U$1" pad="1"/>
+<wire x1="-4.8514" y1="-4.5212" x2="39.8272" y2="18.8214" width="0" layer="19" extent="1-1"/>
+<wire x1="-6.5786" y1="-12.8524" x2="-4.8514" y2="-4.5212" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
