@@ -5802,7 +5802,6 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <part name="TRIMPOT1" library="bourns" deviceset="3386-" device="Y"/>
 <part name="TRIMPOT2" library="bourns" deviceset="3386-" device="Y"/>
 <part name="R3" library="0ohmresistor" deviceset="R-US_" device="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1"/>
-<part name="R4" library="0ohmresistor" deviceset="R-US_" device="0207/5V" package3d_urn="urn:adsk.eagle:package:23502/1"/>
 <part name="U$2" library="GTOR" deviceset="TLC2252" device=""/>
 <part name="Q1" library="FQP30N06L" deviceset="FQP30N06L" device="" value="30N06L">
 <attribute name="SPICEPREFIX" value="Q"/>
@@ -5875,12 +5874,12 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <attribute name="VALUE" x="-78.74" y="62.357" size="1.778" layer="96"/>
 <attribute name="GND" x="-82.042" y="66.04" size="1.778" layer="96" display="name"/>
 </instance>
-<instance part="INO_READ" gate="-1" x="38.1" y="58.42" smashed="yes" rot="R180">
-<attribute name="PT1READ" x="50.8" y="58.42" size="1.778" layer="96" rot="R180" display="name"/>
+<instance part="INO_READ" gate="-1" x="38.1" y="63.5" smashed="yes" rot="R180">
+<attribute name="PT1READ" x="50.8" y="63.5" size="1.778" layer="96" rot="R180" display="name"/>
 </instance>
-<instance part="INO_READ" gate="-2" x="38.1" y="63.5" smashed="yes" rot="R180">
-<attribute name="VALUE" x="40.64" y="67.183" size="1.778" layer="96" rot="R180"/>
-<attribute name="PT2READ" x="50.8" y="63.5" size="1.778" layer="96" rot="R180" display="name"/>
+<instance part="INO_READ" gate="-2" x="38.1" y="58.42" smashed="yes" rot="R180">
+<attribute name="VALUE" x="40.64" y="62.103" size="1.778" layer="96" rot="R180"/>
+<attribute name="PT2READ" x="50.8" y="58.42" size="1.778" layer="96" rot="R180" display="name"/>
 </instance>
 <instance part="R1" gate="G$1" x="-30.48" y="7.62" smashed="yes" rot="R270">
 <attribute name="NAME" x="-28.9814" y="11.43" size="1.778" layer="95" rot="R270"/>
@@ -5906,16 +5905,12 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <attribute name="NAME" x="29.21" y="-11.2014" size="1.778" layer="95"/>
 <attribute name="VALUE" x="29.21" y="-16.002" size="1.778" layer="96"/>
 </instance>
-<instance part="R4" gate="G$1" x="-35.56" y="71.12" smashed="yes">
-<attribute name="NAME" x="-39.37" y="72.6186" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-39.37" y="67.818" size="1.778" layer="96"/>
-</instance>
 <instance part="U$2" gate="G$1" x="10.16" y="53.34" smashed="yes">
 <attribute name="VALUE" x="15.24" y="48.26" size="1.778" layer="96"/>
 <attribute name="NAME" x="15.24" y="74.295" size="1.778" layer="95"/>
 </instance>
-<instance part="Q1" gate="G$1" x="96.52" y="-12.7" smashed="yes" rot="R180">
-<attribute name="VALUE" x="91.219" y="-15.699" size="1.778" layer="96" rot="R90"/>
+<instance part="Q1" gate="G$1" x="96.52" y="-12.7" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="91.219" y="-9.701" size="1.778" layer="96" rot="MR270"/>
 </instance>
 <instance part="R5" gate="G$1" x="33.02" y="2.54" smashed="yes">
 <attribute name="NAME" x="29.21" y="4.0386" size="1.778" layer="95"/>
@@ -6055,16 +6050,6 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <label x="40.64" y="-12.7" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 <segment>
-<pinref part="R4" gate="G$1" pin="1"/>
-<wire x1="-40.64" y1="71.12" x2="-43.18" y2="71.12" width="0.1524" layer="91"/>
-<label x="-43.18" y="71.12" size="1.778" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
-<pinref part="R4" gate="G$1" pin="2"/>
-<wire x1="-30.48" y1="71.12" x2="-27.94" y2="71.12" width="0.1524" layer="91"/>
-<label x="-27.94" y="71.12" size="1.778" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
 <pinref part="U$2" gate="G$1" pin="V-"/>
 <wire x1="10.16" y1="45.72" x2="10.16" y2="43.18" width="0.1524" layer="91"/>
 <label x="10.16" y="43.18" size="1.778" layer="95" rot="R270" xref="yes"/>
@@ -6073,8 +6058,6 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <label x="40.64" y="2.54" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 <segment>
-<pinref part="Q1" gate="G$1" pin="D"/>
-<wire x1="93.98" y1="-17.78" x2="93.98" y2="-20.32" width="0.1524" layer="91"/>
 <pinref part="Q2" gate="G$1" pin="S"/>
 <wire x1="93.98" y1="-20.32" x2="86.36" y2="-20.32" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="-20.32" x2="78.74" y2="-20.32" width="0.1524" layer="91"/>
@@ -6082,6 +6065,8 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <wire x1="86.36" y1="-20.32" x2="86.36" y2="-25.4" width="0.1524" layer="91"/>
 <junction x="86.36" y="-20.32"/>
 <label x="86.36" y="-25.4" size="1.778" layer="95" rot="R270" xref="yes"/>
+<pinref part="Q1" gate="G$1" pin="S"/>
+<wire x1="93.98" y1="-17.78" x2="93.98" y2="-20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VCC" class="0">
@@ -6137,9 +6122,9 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <pinref part="U$2" gate="G$1" pin="1IN-"/>
 <wire x1="17.78" y1="68.58" x2="2.54" y2="68.58" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="68.58" x2="2.54" y2="66.04" width="0.1524" layer="91"/>
-<pinref part="INO_READ" gate="-2" pin="KL"/>
-<wire x1="17.78" y1="68.58" x2="22.86" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="68.58" x2="33.02" y2="63.5" width="0.1524" layer="91"/>
+<pinref part="INO_READ" gate="-1" pin="KL"/>
+<wire x1="17.78" y1="68.58" x2="33.02" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="68.58" x2="33.02" y2="63.5" width="0.1524" layer="91"/>
 <junction x="17.78" y="68.58"/>
 </segment>
 </net>
@@ -6149,9 +6134,9 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <pinref part="U$2" gate="G$1" pin="2IN-"/>
 <wire x1="17.78" y1="53.34" x2="2.54" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="53.34" x2="2.54" y2="50.8" width="0.1524" layer="91"/>
-<pinref part="INO_READ" gate="-1" pin="KL"/>
-<wire x1="17.78" y1="53.34" x2="22.86" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="53.34" x2="33.02" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="INO_READ" gate="-2" pin="KL"/>
+<wire x1="33.02" y1="58.42" x2="33.02" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="53.34" x2="17.78" y2="53.34" width="0.1524" layer="91"/>
 <junction x="17.78" y="53.34"/>
 </segment>
 </net>
@@ -6170,7 +6155,7 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <wire x1="78.74" y1="-5.08" x2="78.74" y2="-7.62" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="-5.08" x2="93.98" y2="-5.08" width="0.1524" layer="91"/>
 <junction x="86.36" y="-5.08"/>
-<pinref part="Q1" gate="G$1" pin="S"/>
+<pinref part="Q1" gate="G$1" pin="D"/>
 <wire x1="93.98" y1="-5.08" x2="93.98" y2="-7.62" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -6193,11 +6178,6 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 </net>
 <net name="ACTIVATE2" class="0">
 <segment>
-<pinref part="Q1" gate="G$1" pin="G"/>
-<wire x1="99.06" y1="-10.16" x2="101.6" y2="-10.16" width="0.1524" layer="91"/>
-<label x="101.6" y="-10.16" size="1.778" layer="95" xref="yes"/>
-</segment>
-<segment>
 <wire x1="25.4" y1="2.54" x2="27.94" y2="2.54" width="0.1524" layer="91"/>
 <pinref part="R5" gate="G$1" pin="1"/>
 <pinref part="U$1" gate="G$1" pin="1OUT"/>
@@ -6206,6 +6186,11 @@ Updated 01/08/2005&lt;/i&gt;&lt;/h4&gt;</description>
 <wire x1="25.4" y1="7.62" x2="43.18" y2="7.62" width="0.1524" layer="91"/>
 <junction x="25.4" y="7.62"/>
 <label x="43.18" y="7.62" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="Q1" gate="G$1" pin="G"/>
+<wire x1="99.06" y1="-15.24" x2="101.6" y2="-15.24" width="0.1524" layer="91"/>
+<label x="101.6" y="-15.24" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 </nets>
