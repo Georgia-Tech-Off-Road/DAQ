@@ -9,12 +9,10 @@
 #include <DS3232RTC.h>        // https://github.com/JChristensen/DS3232RTC
 
 struct Data{
-  uint8_t frs;   //Value needs to be bigger if travel is more than 255mm
   uint8_t fls;   //Value needs to be bigger if travel is more than 255mm
-  uint8_t brs;   //Value needs to be bigger if travel is more than 255mm
   uint8_t bls;   //Value needs to be bigger if travel is more than 255mm
   uint8_t steer; //Value needs to be bigger if travel is more than 255mm
-  uint8_t ecvt;  //Value needs to be bigger if travel is more than 255mm
+  uint16_t ecvt;  //(0-1023 analog position)
   uint8_t throttle; //Throttle position 0-55 degrees
   uint16_t espd; //Engine speed in rpm
   uint16_t wspd; //Wheel speed in rpm
@@ -38,19 +36,19 @@ struct Data{
 
   uint8_t allDataSD[64] = {0};
   uint8_t allDataXBee[64] = {0};
-  uint8_t incomingECVTData[4] = {0};
+  uint8_t incomingECVTData[13] = {0};
 
   inline void packDataSD(){    
-    allDataSD[0]  = frs;
-    allDataSD[1]  = fls;
-    allDataSD[2]  = brs;
-    allDataSD[3]  = bls;
-    allDataSD[4]  = steer;
-    allDataSD[5]  = ecvt;
-    allDataSD[6]  = throttle;
-    allDataSD[7]  = hrs;
-    allDataSD[8]  = mins;
-    allDataSD[9]  = secs;
+    allDataSD[0]  = fls;
+    allDataSD[1]  = bls;
+    allDataSD[2]  = current;
+    allDataSD[3]  = voltage;
+    allDataSD[4]  = throttle;
+    allDataSD[5]  = hrs;
+    allDataSD[6]  = mins;
+    allDataSD[7]  = secs;
+    allDataSD[8]  = ecvt;
+    allDataSD[9]  = ecvt >> 8;
     allDataSD[10] = espd;
     allDataSD[11] = espd >> 8;
     allDataSD[12] = wspd;
@@ -117,8 +115,12 @@ struct Data{
   }
 
   inline void unpackECVTData(){
-    incomingECVTData[0] = ecvt;
-    incomingECVTData[1] = current;
+    ecvt   = (uint16_t)incomingECVTData[0] | (uint16_t)incomingECVTData[1] << 8;
+    espd   = (uint16_t)incomingECVTData[2] | (uint16_t)incomingECVTData[3] << 8;
+    wspd   = (uint16_t)incomingECVTData[4] | (uint16_t)incomingECVTData[5] << 8;
+    brkf   = (uint16_t)incomingECVTData[6] | (uint16_t)incomingECVTData[7] << 8;
+    brkb   = (uint16_t)incomingECVTData[8] | (uint16_t)incomingECVTData[9] << 8;
+    current= incomingECVTData[10];
   }
   
 } data;
@@ -145,7 +147,7 @@ uint32_t xbeeTime = micros(), sdTime = micros(), serialTime = micros(), oldTime 
 
 
 //##########  Definition of all pin assignments and sensor objects  ############
-LDS FRShock(A0, 225), FLShock(A2, 225, true), BRShock(A1, 200), BLShock(A6, 200), Steer(A3, 50), ECVT(A14, 50); //inputPin, travelMM, isReversed = false
+LDS FLShock(A2, 225, true), BLShock(A6, 200), Steer(A3, 50), ECVT(A14, 50); //inputPin, travelMM, isReversed = false
 PressureSensor BrakeFront(A12, 2000, 4600, 8200), BrakeBack(A13, 2000, 4600, 8200); //inputPin, maxPressure (PSI), r1 (Ohms), r2 (Ohms)
 HallEffectSpeedSensor EngineSpeed(5, 6), WheelSpeed(6, 86); //inputPin, toneWheelTeeth, intervalLength = 50us, averagingAmount = 200
 DS3232RTC RTC;
@@ -156,7 +158,7 @@ uint8_t throttlePin = A7;
 uint8_t LEDPin = 13;
 uint8_t batteryPin = A20;
 
-
+//############ Variables for receiving data from the eCVT ####################
 uint8_t indexer = 0;
 uint16_t tempCode = 0;
 const uint16_t endCode = 0xFFFF;
@@ -168,9 +170,7 @@ void setup() {
   Serial1.begin(9600);  //For XBee
   Serial2.begin(9600);  //For getting data from eCVT
 
-  FRShock.begin();
   FLShock.begin();
-  BRShock.begin();
   BLShock.begin();
   Steer.begin();
   ECVT.begin();
@@ -273,9 +273,7 @@ void loop() {
     serialTime = micros();
     collectAllData();
 //    Serial.print("Time: "  + String(data.atime)   + "\t");
-//    Serial.print("FRS: "   + String(data.frs)   + "\t");
 //    Serial.print("FLS: "   + String(data.fls)   + "\t");
-//    Serial.print("BRS: "   + String(data.brs)   + "\t");
 //    Serial.print("BLS: "   + String(data.bls)   + "\t");
 //    Serial.print("Steer: " + String(data.steer) + "\t");
 //    Serial.print("ECVT: "  + String(data.ecvt)  + "\t");
@@ -291,11 +289,6 @@ void loop() {
 //    Serial.print("X1: " + String(data.accel1.x()) + " | ");
 //    Serial.print("Y1: " + String(data.accel1.y()) + " | ");
 //    Serial.print("Z1: " + String(data.accel1.z()) + " | ");
-//    Serial.print(data.accel1.x());
-//    Serial.print(',');
-//    Serial.print(data.accel1.y());
-//    Serial.print(',');
-//    Serial.print(data.accel1.z());
     Serial.println();
 
   }
@@ -308,30 +301,29 @@ void loop() {
    * OFF: Neither the Xbee is transmitting or SD card is writing (or the Teensy is not powered)
    */ 
   if (XbeeWorking && SDWorking){
-    digitalWrite(LEDPin, HIGH);
-    LEDState = 1;
-    Serial.println("Both working");
+    if (abs(micros() - LEDTime) > 200000){
+      LEDTime = micros();
+      LEDState = !LEDState;
+      LEDState ? digitalWrite(LEDPin, HIGH) : digitalWrite(LEDPin, LOW);
+    }
   }
   else if (XbeeWorking){
     if (abs(micros() - LEDTime) > 800000){
       LEDTime = micros();
       LEDState = !LEDState;
       LEDState ? digitalWrite(LEDPin, HIGH) : digitalWrite(LEDPin, LOW);
-      //Serial.println("Xbee");
     }
   }
   else if (SDWorking){
-    if (abs(micros() - LEDTime) > 300000){
+    if (abs(micros() - LEDTime) > 1600000){
       LEDTime = micros();
       LEDState = !LEDState;
       LEDState ? digitalWrite(LEDPin, HIGH) : digitalWrite(LEDPin, LOW);
     }
-    Serial.println("SD");
   }
   else {
     digitalWrite(LEDPin, LOW);
     LEDState = 0;
-    //Serial.println("Neither Working");
   }
 
   /**
@@ -341,17 +333,15 @@ void loop() {
     data.incomingECVTData[indexer] = Serial2.read();
     if(indexer >= 1) {
       tempCode = (uint16_t)data.incomingECVTData[indexer - 1] << 8 | (uint16_t)data.incomingECVTData[indexer];
-      if(tempCode == endCode and indexer == 3){
-        //Serial.println("Got data!");
+      if(tempCode == endCode and indexer == sizeof(data.incomingECVTData) - 1){
+        Serial.println("Got data!");
         byteArrayFull = true;
       }
       else if(tempCode == endCode){
         isError = true;
-        Serial.println("Early end code");
       }
-      else if(indexer == 3){
+      else if(indexer == sizeof(data.incomingECVTData) - 1){
         isOverflow = true;
-        Serial.println("Overflow error");
       }
     }
         
@@ -388,16 +378,14 @@ inline void fileNameCreator(){
 }
 
 inline void collectAllData(){
-  data.frs   = FRShock.getPositionMM();
   data.fls   = FLShock.getPositionMM();
-  data.brs   = BRShock.getPositionMM();
   data.bls   = BLShock.getPositionMM();
   data.steer = Steer.getPositionMM();
   data.ecvt  = ECVT.getPositionMM();
-  data.espd  = EngineSpeed.getSpeed();
-  data.wspd  = WheelSpeed.getSpeed() * (86/25); //Scale by the number of teeth of measured gear vs. input shaft
-  data.brkf  = BrakeFront.getPressurePSI();
-  data.brkb  = BrakeBack.getPressurePSI();
+  //data.espd  = EngineSpeed.getSpeed();
+  //data.wspd  = WheelSpeed.getSpeed() * (86/25); //Scale by the number of teeth of measured gear vs. input shaft
+  //data.brkf  = BrakeFront.getPressurePSI();
+  //data.brkb  = BrakeBack.getPressurePSI();
   data.hrs   = hour();
   data.mins  = minute();
   data.secs  = second();
