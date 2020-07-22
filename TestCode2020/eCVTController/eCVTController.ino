@@ -53,12 +53,12 @@ bool LEDState = 0;
 //################################# DEFINITION OF ALL ECVT RELATED VARIABLES ################################//
 const uint16_t target_enigine_speed = 3400;
 const uint16_t min_lds_pos = 540;
-const uint16_t max_lds_pos = 627;
+const uint16_t max_lds_pos = 620;
 const uint16_t threshold_rpm = 1800;
 int16_t desired_power = 0;
 bool hasRunTuningFunction = false;
 bool isRunningControlLoop = false;
-
+//## NOTE: POSITIVE DIRECTION MOVES THE SHEATHES APART ##//
 
 
 
@@ -108,10 +108,10 @@ void loop() {
   collectAllData();
   
   //Only set one true at a time
-  customFunction(0);
+  customFunction(1);
   tuneClosingPosition(0);
   tuneOpeningPosition(0);
-  runController(1);
+  runController(0);
 
   /**
    * If the time since last writing is greater than the interval time,

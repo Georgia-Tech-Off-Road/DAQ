@@ -36,7 +36,9 @@ public:
     /**
      * Returns the raw analog reading of the PressureSensor sensor
      */
-    int getRawAnalog();
+    uint16_t getRawAnalog();
+
+    uint16_t analogToPressure(uint16_t v_analog);
 
 
 

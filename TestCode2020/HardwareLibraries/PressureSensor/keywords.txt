@@ -13,6 +13,7 @@ PressureSensor	KEYWORD1	PressureSensor
 #######################################
 getPressurePSI	KEYWORD2
 getRawAnalog	KEYWORD2
+analogToPressure    KEYWORD2
 begin   KEYWORD2
 
 #######################################

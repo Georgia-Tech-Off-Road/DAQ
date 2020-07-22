@@ -6,16 +6,16 @@
 //Recieving end of wireless transmission
 
 //###  EXPECTING BELOW FORMAT ###//
-//    [0]  = frs;
-//    [1]  = fls;
-//    [2]  = brs;
-//    [3]  = bls;
-//    [4]  = steer;
-//    [5]  = ecvt;
-//    [6]  = throttle;
-//    [7]  = hrs;
-//    [8]  = mins;
-//    [9]  = secs;
+//    [0]  = fls;
+//    [1]  = bls;
+//    [2]  = 0;
+//    [3]  = voltage;
+//    [4]  = throttle;
+//    [5]  = hrs;
+//    [6]  = mins;
+//    [7]  = secs;
+//    [8]  = 0;
+//    [9]  = 0;
 //    [10] = espd;
 //    [11] = espd >> 8;
 //    [12] = wspd;
@@ -73,17 +73,15 @@
 //### EXPECTING ABOVE FORMAT ###//
 
 struct Data{
-  uint8_t frs;   //Value needs to be bigger if travel is more than 255mm
   uint8_t fls;   //Value needs to be bigger if travel is more than 255mm
-  uint8_t brs;   //Value needs to be bigger if travel is more than 255mm
   uint8_t bls;   //Value needs to be bigger if travel is more than 255mm
   uint8_t steer; //Value needs to be bigger if travel is more than 255mm
-  uint8_t ecvt;  //Value needs to be bigger if travel is more than 255mm
   uint8_t throttle; //Throttle position 0-55 degrees
   uint16_t espd; //Engine speed in rpm
   uint16_t wspd; //Wheel speed in rpm
   uint16_t brkf; //Brake pressure in psi
   uint16_t brkb; //Brake pressure in psi
+  uint16_t voltage;
 
   float imu1w;
   float imu1x;
@@ -118,16 +116,13 @@ struct Data{
   byte incomingBytes[64] = {0};
 
   inline void unpackData(){    
-    frs  =   incomingBytes[0];
-    fls  =   incomingBytes[1];
-    brs  =   incomingBytes[2];
-    bls  =   incomingBytes[3];
-    steer=   incomingBytes[4];
-    ecvt =   incomingBytes[5];
-    throttle=incomingBytes[6];
-    hrs  =   incomingBytes[7];
-    mins =   incomingBytes[8];
-    secs =   incomingBytes[9];
+    fls  =   incomingBytes[0];
+    bls  =   incomingBytes[1];
+    voltage= incomingBytes[3];
+    throttle=incomingBytes[4];
+    hrs  =   incomingBytes[5];
+    mins =   incomingBytes[6];
+    secs =   incomingBytes[7];
     espd =  (uint16_t)incomingBytes[10] | (uint16_t)incomingBytes[11] << 8;
     wspd =  (uint16_t)incomingBytes[12] | (uint16_t)incomingBytes[13] << 8;
     brkf =  (uint16_t)incomingBytes[14] | (uint16_t)incomingBytes[15] << 8;
@@ -211,12 +206,14 @@ void loop() {
 //      Serial.print(data.accel1y);
 //      Serial.print(',');
 //      Serial.print(data.accel1z);
-      //Serial.print("LDS: " + String(data.ecvt) + "\t");
       Serial.print("Engine: " + String(data.espd) + "\t");
       Serial.print("Wheel: " + String(data.wspd) + "\t");
-      if(data.wspd != 0){
-          Serial.print("Ratio: " + String(min(5000,1000 * (float)data.espd / (float)data.wspd)) + "\t");
-      }
+      Serial.print("Throttle: " + String(data.throttle*100) + "\t");
+//      Serial.print("BrakeB: " + String(data.brkb) + "\t");
+      Serial.print("BrakeF: " + String(data.brkf*10) + "\t");
+//      if(data.wspd != 0){
+//          Serial.print("Ratio: " + String(min(5000,1000 * (float)data.espd / (float)data.wspd)) + "\t");
+//      }
       Serial.println();
     }
   }
