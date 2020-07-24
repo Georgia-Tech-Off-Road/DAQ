@@ -5,7 +5,7 @@ function [dataArr, logging_f] = txtByteReader_mm2019(filename)
 
 %Reads byte data from SD file into matlab array
     %the datastream must have this packet format:
-    % [1, 2] = LDS0
+    % [1, 2] = LDS0 
     % [3, 4] = LDS1
     % [5, 6] = LDS2
     % [7, 8] = LDS3
@@ -27,7 +27,7 @@ function [dataArr, logging_f] = txtByteReader_mm2019(filename)
 fr = matlab.io.datastore.DsFileReader(filename); %creat IO object
 s = dir(filename);
 sz26 = floor(s.bytes/26);
-sz = sz26*26; %read size to nearest 28 byte unit
+sz = sz26*26; %read size to nearest 26 byte unit
 dataVec = read(fr, sz); %create vector of raw byte
 dataVec = reshape(dataVec, [26, sz26]);
 
@@ -37,5 +37,6 @@ dataArr = zeros(sz26, 12);
             dataArr(i, 12) = typecast(dataVec(23:26, i), 'uint32');%time
     end
 logging_f = sz26/((dataArr(end, 12)-dataArr(1, 12))/1e6); %Hz
+dataArr(:, 5:10) = (dataArr(:, 5:10)-2048)*0.076645;
 end
 
