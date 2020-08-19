@@ -123,6 +123,7 @@ private:
                         // Just send 1's
                         for (int j = 0; j < num_elements; j++){
                             _serial_ports[i]->write(1);
+                            // Need to send end code
                         })
                     }
                 }
@@ -135,8 +136,31 @@ private:
     }
 
 
+    static uint8_t getNumActiveSensors(){
+        uint8_t num_active_elements = 0;
+        for (int i = 0; i < sizeof(_sensor_is_sending)/sizeof(_sensor_is_sending[0]); i++){
+            num_active_elements += int(_sensor_is_sending[i]);
+        }
+        return num_active_elements;
+    }
+
+
+    static uint8_t getNumActiveSensors(uint8_t port_number){
+        uint8_t num_active_elements = 0;
+        for (int i = 0; i < sizeof(_sensor_is_receiving[port_number])/sizeof(_sensor_is_receiving[port_number][0]); i++){
+            num_active_elements += int(_sensor_is_receiving[port_number][i]);
+        }
+        return num_active_elements;
+    }
+
+
     static uint8_t packData(){
         return 0;
+    }
+
+
+    static void unpackData(){
+
     }
 
 
@@ -205,7 +229,8 @@ public:
         bool send_data = abs(micros() - _last_time) > _period;
         if (send_data){
             _last_time = micros();
-            uint8_t num_elements = packData();
+            packData();
+            uint8_t num_elements = getNumActiveSensors();
             sendData(num_elements);
         }
         for (uint8_t i = 0; i <= 8; i++){
@@ -221,45 +246,6 @@ public:
                     bool end_of_packet = receivedEndCode(i);
                     _index[i]++;
                 }
-            }
-        }
-
-
-        bool byteArrayFull = false;
-        uint32_t temp_code = 0;
-        if(Serial.available() || Serial1.available()){
-            _data[_index] = Serial.available() ? Serial.read() : Serial1.read();
-            if(_index >= 3) {
-                temp_code = (uint32_t)_data[_index - 3] << 24 | (uint32_t)_data[_index - 2] << 16 | (uint32_t)_data[_index - 1] << 8 | (uint32_t)_data[_index];
-                byteArrayFull = (temp_code == _end_code && _index == 59);
-            }
-            _index = (temp_code == _end_code  || _index == 59 || byteArrayFull) ? 0 : (_index + 1);
-            if(byteArrayFull){
-                //Data is for device
-                if(_data[0] == _address){
-                    _packet_type = _data[1];
-                    if(_packet_type == 0){
-                        transmitData(_pingArray, _address == 1 ? 0:1);
-                    }
-                    _has_new_packet = (_packet_type <= 10 && _packet_type >= 1);
-                    _has_requested_data = (_packet_type >= 11);
-                }
-                //Data is being sent to another Teensy
-                else{
-                    transmitData(_data, 2);
-                }
-            }
-        }
-        if(Serial2.available()){
-            _data2[_index2] = Serial2.read();
-            if(_index2 >= 3) {
-                temp_code = (uint32_t)_data2[_index2 - 3] << 24 | (uint32_t)_data2[_index2 - 2] << 16 | (uint32_t)_data2[_index2 - 1] << 8 | (uint32_t)_data2[_index2];
-                byteArrayFull = (temp_code == _end_code && _index2 == 59);
-            }
-            _index2 = (temp_code == _end_code  || _index2 == 59 || byteArrayFull) ? 0 : (_index2 + 1);
-            if(byteArrayFull){
-                //Data is for PC
-                transmitData(_data2, _address == 1 ? 0:1);
             }
         }
     }
