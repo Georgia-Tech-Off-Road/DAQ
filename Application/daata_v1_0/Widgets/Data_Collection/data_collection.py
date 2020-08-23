@@ -1,10 +1,10 @@
-from PyQt5 import QtWidgets, uic, QtCore
+from PyQt5 import QtWidgets, uic, QtCore, QtGui
 import sys
+import os
 
 import pyqtgraph as pg
 import numpy as np
 from functools import partial
-import json
 
 dict_sensors = {}  # instantiates sensor dictionary
 activeSensorCount = 0
@@ -18,34 +18,13 @@ for n in range(1000):
 
 
 
-## Default plot configuration for pyqtgraph
-pg.setConfigOption('background', 'w')   # white
-pg.setConfigOption('foreground', 'k')   # black
-
-
-
-class arduinoSettingAndData(object):
-    def __init__(self, portCOM, baudrate):
-        self.arduino = serial.Serial()
-        self.arduino.port = portCOM
-        self.arduino.baudrate = 115200
-
-        # self.arduino.is_open()
-        print("Hello")
-
-    def import_Settings(self):
-        pass
-
-
-
-Ui_MainWindow, _ = uic.loadUiType('ui_DAATA.ui')  # loads the .ui file from QT Desginer
-class DAATA_Ui(QtWidgets.QMainWindow, Ui_MainWindow):
-    def __init__(self):
-        super(DAATA_Ui, self).__init__()
+Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'data_collection.ui'))  # loads the .ui file from QT Desginer
+class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
+    def __init__(self, parent):
+        super().__init__(parent)
         self.setupUi(self)
 
         self.import_arduinoDict()
-
         self.create_sensorCheckboxes()
         self.label_activeSensorCount.setText('(' + str(activeSensorCount) + '/' + str(len(dict_sensors)) + ')')     # reset the label for number of active sensors
         self.create_graphs()
@@ -92,16 +71,16 @@ class DAATA_Ui(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.selectAll_checkbox = QtWidgets.QCheckBox("Select All", self.scrollAreaWidgetContents_2, objectName="selectAll_checkbox")
         self.selectAll_checkbox.setToolTip(self.selectAll_checkbox.objectName())
-        self.gridLayout.addWidget(self.selectAll_checkbox)
+        self.gridLayout_2.addWidget(self.selectAll_checkbox)
 
         ## create a checkbox for each sensor in dictionary in self.scrollAreaWidgetContents_2
         for key in dict_sensors.keys():
             dict_sensors[key]['Checkbox'] = QtWidgets.QCheckBox(key, self.scrollAreaWidgetContents_2, objectName=key)
-            self.gridLayout.addWidget(dict_sensors[key]['Checkbox'])
+            self.gridLayout_2.addWidget(dict_sensors[key]['Checkbox'])
 
         # Create a vertical spacer that forces checkboxes to the top
         spacerItem1 = QtWidgets.QSpacerItem(20, 1000000, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem1)
+        self.gridLayout_2.addItem(spacerItem1)
 
 
     def create_graphs(self):
@@ -191,31 +170,10 @@ class DAATA_Ui(QtWidgets.QMainWindow, Ui_MainWindow):
         dict_sensors['LDS']['Plot'].setData(y[pos:pos+xAxisWidth])
         dict_sensors['LDS']['Plot'].setPos(pos,0)
 
-def update():
-    global pos
-    global y
-    global dict_sensors
 
-    pos += 1
-    dict_sensors['LDS']['Plot'].setData(y[pos:pos+xAxisWidth])
-    dict_sensors['LDS']['Plot'].setPos(pos,0)
-
-
-def main():
-    app = QtWidgets.QApplication(sys.argv)
-    daata = DAATA_Ui()
-    daata.show()
-    sys.exit(app.exec_())
-
-
-
-
-
-if __name__ == "__main__":
-    main()
-
-
-DAQduino = arduinoSettingAndData('COM9', 115200)
-# while True:
-    # updateGraph()
-
+# if __name__ == "__main__":
+#     app = QtWidgets.QApplication(sys.argv)
+#     # widget = QtWidgets.QWidget()
+#     ui = Layout_Data_Collection()
+#     ui.show()
+#     sys.exit(app.exec_())
