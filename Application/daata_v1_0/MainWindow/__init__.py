@@ -1,21 +1,26 @@
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QAction, QTabWidget, QMessageBox, QInputDialog, QLineEdit
+from PyQt5.QtWidgets import QMainWindow, QWidget, QAction, QTabWidget, QMessageBox, QInputDialog, QLineEdit
 from PyQt5.QtCore import QSettings
-import sys
 
 import pyqtgraph as pg
 import numpy as np
 from functools import partial
 import json
-
+import threading
 
 from Widgets.Homepage import widget_Homepage
 from Widgets.Data_Collection import data_collection
 from Widgets.Layout_Test import widget_Test
 
+import DataAcquisition
 
 
-Ui_MainWindow, _ = uic.loadUiType('MainWindow.ui')  # loads the .ui file from QT Desginer
+Ui_MainWindow, _ = uic.loadUiType(r'MainWindow\MainWindow.ui')  # loads the .ui file from QT Desginer
+
+data_collection_lock = threading.Lock()  # Creates a lock for data synchronization
+data_collection_thread = threading.Thread(target=DataAcquisition.collect_data)  # Creates thread for collecting data
+
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -40,8 +45,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.move(self.settings.value('window position'))
         except:
             pass
-
-
 
     def importWidgets(self):
 
@@ -74,11 +77,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.dict_sensors[key]['Menu Action'].setText(key)
             self.menuWidget.addAction(self.dict_sensors[key]['Menu Action'])
 
-
     def createTab(self, key):
         self.tabWidget.addTab(self.dict_sensors[key]['Create Widget'](), key)
-
-
 
     def closeTab(self, index):
         ans =  QMessageBox.question(self, "Warning", "Do you want to close this tab? Any unsaved progress will be lost", QMessageBox.Close | QMessageBox.Cancel)
@@ -89,19 +89,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 widget.close()
             self.tabWidget.removeTab(index)
 
-
     def closeEvent(self, event):
         self.settings.setValue('window size', self.size())
         self.settings.setValue('window position', self.pos())
 
     def renameObject(self, index):
 
-
-
         text, okPressed = QInputDialog.getText(self, "Get text", "Your name:", QLineEdit.Normal, "")
         if okPressed and text != '':
             self.tabWidget.setTabText(index, text)
-
 
     def openCloseConfirmation(self):
         buttonReply = QMessageBox.question(self, 'PyQt5 message', "Do you like PyQt5?",
@@ -117,9 +113,3 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tabWidget.tabCloseRequested.connect(self.closeTab)
         self.tabWidget.tabBarDoubleClicked.connect(self.renameObject)
 
-    def
-
-app = QApplication(sys.argv)
-daata = MainWindow()
-daata.show()
-sys.exit(app.exec_())

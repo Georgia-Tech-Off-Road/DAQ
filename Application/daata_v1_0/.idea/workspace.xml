@@ -19,48 +19,55 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7275b445-8dfd-420e-a6db-2bfe38a8d9bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MainWindow/MainWindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainWindow/MainWindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow/MainWindow.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Widgets/Data_Collection/data_collection.py" beforeDir="false" afterPath="$PROJECT_DIR$/Widgets/Data_Collection/data_collection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Widgets/Homepage/widget_Homepage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Widgets/Homepage/widget_Homepage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Widgets/Layout_Test/widget_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Widgets/Layout_Test/widget_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desktop.ini" beforeDir="false" />
+    <list default="true" id="f843fd38-2750-48c4-8e7b-c36971d137c3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/DataAcquisition/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/daata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow/MainWindow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../install_dependencies.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../install_dependencies.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectId" id="1gW5HdouXVFbzVLqDV6R6EgCBhu" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1gi9N0ngvMxIYzPnBQE6RDKBU3F" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/daata.py" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.MainWindow">
-    <configuration name="MainWindow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="daata" type="PythonConfigurationType" factoryName="Python">
       <module name="daata_v1_0" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MainWindow" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_HOME" value="C:\Users\ahell\AppData\Local\Programs\Python\Python38-32\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MainWindow/MainWindow.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/daata.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -69,44 +76,15 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="data_collection" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="daata_v1_0" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Widgets/Data_Collection" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Widgets/Data_Collection/data_collection.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.MainWindow" />
-        <item itemvalue="Python.data_collection" />
-      </list>
-    </recent_temporary>
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7275b445-8dfd-420e-a6db-2bfe38a8d9bc" name="Default Changelist" comment="" />
-      <created>1598217421930</created>
+      <changelist id="f843fd38-2750-48c4-8e7b-c36971d137c3" name="Default Changelist" comment="" />
+      <created>1598586503447</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1598217421930</updated>
+      <updated>1598586503447</updated>
     </task>
     <servers />
   </component>
@@ -120,28 +98,35 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1173" height="203" key="GridCell.Tab.0.bottom" timestamp="1598582743447">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state x="414" y="175" width="1092" height="810" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598591203122">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1173" height="203" key="GridCell.Tab.0.bottom/0.0.1368.872@0.0.1368.872" timestamp="1598582743447" />
-    <state width="1173" height="203" key="GridCell.Tab.0.center" timestamp="1598582743446">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state x="414" y="175" width="1092" height="810" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598591203122" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1598591200386">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1173" height="203" key="GridCell.Tab.0.center/0.0.1368.872@0.0.1368.872" timestamp="1598582743446" />
-    <state width="1173" height="203" key="GridCell.Tab.0.left" timestamp="1598582743446">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598591200386" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1598597428321">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1173" height="203" key="GridCell.Tab.0.left/0.0.1368.872@0.0.1368.872" timestamp="1598582743446" />
-    <state width="1173" height="203" key="GridCell.Tab.0.right" timestamp="1598582743446">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598597428321" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1598597428320">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1173" height="203" key="GridCell.Tab.0.right/0.0.1368.872@0.0.1368.872" timestamp="1598582743446" />
-    <state x="464" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598573309620">
-      <screen x="0" y="0" width="1368" height="872" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598597428320" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1598597428320">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="464" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1368.872@0.0.1368.872" timestamp="1598573309620" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598597428320" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1598597428320">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598597428320" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1598586732308">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598586732308" />
   </component>
 </project>
