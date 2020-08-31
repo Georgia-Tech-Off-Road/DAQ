@@ -9,7 +9,7 @@ import json
 import threading
 
 from Widgets.Homepage import widget_Homepage
-from Widgets.Data_Collection import data_collection
+from Widgets.Data_Collection import Layout_Data_Collection
 from Widgets.Layout_Test import widget_Test
 
 import DataAcquisition
@@ -17,7 +17,7 @@ import DataAcquisition
 
 Ui_MainWindow, _ = uic.loadUiType(r'MainWindow\MainWindow.ui')  # loads the .ui file from QT Desginer
 
-data_collection_lock = threading.Lock()  # Creates a lock for data synchronization
+is_data_collecting = threading.Event()  # Creates an event to know if the data collection has started
 data_collection_thread = threading.Thread(target=DataAcquisition.collect_data)  # Creates thread for collecting data
 
 
@@ -26,6 +26,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.dict_sensors = {}  # instantiates sensor dictionary
+
+        data_collection_thread.start()
 
         ## Creates tab widget for apps
         self.tabWidget = QTabWidget(self.centralwidget)
@@ -54,7 +56,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             },
 
             'Data Collection': {
-                'Create Widget': data_collection.Layout_Data_Collection
+                'Create Widget': Layout_Data_Collection
             },
 
             'Layout Test': {

@@ -20,12 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f843fd38-2750-48c4-8e7b-c36971d137c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DataAcquisition/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/daata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitkeep" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataAcquisition/Data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataAcquisition/DataImport.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataAcquisition/DerivedSensors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataAcquisition/Sensors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Widgets/Data_Collection/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainWindow/MainWindow.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../install_dependencies.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../install_dependencies.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAcquisition/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataAcquisition/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Widgets/Data_Collection/data_collection.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +54,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/daata.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RunManager">
@@ -98,35 +101,44 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" width="1092" height="810" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598591203122">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="810" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598591203122" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1598591200386">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-840" y="193" key="FileChooserDialogImpl" timestamp="1598838932375">
+      <screen x="-1366" y="0" width="1366" height="728" />
     </state>
+    <state x="-840" y="193" key="FileChooserDialogImpl/0.0.1920.1040/-1366.0.1366.728@-1366.0.1366.728" timestamp="1598838932375" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1598628067185" />
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598591200386" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1598597428321">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1598845907856">
+      <screen x="-1366" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1366.0.1366.728@-1366.0.1366.728" timestamp="1598845907856" />
     <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598597428321" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1598597428320">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1598845907856">
+      <screen x="-1366" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1920.1040/-1366.0.1366.728@-1366.0.1366.728" timestamp="1598845907856" />
     <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598597428320" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1598597428320">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1598845907856">
+      <screen x="-1366" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1920.1040/-1366.0.1366.728@-1366.0.1366.728" timestamp="1598845907856" />
     <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598597428320" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1598597428320">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1598845907856">
+      <screen x="-1366" y="0" width="1366" height="728" />
     </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1920.1040/-1366.0.1366.728@-1366.0.1366.728" timestamp="1598845907856" />
     <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598597428320" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1598586732308">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1038" y="18" key="SettingsEditor" timestamp="1598838937851">
+      <screen x="-1366" y="0" width="1366" height="728" />
     </state>
+    <state x="-1038" y="18" key="SettingsEditor/0.0.1920.1040/-1366.0.1366.728@-1366.0.1366.728" timestamp="1598838937851" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1366.0.1366.728@0.0.1920.1040" timestamp="1598628070963" />
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598586732308" />
   </component>
 </project>
