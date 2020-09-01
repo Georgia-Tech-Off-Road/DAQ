@@ -26,6 +26,8 @@
  *         if data has not been recieved for that sensor, readData will return the last recieved value (or 0 if a value has never
  *         been received)
  * 
+ * To determine the max baud rate, refer to the chart at the bottom of this website: https://www.pjrc.com/teensy/td_uart.html
+ * 
  * @TODO: Add support for Teensy < 4.0 and for Arduino
  */
 
@@ -70,7 +72,7 @@ private:
     static port_setting_t _port_setting[9];
     static bool _is_settings_need_sent[9];
     static bool _has_updated_settings[9];
-    static bool _is_settings_needed[9];
+    static bool _has_settings_requested[9];
 
     static constexpr uint8_t _sensor_bytes[] = {
         2, //0
@@ -114,18 +116,12 @@ private:
         for (int i = 0; i <= 8; i++){
             if (_port_setting[i] == SENDING || _port_setting[i] == BOTH){
                 if (_has_updated_settings[i]){
-                    if (_is_settings_need_sent[i]){
+                    if(_has_settings_requested[i]){
                         // Send settings
                         _has_updated_settings[i] = false;
-                        _is_settings_need_sent[i] = false;
+                        _has_settings_requested[i] = false;
                     }
-                    else {
-                        // Just send 1's
-                        for (int j = 0; j < num_elements; j++){
-                            _serial_ports[i]->write(1);
-                            // Need to send end code
-                        })
-                    }
+                    // else do nothing
                 }
                 else {
                     // Send the data
@@ -135,7 +131,7 @@ private:
         }
     }
 
-
+    // This function should actually get the number of bytes being sent instead of the number of sensors
     static uint8_t getNumActiveSensors(){
         uint8_t num_active_elements = 0;
         for (int i = 0; i < sizeof(_sensor_is_sending)/sizeof(_sensor_is_sending[0]); i++){
@@ -145,25 +141,25 @@ private:
     }
 
 
-    static uint8_t getNumActiveSensors(uint8_t port_number){
-        uint8_t num_active_elements = 0;
-        for (int i = 0; i < sizeof(_sensor_is_receiving[port_number])/sizeof(_sensor_is_receiving[port_number][0]); i++){
-            num_active_elements += int(_sensor_is_receiving[port_number][i]);
-        }
-        return num_active_elements;
-    }
-
-
+    // This funciton should iterate through _data_store, and if the corresponding sensor is sending, then take the amount of bytes that the corresponding sensor is, and put it into _data_send
     static uint8_t packData(){
         return 0;
     }
 
 
-    static void unpackData(){
+    // This function should iterate through _data_receive[serial_number] and if the corresponding sensor is being received on that port, then take the amount of bytes and put it into _data_store
+    // Should also set _has_new_data for that sensor
+    static void unpackData(uint8_t serial_number){
 
     }
 
-
+    /*
+     * @breif this function will check the _data_receive for a specific port to see if the end code has been received to signify a full packet has been received
+     * 
+     * @param serial_number This is the port to check
+     * 
+     * @return A boolean value to indicate if the end_code has been received
+     */
     static bool receivedEndCode(uint8_t serial_number){
         uint8_t end_code_bytes = sizeof(_end_code)/sizeof(_end_code[0]);
         if (_index[serial_number] < (end_code_bytes - 1)){
@@ -197,7 +193,8 @@ public:
     /*
      * @brief Necessary to set up hardware used for communication
      * 
-     * @param period The period in which data is sent in microseconds (us)
+     * @param period The period in which data is sent in microseconds (us) (for 200Hz -> 5000us)
+     *      **Note: Can't be greater than 65,535 us
      */
     static void begin(uint16_t period){
         _period = period;
@@ -209,7 +206,7 @@ public:
         _serial_ports[5] = &Serial5;
         _serial_ports[6] = &Serial6;
         _serial_ports[7] = &Serial7;
-        #if defined(__IMXRT1052__) 
+        #if defined(__IMXRT1052__)   // Depending on the hardware, this is not always defined
         _serial_ports[8] = &Serial8;
         #endif
         for(uint8_t i = 0; i <= 8; i++){
