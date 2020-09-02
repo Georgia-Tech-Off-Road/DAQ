@@ -6,6 +6,7 @@ import os
 import pyqtgraph as pg
 import numpy as np
 from functools import partial
+import threading
 
 
 ## Default plot configuration for pyqtgraph
@@ -14,19 +15,24 @@ pg.setConfigOption('foreground', 'k')   # black
 
 
 
-
 Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'data_collection.ui'))  # loads the .ui file from QT Desginer
-class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
-    
-    
-    def __init__(self):
+
+
+#Todo List      ####################################
+## add refresh button in menu to scan for hardware changes when a new sensor is plugged in, to add a checkbox and graph for it
+## add warning dialog if trying to start recording data while teensy is not plugged in (checked with data.is_connected)
+
+class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
+    def __init__(self, data_collection_lock, is_data_collecting):
         super().__init__()
         self.setupUi(self)
+        # self.setObjectName("data_collection" + str(np.random.rand()))
+
+        self.data_collection_lock = data_collection_lock
+        self.is_data_collecting = is_data_collecting
         self.dict_sensors = {}  # instantiates sensor dictionary
         self.activeSensorCount = 0
 
-        
-        
         self.import_arduinoDict()
         self.create_sensorCheckboxes()
         self.label_activeSensorCount.setText('(' + str(self.activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')     # reset the label for number of active sensors
@@ -35,12 +41,18 @@ class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
         self.connect_slotsAndSignals()
         self.hide()
 
+        self.timer_data = threading.Timer(1.0, self.updateAll)
+        self.timer_data.start()
+
+
+        ## CODE IN CASE FOR WHEN APPLICATION IS EXITED
+        ## right now only saves settings when the tab is closed
         self.settings = QSettings('DAATA', 'Data Collection')
         self.loadSettings()
 
 
     def import_arduinoDict(self):
-        
+
         # temp matrix that represents information imported from Arduino code
 
         sensor_names = [
@@ -64,8 +76,6 @@ class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
 
     # Create checkboxes based on a list of strings
     def create_sensorCheckboxes(self):
-        
-
         self.selectAll_checkbox = QtWidgets.QCheckBox("Select All", self.scrollAreaWidgetContents_2, objectName="selectAll_checkbox")
         self.selectAll_checkbox.setToolTip(self.selectAll_checkbox.objectName())
         self.gridLayout_2.addWidget(self.selectAll_checkbox)
@@ -81,7 +91,6 @@ class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
 
 
     def create_graphs(self):
-        
         for key in self.dict_sensors.keys():
             self.dict_sensors[key]['Graph Widget'] = pg.PlotWidget(self.scrollAreaWidgetContents)
             self.dict_sensors[key]['Graph Widget'].setMinimumSize(QtCore.QSize(0, 400))
@@ -92,11 +101,11 @@ class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
 
             x = np.arange(100)
             y = np.random.randint(0,100,60)
-            print(y)
+            # print(y)
 
             self.dict_sensors[key]['Plot'] = self.dict_sensors[key]['Graph Widget'].plot(pen='b')
-            # self.dict_sensors[key]['Graph Widget']['Curve'] = pg.plot(x, y, pen='b')
-            # self.dict_sensors[key]['Graph Widget'].addWidget = self.dict_sensors[key]['Graph Widget']['Curve']
+            # self.dict_widgets[key]['Graph Widget']['Curve'] = pg.plot(x, y, pen='b')
+            # self.dict_widgets[key]['Graph Widget'].addWidget = self.dict_widgets[key]['Graph Widget']['Curve']
 
 
             self.verticalLayout.addWidget(self.dict_sensors[key]['Graph Widget'])
@@ -109,7 +118,7 @@ class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
 
     def connect_slotsAndSignals(self):
         self.button_record.clicked.connect(self.slot_changeRecordingState)
-        self.button_record.clicked.connect(self.updateGraph)
+        # self.button_record.clicked.connect(self.updateGraph)
         for key in self.dict_sensors.keys():
             self.dict_sensors[key]['Checkbox'].clicked.connect(partial(self.slot_checkboxClicked, key))        ## partial creates a new function of slot_checkboxClicked for each key passed in
         self.selectAll_checkbox.clicked.connect(self.slot_checkboxSelectAll)
@@ -127,7 +136,6 @@ class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
 
 
     def slot_checkboxSelectAll(self):
-
         if self.selectAll_checkbox.isChecked():
             for key in self.dict_sensors.keys():
                 self.dict_sensors[key]['Checkbox'].setChecked(True)
@@ -141,7 +149,6 @@ class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
         self.label_activeSensorCount.setText('(' + str(self.activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')
 
     def slot_checkboxClicked(self, key):
-
         ## update the label displaying number of active sensors
         if self.dict_sensors[key]['Checkbox'].isChecked():
             self.activeSensorCount = self.activeSensorCount + 1
@@ -156,17 +163,27 @@ class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
             self.dict_sensors[key]['Graph Widget'].hide()
 
     def updateGraph(self):
+        if self.isHidden():
+            pass
+        else:
+            pos = 0
+            xAxisWidth = 200
 
-        pos = 0
-        xAxisWidth = 60
+            y = np.zeros(10000, float)
+            for n in range(10000):
+                y[n] = np.sin(n)
 
-        y = np.zeros(1000, float)
-        for n in range(1000):
-            y[n] = np.sin(n)
+            pos += 1
+            self.dict_sensors['LDS']['Plot'].setData(y[pos:pos+xAxisWidth])
+            self.dict_sensors['LDS']['Plot'].setPos(pos,0)
 
-        pos += 1
-        self.dict_sensors['LDS']['Plot'].setData(y[pos:pos+xAxisWidth])
-        self.dict_sensors['LDS']['Plot'].setPos(pos,0)
+
+    def updateAll(self):
+        if self.button_record.isChecked():
+            self.updateGraph()
+            print('1')
+        else:
+            pass
 
     def loadSettings(self):
         try:
@@ -189,9 +206,9 @@ class Layout_Data_Collection(QtWidgets.QWidget, Ui_Widget_Test):
         self.settings.setValue('enabledSensors', enabledSensors)
 
 
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    # widget = QtWidgets.QWidget()
-    ui = Layout_Data_Collection()
-    ui.show()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     app = QtWidgets.QApplication(sys.argv)
+#     # widget = QtWidgets.QWidget()
+#     ui = DataCollection()
+#     ui.show()
+#     sys.exit(app.exec_())

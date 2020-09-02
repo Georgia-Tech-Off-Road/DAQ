@@ -119,8 +119,8 @@ class DAATA_Ui(QtWidgets.QMainWindow, Ui_MainWindow):
             print(y)
 
             dict_sensors[key]['Plot'] = dict_sensors[key]['Graph Widget'].plot(pen='b')
-            # dict_sensors[key]['Graph Widget']['Curve'] = pg.plot(x, y, pen='b')
-            # dict_sensors[key]['Graph Widget'].addWidget = dict_sensors[key]['Graph Widget']['Curve']
+            # dict_widgets[key]['Graph Widget']['Curve'] = pg.plot(x, y, pen='b')
+            # dict_widgets[key]['Graph Widget'].addWidget = dict_widgets[key]['Graph Widget']['Curve']
 
 
             self.verticalLayout.addWidget(dict_sensors[key]['Graph Widget'])
