@@ -26,12 +26,15 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
     def __init__(self, data_collection_lock, is_data_collecting):
         super().__init__()
         self.setupUi(self)
-        # self.setObjectName("data_collection" + str(np.random.rand()))
 
         self.data_collection_lock = data_collection_lock
         self.is_data_collecting = is_data_collecting
         self.dict_sensors = {}  # instantiates sensor dictionary
         self.activeSensorCount = 0
+        self.pos = 0
+        self.y = np.zeros(100000, float)
+        for n in range(100000):
+            self.y[n] = np.sin(.1 * n)
 
         self.import_arduinoDict()
         self.create_sensorCheckboxes()
@@ -41,8 +44,13 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
         self.connect_slotsAndSignals()
         self.hide()
 
-        self.timer_data = threading.Timer(1.0, self.updateAll)
-        self.timer_data.start()
+
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.updateAll)
+        self.timer.start(20)
+        self.timer.setInterval(20)
+
+
 
 
         ## CODE IN CASE FOR WHEN APPLICATION IS EXITED
@@ -163,27 +171,29 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
             self.dict_sensors[key]['Graph Widget'].hide()
 
     def updateGraph(self):
-        if self.isHidden():
-            pass
-        else:
-            pos = 0
-            xAxisWidth = 200
 
-            y = np.zeros(10000, float)
-            for n in range(10000):
-                y[n] = np.sin(n)
+        xAxisWidth = 200
 
-            pos += 1
-            self.dict_sensors['LDS']['Plot'].setData(y[pos:pos+xAxisWidth])
-            self.dict_sensors['LDS']['Plot'].setPos(pos,0)
+
+        self.pos += 1
+
+        for key in self.dict_sensors.keys():
+            self.dict_sensors[key]['Plot'].setData(self.y[self.pos:self.pos + xAxisWidth])
+            self.dict_sensors[key]['Plot'].setPos(self.pos,0)
 
 
     def updateAll(self):
-        if self.button_record.isChecked():
-            self.updateGraph()
-            print('1')
-        else:
+        if self.isHidden():
+            print(self.objectName() + " is hidden")
             pass
+        else:
+            if self.button_record.isChecked():
+                self.updateGraph()
+                self.label_timeElapsed.setText(str(self.pos))
+            print('updating ' + self.objectName() + "...")
+
+
+
 
     def loadSettings(self):
         try:
@@ -204,6 +214,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
                 enabledSensors.append(key)
 
         self.settings.setValue('enabledSensors', enabledSensors)
+
 
 
 # if __name__ == "__main__":
