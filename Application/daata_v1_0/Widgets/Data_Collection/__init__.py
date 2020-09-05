@@ -7,7 +7,7 @@ import pyqtgraph as pg
 import numpy as np
 from functools import partial
 import threading
-
+import DataAcquisition
 
 ## Default plot configuration for pyqtgraph
 pg.setConfigOption('background', 'w')   # white
@@ -23,11 +23,14 @@ Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'data
 ## add warning dialog if trying to start recording data while teensy is not plugged in (checked with data.is_connected)
 
 class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
-    def __init__(self, data_collection_lock, is_data_collecting):
+    def __init__(self, data_collection_thread, is_data_collecting):
         super().__init__()
         self.setupUi(self)
+        self.hide()
 
-        self.data_collection_lock = data_collection_lock
+        from MainWindow import data_collection_thread, is_data_collecting
+
+        self.data_collection_thread = data_collection_thread
         self.is_data_collecting = is_data_collecting
         self.dict_sensors = {}  # instantiates sensor dictionary
         self.activeSensorCount = 0
@@ -42,7 +45,6 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
         self.create_graphs()
 
         self.connect_slotsAndSignals()
-        self.hide()
 
 
         self.timer = QtCore.QTimer()
@@ -61,25 +63,27 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
     def import_arduinoDict(self):
 
-        # temp matrix that represents information imported from Arduino code
-
-        sensor_names = [
-            ['LDS', 2, 1, 'seconds (s)', 'extension length (cm)'],
-            ['Engine', 4, 0, 'seconds (s)', 'engine speed (rps)'],
-            ['Accel', 16, 1, 'seconds (s)', 'acceleration (m^2/s)'],
-            ['Brakes', 3, 2, 'seconds (s)', 'braking pressure (lbs of force)'],
-            ['Phone', 2, 1, 'seconds (s)', 'signal (bars of data)']
-
-
-        ]
-
-        ## assigning each matrix index to a key/value pair in dictionary
-        for index, sensor in enumerate(sensor_names):
-            self.dict_sensors[sensor[0]] = {}
-            self.dict_sensors[sensor[0]]['Byte Count'] = sensor[1]
-            self.dict_sensors[sensor[0]]['On/Off'] = sensor[2]
-            self.dict_sensors[sensor[0]]['X Units'] = sensor[3]
-            self.dict_sensors[sensor[0]]['Y Units'] = sensor[4]
+        self.dict_sensors = DataAcquisition.data.get_sensor_graph_properties()
+        print(self.dict_sensors)
+        # # temp matrix that represents information imported from Arduino code
+        #
+        # sensor_names = [
+        #     ['LDS', 2, 1, 'seconds (s)', 'extension length (cm)'],
+        #     ['Engine', 4, 0, 'seconds (s)', 'engine speed (rps)'],
+        #     ['Accel', 16, 1, 'seconds (s)', 'acceleration (m^2/s)'],
+        #     ['Brakes', 3, 2, 'seconds (s)', 'braking pressure (lbs of force)'],
+        #     ['Phone', 2, 1, 'seconds (s)', 'signal (bars of data)']
+        #
+        #
+        # ]
+        #
+        # ## assigning each matrix index to a key/value pair in dictionary
+        # for index, sensor in enumerate(sensor_names):
+        #     self.dict_sensors[sensor[0]] = {}
+        #     self.dict_sensors[sensor[0]]['Byte Count'] = sensor[1]
+        #     self.dict_sensors[sensor[0]]['On/Off'] = sensor[2]
+        #     self.dict_sensors[sensor[0]]['X Units'] = sensor[3]
+        #     self.dict_sensors[sensor[0]]['Y Units'] = sensor[4]
 
 
     # Create checkboxes based on a list of strings
@@ -104,7 +108,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
             self.dict_sensors[key]['Graph Widget'].setMinimumSize(QtCore.QSize(0, 400))
             self.dict_sensors[key]['Graph Widget'].setMaximumSize(QtCore.QSize(16777215, 400))
             self.dict_sensors[key]['Graph Widget'].setMouseEnabled(False, False)             # disable mouse-scroll zooming on the graph
-            self.dict_sensors[key]['Graph Widget'].setLabels(left=self.dict_sensors[key]['Y Units'], bottom=self.dict_sensors[key]['X Units'], title=key + ' Graph')     # set title and axes
+            self.dict_sensors[key]['Graph Widget'].setLabels(left=self.dict_sensors[key]['unit'], bottom= 'time', title=key + ' Graph')     # set title and axes
             self.dict_sensors[key]['Graph Widget'].showGrid(x=True, y=True, alpha=.2)
 
             x = np.arange(100)
@@ -192,7 +196,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
                 self.label_timeElapsed.setText(str(self.pos))
             print('updating ' + self.objectName() + "...")
 
-
+        print(self.window().objectName())
 
 
     def loadSettings(self):
@@ -215,6 +219,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
         self.settings.setValue('enabledSensors', enabledSensors)
 
+        self.window().setWindowTitle('closed tab')
 
 
 # if __name__ == "__main__":

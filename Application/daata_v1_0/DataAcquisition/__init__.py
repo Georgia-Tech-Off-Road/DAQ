@@ -9,7 +9,7 @@ data_collection_lock = threading.Lock()  # Creates a lock for data synchronizati
 data = Data(data_collection_lock)
 
 # Set this to true if you want to test the code without having hardware connected
-use_fake_inputs = False
+use_fake_inputs = True
 
 
 def collect_data():

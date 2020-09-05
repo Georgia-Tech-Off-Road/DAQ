@@ -68,6 +68,18 @@ class Data:
         # Make sure to wrap this function in the lock as it is not thread-safe
         self.__data[sensor_name].add_value(value)
 
+    def get_sensor_graph_properties(self):
+        sensorProps = dict()
+        for sensor_name in self.__data.keys():
+
+            # replace with if condition below when not debugging/developing
+            # if (self.__data[sensor_name].is_plottable == True) and (self.__data[sensor_name].is_connected == True)
+            if self.__data[sensor_name].is_plottable == True:
+                sensorProps[self.__data[sensor_name].display_name] = dict()
+                sensorProps[self.__data[sensor_name].display_name]['unit'] = self.__data[sensor_name].unit
+                sensorProps[self.__data[sensor_name].display_name]['unit short'] = self.__data[sensor_name].unit_short
+        return sensorProps
+
     def reset(self):
         # TODO implement reset
         pass
