@@ -32,6 +32,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
         self.data_collection_thread = data_collection_thread
         self.is_data_collecting = is_data_collecting
+        self.data = DataAcquisition.data
         self.dict_sensors = {}  # instantiates sensor dictionary
         self.activeSensorCount = 0
         self.pos = 0
@@ -62,8 +63,11 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
 
     def import_arduinoDict(self):
-
-        self.dict_sensors = DataAcquisition.data.get_sensor_graph_properties()
+        sensors = self.data.get_sensors(is_plottable=True, is_connected=True)
+        for sensor in sensors:
+            self.dict_sensors[self.data.get_display_name(sensor)] = dict()
+            self.dict_sensors[self.data.get_display_name(sensor)]['unit'] = self.data.get_unit(sensor)
+            self.dict_sensors[self.data.get_display_name(sensor)]['unit_short'] = self.data.get_unit_short(sensor)
         print(self.dict_sensors)
         # # temp matrix that represents information imported from Arduino code
         #

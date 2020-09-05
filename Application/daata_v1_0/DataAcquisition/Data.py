@@ -16,17 +16,17 @@ class Data:
         self.__data = dict()
 
         # Internal sensors
-        self.__data['unix_time'] = Time('Unix Time', 'Seconds', 's', is_external=False)
-        self.__data['timestamp'] = Time('Timestamp', None, None, is_external=False)
+        self.__data['unix_time'] = Time(display_name='Unix Time', unit='Seconds', unit_short='s', is_external=False)
+        self.__data['timestamp'] = Time(display_name='Timestamp', is_external=False)
 
         # External sensors
-        self.__data['teensy_time'] = Time('Time Since Start', 'Micro-seconds', 'us', is_external=True)
-        self.__data['engine_rpm'] = HESpeedSensor('Engine RPM', 0)
-        self.__data['secondary_rpm'] = HESpeedSensor('Secondary RPM', 0)
-        self.__data['fl_lds'] = LDS('Front Left LDS', 0)
-        self.__data['fr_lds'] = LDS('Front Right LDS', 0)
-        self.__data['bl_lds'] = LDS('Back Left LDS', 0)
-        self.__data['br_lds'] = LDS('Back Right LDS', 0)
+        self.__data['teensy_time'] = Time(display_name='Time Since Start', unit='Micro-seconds', unit_short='us')
+        self.__data['engine_rpm'] = HESpeedSensor(0, display_name='Engine RPM')
+        self.__data['secondary_rpm'] = HESpeedSensor(0, display_name='Secondary RPM')
+        self.__data['fl_lds'] = LDS(0, display_name='Front Left LDS')
+        self.__data['fr_lds'] = LDS(0, display_name='Front Right LDS')
+        self.__data['bl_lds'] = LDS(0, display_name='Back Left LDS')
+        self.__data['br_lds'] = LDS(0, display_name='Back Right LDS')
 
         # Derived sensors
         self.__data['wheel_speed'] = WheelSpeed(self.__data['secondary_rpm'])
@@ -39,15 +39,31 @@ class Data:
     def get_value(self, sensor_name, index):
         with self.lock:
             try:
-                self.__data[sensor_name].get_value(index)
+                return self.__data[sensor_name].get_value(index)
             except KeyError:
                 logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+                return None
 
     def get_values(self, sensor_name, index, num_values):
-        # TODO implement get_values
-        pass
+        with self.lock:
+            try:
+                return self.__data[sensor_name].get_values(index, num_values)
+            except KeyError:
+                logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+                return None
 
-    def get_sensors_from_param(self, is_external=None, is_plottable=None, is_derived=None):
+    def get_sensors(self, is_external=None, is_plottable=None, is_derived=None, is_connected=None):
+        """
+        Versatile function to get a list of sensors with specific attributes
+        Ex. calling get_sensors(is_derived=False, is_connected=True) would return a list of
+        all the sensors that are connected but not derived
+
+        :param is_external: If the sensor relies on an external source (True/False, defaults to None)
+        :param is_plottable: If the sensor can be plotted against time (True/False, defaults to None)
+        :param is_derived: If the value of the 'sensor' is derived from other sensors (True/False, defaults to None)
+        :param is_connected: If the sensor is connected (True/False, defaults to None)
+        :return: A list of sensor key names
+        """
         sensors = list()
         for sensor_name in self.__data.keys():
             sensor_fits_params = True
@@ -60,26 +76,37 @@ class Data:
             if is_derived is not None:
                 if self.__data[sensor_name].is_derived != is_derived:
                     sensor_fits_params = False
+            if is_connected is not None:
+                if self.__data[sensor_name].is_connected != is_connected:
+                    sensor_fits_params = False
             if sensor_fits_params:
                 sensors.append(sensor_name)
         return sensors
+
+    def get_display_name(self, sensor_name):
+        try:
+            return self.__data[sensor_name].display_name
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def get_unit(self, sensor_name):
+        try:
+            return self.__data[sensor_name].unit
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def get_unit_short(self, sensor_name):
+        try:
+            return self.__data[sensor_name].unit_short
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
     def add_value(self, sensor_name, value):
         # Make sure to wrap this function in the lock as it is not thread-safe
         self.__data[sensor_name].add_value(value)
 
-    def get_sensor_graph_properties(self):
-        sensorProps = dict()
-        for sensor_name in self.__data.keys():
-
-            # replace with if condition below when not debugging/developing
-            # if (self.__data[sensor_name].is_plottable == True) and (self.__data[sensor_name].is_connected == True)
-            if self.__data[sensor_name].is_plottable == True:
-                sensorProps[self.__data[sensor_name].display_name] = dict()
-                sensorProps[self.__data[sensor_name].display_name]['unit'] = self.__data[sensor_name].unit
-                sensorProps[self.__data[sensor_name].display_name]['unit short'] = self.__data[sensor_name].unit_short
-        return sensorProps
-
     def reset(self):
-        # TODO implement reset
-        pass
+        sensors = self.get_sensors(is_derived=False)
+        with self.lock:
+            for sensor in sensors:
+                self.__data[sensor].reset()

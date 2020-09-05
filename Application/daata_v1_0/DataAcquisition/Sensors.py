@@ -8,38 +8,24 @@ logger.setLevel(logging.DEBUG)
 
 
 class Sensor(metaclass=ABCMeta):
-    @abstractmethod
-    def get_value(self, index):
-        raise NotImplementedError
-
-    @abstractmethod
-    def get_values(self, index, num_values):
-        raise NotImplementedError
+    def __init__(self, **kwargs):
+        self.values = list()
+        self.most_recent_index = 0
+        self.display_name = kwargs.get('display_name')
+        self.unit = kwargs.get('unit')
+        self.unit_short = kwargs.get('unit_short')
+        self.is_plottable = kwargs.get('is_plottable', True)
+        self.is_external = kwargs.get('is_external', True)
+        self.is_derived = False
+        self.is_connected = kwargs.get('is_connected', False)
 
     @abstractmethod
     def add_value(self, value):
         raise NotImplementedError
 
-    @abstractmethod
-    def reset(self):
-        raise NotImplementedError
-
-
-class Time(Sensor):
-    def __init__(self, display_name, unit, unit_short, is_external):
-        self.__values = list()
-        self.most_recent_index = 0
-        self.display_name = display_name
-        self.unit = unit
-        self.unit_short = unit_short
-        self.is_plottable = False
-        self.is_external = is_external
-        self.is_derived = False
-        self.is_connected = False
-
     def get_value(self, index):
         try:
-            return self.__values[index]
+            return self.values[index]
         except IndexError:
             logger.error("Index out of range, use get_most_recent_index to ensure that the index exists")
             return None
@@ -47,119 +33,62 @@ class Time(Sensor):
     def get_values(self, index, num_values):
         try:
             try:
-                assert index-num_values >= 0
-                return self.__values[index-num_values:index]
+                assert index - num_values >= 0
+                return self.values[index - num_values:index]
             except AssertionError:
                 logger.debug("Tried to get more values than are contained, returning all values")
-                return self.__values[0:index]
+                return self.values[0:index]
         except IndexError:
             logger.error("Index out of range, use get_most_recent_index to ensure that the index exists")
             return None
 
-    def add_value(self, value):
+    def reset(self):
         try:
-            self.__values.append(value)
-            self.most_recent_index = len(self.__values) - 1
+            self.values = []
+            self.most_recent_index = 0
         except Exception as e:
             logger.error(e)
 
-    def reset(self):
+
+class Time(Sensor):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def add_value(self, value):
         try:
-            self.__values = []
-            self.most_recent_index = 0
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
         except Exception as e:
             logger.error(e)
 
 
 class HESpeedSensor(Sensor):
-    def __init__(self, display_name, pulses_per_revolution):
-        self.__values = list()
-        self.most_recent_index = 0
-        self.display_name = display_name
-        self.unit = "Revolutions Per Minute"
-        self.unit_short = "RPM"
-        self.is_plottable = True
-        self.is_external = True
-        self.is_derived = False
-        self.is_connected = False
-
-    def get_value(self, index):
-        try:
-            return self.__values[index]
-        except IndexError:
-            logger.error("Index out of range, use get_most_recent_index to ensure that the index exists")
-            return None
-
-    def get_values(self, index, num_values):
-        try:
-            try:
-                assert index-num_values >= 0
-                return self.__values[index-num_values:index]
-            except AssertionError:
-                logger.debug("Tried to get more values than are contained, returning all values")
-                return self.__values[0:index]
-        except IndexError:
-            logger.error("Index out of range, use get_most_recent_index to ensure that the index exists")
-            return None
+    def __init__(self, pulses_per_revolution, **kwargs):
+        super().__init__(**kwargs)
+        self.ppr = pulses_per_revolution
+        self.unit = kwargs.get('unit', "Revolutions Per Minute")
+        self.unit_short = kwargs.get('unit_short', "RPM")
 
     def add_value(self, value):
         try:
             # TODO: Implement a transfer function for conversion to RPM
-            self.__values.append(value)
-            self.most_recent_index = len(self.__values) - 1
-        except Exception as e:
-            logger.error(e)
-
-    def reset(self):
-        try:
-            self.__values = []
-            self.most_recent_index = 0
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
         except Exception as e:
             logger.error(e)
 
 
 class LDS(Sensor):
-    def __init__(self, display_name, stroke_length):
-        self.__values = list()
-        self.most_recent_index = 0
-        self.display_name = display_name
-        self.unit = "Millimeters"
-        self.unit_short = "mm"
-        self.is_plottable = True
-        self.is_external = True
-        self.is_derived = False
-        self.is_connected = False
-
-    def get_value(self, index):
-        try:
-            return self.__values[index]
-        except IndexError:
-            logger.error("Index out of range, use get_most_recent_index to ensure that the index exists")
-            return None
-
-    def get_values(self, index, num_values):
-        try:
-            try:
-                assert index-num_values >= 0
-                return self.__values[index-num_values:index]
-            except AssertionError:
-                logger.debug("Tried to get more values than are contained, returning all values")
-                return self.__values[0:index]
-        except IndexError:
-            logger.error("Index out of range, use get_most_recent_index to ensure that the index exists")
-            return None
+    def __init__(self, stroke_length, **kwargs):
+        super().__init__(**kwargs)
+        self.stroke_length = stroke_length
+        self.unit = kwargs.get('unit', "Millimeters")
+        self.unit_short = kwargs.get('unit_short', "mm")
 
     def add_value(self, value):
         try:
             # TODO: Implement a transfer function for conversion to from raw data to mm
-            self.__values.append(value)
-            self.most_recent_index = len(self.__values) - 1
-        except Exception as e:
-            logger.error(e)
-
-    def reset(self):
-        try:
-            self.__values = []
-            self.most_recent_index = 0
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
         except Exception as e:
             logger.error(e)
