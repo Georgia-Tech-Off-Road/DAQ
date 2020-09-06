@@ -14,7 +14,6 @@ pg.setConfigOption('background', 'w')   # white
 pg.setConfigOption('foreground', 'k')   # black
 
 
-
 Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'data_collection.ui'))  # loads the .ui file from QT Desginer
 
 
@@ -28,10 +27,10 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
         self.setupUi(self)
         self.hide()
 
-        from MainWindow import data_collection_thread, is_data_collecting
+        from MainWindow import is_data_collecting
 
-        self.data_collection_thread = data_collection_thread
         self.is_data_collecting = is_data_collecting
+        is_data_collecting.set()
         self.data = DataAcquisition.data
         self.dict_sensors = {}  # instantiates sensor dictionary
         self.activeSensorCount = 0

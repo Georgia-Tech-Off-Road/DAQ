@@ -14,10 +14,9 @@ from Widgets.Layout_Test import Widget_Test
 from MainWindow.Popup_ParentChildrenTree import Popup_ParentChildrenTree
 import DataAcquisition
 
+
 is_data_collecting = threading.Event()  # Creates an event to know if the data collection has started
 data_collection_thread = threading.Thread(target=DataAcquisition.collect_data)  # Creates thread for collecting data
-
-
 
 
 Ui_MainWindow, _ = uic.loadUiType(r'MainWindow\MainWindow.ui')  # loads the .ui file from QT Desginer
@@ -25,11 +24,12 @@ Ui_MainWindow, _ = uic.loadUiType(r'MainWindow\MainWindow.ui')  # loads the .ui 
 
 tabInstances = 0    # a counter for the number of tabs created in current session
 
+
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
-
-
     def __init__(self):
         super(MainWindow, self).__init__()
+        data_collection_thread.start()
+
         self.setupUi(self)
         self.dict_widgets = {}  # instantiates dictionary that holds objects for widgets
         self.create_TabWidget()

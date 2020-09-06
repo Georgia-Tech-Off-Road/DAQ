@@ -1,5 +1,6 @@
 import serial
 import time
+from datetime import datetime
 import random
 import math
 
@@ -14,12 +15,13 @@ class DataImport:
         self.is_data_collecting = is_data_collecting
 
         # Variables needed for fake data
-        self.start_time = time.time()
+        self.start_time = datetime.now()
+        self.prev_time = datetime.now()
         self.prev_engine_val = 1800
         self.prev_lds_val = 0
 
         self.temp_data = {}
-        for sensor in data.get_sensors_from_param(is_external=True, is_derived=False):
+        for sensor in data.get_sensors(is_external=True, is_derived=False):
             self.temp_data[sensor] = {'value': None, 'has_been_updated': False, 'is_used': False}
 
     def check_connected(self):
@@ -33,7 +35,7 @@ class DataImport:
         # TODO implement actual serial reading
 
     def check_connected_fake(self):
-        if time.time() - self.start_time > 2:
+        if (datetime.now() - self.start_time).total_seconds() > 5:
             self.data.is_connected = True
 
     def read_data_fake(self):
@@ -41,11 +43,12 @@ class DataImport:
             if not self.data.is_connected:
                 self.check_connected_fake()
             else:
-                self.prev_engine_val = max(1800, min(4000, self.prev_engine_val + 500 * math.sin(
-                    (time.time() - self.start_time) / 10) + random.randrange(-5, 5)))
-                self.data.add_value('engine_rpm', self.prev_engine_val)
-                self.prev_lds_val = 100 + 100 * math.sin((time.time() - self.start_time) / 20)
-                self.data.add_value('fl_lds', self.prev_lds_val)
+                if (datetime.now() - self.prev_time).total_seconds() / 1000 > 5:
+                    self.prev_engine_val = max(1800, min(4000, self.prev_engine_val + 500 * math.sin(
+                        (datetime.now() - self.start_time).total_seconds() / 10) + random.randrange(-5, 5)))
+                    self.data.add_value('engine_rpm', self.prev_engine_val)
+                    self.prev_lds_val = 100 + 100 * math.sin((datetime.now() - self.start_time).total_seconds() / 20)
+                    self.data.add_value('fl_lds', self.prev_lds_val)
 
 
 

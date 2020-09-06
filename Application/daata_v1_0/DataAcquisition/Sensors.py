@@ -3,8 +3,7 @@ import logging
 import math
 
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger = logging.getLogger("DataAcquisition")
 
 
 class Sensor(metaclass=ABCMeta):
@@ -56,6 +55,7 @@ class Time(Sensor):
 
     def add_value(self, value):
         try:
+            self.is_connected = True
             self.values.append(value)
             self.most_recent_index = len(self.values) - 1
         except Exception as e:
@@ -72,6 +72,7 @@ class HESpeedSensor(Sensor):
     def add_value(self, value):
         try:
             # TODO: Implement a transfer function for conversion to RPM
+            self.is_connected = True
             self.values.append(value)
             self.most_recent_index = len(self.values) - 1
         except Exception as e:
@@ -88,6 +89,7 @@ class LDS(Sensor):
     def add_value(self, value):
         try:
             # TODO: Implement a transfer function for conversion to from raw data to mm
+            self.is_connected = True
             self.values.append(value)
             self.most_recent_index = len(self.values) - 1
         except Exception as e:

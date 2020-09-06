@@ -4,12 +4,12 @@ from DataAcquisition.Sensors import *
 from DataAcquisition.DerivedSensors import *
 
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger = logging.getLogger("DataAcquisition")
 
 
 class Data:
     def __init__(self, lock):
+        logger.debug("Data object is being initialized")
         self.is_connected = False
         self.lock = lock
 
@@ -32,11 +32,15 @@ class Data:
         self.__data['wheel_speed'] = WheelSpeed(self.__data['secondary_rpm'])
         self.__data['car_speed'] = CarSpeed(self.__data['secondary_rpm'])
 
+        logger.info("Data object successfully initialized")
+
     def get_most_recent_index(self):
+        logger.debug("Getting the most recent index")
         with self.lock:
             return self.__data['unix_time'].most_recent_index
 
     def get_value(self, sensor_name, index):
+        logger.debug("Getting a value for {}".format(sensor_name))
         with self.lock:
             try:
                 return self.__data[sensor_name].get_value(index)
@@ -45,6 +49,7 @@ class Data:
                 return None
 
     def get_values(self, sensor_name, index, num_values):
+        logger.debug("Getting values for {}".format(sensor_name))
         with self.lock:
             try:
                 return self.__data[sensor_name].get_values(index, num_values)
@@ -64,6 +69,9 @@ class Data:
         :param is_connected: If the sensor is connected (True/False, defaults to None)
         :return: A list of sensor key names
         """
+
+        logger.debug("Getting a list of sensors")
+
         sensors = list()
         for sensor_name in self.__data.keys():
             sensor_fits_params = True
@@ -84,18 +92,21 @@ class Data:
         return sensors
 
     def get_display_name(self, sensor_name):
+        logger.debug(logger.debug("Getting the display name for {}".format(sensor_name)))
         try:
             return self.__data[sensor_name].display_name
         except KeyError:
             logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
     def get_unit(self, sensor_name):
+        logger.debug("Getting the unit for {}".format(sensor_name))
         try:
             return self.__data[sensor_name].unit
         except KeyError:
             logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
     def get_unit_short(self, sensor_name):
+        logger.debug("Getting the unit_short for {}".format(sensor_name))
         try:
             return self.__data[sensor_name].unit_short
         except KeyError:
@@ -106,6 +117,7 @@ class Data:
         self.__data[sensor_name].add_value(value)
 
     def reset(self):
+        logger.debug("Resetting all the sensors")
         sensors = self.get_sensors(is_derived=False)
         with self.lock:
             for sensor in sensors:
