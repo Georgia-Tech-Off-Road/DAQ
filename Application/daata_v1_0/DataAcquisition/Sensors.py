@@ -52,6 +52,7 @@ class Sensor(metaclass=ABCMeta):
 class Time(Sensor):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.is_plottable = False
 
     def add_value(self, value):
         try:

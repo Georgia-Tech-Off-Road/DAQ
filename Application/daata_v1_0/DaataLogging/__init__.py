@@ -5,7 +5,8 @@ from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
 logging_objects = {
     "Logging": DEBUG,
     "DataAcquisition": DEBUG,
-    "MainWindow": DEBUG
+    "MainWindow": DEBUG,
+    "Plotting": DEBUG
 }
 
 # Console output handler

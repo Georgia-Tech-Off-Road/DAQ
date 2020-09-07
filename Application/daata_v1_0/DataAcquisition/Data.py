@@ -18,6 +18,7 @@ class Data:
         # Internal sensors
         self.__data['unix_time'] = Time(display_name='Unix Time', unit='Seconds', unit_short='s', is_external=False)
         self.__data['timestamp'] = Time(display_name='Timestamp', is_external=False)
+        self.__data['time'] = Time(display_name="Time", unit='Seconds', unit_short='s', is_external=False)
 
         # External sensors
         self.__data['teensy_time'] = Time(display_name='Time Since Start', unit='Micro-seconds', unit_short='us')
@@ -37,7 +38,7 @@ class Data:
     def get_most_recent_index(self):
         logger.debug("Getting the most recent index")
         with self.lock:
-            return self.__data['unix_time'].most_recent_index
+            return self.__data['time'].most_recent_index
 
     def get_value(self, sensor_name, index):
         logger.debug("Getting a value for {}".format(sensor_name))

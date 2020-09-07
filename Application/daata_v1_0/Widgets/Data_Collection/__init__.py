@@ -8,6 +8,7 @@ import numpy as np
 from functools import partial
 import threading
 import DataAcquisition
+from Utilities.Plotting import RealTimePlot
 
 ## Default plot configuration for pyqtgraph
 pg.setConfigOption('background', 'w')   # white
@@ -49,10 +50,8 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.updateAll)
-        self.timer.start(20)
-        self.timer.setInterval(20)
-
-
+        self.timer.start(100)
+        self.timer.setInterval(100)
 
 
         ## CODE IN CASE FOR WHEN APPLICATION IS EXITED
@@ -64,29 +63,10 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
     def import_arduinoDict(self):
         sensors = self.data.get_sensors(is_plottable=True, is_connected=True)
         for sensor in sensors:
-            self.dict_sensors[self.data.get_display_name(sensor)] = dict()
-            self.dict_sensors[self.data.get_display_name(sensor)]['unit'] = self.data.get_unit(sensor)
-            self.dict_sensors[self.data.get_display_name(sensor)]['unit_short'] = self.data.get_unit_short(sensor)
+            self.dict_sensors[sensor] = dict()
+            self.dict_sensors[sensor]['unit'] = self.data.get_unit(sensor)
+            self.dict_sensors[sensor]['unit_short'] = self.data.get_unit_short(sensor)
         print(self.dict_sensors)
-        # # temp matrix that represents information imported from Arduino code
-        #
-        # sensor_names = [
-        #     ['LDS', 2, 1, 'seconds (s)', 'extension length (cm)'],
-        #     ['Engine', 4, 0, 'seconds (s)', 'engine speed (rps)'],
-        #     ['Accel', 16, 1, 'seconds (s)', 'acceleration (m^2/s)'],
-        #     ['Brakes', 3, 2, 'seconds (s)', 'braking pressure (lbs of force)'],
-        #     ['Phone', 2, 1, 'seconds (s)', 'signal (bars of data)']
-        #
-        #
-        # ]
-        #
-        # ## assigning each matrix index to a key/value pair in dictionary
-        # for index, sensor in enumerate(sensor_names):
-        #     self.dict_sensors[sensor[0]] = {}
-        #     self.dict_sensors[sensor[0]]['Byte Count'] = sensor[1]
-        #     self.dict_sensors[sensor[0]]['On/Off'] = sensor[2]
-        #     self.dict_sensors[sensor[0]]['X Units'] = sensor[3]
-        #     self.dict_sensors[sensor[0]]['Y Units'] = sensor[4]
 
 
     # Create checkboxes based on a list of strings
@@ -107,21 +87,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
     def create_graphs(self):
         for key in self.dict_sensors.keys():
-            self.dict_sensors[key]['Graph Widget'] = pg.PlotWidget(self.scrollAreaWidgetContents)
-            self.dict_sensors[key]['Graph Widget'].setMinimumSize(QtCore.QSize(0, 400))
-            self.dict_sensors[key]['Graph Widget'].setMaximumSize(QtCore.QSize(16777215, 400))
-            self.dict_sensors[key]['Graph Widget'].setMouseEnabled(False, False)             # disable mouse-scroll zooming on the graph
-            self.dict_sensors[key]['Graph Widget'].setLabels(left=self.dict_sensors[key]['unit'], bottom= 'time', title=key + ' Graph')     # set title and axes
-            self.dict_sensors[key]['Graph Widget'].showGrid(x=True, y=True, alpha=.2)
-
-            x = np.arange(100)
-            y = np.random.randint(0,100,60)
-            # print(y)
-
-            self.dict_sensors[key]['Plot'] = self.dict_sensors[key]['Graph Widget'].plot(pen='b')
-            # self.dict_widgets[key]['Graph Widget']['Curve'] = pg.plot(x, y, pen='b')
-            # self.dict_widgets[key]['Graph Widget'].addWidget = self.dict_widgets[key]['Graph Widget']['Curve']
-
+            self.dict_sensors[key]['Graph Widget'] = RealTimePlot(key, parent=self.scrollAreaWidgetContents)
 
             self.verticalLayout.addWidget(self.dict_sensors[key]['Graph Widget'])
             self.dict_sensors[key]['Graph Widget'].hide()
@@ -178,28 +144,19 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
             self.dict_sensors[key]['Graph Widget'].hide()
 
     def updateGraph(self):
-
-        xAxisWidth = 200
-
-
-        self.pos += 1
-
         for key in self.dict_sensors.keys():
-            self.dict_sensors[key]['Plot'].setData(self.y[self.pos:self.pos + xAxisWidth])
-            self.dict_sensors[key]['Plot'].setPos(self.pos,0)
-
+            self.dict_sensors[key]['Graph Widget'].update_graph()
 
     def updateAll(self):
         if self.isHidden():
-            print(self.objectName() + " is hidden")
+            # print(self.objectName() + " is hidden")
             pass
         else:
             if self.button_record.isChecked():
                 self.updateGraph()
                 self.label_timeElapsed.setText(str(self.pos))
-            print('updating ' + self.objectName() + "...")
+            # print('updating ' + self.objectName() + "...")
 
-        print(self.window().objectName())
 
 
     def loadSettings(self):

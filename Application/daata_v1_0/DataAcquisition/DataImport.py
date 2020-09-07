@@ -1,11 +1,13 @@
 import serial
 import time
+import logging
 from datetime import datetime
 import random
 import math
 
 from DataAcquisition.Data import Data
 
+logger = logging.getLogger("DataAcquisition")
 
 class DataImport:
     def __init__(self, data, lock, is_data_collecting, use_fake_inputs):
@@ -43,12 +45,11 @@ class DataImport:
             if not self.data.is_connected:
                 self.check_connected_fake()
             else:
-                if (datetime.now() - self.prev_time).total_seconds() / 1000 > 5:
-                    self.prev_engine_val = max(1800, min(4000, self.prev_engine_val + 500 * math.sin(
-                        (datetime.now() - self.start_time).total_seconds() / 10) + random.randrange(-5, 5)))
+                if (datetime.now() - self.prev_time).total_seconds() * 1000 > 5:
+                    self.data.add_value("time", (datetime.now() - self.start_time).total_seconds())
+                    self.prev_engine_val = max(1800, min(4000, self.prev_engine_val + 0.5 * math.sin(
+                        (datetime.now() - self.start_time).total_seconds() * 10) + random.randrange(-2, 2)))
                     self.data.add_value('engine_rpm', self.prev_engine_val)
                     self.prev_lds_val = 100 + 100 * math.sin((datetime.now() - self.start_time).total_seconds() / 20)
                     self.data.add_value('fl_lds', self.prev_lds_val)
-
-
 
