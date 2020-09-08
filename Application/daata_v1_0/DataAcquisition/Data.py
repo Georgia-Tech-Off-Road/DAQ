@@ -36,12 +36,10 @@ class Data:
         logger.info("Data object successfully initialized")
 
     def get_most_recent_index(self):
-        logger.debug("Getting the most recent index")
         with self.lock:
             return self.__data['time'].most_recent_index
 
     def get_value(self, sensor_name, index):
-        logger.debug("Getting a value for {}".format(sensor_name))
         with self.lock:
             try:
                 return self.__data[sensor_name].get_value(index)
@@ -50,7 +48,6 @@ class Data:
                 return None
 
     def get_values(self, sensor_name, index, num_values):
-        logger.debug("Getting values for {}".format(sensor_name))
         with self.lock:
             try:
                 return self.__data[sensor_name].get_values(index, num_values)
@@ -110,6 +107,50 @@ class Data:
         logger.debug("Getting the unit_short for {}".format(sensor_name))
         try:
             return self.__data[sensor_name].unit_short
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def get_is_external(self, sensor_name):
+        logger.debug("Getting if {} is external".format(sensor_name))
+        try:
+            return self.__data[sensor_name].is_external
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def get_is_plottable(self, sensor_name):
+        logger.debug("Getting if {} is plottable".format(sensor_name))
+        try:
+            return self.__data[sensor_name].is_plottable
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def get_is_derived(self, sensor_name):
+        logger.debug("Getting if {} is a derived sensor".format(sensor_name))
+        try:
+            return self.__data[sensor_name].is_derived
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def get_is_connected(self, sensor_name):
+        logger.debug("Getting the connection status for {}".format(sensor_name))
+        try:
+            return self.__data[sensor_name].is_connected
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def set_connected(self, sensor_name):
+        try:
+            if not self.__data[sensor_name].is_connected:
+                self.__data[sensor_name].is_connected = True
+                logger.info("{} has been connected".format(sensor_name))
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def set_disconnected(self, sensor_name):
+        try:
+            if self.__data[sensor_name].is_connected:
+                self.__data[sensor_name].is_connected = False
+                logger.warning("{} has been disconnected".format(sensor_name))
         except KeyError:
             logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 

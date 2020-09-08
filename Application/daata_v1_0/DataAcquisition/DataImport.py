@@ -15,9 +15,10 @@ class DataImport:
         self.lock = lock
         self.use_fake_inputs = use_fake_inputs
         self.is_data_collecting = is_data_collecting
+        self.start_time = datetime.now()
 
         # Variables needed for fake data
-        self.start_time = datetime.now()
+        self.time_begin = datetime.now()
         self.prev_time = datetime.now()
         self.prev_engine_val = 1800
         self.prev_lds_val = 0
@@ -37,8 +38,12 @@ class DataImport:
         # TODO implement actual serial reading
 
     def check_connected_fake(self):
-        if (datetime.now() - self.start_time).total_seconds() > 5:
+        self.data.set_connected("time")
+        self.start_time = datetime.now()
+        if (datetime.now() - self.time_begin).total_seconds() > 5:
             self.data.is_connected = True
+            self.data.set_connected("engine_rpm")
+            self.data.set_connected("fl_lds")
 
     def read_data_fake(self):
         with self.lock:

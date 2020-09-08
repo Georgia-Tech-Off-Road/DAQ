@@ -31,7 +31,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
         from MainWindow import is_data_collecting
 
         self.is_data_collecting = is_data_collecting
-        is_data_collecting.set()
+
         self.data = DataAcquisition.data
         self.dict_sensors = {}  # instantiates sensor dictionary
         self.activeSensorCount = 0
@@ -64,8 +64,6 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
         sensors = self.data.get_sensors(is_plottable=True, is_connected=True)
         for sensor in sensors:
             self.dict_sensors[sensor] = dict()
-            self.dict_sensors[sensor]['unit'] = self.data.get_unit(sensor)
-            self.dict_sensors[sensor]['unit_short'] = self.data.get_unit_short(sensor)
         print(self.dict_sensors)
 
 
@@ -110,10 +108,12 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
             self.indicator_onOrOff.setText("On")
             self.indicator_onOrOff.setStyleSheet("color: green;")
             self.button_record.setText("Stop Recording")
+            self.is_data_collecting.set()
         else:
             self.indicator_onOrOff.setText("Off")
             self.indicator_onOrOff.setStyleSheet("color: red;")
             self.button_record.setText("Start Recording")
+            self.is_data_collecting.clear()
 
 
     def slot_checkboxSelectAll(self):

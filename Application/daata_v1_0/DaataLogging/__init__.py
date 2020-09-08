@@ -9,6 +9,7 @@ logging_objects = {
     "Plotting": DEBUG
 }
 
+
 # Console output handler
 ch = StreamHandler()
 ch.setLevel(logging.DEBUG)
@@ -23,5 +24,6 @@ for name, level in logging_objects.items():
     logger.setLevel(level)
     logger.addHandler(ch)
 
+logger = getLogger("Logging")
+logger.info("Logger has been created")
 
-getLogger("Logging").debug("Logger has been created")

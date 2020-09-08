@@ -43,7 +43,8 @@ class Sensor(metaclass=ABCMeta):
 
     def reset(self):
         try:
-            self.values = []
+            logger.debug("Resetting the sensor {}".format(self.display_name))
+            self.values = list()
             self.most_recent_index = 0
         except Exception as e:
             logger.error(e)
