@@ -2232,6 +2232,10 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="C" x="13.97" y="24.765" size="1.778" layer="28" rot="MR90" display="off"/>
 <attribute name="VALUE" x="12.065" y="24.13" size="1.27" layer="28" rot="MR90"/>
 </element>
+<element name="X4" library="Rembrandt Electronics - JST XH Connectors v1-0" package="JST-XH-04-PACKAGE-LONG-PAD" value="JST-XH-04-PIN-LONG-PAD" x="37.973" y="-14.605" smashed="yes" rot="MR90">
+<attribute name="NAME" x="35.933" y="-21.26" size="1.016" layer="26" ratio="10" rot="MR180"/>
+<attribute name="VALUE" x="41.8655" y="-20.6075" size="1.016" layer="28" ratio="10" rot="MR90"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -2296,22 +2300,6 @@ design rules under a new name.</description>
 <contactref element="U$1" pad="2"/>
 <contactref element="X3" pad="4"/>
 <wire x1="-7.62" y1="-19.05" x2="-38.481" y2="-19.05" width="0.1524" layer="16"/>
-</signal>
-<signal name="LAT_R">
-<contactref element="U$1" pad="10/CS"/>
-<wire x1="-7.62" y1="1.27" x2="-1.27" y2="-5.08" width="0.1524" layer="16"/>
-<wire x1="10.238075" y1="-5.08" x2="11.094075" y2="-4.224" width="0.1524" layer="16"/>
-<wire x1="11.094075" y1="-4.224" x2="23.112875" y2="-4.224" width="0.1524" layer="16"/>
-<wire x1="23.112875" y1="-4.224" x2="33.094075" y2="-14.2052" width="0.1524" layer="16"/>
-<wire x1="-1.27" y1="-5.08" x2="10.238075" y2="-5.08" width="0.1524" layer="16"/>
-</signal>
-<signal name="SERVO_R">
-<contactref element="U$1" pad="9/CS"/>
-<wire x1="-7.62" y1="-1.27" x2="-1.3335" y2="-7.5565" width="0.1524" layer="16"/>
-<wire x1="-1.3335" y1="-7.5565" x2="-1.27" y2="-7.62" width="0.1524" layer="16"/>
-<wire x1="-1.3335" y1="-7.5565" x2="10.445375" y2="-7.5565" width="0.1524" layer="16"/>
-<wire x1="10.445375" y1="-7.5565" x2="11.094075" y2="-8.2052" width="0.1524" layer="16"/>
-<wire x1="11.094075" y1="-8.2052" x2="24.9692" y2="-8.2052" width="0.1524" layer="16"/>
 </signal>
 <signal name="SERVO_L">
 <contactref element="U$1" pad="5"/>
@@ -2830,25 +2818,28 @@ design rules under a new name.</description>
 <wire x1="-14.899" y1="-5.929" x2="-11.938" y2="-8.89" width="0.1524" layer="16"/>
 <wire x1="-11.938" y1="-8.89" x2="-7.62" y2="-8.89" width="0.1524" layer="16"/>
 </signal>
-<signal name="SCLK_R">
-<contactref element="U$1" pad="11/MOSI"/>
-<wire x1="-7.62" y1="3.81" x2="-1.27" y2="-2.54" width="0.1524" layer="16"/>
+<signal name="S$1">
 <wire x1="10.778075" y1="-2.54" x2="11.094075" y2="-2.224" width="0.1524" layer="16"/>
-<wire x1="11.094075" y1="-2.224" x2="23.112875" y2="-2.224" width="0.1524" layer="16"/>
-<wire x1="23.112875" y1="-2.224" x2="33.094075" y2="-12.2052" width="0.1524" layer="16"/>
-<wire x1="-1.27" y1="-2.54" x2="10.778075" y2="-2.54" width="0.1524" layer="16"/>
 </signal>
 <signal name="SIN_R">
+<contactref element="X4" pad="1"/>
 <contactref element="U$1" pad="12/MISO"/>
-<wire x1="-7.62" y1="6.35" x2="-1.27" y2="0" width="0.1524" layer="16"/>
-<wire x1="10.888875" y1="0" x2="11.094075" y2="-0.2052" width="0.1524" layer="16"/>
-<wire x1="11.094075" y1="-0.2052" x2="23.9542" y2="-0.2052" width="0.1524" layer="16"/>
-<wire x1="32.5138" y1="-9.624925" x2="33.094075" y2="-10.2052" width="0.1524" layer="16"/>
-<wire x1="33.9542" y1="-10.2052" x2="35.179" y2="-11.43" width="0.1524" layer="16"/>
-<wire x1="32.5138" y1="-8.7648" x2="32.5138" y2="-9.624925" width="0.1524" layer="16"/>
-<wire x1="33.094075" y1="-10.2052" x2="33.9542" y2="-10.2052" width="0.1524" layer="16"/>
-<wire x1="-1.27" y1="0" x2="10.888875" y2="0" width="0.1524" layer="16"/>
-<wire x1="23.9542" y1="-0.2052" x2="32.5138" y2="-8.7648" width="0.1524" layer="16"/>
+<wire x1="-7.62" y1="6.35" x2="37.973" y2="-18.415" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="SCLK_R">
+<contactref element="U$1" pad="11/MOSI"/>
+<contactref element="X4" pad="2"/>
+<wire x1="-7.62" y1="3.81" x2="37.973" y2="-15.875" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="LAT_R">
+<contactref element="X4" pad="3"/>
+<contactref element="U$1" pad="10/CS"/>
+<wire x1="-7.62" y1="1.27" x2="37.973" y2="-13.335" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="SERVO_R">
+<contactref element="U$1" pad="9/CS"/>
+<contactref element="X4" pad="4"/>
+<wire x1="-7.62" y1="-1.27" x2="37.973" y2="-10.795" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
