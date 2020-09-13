@@ -63,7 +63,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         ## Make an action in the File menu to display current parent and children tree
         self.action_parentChildren = QtWidgets.QAction(self)
-        self.action_parentChildren.setToolTip('Display a tree of all parent objects and their respective children for the current UI layout')
+        self.action_parentChildren.setToolTip(
+            'Display a tree of all parent objects and their respective children for the current UI layout')
         self.action_parentChildren.setText('Display parent/children tree')
         self.menuFile.addAction(self.action_parentChildren)
 
@@ -76,16 +77,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             'Data Collection': {
                 'Create Widget': partial(Widget_DataCollection, data_collection_thread, is_data_collecting)
-                # 'Create Widget': Widget_DataCollection
             },
 
             'Layout Test': {
                 'Create Widget': Widget_Test
             }
         }
-
-        for key in self.dict_widgets.keys():
-            self.dict_widgets[key]['Widget'] = self.dict_widgets[key]['Create Widget']
 
 
     ## Creates tab widget for apps

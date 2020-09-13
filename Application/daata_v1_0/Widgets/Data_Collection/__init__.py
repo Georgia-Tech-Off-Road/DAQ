@@ -9,6 +9,7 @@ from functools import partial
 import threading
 import DataAcquisition
 from Utilities.Plotting import RealTimePlot
+import logging
 
 ## Default plot configuration for pyqtgraph
 pg.setConfigOption('background', 'w')   # white
@@ -17,6 +18,7 @@ pg.setConfigOption('foreground', 'k')   # black
 
 Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'data_collection.ui'))  # loads the .ui file from QT Desginer
 
+logger = logging.getLogger("Data Collection")
 
 #Todo List      ####################################
 ## add refresh button in menu to scan for hardware changes when a new sensor is plugged in, to add a checkbox and graph for it
@@ -36,6 +38,8 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
         self.dict_sensors = {}  # instantiates sensor dictionary
         self.activeSensorCount = 0
         self.pos = 0
+        self.refreshFreq = 60   # how fast the graphs update in Hz
+
         self.y = np.zeros(100000, float)
         for n in range(100000):
             self.y[n] = np.sin(.1 * n)
@@ -50,8 +54,8 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.updateAll)
-        self.timer.start(100)
-        self.timer.setInterval(100)
+        self.timer.start(1000/self.refreshFreq)
+        self.timer.setInterval(1000/self.refreshFreq)
 
 
         ## CODE IN CASE FOR WHEN APPLICATION IS EXITED
@@ -85,7 +89,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
     def create_graphs(self):
         for key in self.dict_sensors.keys():
-            self.dict_sensors[key]['Graph Widget'] = RealTimePlot(key, parent=self.scrollAreaWidgetContents)
+            self.dict_sensors[key]['Graph Widget'] = RealTimePlot(key, parent=self.scrollAreaWidgetContents, graph_width_seconds = 10)
 
             self.verticalLayout.addWidget(self.dict_sensors[key]['Graph Widget'])
             self.dict_sensors[key]['Graph Widget'].hide()
