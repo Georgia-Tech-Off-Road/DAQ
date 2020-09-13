@@ -37,12 +37,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
         self.data = DataAcquisition.data
         self.dict_sensors = {}  # instantiates sensor dictionary
         self.activeSensorCount = 0
-        self.pos = 0
         self.refreshFreq = 60   # how fast the graphs update in Hz
-
-        self.y = np.zeros(100000, float)
-        for n in range(100000):
-            self.y[n] = np.sin(.1 * n)
 
         self.import_arduinoDict()
         self.create_sensorCheckboxes()
@@ -100,23 +95,22 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
 
     def connect_slotsAndSignals(self):
-        self.button_record.clicked.connect(self.slot_changeRecordingState)
-        # self.button_record.clicked.connect(self.updateGraph)
+        self.button_display.clicked.connect(self.slot_changeDisplayingState)
         for key in self.dict_sensors.keys():
             self.dict_sensors[key]['Checkbox'].clicked.connect(partial(self.slot_checkboxClicked, key))        ## partial creates a new function of slot_checkboxClicked for each key passed in
         self.selectAll_checkbox.clicked.connect(self.slot_checkboxSelectAll)
 
 
-    def slot_changeRecordingState(self):
-        if self.button_record.isChecked():
+    def slot_changeDisplayingState(self):
+        if self.button_display.isChecked():
             self.indicator_onOrOff.setText("On")
             self.indicator_onOrOff.setStyleSheet("color: green;")
-            self.button_record.setText("Stop Recording")
+            self.button_display.setText("Stop Displaying Data")
             self.is_data_collecting.set()
         else:
             self.indicator_onOrOff.setText("Off")
             self.indicator_onOrOff.setStyleSheet("color: red;")
-            self.button_record.setText("Start Recording")
+            self.button_display.setText("Start Displaying Data")
             self.is_data_collecting.clear()
 
 
@@ -156,9 +150,15 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
             # print(self.objectName() + " is hidden")
             pass
         else:
-            if self.button_record.isChecked():
+            if self.button_display.isChecked():
                 self.updateGraph()
-                self.label_timeElapsed.setText(str(self.pos))
+                secondsElapsed = DataAcquisition.data.get_value("time", DataAcquisition.data.get_most_recent_index())
+                hoursElapsed = int(secondsElapsed / 3600)
+                minutesElapsed = int((secondsElapsed - hoursElapsed * 3600) / 60)
+                secondsElapsed = secondsElapsed % 60
+                formatTime = "{hours:02d}:{minutes:02d}:{seconds:05.2f}"
+                strTime = formatTime.format(hours=hoursElapsed, minutes=minutesElapsed, seconds=secondsElapsed)
+                self.label_timeElapsed.setText(strTime)
             # print('updating ' + self.objectName() + "...")
 
 

@@ -11,7 +11,7 @@ logger = logging.getLogger("Plotting")
 
 class RealTimePlot(pg.PlotWidget):
     def __init__(self, sensor_name, parent=None, **kwargs):
-        super().__init__()
+        super().__init__(parent)
         self.sensor_name = sensor_name
 
         self.setMinimumSize(QtCore.QSize(0, 400))
