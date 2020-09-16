@@ -32,6 +32,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
         from MainWindow import is_data_collecting
 
+
         self.is_data_collecting = is_data_collecting
 
         self.data = DataAcquisition.data

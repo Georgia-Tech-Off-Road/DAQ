@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="2">
+   <item row="2" column="2">
     <widget class="QScrollArea" name="scrollable_enabledSensors">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -34,6 +34,9 @@
        <height>16777215</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #EEEEEE</string>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -43,7 +46,7 @@
         <x>0</x>
         <y>0</y>
         <width>298</width>
-        <height>628</height>
+        <height>610</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -101,64 +104,14 @@
      </widget>
     </widget>
    </item>
-   <item row="0" column="2">
-    <layout class="QVBoxLayout" name="verticalLayout_recordingBox">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QLabel" name="indicator_onOrOff">
-         <property name="minimumSize">
-          <size>
-           <width>35</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>35</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#c70000;&quot;&gt;Off&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="indent">
-          <number>5</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="button_display">
-         <property name="text">
-          <string>Start Displaying Data</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_timeElapsed">
-       <property name="text">
-        <string>00:00:00.00</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="0" column="0" rowspan="2">
+   <item row="0" column="0" rowspan="3">
     <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true">QScrollArea {
+background-color: #F3F3F3
+}
+</string>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -176,6 +129,76 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout"/>
      </widget>
+    </widget>
+   </item>
+   <item row="0" column="2" rowspan="2">
+    <widget class="QFrame" name="frame_displayingBox">
+     <property name="styleSheet">
+      <string notr="true">background-color: #EEEEEE</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="indicator_onOrOff">
+          <property name="minimumSize">
+           <size>
+            <width>35</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>35</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#c70000;&quot;&gt;Off&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="indent">
+           <number>5</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="button_display">
+          <property name="styleSheet">
+           <string notr="true">background-color: light</string>
+          </property>
+          <property name="text">
+           <string>Start Displaying Data</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_timeElapsed">
+        <property name="text">
+         <string>00:00:00.00</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
