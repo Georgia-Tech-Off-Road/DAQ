@@ -3,12 +3,12 @@ from PyQt5 import QtWidgets
 
 class MenuAction:
     ## Make an action to create a tab for each imported widget
-    for key in self.dict_widgets.keys():
-        self.dict_widgets[key]['Menu Action'] = QtWidgets.QAction(self)
-        self.dict_widgets[key]['Menu Action'].setCheckable(False)
-        self.dict_widgets[key]['Menu Action'].setToolTip('Open a new tab for ' + key)
-        self.dict_widgets[key]['Menu Action'].setText(key)
-        self.menuWidget.addAction(self.dict_widgets[key]['Menu Action'])
+    for key in self.dict_layouts.keys():
+        self.dict_layouts[key]['Menu Action'] = QtWidgets.QAction(self)
+        self.dict_layouts[key]['Menu Action'].setCheckable(False)
+        self.dict_layouts[key]['Menu Action'].setToolTip('Open a new tab for ' + key)
+        self.dict_layouts[key]['Menu Action'].setText(key)
+        self.menuWidget.addAction(self.dict_layouts[key]['Menu Action'])
 
     ## Make an action in the File menu to display current parent and children tree
     self.action_parentChildren = QtWidgets.QAction(self)

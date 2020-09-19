@@ -13,7 +13,6 @@ class RealTimePlot(pg.PlotWidget):
     def __init__(self, sensor_name, parent=None, **kwargs):
         super().__init__(parent)
         self.sensor_name = sensor_name
-
         self.setMinimumSize(QtCore.QSize(0, 400))
         self.setMaximumSize(QtCore.QSize(16777215, 400))
         self.setMouseEnabled(False, False)  # disable mouse-scroll zooming on the graph
@@ -42,13 +41,13 @@ class RealTimePlot(pg.PlotWidget):
         self.timeArray = data.get_values("time", index, self.graph_width)
         self.curve.setData(self.timeArray, self.valueArray)
 
-
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    widget = QtWidgets.QWidget()
-    ui = RealTimePlot("Engine Speed")
-    ui.show()
-    ui.update_graph()
-    sys.exit(app.exec_())
+#
+# if __name__ == "__main__":
+#     app = QtWidgets.QApplication(sys.argv)
+#     widget = QtWidgets.QWidget()
+#     ui = RealTimePlot("Engine Speed")
+#     ui.show()
+#     ui.update_graph()
+#     sys.exit(app.exec_())
 
 

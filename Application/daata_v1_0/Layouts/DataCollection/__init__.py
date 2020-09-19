@@ -18,13 +18,13 @@ pg.setConfigOption('foreground', 'k')   # black
 
 Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'data_collection.ui'))  # loads the .ui file from QT Desginer
 
-logger = logging.getLogger("Data Collection")
+logger = logging.getLogger("DataCollection")
 
 #Todo List      ####################################
 ## add refresh button in menu to scan for hardware changes when a new sensor is plugged in, to add a checkbox and graph for it
 ## add warning dialog if trying to start recording data while teensy is not plugged in (checked with data.is_connected)
 
-class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
+class Layout_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
     def __init__(self, data_collection_thread, is_data_collecting):
         super().__init__()
         self.setupUi(self)
@@ -86,6 +86,7 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
     def create_graphs(self):
         for key in self.dict_sensors.keys():
             self.dict_sensors[key]['Graph Widget'] = RealTimePlot(key, parent=self.scrollAreaWidgetContents, graph_width_seconds = 10)
+            self.dict_sensors[key]['Graph Widget'].setObjectName(key)
 
             self.verticalLayout.addWidget(self.dict_sensors[key]['Graph Widget'])
             self.dict_sensors[key]['Graph Widget'].hide()
@@ -146,21 +147,25 @@ class Widget_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
         for key in self.dict_sensors.keys():
             self.dict_sensors[key]['Graph Widget'].update_graph()
 
+    def updateTimeElapsed(self):
+        secondsElapsed = DataAcquisition.data.get_value("time", DataAcquisition.data.get_most_recent_index())
+        hoursElapsed = int(secondsElapsed / 3600)
+        minutesElapsed = int((secondsElapsed - hoursElapsed * 3600) / 60)
+        secondsElapsed = secondsElapsed % 60
+        formatTime = "{hours:02d}:{minutes:02d}:{seconds:05.2f}"
+        strTime = formatTime.format(hours=hoursElapsed, minutes=minutesElapsed, seconds=secondsElapsed)
+        self.label_timeElapsed.setText(strTime)
+
     def updateAll(self):
-        if self.isHidden():
-            # print(self.objectName() + " is hidden")
-            pass
-        else:
-            if self.button_display.isChecked():
-                self.updateGraph()
-                secondsElapsed = DataAcquisition.data.get_value("time", DataAcquisition.data.get_most_recent_index())
-                hoursElapsed = int(secondsElapsed / 3600)
-                minutesElapsed = int((secondsElapsed - hoursElapsed * 3600) / 60)
-                secondsElapsed = secondsElapsed % 60
-                formatTime = "{hours:02d}:{minutes:02d}:{seconds:05.2f}"
-                strTime = formatTime.format(hours=hoursElapsed, minutes=minutesElapsed, seconds=secondsElapsed)
-                self.label_timeElapsed.setText(strTime)
-            # print('updating ' + self.objectName() + "...")
+        # update only
+        # if the Data Collection tab is the current tab
+        # or if the Layouts tab is the current tab
+        if self.isVisible():
+            if self.parentWidget().parentWidget().parentWidget().isVisible():
+                if self.button_display.isChecked():
+                    self.updateGraph()
+                    self.updateTimeElapsed()
+                    logger.debug('updating ' + self.objectName() + "...")
 
 
 

@@ -3,7 +3,7 @@ import os
 
 
 
-Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'widget_Test.ui'))  # loads the .ui file from QT Desginer
+Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'testLayout.ui'))  # loads the .ui file from QT Desginer
 
 class Widget_Test(QtWidgets.QWidget, Ui_Widget_Test):
     def __init__(self):

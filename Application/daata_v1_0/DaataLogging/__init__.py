@@ -4,10 +4,12 @@ from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
 
 logging_objects = {
     "Logging": DEBUG,
-    "DataAcquisition": DEBUG,
+    "DataAcquisition": CRITICAL,
     "MainWindow": DEBUG,
-    "Plotting": DEBUG,
-    "GTORNetwork": DEBUG
+    "Plotting": INFO,
+    "GTORNetwork": DEBUG,
+    "Homepage": DEBUG,
+    "DataCollection": DEBUG
 }
 
 

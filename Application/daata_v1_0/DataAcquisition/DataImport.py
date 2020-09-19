@@ -51,6 +51,10 @@ class DataImport:
             self.data.set_connected("fr_lds")
             self.data.set_connected("bl_lds")
 
+        if (datetime.now() - self.time_begin).total_seconds() > 3:
+            self.data.set_disconnected("fl_lds")
+            self.data.set_disconnected("br_lds")
+
     def read_data_fake(self):
         with self.lock:
             if not self.data.is_connected:

@@ -1,20 +1,29 @@
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 import os
 from DataAcquisition import data
+import logging
 
+logger = logging.getLogger("Homepage")
 
-Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'widget_Homepage.ui'))  # loads the .ui file from QT Desginer
+Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'homepage.ui'))  # loads the .ui file from QT Desginer
 
-class Widget_Homepage(QtWidgets.QWidget, Ui_Widget_Test):
-    def __init__(self, parent):
+class Layout_Homepage(QtWidgets.QWidget, Ui_Widget_Test):
+    def __init__(self):
         super().__init__()
         self.setupUi(self)
         # self.hide()
-        self.parent = parent
         self.dict_sensorStatus = {}
-        self.export_data()
-        self.update_sensorStatus()
-        self.create_buttonTab()
+        self.connected_sensors = data.get_sensors(is_connected=True)
+
+        self.create_sensorStatusCheckboxes()
+        self.create_connectionStatusCheckboxes()
+        # self.export_data()
+
+        self.updateFreq =  1    # how often the layout checks for new sensors (Hz)
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.updateAll)
+        self.timer.start(1000 / self.updateFreq)
+        self.timer.setInterval(1000 / self.updateFreq)
 
 
     def export_data(self):
@@ -27,30 +36,63 @@ class Widget_Homepage(QtWidgets.QWidget, Ui_Widget_Test):
         # print(file)
         pass
 
-    def update_sensorStatus(self):
-        connected_sensors = data.get_sensors(is_connected=True)
-        for sensor in connected_sensors:
-            self.dict_sensorStatus['sensor'] = {}
-            self.dict_sensorStatus['sensor']['indicator'] = QtWidgets.QRadioButton(data.get_display_name(sensor), self.scrollArea_sensorStatus, objectName=sensor, checkable  = False)
-            self.verticalLayout_sensorStatus.addWidget(self.dict_sensorStatus['sensor']['indicator'])
-            # Create a vertical spacer that forces checkboxes to the top
+    def create_sensorStatusCheckboxes(self):
+        all_sensors = data.get_sensors()
+        for sensor in all_sensors:
+            self.dict_sensorStatus[sensor] = {}
+            self.dict_sensorStatus[sensor]['indicator'] = QtWidgets.QCheckBox(data.get_display_name(sensor),
+                                                                              objectName=sensor)
+            self.verticalLayout_sensorStatus.addWidget(self.dict_sensorStatus[sensor]['indicator'])
+
+            # disables user input for checkboxes
+            self.dict_sensorStatus[sensor]['indicator'].setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+            self.dict_sensorStatus[sensor]['indicator'].setFocusPolicy(QtCore.Qt.NoFocus)
+
+
+        # Create a vertical spacer that forces checkboxes to the top
         spacerItem1 = QtWidgets.QSpacerItem(20, 1000000, QtWidgets.QSizePolicy.Minimum,
                                             QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_2.addItem(spacerItem1)
+        self.verticalLayout_sensorStatus.addItem(spacerItem1)
 
 
-    def create_buttonTab(self):
-        self.button = QtWidgets.QPushButton("Homepage")
-        self.button.clicked.connect(self.switch_Homepage)
+    def update_sensorStatus(self):
+        connected_sensors = data.get_sensors(is_connected=True)
+        for sensor in self.dict_sensorStatus.keys():
+            if sensor in connected_sensors:
+                self.dict_sensorStatus[sensor]['indicator'].setChecked(True)
+                logger.debug(sensor + " is connected...")
+            else:
+                self.dict_sensorStatus[sensor]['indicator'].setChecked(False)
+                # logger.debug(sensor + " is disconnected...")
 
-    def switch_Homepage(self):
-        if self.button.text() == "Switch to Homepage":
-            # self.parent().parent().addTab(self,"Homepage")
-            self.parent.addTab(self,"Homepage")
-            self.button.setText("Switch to Widgets")
+    def create_connectionStatusCheckboxes(self):
+        self.ind_RFBox = QtWidgets.QCheckBox("RF Box Disconnected", objectName = "ind_RFBox")
+        self.verticalLayout_connectionStatus.addWidget(self.ind_RFBox)
+        # disables user input for checkboxes
+        self.ind_RFBox.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+        self.ind_RFBox.setFocusPolicy(QtCore.Qt.NoFocus)
+
+        self.ind_SDCard = QtWidgets.QCheckBox("SD Card Disconnected", objectName = "ind_SDCard")
+        self.verticalLayout_connectionStatus.addWidget(self.ind_SDCard)
+        # disables user input for checkboxes
+        self.ind_SDCard.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+        self.ind_SDCard.setFocusPolicy(QtCore.Qt.NoFocus)
+
+        self.ind_connectionStatus = QtWidgets.QCheckBox("Network Drive Disconnected", objectName = "ind_connectionStatus")
+        self.verticalLayout_connectionStatus.addWidget(self.ind_connectionStatus)
+        # disables user input for checkboxes
+        self.ind_connectionStatus.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+        self.ind_connectionStatus.setFocusPolicy(QtCore.Qt.NoFocus)
+
+
+        # Create a vertical spacer that forces checkboxes to the top
+        spacerItem1 = QtWidgets.QSpacerItem(20, 1000000, QtWidgets.QSizePolicy.Minimum,
+                                            QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_connectionStatus.addItem(spacerItem1)
 
 
 
-    def updateParent(self):
-        # self.parent()
-        pass
+    def updateAll(self):
+        if self.isVisible():
+            self.update_sensorStatus()
+            logger.debug('updating ' + self.objectName() + "...")

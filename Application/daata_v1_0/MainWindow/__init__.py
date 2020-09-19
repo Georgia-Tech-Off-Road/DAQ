@@ -5,11 +5,12 @@ from functools import partial
 import threading
 import os
 
-from Layouts.Homepage import Widget_Homepage
-from Layouts.Data_Collection import Widget_DataCollection
+from Layouts.Homepage import Layout_Homepage
+from Layouts.DataCollection import Layout_DataCollection
 from Layouts.Layout_Test import Widget_Test
 
-from Utilities.Popups.Popup_ParentChildrenTree import Popup_ParentChildrenTree
+from Utilities.Popups import popup_ParentChildrenTree
+from Utilities.Popups import popup_closeTabConfirmation
 import DataAcquisition
 
 
@@ -29,7 +30,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         data_collection_thread.start()
 
         self.setupUi(self)
-        self.dict_widgets = {}  # instantiates dictionary that holds objects for widgets
+        self.dict_layouts = {}  # instantiates dictionary that holds objects for widgets
         self.import_Widgets()
         self.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname(__file__), 'icon_application.svg')))
 
@@ -39,8 +40,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.connectSignalsSlots()
 
-        # widg = self.dict_widgets['Homepage']['Create Widget']()
-        # self.tabWidget.setCornerWidget(widg)
         self.create_homepage()
 
         self.settings = QSettings('DAATA', 'MainWindow')
@@ -52,12 +51,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def populate_menubar(self):
         ## Make an action to create a tab for each imported widget
-        for key in self.dict_widgets.keys():
-            self.dict_widgets[key]['Menu Action'] = QtWidgets.QAction(self)
-            self.dict_widgets[key]['Menu Action'].setCheckable(False)
-            self.dict_widgets[key]['Menu Action'].setToolTip('Open a new tab for ' + key)
-            self.dict_widgets[key]['Menu Action'].setText(key)
-            self.menuWidget.addAction(self.dict_widgets[key]['Menu Action'])
+        for key in self.dict_layouts.keys():
+            self.dict_layouts[key]['Menu Action'] = QtWidgets.QAction(self)
+            self.dict_layouts[key]['Menu Action'].setCheckable(False)
+            self.dict_layouts[key]['Menu Action'].setToolTip('Open a new tab for ' + key)
+            self.dict_layouts[key]['Menu Action'].setText(key)
+            self.menuAddLayout.addAction(self.dict_layouts[key]['Menu Action'])
 
         ## Make an action in the File menu to display current parent and children tree
         self.action_parentChildren = QtWidgets.QAction(self)
@@ -68,18 +67,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
     def import_Widgets(self):
-        self.dict_widgets = {
+        self.dict_layouts = {
             'Data Collection': {
-                'Create Widget': partial(Widget_DataCollection, data_collection_thread, is_data_collecting)
+                'Create Layout': partial(Layout_DataCollection, data_collection_thread, is_data_collecting)
             },
 
             'Layout Test': {
-                'Create Widget': Widget_Test
+                'Create Layout': Widget_Test
             }
         }
 
     def create_homepage(self):
-        self.homepage = Widget_Homepage(self.tabWidget)
+        self.homepage = Layout_Homepage()
         self.homepage.setObjectName("Homepage")
         self.gridLayout_tab_homepage.addWidget(self.homepage)
 
@@ -90,7 +89,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         for index in range(self.tabWidget.count()):
             self.tabWidget.removeTab(0)
         self.create_layoutTab('Data Collection')                       # sets default tab that pops up in Layouts
-
+        self.tabWidget_central.setCurrentIndex(self.tabWidget_central.indexOf(self.tab_homepage)) ## temporary measure to default to homepage on startup
         self.tabWidget.setStyleSheet("""
 
         """)
@@ -98,21 +97,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def create_layoutTab(self, key):
         global tabInstances
-        widg = self.dict_widgets[key]['Create Widget']()
-        widg.setObjectName(key + " (instance " + str(tabInstances) + ")")           # set object names for each tab's widget (allows duplicate widgets to have a functional parent/child relationship)
-        self.tabWidget.addTab(widg, key)
-
+        tab = self.dict_layouts[key]['Create Layout']()
+        tab.setObjectName(key + " (instance " + str(tabInstances) + ")")           # set object names for each tab's widget (allows duplicate widgets to have a functional parent/child relationship)
+        self.tabWidget.addTab(tab, key)
+        self.tabWidget.setCurrentIndex(self.tabWidget.indexOf(tab))
+        self.tabWidget_central.setCurrentIndex(self.tabWidget_central.indexOf(self.tab_layouts))
         tabInstances += 1
-
-
-    def popup_closeTabConfirm(self, index):
-        ans = QtWidgets.QMessageBox.question(self, "Warning", "Do you want to close this tab? Any unsaved progress will be lost", QtWidgets.QMessageBox.Close | QtWidgets.QMessageBox.Cancel)
-
-        if ans == QtWidgets.QMessageBox.Close:
-            widget = self.tabWidget.widget(index)
-            if widget is not None:
-                widget.deleteLater()
-            self.tabWidget.removeTab(index)
 
     def closeEvent(self, event):
         self.settings.setValue('window size', self.size())
@@ -124,18 +114,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tabWidget.setTabText(index, text)
 
 
-    def open_CloseConfirmation(self):
-        buttonReply = QtWidgets.QMessageBox.question(self, 'PyQt5 message', "Do you like PyQt5?",
-                                                     QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
-        if buttonReply == QtWidgets.QMessageBox.Yes:
-            print('Yes clicked.')
-        else:
-            print('No clicked.')
 
     def connectSignalsSlots(self):
-        for key in self.dict_widgets.keys():
-            self.dict_widgets[key]['Menu Action'].triggered.connect(partial(self.create_layoutTab, key))
-        self.tabWidget.tabCloseRequested.connect(self.popup_closeTabConfirm)
+        for key in self.dict_layouts.keys():
+            self.dict_layouts[key]['Menu Action'].triggered.connect(partial(self.create_layoutTab, key))
         self.tabWidget.tabBarDoubleClicked.connect(self.rename_object)
-        self.action_parentChildren.triggered.connect(partial(Popup_ParentChildrenTree, self))
-        # self.action_parentChildren.triggered.connect(Popup_ParentChildrenTree(self))
+        self.tabWidget.tabCloseRequested.connect(partial(popup_closeTabConfirmation,self))
+        self.action_parentChildren.triggered.connect(partial(popup_ParentChildrenTree, self))
+        # self.action_parentChildren.triggered.connect(popup_ParentChildrenTree(self))

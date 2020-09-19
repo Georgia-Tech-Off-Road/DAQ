@@ -176,14 +176,14 @@
      <string>Edit</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuWidget">
+   <widget class="QMenu" name="menuAddLayout">
     <property name="title">
-     <string>Widget</string>
+     <string>Add Layout</string>
     </property>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
-   <addaction name="menuWidget"/>
+   <addaction name="menuAddLayout"/>
   </widget>
  </widget>
  <resources/>
