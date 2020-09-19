@@ -1,17 +1,15 @@
-from PyQt5 import uic, QtWidgets, Qt
-from PyQt5.QtCore import QSettings, QRect
+from PyQt5 import uic, QtWidgets, QtGui
+from PyQt5.QtCore import QSettings
 
-import pyqtgraph as pg
-import numpy as np
 from functools import partial
-import json
 import threading
+import os
 
-from Widgets.Homepage import Widget_Homepage
-from Widgets.Data_Collection import Widget_DataCollection
-from Widgets.Layout_Test import Widget_Test
+from Layouts.Homepage import Widget_Homepage
+from Layouts.Data_Collection import Widget_DataCollection
+from Layouts.Layout_Test import Widget_Test
 
-from MainWindow.Popup_ParentChildrenTree import Popup_ParentChildrenTree
+from Utilities.Popups.Popup_ParentChildrenTree import Popup_ParentChildrenTree
 import DataAcquisition
 
 
@@ -32,18 +30,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.setupUi(self)
         self.dict_widgets = {}  # instantiates dictionary that holds objects for widgets
-        self.create_TabWidget()
-
-
         self.import_Widgets()
+        self.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname(__file__), 'icon_application.svg')))
+
+        self.resetTabs_tabWidget()
         self.populate_menubar()
 
 
         self.connectSignalsSlots()
 
-        widg = self.dict_widgets['Homepage']['Create Widget']()
-        self.tabWidget.setCornerWidget(widg)
-
+        # widg = self.dict_widgets['Homepage']['Create Widget']()
+        # self.tabWidget.setCornerWidget(widg)
+        self.create_homepage()
 
         self.settings = QSettings('DAATA', 'MainWindow')
         try:
@@ -71,10 +69,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def import_Widgets(self):
         self.dict_widgets = {
-            'Homepage': {
-                'Create Widget': Widget_Homepage
-            },
-
             'Data Collection': {
                 'Create Widget': partial(Widget_DataCollection, data_collection_thread, is_data_collecting)
             },
@@ -84,17 +78,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             }
         }
 
+    def create_homepage(self):
+        self.homepage = Widget_Homepage(self.tabWidget)
+        self.homepage.setObjectName("Homepage")
+        self.gridLayout_tab_homepage.addWidget(self.homepage)
+
+        # self.tabWidget.setCornerWidget(self.homepage.button, corner = Qt.Corner.TopRightCorner)
 
     ## Creates tab widget for apps
-    def create_TabWidget(self):
-        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setTabsClosable(True)
-        self.tabWidget.setMovable(True)
-        self.tabWidget.setObjectName("tabWidget")
-        self.centralLayout.addWidget(self.tabWidget)
+    def resetTabs_tabWidget(self):
+        for index in range(self.tabWidget.count()):
+            self.tabWidget.removeTab(0)
+        self.create_layoutTab('Data Collection')                       # sets default tab that pops up in Layouts
+
+        self.tabWidget.setStyleSheet("""
+
+        """)
 
 
-    def create_Tab(self, key):
+    def create_layoutTab(self, key):
         global tabInstances
         widg = self.dict_widgets[key]['Create Widget']()
         widg.setObjectName(key + " (instance " + str(tabInstances) + ")")           # set object names for each tab's widget (allows duplicate widgets to have a functional parent/child relationship)
@@ -132,7 +134,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def connectSignalsSlots(self):
         for key in self.dict_widgets.keys():
-            self.dict_widgets[key]['Menu Action'].triggered.connect(partial(self.create_Tab, key))
+            self.dict_widgets[key]['Menu Action'].triggered.connect(partial(self.create_layoutTab, key))
         self.tabWidget.tabCloseRequested.connect(self.popup_closeTabConfirm)
         self.tabWidget.tabBarDoubleClicked.connect(self.rename_object)
         self.action_parentChildren.triggered.connect(partial(Popup_ParentChildrenTree, self))
