@@ -9,6 +9,8 @@ from functools import partial
 import threading
 import DataAcquisition
 from Utilities.Plotting import RealTimePlot
+from Layouts import DAATALayout
+
 import logging
 
 ## Default plot configuration for pyqtgraph
@@ -16,7 +18,7 @@ pg.setConfigOption('background', 'w')   # white
 pg.setConfigOption('foreground', 'k')   # black
 
 
-Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'data_collection.ui'))  # loads the .ui file from QT Desginer
+uiFile, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'data_collection.ui'))  # loads the .ui file from QT Desginer
 
 logger = logging.getLogger("DataCollection")
 
@@ -24,21 +26,18 @@ logger = logging.getLogger("DataCollection")
 ## add refresh button in menu to scan for hardware changes when a new sensor is plugged in, to add a checkbox and graph for it
 ## add warning dialog if trying to start recording data while teensy is not plugged in (checked with data.is_connected)
 
-class Layout_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
+class Layout_DataCollection(DAATALayout, uiFile):
     def __init__(self, data_collection_thread, is_data_collecting):
         super().__init__()
         self.setupUi(self)
         self.hide()
+        self.updateFreq = 60   # how fast the graphs update in Hz
 
-        from MainWindow import is_data_collecting
 
-
-        self.is_data_collecting = is_data_collecting
 
         self.data = DataAcquisition.data
         self.dict_sensors = {}  # instantiates sensor dictionary
         self.activeSensorCount = 0
-        self.refreshFreq = 60   # how fast the graphs update in Hz
 
         self.import_arduinoDict()
         self.create_sensorCheckboxes()
@@ -47,11 +46,8 @@ class Layout_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
         self.connect_slotsAndSignals()
 
-
-        self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.updateAll)
-        self.timer.start(1000/self.refreshFreq)
-        self.timer.setInterval(1000/self.refreshFreq)
+        from MainWindow import is_data_collecting
+        self.is_data_collecting = is_data_collecting
 
 
         ## CODE IN CASE FOR WHEN APPLICATION IS EXITED
@@ -104,16 +100,19 @@ class Layout_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
 
     def slot_changeDisplayingState(self):
+
+
         if self.button_display.isChecked():
             self.indicator_onOrOff.setText("On")
             self.indicator_onOrOff.setStyleSheet("color: green;")
-            self.button_display.setText("Stop Displaying Data")
+            self.button_display.setText("Stop Collecting Data")
             self.is_data_collecting.set()
         else:
             self.indicator_onOrOff.setText("Off")
             self.indicator_onOrOff.setStyleSheet("color: red;")
-            self.button_display.setText("Start Displaying Data")
+            self.button_display.setText("Start Collecting Data")
             self.is_data_collecting.clear()
+
 
 
     def slot_checkboxSelectAll(self):
@@ -149,25 +148,35 @@ class Layout_DataCollection(QtWidgets.QWidget, Ui_Widget_Test):
 
     def updateTimeElapsed(self):
         secondsElapsed = DataAcquisition.data.get_value("time", DataAcquisition.data.get_most_recent_index())
-        hoursElapsed = int(secondsElapsed / 3600)
-        minutesElapsed = int((secondsElapsed - hoursElapsed * 3600) / 60)
+        secondsElapsedInt = int(secondsElapsed)
+        hoursElapsed = int(secondsElapsedInt / 3600)
+        minutesElapsed = int((secondsElapsedInt - hoursElapsed * 3600) / 60)
         secondsElapsed = secondsElapsed % 60
         formatTime = "{hours:02d}:{minutes:02d}:{seconds:05.2f}"
         strTime = formatTime.format(hours=hoursElapsed, minutes=minutesElapsed, seconds=secondsElapsed)
         self.label_timeElapsed.setText(strTime)
 
-    def updateAll(self):
+    def update(self):
         # update only
         # if the Data Collection tab is the current tab
         # or if the Layouts tab is the current tab
-        if self.isVisible():
-            if self.parentWidget().parentWidget().parentWidget().isVisible():
-                if self.button_display.isChecked():
-                    self.updateGraph()
-                    self.updateTimeElapsed()
-                    logger.debug('updating ' + self.objectName() + "...")
 
+        if self.is_data_collecting.is_set():
+            self.updateGraph()
+            self.updateTimeElapsed()
+            logger.debug('updating ' + self.objectName() + "...")
 
+        #### temporary implementation of global recording button update
+        if self.is_data_collecting.is_set():
+            self.indicator_onOrOff.setText("On")
+            self.indicator_onOrOff.setStyleSheet("color: green;")
+            self.button_display.setText("Stop Collecting Data")
+            self.button_display.setChecked(True)
+        else:
+            self.indicator_onOrOff.setText("Off")
+            self.indicator_onOrOff.setStyleSheet("color: red;")
+            self.button_display.setText("Start Collecting Data")
+            self.button_display.setChecked(False)
 
     def loadSettings(self):
         try:

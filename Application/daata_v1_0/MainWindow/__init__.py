@@ -1,13 +1,15 @@
-from PyQt5 import uic, QtWidgets, QtGui
+from PyQt5 import uic, QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import QSettings
 
 from functools import partial
 import threading
 import os
 
+from Layouts import DAATALayout
 from Layouts.Homepage import Layout_Homepage
 from Layouts.DataCollection import Layout_DataCollection
 from Layouts.Layout_Test import Widget_Test
+
 
 from Utilities.Popups import popup_ParentChildrenTree
 from Utilities.Popups import popup_closeTabConfirmation
@@ -35,7 +37,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname(__file__), 'icon_application.svg')))
 
         self.resetTabs_tabWidget()
-        self.populate_menubar()
+        self.populate_newLayoutMenu()
 
 
         self.connectSignalsSlots()
@@ -43,27 +45,52 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.create_homepage()
 
         self.settings = QSettings('DAATA', 'MainWindow')
+        self.load_settings()
+
+        self.refreshFreq = 60
+        self.updateLoops = 0
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.updateAll)
+        self.timer.start(1000 / self.refreshFreq)
+        self.timer.setInterval(1000 / self.refreshFreq)
+
+    def updateAll(self):
+        if self.updateLoops > self.refreshFreq:
+            self.updateLoops = 0
+        self.updateLoops = self.updateLoops + 1
+
+        if self.tab_homepage.isVisible():
+            if (self.updateLoops % (self.refreshFreq / self.homepage.updateFreq)) == 0:
+                self.homepage.update()
+                print("updating " + self.homepage.objectName())
+
+        if self.tab_layouts.isVisible():
+            for tab in self.tabWidget.findChildren(DAATALayout):
+                if tab.isVisible():
+                    if (self.updateLoops % (self.refreshFreq/tab.updateFreq)) == 0:
+                        tab.update()
+                        print("updating " + tab.objectName())
+
+    def load_settings(self):
         try:
             self.resize(self.settings.value('window size'))
             self.move(self.settings.value('window position'))
         except:
             pass
 
-    def populate_menubar(self):
+    def save_settings(self):
+        self.settings.setValue('window size', self.size())
+        self.settings.setValue('window position', self.pos())
+
+    def populate_newLayoutMenu(self):
         ## Make an action to create a tab for each imported widget
         for key in self.dict_layouts.keys():
             self.dict_layouts[key]['Menu Action'] = QtWidgets.QAction(self)
             self.dict_layouts[key]['Menu Action'].setCheckable(False)
             self.dict_layouts[key]['Menu Action'].setToolTip('Open a new tab for ' + key)
             self.dict_layouts[key]['Menu Action'].setText(key)
-            self.menuAddLayout.addAction(self.dict_layouts[key]['Menu Action'])
+            self.menuNew_Layout.addAction(self.dict_layouts[key]['Menu Action'])
 
-        ## Make an action in the File menu to display current parent and children tree
-        self.action_parentChildren = QtWidgets.QAction(self)
-        self.action_parentChildren.setToolTip(
-            'Display a tree of all parent objects and their respective children for the current UI layout')
-        self.action_parentChildren.setText('Display parent/children tree')
-        self.menuFile.addAction(self.action_parentChildren)
 
 
     def import_Widgets(self):
@@ -94,6 +121,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         """)
 
+    # def refreshLayouts(self):
+    #     for layout
 
     def create_layoutTab(self, key):
         global tabInstances
@@ -105,8 +134,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         tabInstances += 1
 
     def closeEvent(self, event):
-        self.settings.setValue('window size', self.size())
-        self.settings.setValue('window position', self.pos())
+        self.save_settings()
+
+        ##  Close Confirmation Window
+        # close = QtWidgets.QMessageBox()
+        # close.setText("Close DAATA?")
+        # close.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.Cancel)
+        # close = close.exec()
+        # if close == QtWidgets.QMessageBox.Yes:
+        #     event.accept()
+        # else:
+        #     event.ignore()
 
     def rename_object(self, index):
         text, okPressed = QtWidgets.QInputDialog.getText(self, "Rename Object", "New Name:", QtWidgets.QLineEdit.Normal, "")
@@ -120,5 +158,5 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.dict_layouts[key]['Menu Action'].triggered.connect(partial(self.create_layoutTab, key))
         self.tabWidget.tabBarDoubleClicked.connect(self.rename_object)
         self.tabWidget.tabCloseRequested.connect(partial(popup_closeTabConfirmation,self))
-        self.action_parentChildren.triggered.connect(partial(popup_ParentChildrenTree, self))
+        self.action_parentChildrenTree.triggered.connect(partial(popup_ParentChildrenTree, self))
         # self.action_parentChildren.triggered.connect(popup_ParentChildrenTree(self))
