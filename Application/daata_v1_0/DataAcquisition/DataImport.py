@@ -51,7 +51,7 @@ class DataImport:
             self.data.set_connected("fr_lds")
             self.data.set_connected("bl_lds")
 
-        if (datetime.now() - self.time_begin).total_seconds() > 3:
+        if (datetime.now() - self.time_begin).total_seconds() > 6:
             self.data.set_disconnected("fl_lds")
             self.data.set_disconnected("br_lds")
 

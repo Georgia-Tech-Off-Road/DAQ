@@ -110,6 +110,13 @@ QCheckBox::indicator:checked:pressed {
       </item>
       <item>
        <widget class="QScrollArea" name="scrollArea_sensorStatus">
+        <property name="styleSheet">
+         <string notr="true">QScrollArea {
+background-color : white
+
+}
+</string>
+        </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -129,7 +136,9 @@ QCheckBox::indicator:checked:pressed {
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">QWidget { 
+background-color: rgba(0, 0, 0, 0);
+}\n</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_sensorStatus">
           <item>
@@ -282,6 +291,13 @@ QCheckBox::indicator:checked:pressed {
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
        </widget>
       </item>

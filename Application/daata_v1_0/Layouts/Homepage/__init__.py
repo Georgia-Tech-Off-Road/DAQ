@@ -1,13 +1,14 @@
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 import os
 from DataAcquisition import data
+from Layouts import DAATALayout
 import logging
 
 logger = logging.getLogger("Homepage")
 
-Ui_Widget_Test, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'homepage.ui'))  # loads the .ui file from QT Desginer
+uiFile, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'homepage.ui'))  # loads the .ui file from QT Desginer
 
-class Layout_Homepage(QtWidgets.QWidget, Ui_Widget_Test):
+class Layout_Homepage(DAATALayout, uiFile):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -17,17 +18,13 @@ class Layout_Homepage(QtWidgets.QWidget, Ui_Widget_Test):
 
         self.create_sensorStatusCheckboxes()
         self.create_connectionStatusCheckboxes()
-        # self.export_data()
+        self.export_data()
 
-        self.updateFreq =  1    # how often the layout checks for new sensors (Hz)
-        self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.updateAll)
-        self.timer.start(1000 / self.updateFreq)
-        self.timer.setInterval(1000 / self.updateFreq)
+        self.updateFreq =  2    # how often the layout checks for new sensors (Hz)
 
 
     def export_data(self):
-        dir_ = QtGui.QFileDialog.getExistingDirectory(None, 'Select a folder:', 'C:\\', QtGui.QFileDialog.ShowDirsOnly)       #select a folder in the C drive
+        dir_ = QtGui.QFileDialog.getExistingDirectory(None, 'Select GTOR Network Drive', os.path.expanduser('~'), QtGui.QFileDialog.ShowDirsOnly)       #select a folder in the C drive
         print(dir_)
         # file = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File', "data_collection.mat")        # returns a QUrl object of what User wishes to save file as
         # f = open(file[0], 'w')
@@ -92,7 +89,6 @@ class Layout_Homepage(QtWidgets.QWidget, Ui_Widget_Test):
 
 
 
-    def updateAll(self):
-        if self.isVisible():
-            self.update_sensorStatus()
-            logger.debug('updating ' + self.objectName() + "...")
+    def update(self):
+        self.update_sensorStatus()
+        logger.debug('updating ' + self.objectName() + "...")
