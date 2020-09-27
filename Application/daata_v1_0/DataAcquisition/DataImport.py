@@ -46,6 +46,7 @@ class DataImport:
         if (datetime.now() - self.time_begin).total_seconds() > 0:
             self.data.is_connected = True
             self.data.set_connected("engine_rpm")
+            self.data.set_connected("secondary_rpm")
             self.data.set_connected("fl_lds")
             self.data.set_connected("br_lds")
             self.data.set_connected("fr_lds")
@@ -54,6 +55,8 @@ class DataImport:
         if (datetime.now() - self.time_begin).total_seconds() > 6:
             self.data.set_disconnected("fl_lds")
             self.data.set_disconnected("br_lds")
+            self.data.set_disconnected("fr_lds")
+            self.data.set_disconnected("bl_lds")
 
     def read_data_fake(self):
         with self.lock:
@@ -61,18 +64,26 @@ class DataImport:
                 self.check_connected_fake()
             else:
                 if (datetime.now() - self.prev_time).total_seconds() * 1000 > 5:
-                    self.data.add_value("time", (datetime.now() - self.start_time).total_seconds())
+                    time = (datetime.now() - self.start_time).total_seconds()
+
+                    self.data.add_value("time", time)
+
                     self.prev_engine_val = max(1800, min(4000, self.prev_engine_val + 0.5 * math.sin(
-                        (datetime.now() - self.start_time).total_seconds() * 10) + random.randrange(-2, 2)))
+                        time * 10) + random.randrange(-2, 2)))
                     self.data.add_value('engine_rpm', self.prev_engine_val)
-                    self.prev_lds_val = 100 + 100 * math.sin((datetime.now() - self.start_time).total_seconds() / 20)
+
+                    # temp_t = time%8-4
+                    temp_t = time%6-4
+                    self.prev_secondary_rpm_val = abs(2*temp_t*math.exp(temp_t)
+                                                        - math.exp(1.65*temp_t))
+                    self.data.add_value('secondary_rpm', self.prev_secondary_rpm_val)
+
+                    self.prev_lds_val = 100 + 100 * math.sin(time / 20)
                     self.data.add_value('fl_lds', self.prev_lds_val)
 
                     self.prev_br_lds_val = max(1800, min(4000, self.prev_engine_val + 0.5 * math.sin(
-                        (datetime.now() - self.start_time).total_seconds() * 10) + random.randrange(-2, 2)))
+                        time * 10) + random.randrange(-2, 2)))
                     self.data.add_value('br_lds', self.prev_br_lds_val)
-
-                    time = (datetime.now() - self.start_time).total_seconds()
 
                     self.prev_bl_lds_val = 100 + 100 * math.sin(time * 2) \
                                             + 100 * math.sin(time * 3.2)\

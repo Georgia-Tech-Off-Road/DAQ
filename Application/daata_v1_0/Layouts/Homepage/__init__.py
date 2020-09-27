@@ -18,7 +18,7 @@ class Layout_Homepage(DAATALayout, uiFile):
 
         self.create_sensorStatusCheckboxes()
         self.create_connectionStatusCheckboxes()
-        self.export_data()
+        # self.export_data()
 
         self.updateFreq =  2    # how often the layout checks for new sensors (Hz)
 
@@ -57,10 +57,8 @@ class Layout_Homepage(DAATALayout, uiFile):
         for sensor in self.dict_sensorStatus.keys():
             if sensor in connected_sensors:
                 self.dict_sensorStatus[sensor]['indicator'].setChecked(True)
-                logger.debug(sensor + " is connected...")
             else:
                 self.dict_sensorStatus[sensor]['indicator'].setChecked(False)
-                # logger.debug(sensor + " is disconnected...")
 
     def create_connectionStatusCheckboxes(self):
         self.ind_RFBox = QtWidgets.QCheckBox("RF Box Disconnected", objectName = "ind_RFBox")

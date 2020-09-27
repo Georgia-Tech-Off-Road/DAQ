@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>700</height>
+    <width>1024</width>
+    <height>739</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,7 +46,7 @@
         <x>0</x>
         <y>0</y>
         <width>298</width>
-        <height>610</height>
+        <height>649</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
@@ -61,6 +61,12 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QLabel" name="label_enabledSensors">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>4</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="font">
             <font>
              <weight>75</weight>
@@ -77,11 +83,39 @@
          </item>
          <item>
           <widget class="QLabel" name="label_activeSensorCount">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>(0/0)</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_graphDimension">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>2</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Graph display dimensions</string>
+           </property>
+           <property name="editable">
+            <bool>false</bool>
+           </property>
+           <property name="currentText">
+            <string/>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -120,14 +154,14 @@ background-color: #F3F3F3
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>674</width>
-        <height>680</height>
+        <width>698</width>
+        <height>719</height>
        </rect>
       </property>
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout"/>
+      <layout class="QGridLayout" name="gridLayout_graphs"/>
      </widget>
     </widget>
    </item>

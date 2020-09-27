@@ -13,8 +13,14 @@ class RealTimePlot(pg.PlotWidget):
     def __init__(self, sensor_name, parent=None, **kwargs):
         super().__init__(parent)
         self.sensor_name = sensor_name
-        self.setMinimumSize(QtCore.QSize(0, 400))
+        self.setMinimumSize(QtCore.QSize(200, 200))
         self.setMaximumSize(QtCore.QSize(16777215, 400))
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setVerticalStretch(4)
+        sizePolicy.setHorizontalStretch(4)
+        self.setSizePolicy(sizePolicy)
+
         self.setMouseEnabled(False, False)  # disable mouse-scroll zooming on the graph
         self.setLabels(left=str(data.get_display_name(sensor_name))+" ("+str(data.get_unit_short(sensor_name))+")",
                        bottom='Time (s)',
@@ -22,7 +28,7 @@ class RealTimePlot(pg.PlotWidget):
         self.showGrid(x=True, y=True, alpha=.2)
 
         # Number of value to show on the x_axis
-        self.samplingFreq = 400
+        self.samplingFreq = 200
         self.graph_width = kwargs.get("graph_width_seconds", 10) * self.samplingFreq
 
         # Frequency of values to show (if set to 5 will show every 5th value collected)
@@ -33,7 +39,12 @@ class RealTimePlot(pg.PlotWidget):
         self.curve = self.plot(self.valueArray, pen='b')
         self.initialCounter = 0
 
+
         self.show()
+
+    def set_height(self, height):
+        self.setMinimumSize(QtCore.QSize(200, height))
+        self.setMaximumSize(QtCore.QSize(16777215, height))
 
     def update_graph(self):
         index = data.get_most_recent_index()

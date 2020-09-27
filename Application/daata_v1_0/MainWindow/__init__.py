@@ -3,6 +3,7 @@ from PyQt5.QtCore import QSettings
 
 from functools import partial
 import threading
+import logging
 import os
 
 from Layouts import DAATALayout
@@ -11,14 +12,14 @@ from Layouts.DataCollection import Layout_DataCollection
 from Layouts.Layout_Test import Widget_Test
 
 
-from Utilities.Popups import popup_ParentChildrenTree
-from Utilities.Popups import popup_closeTabConfirmation
+from Utilities.CustomWidgets.Popups import popup_ParentChildrenTree
+from Utilities.CustomWidgets.Popups import popup_closeTabConfirmation
 import DataAcquisition
 
 
 is_data_collecting = threading.Event()  # Creates an event to know if the data collection has started
 data_collection_thread = threading.Thread(target=DataAcquisition.collect_data)  # Creates thread for collecting data
-
+logger = logging.getLogger("MainWindow")
 
 Ui_MainWindow, _ = uic.loadUiType(r'MainWindow\MainWindow.ui')  # loads the .ui file from QT Desginer
 
@@ -62,14 +63,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if self.tab_homepage.isVisible():
             if (self.updateLoops % (self.refreshFreq / self.homepage.updateFreq)) == 0:
                 self.homepage.update()
-                print("updating " + self.homepage.objectName())
+                # logger.debug("updating " + self.homepage.objectName())
 
         if self.tab_layouts.isVisible():
             for tab in self.tabWidget.findChildren(DAATALayout):
                 if tab.isVisible():
                     if (self.updateLoops % (self.refreshFreq/tab.updateFreq)) == 0:
                         tab.update()
-                        print("updating " + tab.objectName())
+                        # logger.debug("updating " + tab.objectName())
 
     def load_settings(self):
         try:
@@ -89,7 +90,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.dict_layouts[key]['Menu Action'].setCheckable(False)
             self.dict_layouts[key]['Menu Action'].setToolTip('Open a new tab for ' + key)
             self.dict_layouts[key]['Menu Action'].setText(key)
-            self.menuNew_Layout.addAction(self.dict_layouts[key]['Menu Action'])
+            self.menuAdd_Layout.addAction(self.dict_layouts[key]['Menu Action'])
 
 
 
@@ -118,7 +119,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.create_layoutTab('Data Collection')                       # sets default tab that pops up in Layouts
         self.tabWidget_central.setCurrentIndex(self.tabWidget_central.indexOf(self.tab_homepage)) ## temporary measure to default to homepage on startup
         self.tabWidget.setStyleSheet("""
-
+ 
         """)
 
     # def refreshLayouts(self):
