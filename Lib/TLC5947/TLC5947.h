@@ -39,7 +39,8 @@ public:
     void begin();
     void update();
     void writePWM(uint8_t led, uint16_t pwm);
-    void writeAll(uint16_t pwm[24]);
+    void writeAll(uint16_t pwm);
+    void writeAllInd(uint16_t pwm[24]);
 
 };
 

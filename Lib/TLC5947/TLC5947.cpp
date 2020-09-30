@@ -74,6 +74,12 @@ void TLC5947::writePWM(uint8_t led, uint16_t pwm){
     led_pwm[led] = pwm;
 }
 
+void TLC5947::writePWM(uint16_t pwm){
+    for(int i = 0; i < 24; ++i){
+        writePWM(i, pwm);
+    }
+}
+
 void TLC5947::writeAll(uint16_t pwm[24]){
     memcpy(led_pwm, pwm, 48);
 }
