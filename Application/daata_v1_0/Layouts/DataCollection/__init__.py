@@ -29,6 +29,7 @@ class DataCollection(DAATALayout, uiFile):
         super().__init__()
         self.setupUi(self)
         self.hide()
+        self.updateFreq = 60   # how fast the graphs update in Hz
 
 
         self.updateFreq = 30
@@ -234,6 +235,8 @@ class DataCollection(DAATALayout, uiFile):
 
 
     def slot_changeDisplayingState(self):
+
+
         if self.button_display.isChecked():
             self.indicator_onOrOff.setText("On")
             self.indicator_onOrOff.setStyleSheet("color: green;")
