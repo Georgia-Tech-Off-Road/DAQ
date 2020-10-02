@@ -1,17 +1,13 @@
-from PyQt5 import QtWidgets, uic, QtCore, QtGui
+from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import QSettings
-import sys
 import os
 
 import pyqtgraph as pg
-import numpy as np
 from functools import partial
-import threading
 import DataAcquisition
 from DataAcquisition import data
-from Utilities.Plotting import RealTimePlot
+from Utilities.CustomWidgets.Plotting import CustomPlotWidget, GridPlotLayout
 from Layouts import DAATALayout
-
 import logging
 
 ## Default plot configuration for pyqtgraph
@@ -28,8 +24,8 @@ debugCounter = 0;
 ## add refresh button in menu to scan for hardware changes when a new sensor is plugged in, to add a checkbox and graph for it
 ## add warning dialog if trying to start recording data while teensy is not plugged in (checked with data.is_connected)
 
-class Layout_DataCollection(DAATALayout, uiFile):
-    def __init__(self, data_collection_thread, is_data_collecting):
+class DataCollection(DAATALayout, uiFile):
+    def __init__(self, thread, is_data_collecting):
         super().__init__()
         self.setupUi(self)
         self.hide()
@@ -38,26 +34,33 @@ class Layout_DataCollection(DAATALayout, uiFile):
         self.updateFreq = 30
         self.data = DataAcquisition.data
         self.dict_sensors = {}  # instantiates sensor dictionary
-        for key in self.data.get_sensors(is_plottable=True, is_connected=True):
+        self.currentKeys = list()
+        for key in self.data.get_sensors(is_plottable=True):
             self.dict_sensors[key] = dict()
+            self.currentKeys.append(key)
 
-        self.activeSensorCount = 0
+        self.gridPlotLayout = GridPlotLayout(self.scrollAreaWidgetContents)
+        self.gridPlotLayout.setObjectName("gridPlotLayout")
+        self.scrollAreaWidgetContents.setLayout(self.gridPlotLayout)
 
         self.create_sensorCheckboxes()
-        self.label_activeSensorCount.setText('(' + str(self.activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')     # reset the label for number of active sensors
         self.create_graphDimensionComboBox()
         self.create_graphs()
 
-        self.connect_slotsAndSignals()
 
         from MainWindow import is_data_collecting
         self.is_data_collecting = is_data_collecting
 
+        self.connect_slotsAndSignals()
 
-        ## CODE IN CASE FOR WHEN APPLICATION IS EXITED
-        ## right now only saves settings when the tab is closed
-        self.settings = QSettings('DAATA', 'Data Collection')
-        self.loadSettings()
+        self.configFile = QSettings('DAATA', 'data_collection')
+        self.load_settings()
+
+
+
+
+
+
 
 
 
@@ -70,28 +73,31 @@ class Layout_DataCollection(DAATALayout, uiFile):
         self.gridLayout_2.addWidget(self.selectAll_checkbox)
 
         ## create a checkbox for each sensor in dictionary in self.scrollAreaWidgetContents_2
-        for key in self.data.get_sensors(is_plottable = True, is_connected = True):
-            self.dict_sensors[key]['Checkbox'] = QtWidgets.QCheckBox(self.data.get_display_name(key), self.scrollAreaWidgetContents_2, objectName=key)
-            self.gridLayout_2.addWidget(self.dict_sensors[key]['Checkbox'])
+        for key in self.currentKeys:
+            self.dict_sensors[key]['checkbox'] = QtWidgets.QCheckBox(self.data.get_display_name(key), self.scrollAreaWidgetContents_2, objectName=key)
+            self.gridLayout_2.addWidget(self.dict_sensors[key]['checkbox'])
+            print(key)
 
         # Create a vertical spacer that forces checkboxes to the top
         spacerItem1 = QtWidgets.QSpacerItem(20, 1000000, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_2.addItem(spacerItem1)
 
+
     ## make a checkbox for any newly connected sensors
     def update_sensorCheckboxes(self):
         connected_sensors = data.get_sensors(is_plottable = True, is_connected=True)
-        for key in self.dict_sensors.keys():
+        for key in self.currentKeys:
             if key in connected_sensors:
-                if self.dict_sensors[key]['Checkbox'] is None:
-                    self.dict_sensors[key]['Checkbox'] = QtWidgets.QCheckBox(self.data.get_display_name(key), self.scrollAreaWidgetContents_2, objectName=key)
+                if self.dict_sensors[key]['checkbox'] is None:
+                    self.dict_sensors[key]['checkbox'] = QtWidgets.QCheckBox(self.data.get_display_name(key), self.scrollAreaWidgetContents_2, objectName=key)
                 else:
                     pass
             else:
                 try:
-                    self.scrollAreaWidgetContents_2.removeWidget(self.dict_sensors[key]['Checkbox'])
+                    self.scrollAreaWidgetContents_2.removeWidget(self.dict_sensors[key]['checkbox'])
                 except:
                     pass
+
 
 
 
@@ -103,24 +109,83 @@ class Layout_DataCollection(DAATALayout, uiFile):
             for col in range(1,maxCols+1):
                 self.comboBox_graphDimension.addItem("{0}x{1}".format(row,col))
 
+    def create_gridPlotLayout(self):
+        # self.gridPlotLayout = GridPlotLayout(self.scrollAreaWidgetContents)
+        # self.gridPlotLayout.setObjectName("gridPlotLayout")
+        # self.scrollAreaWidgetContents.setLayout(self.gridPlotLayout)
+
+        currDim = self.comboBox_graphDimension.currentText().split('x')
+        maxRows = int(currDim[0])
+        maxCols = int(currDim[1])
+
+        row = 0
+        col = 0
+
+        leftMar, topMar, rightMar, botMar = self.gridPlotLayout.getContentsMargins()
+        hSpace = self.gridPlotLayout.horizontalSpacing()
+        vSpace = self.gridPlotLayout.verticalSpacing()
+
+        graphHeight = (self.scrollArea_graphs.height()-topMar-botMar-vSpace*(maxRows)) / maxRows
+        print(self.scrollArea_graphs.height())
+        print(graphHeight)
+
+        for key in self.dict_sensors.keys():
+            if self.dict_sensors[key]['graph_widget'].isVisible():
+                try:
+                    self.gridPlotLayout.removeWidget(self.dict_sensors[key]['graph_widget'])
+                    self.dict_sensors[key]['graph_widget'].hide()
+                except:
+                    print(key + " is " + self.dict_sensors[key]['graph_widget'].isVisible())
+
+
+
+        for key in self.dict_sensors.keys():
+            if self.dict_sensors[key]['checkbox'].isChecked():
+                # self.dict_sensors[key]['graph_widget'] = CustomPlotWidget(key, parent=self.scrollAreaWidgetContents,
+                #                                                       graph_width_seconds=10)
+                # self.dict_sensors[key]['graph_widget'].setObjectName(key)
+
+
+                if col == maxCols:
+                    col = 0
+                    row += 1
+                print(str(row) + "  " + str(col) + "   " + key)
+                self.dict_sensors[key]['graph_widget'].set_height(graphHeight)
+                self.gridPlotLayout.addWidget((self.dict_sensors[key]['graph_widget']), row, col, 1, 1)
+                self.dict_sensors[key]['graph_widget'].show()
+                print("item at ({},{}) is {}".format(row,col,self.gridPlotLayout.widgetAtPosition(row,col)))
+
+                col += 1
+            else:
+                # self.dict_sensors[key]['graph_widget'].hide()
+                pass
+
+        # self.gridPlotLayout.moveWidgetDown(self.dict_sensors['bl_lds']['graph_widget'])
+        # self.scrollAreaWidgetContents.setLayout(self.gridPlotLayout)
+        print("gridplotlayout")
+
+        print("gridrows" + str(self.gridPlotLayout.rowCount()))
+        print("gridcols" + str(self.gridPlotLayout.columnCount()))
+        spacerItem = QtWidgets.QSpacerItem(20, 1000000, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridPlotLayout.addItem(spacerItem)
+
     def slot_graphDimension(self):
+        print("SASA")
+        return
+        print("lala")
         currDim = self.comboBox_graphDimension.currentText().split('x')
         maxRows = int(currDim[0])
         maxCols = int(currDim[1])
         row = 0
         col = 0
 
-
-
         for key in self.dict_sensors.keys():
-            if self.dict_sensors[key]['Graph Widget'].isVisible():
+            if self.dict_sensors[key]['graph_widget'].isVisible():
                 try:
-                    self.gridLayout_graphs.removeWidget(self.dict_sensors[key]['Graph Widget'])
-                    self.dict_sensors[key]['Graph Widget'].hide()
-                    # self.dict_sensors[key]['Graph Widget'].deleteLater()
+                    self.gridLayout_graphs.removeWidget(self.dict_sensors[key]['graph_widget'])
+                    self.dict_sensors[key]['graph_widget'].hide()
                 except:
-                    pass
-                    print(key + " is " + self.dict_sensors[key]['Graph Widget'].isVisible())
+                    print(key + " is " + self.dict_sensors[key]['graph_widget'].isVisible())
 
         leftMar, topMar, rightMar, botMar = self.gridLayout_graphs.getContentsMargins()
         hSpace = self.gridLayout_graphs.horizontalSpacing()
@@ -129,50 +194,42 @@ class Layout_DataCollection(DAATALayout, uiFile):
         graphHeight = (self.scrollArea_graphs.height()-topMar-botMar-vSpace*(maxRows)) / maxRows
 
         for key in self.dict_sensors.keys():
-            if self.dict_sensors[key]['Checkbox'].isChecked():
-                # self.dict_sensors[key]['Graph Widget'] = RealTimePlot(key, parent=self.scrollAreaWidgetContents,
+            if self.dict_sensors[key]['checkbox'].isChecked():
+                # self.dict_sensors[key]['graph_widget'] = CustomPlotWidget(key, parent=self.scrollAreaWidgetContents,
                 #                                                       graph_width_seconds=10)
-                # self.dict_sensors[key]['Graph Widget'].setObjectName(key)
+                # self.dict_sensors[key]['graph_widget'].setObjectName(key)
 
                 if col == maxCols:
                     col = 0
                     row += 1
-                self.dict_sensors[key]['Graph Widget'].set_height(graphHeight)
-                self.gridLayout_graphs.addWidget(self.dict_sensors[key]['Graph Widget'], row, col)
-                self.dict_sensors[key]['Graph Widget'].show()
+                self.dict_sensors[key]['graph_widget'].set_height(graphHeight)
+                self.gridLayout_graphs.addWidget(self.dict_sensors[key]['graph_widget'], row, col)
+                self.dict_sensors[key]['graph_widget'].show()
                 col += 1
             else:
-                self.dict_sensors[key]['Graph Widget'].hide()
+                # self.dict_sensors[key]['graph_widget'].hide()
+                pass
 
 
 
-        global debugCounter
-        # add a spacer to the bottom of the layout top align the graphs
+
+        # add a spacer to the bottom of the gridPlotLayout top align the graphs
         spacerItem2 = QtWidgets.QSpacerItem(20, 1000000, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_graphs.addItem(spacerItem2)
-        debugCounter+=1
-        for child in self.findChildren(QtWidgets.QSpacerItem):
-            print(child)
+
+
+        self.update_sensorCount()
 
 
 
     def create_graphs(self):
-        for key in self.dict_sensors.keys():
-            self.dict_sensors[key]['Graph Widget'] = RealTimePlot(key, parent=self.scrollAreaWidgetContents, graph_width_seconds = 8)
-            self.dict_sensors[key]['Graph Widget'].setObjectName(key)
-            self.dict_sensors[key]['Graph Widget'].hide()
 
 
+        for key in self.currentKeys:
+            self.dict_sensors[key]['graph_widget'] = CustomPlotWidget(key, parent=self.scrollAreaWidgetContents, graph_width_seconds = 8)
+            self.dict_sensors[key]['graph_widget'].setObjectName(key)
+            self.dict_sensors[key]['graph_widget'].hide()
 
-
-    def connect_slotsAndSignals(self):
-        self.button_display.clicked.connect(self.slot_changeDisplayingState)
-        for key in self.dict_sensors.keys():
-            self.dict_sensors[key]['Checkbox'].clicked.connect(partial(self.slot_checkboxClicked, key))        ## partial creates a new function of slot_checkboxClicked for each key passed in
-            # self.dict_sensors[key]['Checkbox'].clicked.connect(self.slot_graphDimension)
-        self.selectAll_checkbox.clicked.connect(self.slot_checkboxSelectAll)
-
-        self.comboBox_graphDimension.currentTextChanged.connect(self.slot_graphDimension)
 
 
 
@@ -192,38 +249,35 @@ class Layout_DataCollection(DAATALayout, uiFile):
 
     def slot_checkboxSelectAll(self):
         if self.selectAll_checkbox.isChecked():
-            for key in self.dict_sensors.keys():
-                self.dict_sensors[key]['Checkbox'].setChecked(True)
-                self.dict_sensors[key]['Graph Widget'].show()
-                self.activeSensorCount = len(self.dict_sensors)
+            for key in self.currentKeys:
+                self.dict_sensors[key]['checkbox'].setChecked(True)
+                # self.dict_sensors[key]['graph_widget'].show()
+                # self.activeSensorCount = len(self.dict_sensors)
         else:
-            for key in self.dict_sensors.keys():
-                self.dict_sensors[key]['Checkbox'].setChecked(False)
-                self.dict_sensors[key]['Graph Widget'].hide()
-            self.activeSensorCount = 0
-        self.label_activeSensorCount.setText('(' + str(self.activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')
+            for key in self.currentKeys:
+                self.dict_sensors[key]['checkbox'].setChecked(False)
+                # self.dict_sensors[key]['graph_widget'].hide()
+            # self.activeSensorCount = 0
+        # self.label_activeSensorCount.setText('(' + str(self.activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')
+        self.update_sensorCount()
         self.slot_graphDimension()
 
-    def slot_checkboxClicked(self, key):
-        ## update the label displaying number of active sensors
-        if self.dict_sensors[key]['Checkbox'].isChecked():
-            self.activeSensorCount = self.activeSensorCount + 1
-        else:
-            self.activeSensorCount = self.activeSensorCount - 1
+
+
+    def update_sensorCount(self):
+        self.activeSensorCount = 0
+        for key in self.dict_sensors.keys():
+            if self.dict_sensors[key]['checkbox'].isVisible():
+                if self.dict_sensors[key]['checkbox'].isChecked():
+                    self.activeSensorCount = self.activeSensorCount + 1
         self.label_activeSensorCount.setText('(' + str(self.activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')
 
-        ## display/hide the graph
-        if self.dict_sensors[key]['Checkbox'].isChecked():
-            # self.dict_sensors[key]['Graph Widget'].show()
-            self.slot_graphDimension()
-        else:
-            # self.dict_sensors[key]['Graph Widget'].hide()
-            self.slot_graphDimension()
-
     def updateGraph(self):
-        for key in self.dict_sensors.keys():
-            if self.dict_sensors[key]['Graph Widget'].isVisible():
-                self.dict_sensors[key]['Graph Widget'].update_graph()
+        for key in self.currentKeys:
+            if self.dict_sensors[key]['graph_widget'].isVisible():
+                self.dict_sensors[key]['graph_widget'].update_graph()
+
+
 
     def updateTimeElapsed(self):
         try:
@@ -261,37 +315,67 @@ class Layout_DataCollection(DAATALayout, uiFile):
             self.button_display.setText("Start Collecting Data")
             self.button_display.setChecked(False)
 
-    def loadSettings(self):
-        try:
-            for key in self.settings.value('enabledSensors'):
-                self.dict_sensors[key]['Checkbox'].setChecked(True)
-                self.dict_sensors[key]['Graph Widget'].show()
-                self.activeSensorCount = self.activeSensorCount + 1
-                self.label_activeSensorCount.setText(
-                    '(' + str(self.activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')
-        except:
-            pass
 
-    def closeEvent(self, event):
-        enabledSensors = []
+    def connect_slotsAndSignals(self):
+        self.button_display.clicked.connect(self.slot_changeDisplayingState)
+        for key in self.currentKeys:
+            self.dict_sensors[key]['checkbox'].clicked.connect(self.create_gridPlotLayout)
+            self.dict_sensors[key]['checkbox'].clicked.connect(self.save_settings)
 
+        self.selectAll_checkbox.stateChanged.connect(self.slot_checkboxSelectAll)
+
+        self.comboBox_graphDimension.currentTextChanged.connect(self.create_gridPlotLayout)
+        self.comboBox_graphDimension.currentTextChanged.connect(self.save_settings)
+
+        ## connections to GridPlotLayout
         for key in self.dict_sensors.keys():
-            if self.dict_sensors[key]['Checkbox'].isChecked():
-                enabledSensors.append(key)
+            widget = self.dict_sensors[key]['graph_widget']
+            widget.button_moveUp.clicked.connect(partial(self.gridPlotLayout.moveWidget, widget, 'up'))
+            widget.button_moveLeft.clicked.connect(partial(self.gridPlotLayout.moveWidget, widget, 'left'))
+            widget.button_moveRight.clicked.connect(partial(self.gridPlotLayout.moveWidget, widget, 'right'))
+            widget.button_moveDown.clicked.connect(partial(self.gridPlotLayout.moveWidget, widget, 'down'))
 
-        self.settings.setValue('enabledSensors', enabledSensors)
 
+    def closeEvent(self):
+        self.save_settings()
         self.window().setWindowTitle('closed tab')
 
-class plotContainer:
-    def __init__(self):
-        pass
+    def save_settings(self):
+        self.configFile.setValue('graph_dimension', self.comboBox_graphDimension.currentText())
+        self.configFile.setValue('scrollArea_graphs_height', self.scrollArea_graphs.height())
+
+        enabledSensors = []
+        for key in self.dict_sensors.keys():
+            if self.dict_sensors[key]['checkbox'].isChecked():
+                enabledSensors.append(key)
+        self.configFile.setValue('enabledSensors', enabledSensors)
+
+        # logger.debug("Data Collection config files saved")
+        # self.debug_settings()
+
+
+    def load_settings(self):
+        try:
+            activeSensorCount = 0
+            for key in self.configFile.value('enabledSensors'):
+                self.dict_sensors[key]['checkbox'].setChecked(True)
+                self.dict_sensors[key]['graph_widget'].show()
+                activeSensorCount = activeSensorCount + 1
+                self.label_activeSensorCount.setText(
+                    '(' + str(activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')
+        except TypeError or KeyError:
+            # logger.debug("creating new config file")
+            pass
 
 
 
-# if __name__ == "__main__":
-#     app = QtWidgets.QApplication(sys.argv)
-#     # widget = QtWidgets.QWidget()
-#     ui = DataCollection()
-#     ui.show()
-#     sys.exit(app.exec_())
+
+        self.comboBox_graphDimension.setCurrentText(self.configFile.value('graph_dimension'))
+        # self.slot_graphDimension()
+        self.create_gridPlotLayout()
+        # logger.debug("Data Collection config files loaded")
+        # self.debug_settings()
+
+    def debug_settings(self):
+        for key in self.configFile.allKeys():
+            print(key + ":\t\t" + str(self.configFile.value(key)))

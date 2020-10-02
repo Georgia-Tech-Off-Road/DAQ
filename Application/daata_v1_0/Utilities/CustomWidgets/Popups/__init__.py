@@ -4,7 +4,6 @@ from Utilities.findAncestryTree import findAncestryTree
 
 
 
-
 ## Creates a popup window to display all objects and their parent/child relationships
 Ui_Dialog , _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'dialog_info.ui'))  # loads the .ui file from QT Desginer
 class popup_ParentChildrenTree(QtWidgets.QDialog, Ui_Dialog):
@@ -23,12 +22,3 @@ class popup_ParentChildrenTree(QtWidgets.QDialog, Ui_Dialog):
 
 
 
-class popup_closeTabConfirmation:
-    def __init__(self, parent, index):
-        ans = QtWidgets.QMessageBox.warning(parent, "Warning", "Do you want to close this tab? Any unsaved progress will be lost", QtWidgets.QMessageBox.Close | QtWidgets.QMessageBox.Cancel)
-        # self.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname(__file__), 'warningIcon.png')))
-        if ans == QtWidgets.QMessageBox.Close:
-            widget = parent.tabWidget.widget(index)
-            if widget is not None:
-                widget.deleteLater()
-            parent.tabWidget.removeTab(index)

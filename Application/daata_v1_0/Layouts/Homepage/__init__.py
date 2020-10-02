@@ -8,7 +8,7 @@ logger = logging.getLogger("Homepage")
 
 uiFile, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'homepage.ui'))  # loads the .ui file from QT Desginer
 
-class Layout_Homepage(DAATALayout, uiFile):
+class Homepage(DAATALayout, uiFile):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -20,7 +20,7 @@ class Layout_Homepage(DAATALayout, uiFile):
         self.create_connectionStatusCheckboxes()
         # self.export_data()
 
-        self.updateFreq =  2    # how often the layout checks for new sensors (Hz)
+        self.updateFreq =  2    # how often the gridPlotLayout checks for new sensors (Hz)
 
 
     def export_data(self):

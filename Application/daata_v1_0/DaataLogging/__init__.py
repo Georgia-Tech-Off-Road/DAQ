@@ -8,7 +8,7 @@ logging_objects = {
     "MainWindow": DEBUG,
     "Plotting": INFO,
     "GTORNetwork": DEBUG,
-    "Homepage": DEBUG,
+    "Homepage": INFO,
     "DataCollection": DEBUG
 }
 

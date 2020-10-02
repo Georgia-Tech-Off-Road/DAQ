@@ -161,7 +161,6 @@ background-color: #F3F3F3
       <property name="layoutDirection">
        <enum>Qt::LeftToRight</enum>
       </property>
-      <layout class="QGridLayout" name="gridLayout_graphs"/>
      </widget>
     </widget>
    </item>

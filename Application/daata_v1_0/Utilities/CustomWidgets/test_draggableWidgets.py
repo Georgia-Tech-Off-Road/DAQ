@@ -31,7 +31,7 @@ class DraggableImage(QtWidgets.QLabel):
         # sort the list of widgets by their x position
         order = sorted(all_images, key=lambda i: i.pos().x())
 
-        # remove each item from the layout and insert the one that should go in that index.
+        # remove each item from the gridPlotLayout and insert the one that should go in that index.
         for idx, widget in enumerate(order):
             parent_layout.takeAt(idx)
             parent_layout.insertWidget(idx, widget)
