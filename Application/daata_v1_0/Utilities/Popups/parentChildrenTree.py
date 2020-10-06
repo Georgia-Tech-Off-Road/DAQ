@@ -5,8 +5,8 @@ from Utilities.findAncestryTree import findAncestryTree
 
 
 ## Creates a popup window to display all objects and their parent/child relationships
-Ui_Dialog , _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'dialog_info.ui'))  # loads the .ui file from QT Desginer
-class popup_ParentChildrenTree(QtWidgets.QDialog, Ui_Dialog):
+uiFile , _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'dialog_info.ui'))  # loads the .ui file from QT Designer
+class popup_ParentChildrenTree(QtWidgets.QDialog, uiFile):
     def __init__(self, parent):
         super().__init__()
         self.setupUi(self)

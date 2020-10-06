@@ -18,7 +18,7 @@ class Homepage(DAATALayout, uiFile):
 
         self.create_sensorStatusCheckboxes()
         self.create_connectionStatusCheckboxes()
-        self.export_data()
+        # self.export_data()
 
         self.updateFreq =  2    # how often the gridPlotLayout checks for new sensors (Hz)
 

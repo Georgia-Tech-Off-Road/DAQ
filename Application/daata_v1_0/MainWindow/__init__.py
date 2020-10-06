@@ -12,7 +12,7 @@ from Layouts.DataCollection import DataCollection
 from Layouts.Layout_Test import Widget_Test
 
 
-from Utilities.CustomWidgets.Popups import popup_ParentChildrenTree
+from Utilities.Popups.parentChildrenTree import popup_ParentChildrenTree
 from MainWindow._tabHandler import closeTab
 import DataAcquisition
 

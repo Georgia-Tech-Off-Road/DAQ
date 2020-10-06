@@ -58,21 +58,24 @@ class CustomPlotWidget(QtWidgets.QWidget, uiFile):
         self.timeArray = data.get_values("time", index, self.graph_width)
         self.plot.setData(self.timeArray, self.valueArray)
 
+    def open_SettingsWindow(self):
+        pass
 
+    def connectSignalSlots(self):
+        self.button_settings.clicked.connect(self.open_SettingsWindow)
+
+    def saveSettings(self):
+        pass
+
+    def loadSettings(self):
+        pass
 
 class GridPlotLayout(QGridLayout):
     def __init__(self, parent = None):
         super(GridPlotLayout,self).__init__(parent)
-        self.setContentsMargins(6,2,6,0)
+        # self.setContentsMargins(6,2,6,0)
 
 
-        # self.setSizePolicy(QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding))
-
-    # def itemIndex(self, item):
-    #     for i in range(self.layout.count()):
-    #         if self.layout.itemAt(i).graphicsItem() is item:
-    #             return i
-    #     raise Exception("Could not determine index of item " + str(item))
 
 
     def moveWidget(self, widg, direction):
@@ -96,11 +99,13 @@ class GridPlotLayout(QGridLayout):
 
         try:
             displacedWidg = self.widgetAtPosition(newRow,newCol)
-
+            if displacedWidg == None:
+                return AttributeError
             self.removeWidget(widg)
             self.removeWidget(displacedWidg)
             self.addWidget(widg, newRow, newCol)
             self.addWidget(displacedWidg, oldRow, oldCol)
+            print("switching {} with {}".format(widg,displacedWidg))
         except AttributeError:
             pass
 
