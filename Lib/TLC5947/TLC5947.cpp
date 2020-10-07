@@ -3,20 +3,19 @@
 
 #include "TLC5947.h"
 
-
 TLC5947::TLC5947(uint8_t _o_sin, uint8_t _o_sclk, uint8_t _o_xlat, uint8_t _T_sclk){
     o_sin  = _o_sin;
     o_sclk = _o_sclk;
     o_xlat = _o_xlat;
     T_sclk = _T_sclk;
-
-    led_pwm[24] = {0};
 }
 
 void TLC5947::begin(){
-    pinModeFast(o_sin , OUTPUT);
-    pinModeFast(o_sclk, OUTPUT);
-    pinModeFast(o_xlat, OUTPUT);
+    pinMode(o_sin , OUTPUT);
+    pinMode(o_sclk, OUTPUT);
+    pinMode(o_xlat, OUTPUT);
+
+    writeAll(0);
 
     sin_state  = 0;
     sclk_state = 0;
@@ -38,7 +37,7 @@ void TLC5947::update(){
         // Rising edge.
         sclk_state = 1;
         digitalWriteFast(o_sclk, sclk_state);
-        sclk_last_rising == time;
+        sclk_last_rising = time;
 
         led_counter = (bit_counter == 0 && led_counter > 0) ? led_counter - 1 : 23;
         bit_counter = (bit_counter > 0) ? bit_counter - 1 : 11;
@@ -74,13 +73,13 @@ void TLC5947::writePWM(uint8_t led, uint16_t pwm){
     led_pwm[led] = pwm;
 }
 
-void TLC5947::writePWM(uint16_t pwm){
+void TLC5947::writeAll(uint16_t pwm){
     for(int i = 0; i < 24; ++i){
         writePWM(i, pwm);
     }
 }
 
-void TLC5947::writeAll(uint16_t pwm[24]){
+void TLC5947::writeAllInd(uint16_t pwm[24]){
     memcpy(led_pwm, pwm, 48);
 }
 

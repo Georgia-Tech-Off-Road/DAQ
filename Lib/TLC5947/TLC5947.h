@@ -1,7 +1,7 @@
 #ifndef TLC5947_H
 #define TLC5947_H
 
-#include "../digitalWriteFast-master/digitalWriteFast.h"
+#include <Arduino.h>
 
 // 30us
 

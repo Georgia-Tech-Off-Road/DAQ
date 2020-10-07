@@ -13,6 +13,7 @@ private:
 
 public:
     ServoControl(uint8_t _pin, uint16_t _degrees);
+    ServoControl(uint8_t _pin, uint16_t _degrees, uint16_t _min_us, uint16_t _max_us);
     void begin();
     void writeDeg(uint16_t deg);
     void writeMicroseconds(uint16_t us);

@@ -1,9 +1,9 @@
 #include <TLC5947.h>
 #include <ServoControl.h>
 
-TLC5947 l_driver( 2,  3,  4);
-TLC5947 r_driver(12, 11, 10);
-TLC5947 h_driver(14, 13, 15);
+TLC5947 l_driver( 2,  3,  4, 30);
+TLC5947 r_driver(12, 11, 10, 30);
+TLC5947 h_driver(14, 13, 15, 30);
 
 ServoControl l_servo(5, 270);
 ServoControl r_servo(9, 270);
@@ -43,7 +43,7 @@ void loop(){
             r_driver.writeAll(pwm);
             h_driver.writeAll(pwm);
         } else {
-            uint16_t pwm = 32*(63 - count)
+            uint16_t pwm = 32*(63 - count);
             l_driver.writeAll(pwm);
             r_driver.writeAll(pwm);
             h_driver.writeAll(pwm);

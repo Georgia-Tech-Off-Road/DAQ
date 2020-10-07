@@ -3,7 +3,14 @@
 
 #include "ServoControl.h"
 
-ServoControl::ServoControl(uint8_t _pin, uint16_t _degrees = 180, uint16_t _min_us = 1000, uint16_t _max_us = 2000){
+ServoControl::ServoControl(uint8_t _pin, uint16_t _degrees){
+    pin = _pin;
+    degrees = _degrees;
+    min_us = 1000;
+    longest_period = 1000;
+}
+
+ServoControl::ServoControl(uint8_t _pin, uint16_t _degrees, uint16_t _min_us, uint16_t _max_us){
     pin = _pin;
     degrees = _degrees;
     min_us = _min_us;
