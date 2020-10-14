@@ -955,127 +955,6 @@ Yageo CFR series &lt;a href="http://www.yageo.com/pdf/yageo/Leaded-R_CFR_2008.pd
 <rectangle x1="-2.794" y1="-0.254" x2="-2.286" y2="0.254" layer="51"/>
 <rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
 </package>
-<package name="TO-220-SINK">
-<wire x1="5.08" y1="-1.905" x2="-5.08" y2="-1.905" width="0.2032" layer="21"/>
-<wire x1="-5.08" y1="-1.905" x2="-5.08" y2="1.905" width="0.2032" layer="21"/>
-<wire x1="-5.08" y1="1.905" x2="-5.08" y2="2.54" width="0.2032" layer="21"/>
-<wire x1="-5.08" y1="2.54" x2="5.08" y2="2.54" width="0.2032" layer="21"/>
-<wire x1="5.08" y1="2.54" x2="5.08" y2="1.905" width="0.2032" layer="21"/>
-<wire x1="5.08" y1="1.905" x2="5.08" y2="-1.905" width="0.2032" layer="21"/>
-<wire x1="5.08" y1="1.905" x2="-5.08" y2="1.905" width="0.2032" layer="21"/>
-<wire x1="5.08" y1="2.54" x2="8.255" y2="2.54" width="0.2032" layer="51"/>
-<wire x1="8.255" y1="2.54" x2="8.255" y2="-5.715" width="0.2032" layer="51"/>
-<wire x1="8.255" y1="-5.715" x2="9.525" y2="-5.715" width="0.2032" layer="51"/>
-<wire x1="9.525" y1="-5.715" x2="9.525" y2="3.81" width="0.2032" layer="51"/>
-<wire x1="9.525" y1="3.81" x2="-9.525" y2="3.81" width="0.2032" layer="51"/>
-<wire x1="-9.525" y1="3.81" x2="-9.525" y2="-5.715" width="0.2032" layer="51"/>
-<wire x1="-9.525" y1="-5.715" x2="-8.255" y2="-5.715" width="0.2032" layer="51"/>
-<wire x1="-8.255" y1="-5.715" x2="-8.255" y2="2.54" width="0.2032" layer="51"/>
-<wire x1="-8.255" y1="2.54" x2="-5.08" y2="2.54" width="0.2032" layer="51"/>
-<pad name="1" x="-2.54" y="0" drill="1" diameter="1.8796" shape="square"/>
-<pad name="2" x="0" y="0" drill="1" diameter="1.8796"/>
-<pad name="3" x="2.54" y="0" drill="1" diameter="1.8796"/>
-</package>
-<package name="TO-220">
-<pad name="1" x="-2.54" y="0" drill="1" diameter="1.8796" shape="square"/>
-<pad name="2" x="0" y="0" drill="1" diameter="1.8796"/>
-<pad name="3" x="2.54" y="0" drill="1" diameter="1.8796"/>
-<wire x1="-5.08" y1="3.81" x2="5.08" y2="3.81" width="0.127" layer="21"/>
-<wire x1="5.08" y1="3.81" x2="5.08" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-3.81" x2="-5.08" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="-3.81" x2="-5.08" y2="3.81" width="0.127" layer="21"/>
-</package>
-<package name="TO-220-H">
-<description>&lt;b&gt;TO 220 horizontal&lt;/b&gt;
-&lt;br&gt;
-Source: transistor-fet.lbr</description>
-<wire x1="-5.207" y1="-1.27" x2="5.207" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="5.207" y1="14.605" x2="-5.207" y2="14.605" width="0.127" layer="21"/>
-<wire x1="5.207" y1="-1.27" x2="5.207" y2="11.176" width="0.127" layer="21"/>
-<wire x1="5.207" y1="11.176" x2="4.318" y2="11.176" width="0.127" layer="21"/>
-<wire x1="4.318" y1="11.176" x2="4.318" y2="12.7" width="0.127" layer="21"/>
-<wire x1="4.318" y1="12.7" x2="5.207" y2="12.7" width="0.127" layer="21"/>
-<wire x1="5.207" y1="12.7" x2="5.207" y2="14.605" width="0.127" layer="21"/>
-<wire x1="-5.207" y1="-1.27" x2="-5.207" y2="11.176" width="0.127" layer="21"/>
-<wire x1="-5.207" y1="11.176" x2="-4.318" y2="11.176" width="0.127" layer="21"/>
-<wire x1="-4.318" y1="11.176" x2="-4.318" y2="12.7" width="0.127" layer="21"/>
-<wire x1="-4.318" y1="12.7" x2="-5.207" y2="12.7" width="0.127" layer="21"/>
-<wire x1="-5.207" y1="12.7" x2="-5.207" y2="14.605" width="0.127" layer="21"/>
-<wire x1="-4.572" y1="-0.635" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
-<wire x1="4.572" y1="7.62" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
-<wire x1="4.572" y1="7.62" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
-<wire x1="-4.572" y1="-0.635" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
-<circle x="0" y="11.176" radius="1.8034" width="0.127" layer="21"/>
-<pad name="1" x="-2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
-<pad name="2" x="0" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
-<pad name="3" x="2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
-<text x="-3.81" y="5.207" size="1.778" layer="25" ratio="10">&gt;NAME</text>
-<text x="-3.937" y="2.54" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
-<text x="-3.175" y="0" size="1.27" layer="51" ratio="10">1</text>
-<text x="-0.635" y="0" size="1.27" layer="51" ratio="10">2</text>
-<text x="1.905" y="0" size="1.27" layer="51" ratio="10">3</text>
-<rectangle x1="2.159" y1="-4.699" x2="2.921" y2="-4.064" layer="21"/>
-<rectangle x1="-0.381" y1="-4.699" x2="0.381" y2="-4.064" layer="21"/>
-<rectangle x1="-2.921" y1="-4.699" x2="-2.159" y2="-4.064" layer="21"/>
-<rectangle x1="-3.175" y1="-4.064" x2="-1.905" y2="-1.27" layer="21"/>
-<rectangle x1="-0.635" y1="-4.064" x2="0.635" y2="-1.27" layer="21"/>
-<rectangle x1="1.905" y1="-4.064" x2="3.175" y2="-1.27" layer="21"/>
-<rectangle x1="-2.921" y1="-6.604" x2="-2.159" y2="-4.699" layer="51"/>
-<rectangle x1="-0.381" y1="-6.604" x2="0.381" y2="-4.699" layer="51"/>
-<rectangle x1="2.159" y1="-6.604" x2="2.921" y2="-4.699" layer="51"/>
-</package>
-<package name="TO-220-SPACED">
-<pad name="1" x="-2.54" y="0" drill="1" shape="square"/>
-<pad name="2" x="0" y="0" drill="1"/>
-<pad name="3" x="2.54" y="0" drill="1"/>
-<wire x1="-5.08" y1="3.81" x2="5.08" y2="3.81" width="0.127" layer="21"/>
-<wire x1="5.08" y1="3.81" x2="5.08" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="5.08" y1="-3.81" x2="-5.08" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="-3.81" x2="-5.08" y2="3.81" width="0.127" layer="21"/>
-</package>
-<package name="TO-220-H-HOLE">
-<description>&lt;b&gt;TO 220 horizontal&lt;/b&gt;
-&lt;br&gt;
-Source: transistor-fet.lbr</description>
-<wire x1="-5.207" y1="-1.27" x2="5.207" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="5.207" y1="14.605" x2="-5.207" y2="14.605" width="0.127" layer="21"/>
-<wire x1="5.207" y1="-1.27" x2="5.207" y2="11.176" width="0.127" layer="21"/>
-<wire x1="5.207" y1="11.176" x2="4.318" y2="11.176" width="0.127" layer="21"/>
-<wire x1="4.318" y1="11.176" x2="4.318" y2="12.7" width="0.127" layer="21"/>
-<wire x1="4.318" y1="12.7" x2="5.207" y2="12.7" width="0.127" layer="21"/>
-<wire x1="5.207" y1="12.7" x2="5.207" y2="14.605" width="0.127" layer="21"/>
-<wire x1="-5.207" y1="-1.27" x2="-5.207" y2="11.176" width="0.127" layer="21"/>
-<wire x1="-5.207" y1="11.176" x2="-4.318" y2="11.176" width="0.127" layer="21"/>
-<wire x1="-4.318" y1="11.176" x2="-4.318" y2="12.7" width="0.127" layer="21"/>
-<wire x1="-4.318" y1="12.7" x2="-5.207" y2="12.7" width="0.127" layer="21"/>
-<wire x1="-5.207" y1="12.7" x2="-5.207" y2="14.605" width="0.127" layer="21"/>
-<wire x1="-4.572" y1="-0.635" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
-<wire x1="4.572" y1="7.62" x2="4.572" y2="-0.635" width="0.0508" layer="21"/>
-<wire x1="4.572" y1="7.62" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
-<wire x1="-4.572" y1="-0.635" x2="-4.572" y2="7.62" width="0.0508" layer="21"/>
-<circle x="0" y="11.176" radius="1.8034" width="0.127" layer="21"/>
-<pad name="1" x="-2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
-<pad name="2" x="0" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
-<pad name="3" x="2.54" y="-6.35" drill="1.1176" shape="long" rot="R90"/>
-<text x="-3.81" y="5.207" size="1.778" layer="25" ratio="10">&gt;NAME</text>
-<text x="-3.937" y="2.54" size="1.778" layer="27" ratio="10">&gt;VALUE</text>
-<text x="-3.175" y="0" size="1.27" layer="51" ratio="10">1</text>
-<text x="-0.635" y="0" size="1.27" layer="51" ratio="10">2</text>
-<text x="1.905" y="0" size="1.27" layer="51" ratio="10">3</text>
-<rectangle x1="2.159" y1="-4.699" x2="2.921" y2="-4.064" layer="21"/>
-<rectangle x1="-0.381" y1="-4.699" x2="0.381" y2="-4.064" layer="21"/>
-<rectangle x1="-2.921" y1="-4.699" x2="-2.159" y2="-4.064" layer="21"/>
-<rectangle x1="-3.175" y1="-4.064" x2="-1.905" y2="-1.27" layer="21"/>
-<rectangle x1="-0.635" y1="-4.064" x2="0.635" y2="-1.27" layer="21"/>
-<rectangle x1="1.905" y1="-4.064" x2="3.175" y2="-1.27" layer="21"/>
-<rectangle x1="-2.921" y1="-6.604" x2="-2.159" y2="-4.699" layer="51"/>
-<rectangle x1="-0.381" y1="-6.604" x2="0.381" y2="-4.699" layer="51"/>
-<rectangle x1="2.159" y1="-6.604" x2="2.921" y2="-4.699" layer="51"/>
-<circle x="0" y="11.176" radius="1.8034" width="0.127" layer="21"/>
-<circle x="0" y="11.176" radius="4.191" width="0" layer="42"/>
-<circle x="0" y="11.176" radius="4.191" width="0" layer="43"/>
-<hole x="0" y="11.176" drill="3.302"/>
-</package>
 <package name="DCJACK_2MM_PTH">
 <description>DJ Jack 2.0mm PTH Right-Angle
 &lt;br&gt;
@@ -1221,20 +1100,6 @@ Source: transistor-fet.lbr</description>
 <pin name="1" x="5.08" y="-2.54" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="2" x="5.08" y="0" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="3" x="5.08" y="2.54" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
-</symbol>
-<symbol name="VOLTAGE_REGULATOR">
-<wire x1="-5.08" y1="-5.08" x2="5.08" y2="-5.08" width="0.4064" layer="94"/>
-<wire x1="5.08" y1="-5.08" x2="5.08" y2="2.54" width="0.4064" layer="94"/>
-<wire x1="5.08" y1="2.54" x2="-5.08" y2="2.54" width="0.4064" layer="94"/>
-<wire x1="-5.08" y1="2.54" x2="-5.08" y2="-5.08" width="0.4064" layer="94"/>
-<pin name="GND" x="0" y="-7.62" visible="off" length="short" direction="in" rot="R90"/>
-<pin name="IN" x="-7.62" y="0" visible="off" length="short" direction="in"/>
-<pin name="OUT" x="7.62" y="0" visible="off" length="short" direction="out" rot="R180"/>
-<text x="2.54" y="-7.62" size="1.778" layer="95">&gt;NAME</text>
-<text x="2.54" y="-10.16" size="1.778" layer="96">&gt;VALUE</text>
-<text x="-2.032" y="-4.318" size="1.524" layer="95">GND</text>
-<text x="-4.445" y="-0.635" size="1.524" layer="95">IN</text>
-<text x="0.635" y="-0.635" size="1.524" layer="95">OUT</text>
 </symbol>
 <symbol name="DCBARREL">
 <description>&lt;a href="https://github.com/adafruit/Adafruit-Eagle-Library"&gt;Source: Adafruit&lt;/a&gt;</description>
@@ -1537,72 +1402,6 @@ DMG3406L (SOT-23, 2.8 A 30V)&lt;br&gt;</description>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
 <connect gate="G$1" pin="3" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="5VREG_L7805" prefix="IC" uservalue="yes">
-<description>&lt;b&gt;Voltage Regulator&lt;/b&gt;
-
-&lt;p&gt;Switching 5v regulator
-
-&lt;a href="http://power.murata.com/data/power/oki-78sr.pdf"&gt;Datasheet &lt;/a&gt;
-&lt;br&gt;
-&lt;br&gt;
-Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU : COM-00107
-&lt;a href="http://www.mouser.com/ds/2/308/MC7800-D-94905.pdf"&gt;Datasheet&lt;/a&gt;</description>
-<gates>
-<gate name="G$1" symbol="VOLTAGE_REGULATOR" x="0" y="0"/>
-</gates>
-<devices>
-<device name="_SINK" package="TO-220-SINK">
-<connects>
-<connect gate="G$1" pin="GND" pad="2"/>
-<connect gate="G$1" pin="IN" pad="1"/>
-<connect gate="G$1" pin="OUT" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="_VERT" package="TO-220">
-<connects>
-<connect gate="G$1" pin="GND" pad="2"/>
-<connect gate="G$1" pin="IN" pad="1"/>
-<connect gate="G$1" pin="OUT" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="_HOR" package="TO-220-H">
-<connects>
-<connect gate="G$1" pin="GND" pad="2"/>
-<connect gate="G$1" pin="IN" pad="1"/>
-<connect gate="G$1" pin="OUT" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="SPACED" package="TO-220-SPACED">
-<connects>
-<connect gate="G$1" pin="GND" pad="2"/>
-<connect gate="G$1" pin="IN" pad="1"/>
-<connect gate="G$1" pin="OUT" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="_HOR_HOLE" package="TO-220-H-HOLE">
-<connects>
-<connect gate="G$1" pin="GND" pad="2"/>
-<connect gate="G$1" pin="IN" pad="1"/>
-<connect gate="G$1" pin="OUT" pad="3"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -2181,7 +1980,6 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <part name="SERVO1" library="HyTechDevices" deviceset="M03" device=""/>
 <part name="SERVO2" library="HyTechDevices" deviceset="M03" device=""/>
 <part name="SERVO3" library="HyTechDevices" deviceset="M03" device=""/>
-<part name="5VREG" library="HyTechDevices" deviceset="5VREG_L7805" device="_HOR"/>
 <part name="CN1" library="HyTechDevices" deviceset="DCBARREL" device="PTH"/>
 <part name="GNDKILL" library="HyTechDevices" deviceset="SOLDER_PAD" device=""/>
 <part name="GNDBUTTON" library="HyTechDevices" deviceset="SOLDER_PAD" device=""/>
@@ -2194,49 +1992,49 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="226.06" y="93.98" smashed="yes"/>
-<instance part="ON" gate="LED" x="203.2" y="165.1" smashed="yes">
-<attribute name="NAME" x="201.676" y="160.528" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="201.295" y="157.988" size="1.778" layer="96" rot="R180"/>
+<instance part="ON" gate="LED" x="284.48" y="109.22" smashed="yes">
+<attribute name="NAME" x="282.956" y="104.648" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="282.575" y="102.108" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="OK/SAFE" gate="LED" x="218.44" y="165.1" smashed="yes">
-<attribute name="NAME" x="216.916" y="160.528" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="216.535" y="157.988" size="1.778" layer="96" rot="R180"/>
+<instance part="OK/SAFE" gate="LED" x="299.72" y="109.22" smashed="yes">
+<attribute name="NAME" x="298.196" y="104.648" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="297.815" y="102.108" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="TESTING" gate="LED" x="233.68" y="165.1" smashed="yes">
-<attribute name="NAME" x="232.156" y="160.528" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="231.775" y="157.988" size="1.778" layer="96" rot="R180"/>
+<instance part="TESTING" gate="LED" x="314.96" y="109.22" smashed="yes">
+<attribute name="NAME" x="313.436" y="104.648" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="313.055" y="102.108" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="ERROR" gate="LED" x="248.92" y="165.1" smashed="yes">
-<attribute name="NAME" x="247.396" y="160.528" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="247.015" y="157.988" size="1.778" layer="96" rot="R180"/>
+<instance part="ERROR" gate="LED" x="330.2" y="109.22" smashed="yes">
+<attribute name="NAME" x="328.676" y="104.648" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="328.295" y="102.108" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="R1" gate="G$1" x="203.2" y="175.26" smashed="yes" rot="R90">
-<attribute name="NAME" x="201.7014" y="171.45" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="206.502" y="171.45" size="1.778" layer="96" rot="R90"/>
+<instance part="R1" gate="G$1" x="284.48" y="119.38" smashed="yes" rot="R90">
+<attribute name="NAME" x="282.9814" y="115.57" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="287.782" y="115.57" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R2" gate="G$1" x="218.44" y="175.26" smashed="yes" rot="R90">
-<attribute name="NAME" x="216.9414" y="171.45" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="221.742" y="171.45" size="1.778" layer="96" rot="R90"/>
+<instance part="R2" gate="G$1" x="299.72" y="119.38" smashed="yes" rot="R90">
+<attribute name="NAME" x="298.2214" y="115.57" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="303.022" y="115.57" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R3" gate="G$1" x="233.68" y="175.26" smashed="yes" rot="R90">
-<attribute name="NAME" x="232.1814" y="171.45" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="236.982" y="171.45" size="1.778" layer="96" rot="R90"/>
+<instance part="R3" gate="G$1" x="314.96" y="119.38" smashed="yes" rot="R90">
+<attribute name="NAME" x="313.4614" y="115.57" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="318.262" y="115.57" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R4" gate="G$1" x="248.92" y="175.26" smashed="yes" rot="R90">
-<attribute name="NAME" x="247.4214" y="171.45" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="252.222" y="171.45" size="1.778" layer="96" rot="R90"/>
+<instance part="R4" gate="G$1" x="330.2" y="119.38" smashed="yes" rot="R90">
+<attribute name="NAME" x="328.7014" y="115.57" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="333.502" y="115.57" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="GND1" gate="1" x="203.2" y="152.4" smashed="yes">
-<attribute name="VALUE" x="200.66" y="149.86" size="1.778" layer="96"/>
+<instance part="GND1" gate="1" x="284.48" y="96.52" smashed="yes">
+<attribute name="VALUE" x="281.94" y="93.98" size="1.778" layer="96"/>
 </instance>
-<instance part="GND2" gate="1" x="218.44" y="152.4" smashed="yes">
-<attribute name="VALUE" x="215.9" y="149.86" size="1.778" layer="96"/>
+<instance part="GND2" gate="1" x="299.72" y="96.52" smashed="yes">
+<attribute name="VALUE" x="297.18" y="93.98" size="1.778" layer="96"/>
 </instance>
-<instance part="GND3" gate="1" x="233.68" y="152.4" smashed="yes">
-<attribute name="VALUE" x="231.14" y="149.86" size="1.778" layer="96"/>
+<instance part="GND3" gate="1" x="314.96" y="96.52" smashed="yes">
+<attribute name="VALUE" x="312.42" y="93.98" size="1.778" layer="96"/>
 </instance>
-<instance part="GND4" gate="1" x="248.92" y="152.4" smashed="yes">
-<attribute name="VALUE" x="246.38" y="149.86" size="1.778" layer="96"/>
+<instance part="GND4" gate="1" x="330.2" y="96.52" smashed="yes">
+<attribute name="VALUE" x="327.66" y="93.98" size="1.778" layer="96"/>
 </instance>
 <instance part="LEFTPINS" gate="G$1" x="190.5" y="91.44" smashed="yes">
 <attribute name="VALUE" x="185.42" y="68.58" size="1.778" layer="96"/>
@@ -2246,18 +2044,18 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <attribute name="VALUE" x="266.7" y="111.76" size="1.778" layer="96" rot="R180"/>
 <attribute name="NAME" x="266.7" y="70.358" size="1.778" layer="95" rot="R180"/>
 </instance>
-<instance part="A1" gate="G$1" x="81.28" y="139.7" smashed="yes" rot="R270"/>
-<instance part="A1GND" gate="G$1" x="96.52" y="139.7" smashed="yes" rot="R270"/>
-<instance part="A1VCC" gate="G$1" x="111.76" y="139.7" smashed="yes" rot="R270"/>
-<instance part="A2" gate="G$1" x="81.28" y="119.38" smashed="yes" rot="R270"/>
-<instance part="A2GND" gate="G$1" x="96.52" y="119.38" smashed="yes" rot="R270"/>
-<instance part="A2VCC" gate="G$1" x="111.76" y="119.38" smashed="yes" rot="R270"/>
-<instance part="A3" gate="G$1" x="129.54" y="139.7" smashed="yes" rot="R270"/>
-<instance part="A3GND" gate="G$1" x="144.78" y="139.7" smashed="yes" rot="R270"/>
-<instance part="A3VCC" gate="G$1" x="160.02" y="139.7" smashed="yes" rot="R270"/>
-<instance part="A4" gate="G$1" x="129.54" y="119.38" smashed="yes" rot="R270"/>
-<instance part="A4GND" gate="G$1" x="144.78" y="119.38" smashed="yes" rot="R270"/>
-<instance part="A4VCC" gate="G$1" x="160.02" y="119.38" smashed="yes" rot="R270"/>
+<instance part="A1" gate="G$1" x="96.52" y="139.7" smashed="yes" rot="R270"/>
+<instance part="A1GND" gate="G$1" x="111.76" y="139.7" smashed="yes" rot="R270"/>
+<instance part="A1VCC" gate="G$1" x="127" y="139.7" smashed="yes" rot="R270"/>
+<instance part="A2" gate="G$1" x="96.52" y="119.38" smashed="yes" rot="R270"/>
+<instance part="A2GND" gate="G$1" x="111.76" y="119.38" smashed="yes" rot="R270"/>
+<instance part="A2VCC" gate="G$1" x="127" y="119.38" smashed="yes" rot="R270"/>
+<instance part="A3" gate="G$1" x="142.24" y="139.7" smashed="yes" rot="R270"/>
+<instance part="A3GND" gate="G$1" x="157.48" y="139.7" smashed="yes" rot="R270"/>
+<instance part="A3VCC" gate="G$1" x="172.72" y="139.7" smashed="yes" rot="R270"/>
+<instance part="A4" gate="G$1" x="142.24" y="119.38" smashed="yes" rot="R270"/>
+<instance part="A4GND" gate="G$1" x="157.48" y="119.38" smashed="yes" rot="R270"/>
+<instance part="A4VCC" gate="G$1" x="172.72" y="119.38" smashed="yes" rot="R270"/>
 <instance part="SDA1" gate="G$1" x="81.28" y="91.44" smashed="yes" rot="R270"/>
 <instance part="I2CGND1" gate="G$1" x="96.52" y="91.44" smashed="yes" rot="R270"/>
 <instance part="I2CVCC1" gate="G$1" x="111.76" y="91.44" smashed="yes" rot="R270"/>
@@ -2290,18 +2088,14 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <attribute name="VALUE" x="299.72" y="40.64" size="1.778" layer="96" rot="R90"/>
 <attribute name="NAME" x="296.418" y="38.1" size="1.778" layer="95" rot="R180"/>
 </instance>
-<instance part="5VREG" gate="G$1" x="322.58" y="73.66" smashed="yes">
-<attribute name="NAME" x="325.12" y="66.04" size="1.778" layer="95"/>
-<attribute name="VALUE" x="325.12" y="63.5" size="1.778" layer="96"/>
-</instance>
 <instance part="CN1" gate="G$1" x="281.94" y="68.58" smashed="yes">
 <attribute name="NAME" x="276.86" y="72.39" size="1.778" layer="95"/>
 <attribute name="VALUE" x="276.86" y="63.5" size="1.778" layer="96"/>
 </instance>
-<instance part="GNDKILL" gate="G$1" x="142.24" y="30.48" smashed="yes" rot="R270"/>
-<instance part="GNDBUTTON" gate="G$1" x="142.24" y="10.16" smashed="yes" rot="R270"/>
-<instance part="KILLSWITCH" gate="G$1" x="157.48" y="30.48" smashed="yes" rot="R270"/>
-<instance part="EMERGENCYSTOPBUTTON" gate="G$1" x="157.48" y="10.16" smashed="yes" rot="R270"/>
+<instance part="GNDKILL" gate="G$1" x="66.04" y="139.7" smashed="yes" rot="R270"/>
+<instance part="GNDBUTTON" gate="G$1" x="66.04" y="119.38" smashed="yes" rot="R270"/>
+<instance part="KILLSWITCH" gate="G$1" x="81.28" y="139.7" smashed="yes" rot="R270"/>
+<instance part="EMERGENCYSTOPBUTTON" gate="G$1" x="81.28" y="119.38" smashed="yes" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -2315,9 +2109,9 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 </segment>
 <segment>
 <pinref part="A3" gate="G$1" pin="P$1"/>
-<wire x1="132.08" y1="142.24" x2="132.08" y2="147.32" width="0.1524" layer="91"/>
-<label x="132.08" y="149.86" size="1.778" layer="95"/>
-<label x="132.08" y="149.86" size="1.778" layer="95"/>
+<wire x1="144.78" y1="142.24" x2="144.78" y2="147.32" width="0.1524" layer="91"/>
+<label x="144.78" y="149.86" size="1.778" layer="95"/>
+<label x="144.78" y="149.86" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="A4PIN6" class="0">
@@ -2329,22 +2123,22 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 </segment>
 <segment>
 <pinref part="A4" gate="G$1" pin="P$1"/>
-<wire x1="132.08" y1="121.92" x2="132.08" y2="127" width="0.1524" layer="91"/>
-<label x="132.08" y="129.54" size="1.778" layer="95"/>
-<label x="132.08" y="129.54" size="1.778" layer="95"/>
+<wire x1="144.78" y1="121.92" x2="144.78" y2="127" width="0.1524" layer="91"/>
+<label x="144.78" y="129.54" size="1.778" layer="95"/>
+<label x="144.78" y="129.54" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="SHUTD" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="7/RX2"/>
-<wire x1="205.74" y1="86.36" x2="195.58" y2="86.36" width="0.1524" layer="91"/>
-<pinref part="LEFTPINS" gate="G$1" pin="6"/>
-<label x="195.58" y="86.36" size="1.778" layer="95"/>
-</segment>
+<net name="SHUTDSIG" class="0">
 <segment>
 <pinref part="Q1" gate="G$1" pin="G"/>
 <wire x1="185.42" y1="40.64" x2="185.42" y2="33.02" width="0.1524" layer="91"/>
-<label x="185.42" y="30.48" size="1.778" layer="95"/>
+<label x="187.96" y="33.02" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="14/A0/TX3"/>
+<wire x1="246.38" y1="76.2" x2="256.54" y2="76.2" width="0.1524" layer="91"/>
+<pinref part="RIGHTPINS" gate="G$1" pin="13"/>
+<label x="246.38" y="76.2" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$11" class="0">
@@ -2403,20 +2197,6 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <pinref part="RIGHTPINS" gate="G$1" pin="6"/>
 </segment>
 </net>
-<net name="N$21" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="20/A6/TX5"/>
-<wire x1="246.38" y1="91.44" x2="256.54" y2="91.44" width="0.1524" layer="91"/>
-<pinref part="RIGHTPINS" gate="G$1" pin="7"/>
-</segment>
-</net>
-<net name="N$27" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="14/A0/TX3"/>
-<wire x1="246.38" y1="76.2" x2="256.54" y2="76.2" width="0.1524" layer="91"/>
-<pinref part="RIGHTPINS" gate="G$1" pin="13"/>
-</segment>
-</net>
 <net name="N$28" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="13/SCK"/>
@@ -2428,22 +2208,22 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <segment>
 <pinref part="GND1" gate="1" pin="GND"/>
 <pinref part="ON" gate="LED" pin="C"/>
-<wire x1="203.2" y1="154.94" x2="203.2" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="284.48" y1="99.06" x2="284.48" y2="104.14" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="OK/SAFE" gate="LED" pin="C"/>
 <pinref part="GND2" gate="1" pin="GND"/>
-<wire x1="218.44" y1="160.02" x2="218.44" y2="154.94" width="0.1524" layer="91"/>
+<wire x1="299.72" y1="104.14" x2="299.72" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND3" gate="1" pin="GND"/>
 <pinref part="TESTING" gate="LED" pin="C"/>
-<wire x1="233.68" y1="154.94" x2="233.68" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="314.96" y1="99.06" x2="314.96" y2="104.14" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="ERROR" gate="LED" pin="C"/>
 <pinref part="GND4" gate="1" pin="GND"/>
-<wire x1="248.92" y1="160.02" x2="248.92" y2="154.94" width="0.1524" layer="91"/>
+<wire x1="330.2" y1="104.14" x2="330.2" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="GND"/>
@@ -2459,23 +2239,23 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 </segment>
 <segment>
 <pinref part="A1GND" gate="G$1" pin="P$1"/>
-<wire x1="99.06" y1="142.24" x2="99.06" y2="147.32" width="0.1524" layer="91"/>
-<label x="99.06" y="149.86" size="1.778" layer="95"/>
+<wire x1="114.3" y1="142.24" x2="114.3" y2="147.32" width="0.1524" layer="91"/>
+<label x="114.3" y="149.86" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="A2GND" gate="G$1" pin="P$1"/>
-<wire x1="99.06" y1="121.92" x2="99.06" y2="127" width="0.1524" layer="91"/>
-<label x="99.06" y="129.54" size="1.778" layer="95"/>
+<wire x1="114.3" y1="121.92" x2="114.3" y2="127" width="0.1524" layer="91"/>
+<label x="114.3" y="129.54" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="A3GND" gate="G$1" pin="P$1"/>
-<wire x1="147.32" y1="142.24" x2="147.32" y2="147.32" width="0.1524" layer="91"/>
-<label x="147.32" y="149.86" size="1.778" layer="95"/>
+<wire x1="160.02" y1="142.24" x2="160.02" y2="147.32" width="0.1524" layer="91"/>
+<label x="160.02" y="149.86" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="A4GND" gate="G$1" pin="P$1"/>
-<wire x1="147.32" y1="121.92" x2="147.32" y2="127" width="0.1524" layer="91"/>
-<label x="147.32" y="129.54" size="1.778" layer="95"/>
+<wire x1="160.02" y1="121.92" x2="160.02" y2="127" width="0.1524" layer="91"/>
+<label x="160.02" y="129.54" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="I2CGND1" gate="G$1" pin="P$1"/>
@@ -2513,11 +2293,6 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <label x="294.64" y="58.42" size="1.778" layer="95" rot="R270"/>
 </segment>
 <segment>
-<pinref part="5VREG" gate="G$1" pin="GND"/>
-<wire x1="322.58" y1="66.04" x2="322.58" y2="58.42" width="0.1524" layer="91"/>
-<label x="322.58" y="58.42" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="CN1" gate="G$1" pin="GND"/>
 <wire x1="284.48" y1="66.04" x2="292.1" y2="66.04" width="0.1524" layer="91"/>
 <label x="289.56" y="66.04" size="1.778" layer="95"/>
@@ -2529,49 +2304,49 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 </segment>
 <segment>
 <pinref part="GNDKILL" gate="G$1" pin="P$1"/>
-<wire x1="144.78" y1="33.02" x2="144.78" y2="38.1" width="0.1524" layer="91"/>
-<label x="144.78" y="40.64" size="1.778" layer="95"/>
+<wire x1="68.58" y1="142.24" x2="68.58" y2="147.32" width="0.1524" layer="91"/>
+<label x="68.58" y="149.86" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="GNDBUTTON" gate="G$1" pin="P$1"/>
-<wire x1="144.78" y1="12.7" x2="144.78" y2="17.78" width="0.1524" layer="91"/>
-<label x="144.78" y="20.32" size="1.778" layer="95"/>
+<wire x1="68.58" y1="121.92" x2="68.58" y2="127" width="0.1524" layer="91"/>
+<label x="68.58" y="129.54" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$29" class="0">
 <segment>
 <pinref part="R1" gate="G$1" pin="1"/>
 <pinref part="ON" gate="LED" pin="A"/>
-<wire x1="203.2" y1="170.18" x2="203.2" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="284.48" y1="114.3" x2="284.48" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$30" class="0">
 <segment>
 <pinref part="R2" gate="G$1" pin="1"/>
 <pinref part="OK/SAFE" gate="LED" pin="A"/>
-<wire x1="218.44" y1="170.18" x2="218.44" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="299.72" y1="114.3" x2="299.72" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$31" class="0">
 <segment>
 <pinref part="R3" gate="G$1" pin="1"/>
 <pinref part="TESTING" gate="LED" pin="A"/>
-<wire x1="233.68" y1="170.18" x2="233.68" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="314.96" y1="114.3" x2="314.96" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$32" class="0">
 <segment>
 <pinref part="R4" gate="G$1" pin="1"/>
 <pinref part="ERROR" gate="LED" pin="A"/>
-<wire x1="248.92" y1="170.18" x2="248.92" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="330.2" y1="114.3" x2="330.2" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="VCC" class="0">
 <segment>
 <pinref part="R1" gate="G$1" pin="2"/>
-<wire x1="203.2" y1="180.34" x2="203.2" y2="185.42" width="0.1524" layer="91"/>
-<label x="203.2" y="187.96" size="1.778" layer="95"/>
-<label x="203.2" y="187.96" size="1.778" layer="95"/>
+<wire x1="284.48" y1="124.46" x2="284.48" y2="129.54" width="0.1524" layer="91"/>
+<label x="284.48" y="132.08" size="1.778" layer="95"/>
+<label x="284.48" y="132.08" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="3V3_LO"/>
@@ -2581,23 +2356,23 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 </segment>
 <segment>
 <pinref part="A1VCC" gate="G$1" pin="P$1"/>
-<wire x1="114.3" y1="142.24" x2="114.3" y2="147.32" width="0.1524" layer="91"/>
-<label x="114.3" y="149.86" size="1.778" layer="95"/>
+<wire x1="129.54" y1="142.24" x2="129.54" y2="147.32" width="0.1524" layer="91"/>
+<label x="129.54" y="149.86" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="A2VCC" gate="G$1" pin="P$1"/>
-<wire x1="114.3" y1="121.92" x2="114.3" y2="127" width="0.1524" layer="91"/>
-<label x="114.3" y="129.54" size="1.778" layer="95"/>
+<wire x1="129.54" y1="121.92" x2="129.54" y2="127" width="0.1524" layer="91"/>
+<label x="129.54" y="129.54" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="A3VCC" gate="G$1" pin="P$1"/>
-<wire x1="162.56" y1="142.24" x2="162.56" y2="147.32" width="0.1524" layer="91"/>
-<label x="162.56" y="149.86" size="1.778" layer="95"/>
+<wire x1="175.26" y1="142.24" x2="175.26" y2="147.32" width="0.1524" layer="91"/>
+<label x="175.26" y="149.86" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="A4VCC" gate="G$1" pin="P$1"/>
-<wire x1="162.56" y1="121.92" x2="162.56" y2="127" width="0.1524" layer="91"/>
-<label x="162.56" y="129.54" size="1.778" layer="95"/>
+<wire x1="175.26" y1="121.92" x2="175.26" y2="127" width="0.1524" layer="91"/>
+<label x="175.26" y="129.54" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="I2CVCC1" gate="G$1" pin="P$1"/>
@@ -2623,8 +2398,8 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <net name="PIN0" class="0">
 <segment>
 <pinref part="R2" gate="G$1" pin="2"/>
-<wire x1="218.44" y1="180.34" x2="218.44" y2="185.42" width="0.1524" layer="91"/>
-<label x="218.44" y="187.96" size="1.778" layer="95"/>
+<wire x1="299.72" y1="124.46" x2="299.72" y2="129.54" width="0.1524" layer="91"/>
+<label x="299.72" y="132.08" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="0/RX1"/>
@@ -2636,8 +2411,8 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <net name="PIN1" class="0">
 <segment>
 <pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="233.68" y1="180.34" x2="233.68" y2="185.42" width="0.1524" layer="91"/>
-<label x="233.68" y="187.96" size="1.778" layer="95"/>
+<wire x1="314.96" y1="124.46" x2="314.96" y2="129.54" width="0.1524" layer="91"/>
+<label x="314.96" y="132.08" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="1/TX1"/>
@@ -2649,8 +2424,8 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <net name="PIN2" class="0">
 <segment>
 <pinref part="R4" gate="G$1" pin="2"/>
-<wire x1="248.92" y1="180.34" x2="248.92" y2="185.42" width="0.1524" layer="91"/>
-<label x="248.92" y="187.96" size="1.778" layer="95"/>
+<wire x1="330.2" y1="124.46" x2="330.2" y2="129.54" width="0.1524" layer="91"/>
+<label x="330.2" y="132.08" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="2"/>
@@ -2662,9 +2437,9 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <net name="A1PIN3" class="0">
 <segment>
 <pinref part="A1" gate="G$1" pin="P$1"/>
-<wire x1="83.82" y1="142.24" x2="83.82" y2="147.32" width="0.1524" layer="91"/>
-<label x="83.82" y="149.86" size="1.778" layer="95"/>
-<label x="83.82" y="149.86" size="1.778" layer="95"/>
+<wire x1="99.06" y1="142.24" x2="99.06" y2="147.32" width="0.1524" layer="91"/>
+<label x="99.06" y="149.86" size="1.778" layer="95"/>
+<label x="99.06" y="149.86" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="3"/>
@@ -2676,9 +2451,9 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <net name="A2PIN4" class="0">
 <segment>
 <pinref part="A2" gate="G$1" pin="P$1"/>
-<wire x1="83.82" y1="121.92" x2="83.82" y2="127" width="0.1524" layer="91"/>
-<label x="83.82" y="129.54" size="1.778" layer="95"/>
-<label x="83.82" y="129.54" size="1.778" layer="95"/>
+<wire x1="99.06" y1="121.92" x2="99.06" y2="127" width="0.1524" layer="91"/>
+<label x="99.06" y="129.54" size="1.778" layer="95"/>
+<label x="99.06" y="129.54" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="4"/>
@@ -2758,10 +2533,10 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <label x="259.08" y="58.42" size="1.778" layer="95" rot="R270"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="15/A1/RX3"/>
-<wire x1="246.38" y1="78.74" x2="256.54" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="RIGHTPINS" gate="G$1" pin="12"/>
-<label x="246.38" y="78.74" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="20/A6/TX5"/>
+<wire x1="246.38" y1="91.44" x2="256.54" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="RIGHTPINS" gate="G$1" pin="7"/>
+<label x="246.38" y="91.44" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="5V" class="0">
@@ -2781,9 +2556,12 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <label x="292.1" y="58.42" size="1.778" layer="95" rot="R270"/>
 </segment>
 <segment>
-<pinref part="5VREG" gate="G$1" pin="OUT"/>
-<wire x1="337.82" y1="73.66" x2="330.2" y2="73.66" width="0.1524" layer="91"/>
-<label x="335.28" y="73.66" size="1.778" layer="95"/>
+<pinref part="CN1" gate="G$1" pin="PWR"/>
+<wire x1="284.48" y1="71.12" x2="292.1" y2="71.12" width="0.1524" layer="91"/>
+<label x="289.56" y="71.12" size="1.778" layer="95"/>
+<label x="289.56" y="71.12" size="1.778" layer="95"/>
+<label x="289.56" y="71.12" size="1.778" layer="95"/>
+<label x="289.56" y="71.12" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PWM2" class="0">
@@ -2793,10 +2571,11 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <label x="274.32" y="58.42" size="1.778" layer="95" rot="R270"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="16/A2/RX4"/>
-<wire x1="246.38" y1="81.28" x2="256.54" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="RIGHTPINS" gate="G$1" pin="11"/>
-<label x="246.38" y="81.28" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="17/A3/TX4"/>
+<wire x1="246.38" y1="83.82" x2="256.54" y2="83.82" width="0.1524" layer="91"/>
+<pinref part="RIGHTPINS" gate="G$1" pin="10"/>
+<label x="246.38" y="83.82" size="1.778" layer="95"/>
+<label x="246.38" y="83.82" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PWM3" class="0">
@@ -2806,23 +2585,10 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <label x="289.56" y="58.42" size="1.778" layer="95" rot="R270"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="17/A3/TX4"/>
-<wire x1="246.38" y1="83.82" x2="256.54" y2="83.82" width="0.1524" layer="91"/>
-<pinref part="RIGHTPINS" gate="G$1" pin="10"/>
-<label x="246.38" y="83.82" size="1.778" layer="95"/>
-<label x="246.38" y="83.82" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="IN" class="0">
-<segment>
-<pinref part="5VREG" gate="G$1" pin="IN"/>
-<wire x1="314.96" y1="73.66" x2="309.88" y2="73.66" width="0.1524" layer="91"/>
-<label x="309.88" y="73.66" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="CN1" gate="G$1" pin="PWR"/>
-<wire x1="284.48" y1="71.12" x2="292.1" y2="71.12" width="0.1524" layer="91"/>
-<label x="289.56" y="71.12" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="16/A2/RX4"/>
+<wire x1="246.38" y1="81.28" x2="256.54" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="RIGHTPINS" gate="G$1" pin="11"/>
+<label x="246.38" y="81.28" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="KILLSWITCH" class="0">
@@ -2833,19 +2599,33 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 </segment>
 <segment>
 <pinref part="KILLSWITCH" gate="G$1" pin="P$1"/>
-<wire x1="160.02" y1="33.02" x2="160.02" y2="38.1" width="0.1524" layer="91"/>
-<label x="160.02" y="40.64" size="1.778" layer="95"/>
+<wire x1="83.82" y1="142.24" x2="83.82" y2="147.32" width="0.1524" layer="91"/>
+<label x="81.28" y="149.86" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="EMERGENCYSTOPBUTTON" gate="G$1" pin="P$1"/>
-<wire x1="160.02" y1="12.7" x2="160.02" y2="17.78" width="0.1524" layer="91"/>
-<label x="160.02" y="20.32" size="1.778" layer="95"/>
+<wire x1="83.82" y1="121.92" x2="83.82" y2="127" width="0.1524" layer="91"/>
+<label x="81.28" y="129.54" size="1.778" layer="95"/>
 </segment>
 <segment>
+<pinref part="U$1" gate="G$1" pin="15/A1/RX3"/>
+<wire x1="246.38" y1="78.74" x2="256.54" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="RIGHTPINS" gate="G$1" pin="12"/>
+<label x="246.38" y="78.74" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="LEFTPINS" gate="G$1" pin="6"/>
+<pinref part="U$1" gate="G$1" pin="7/RX2"/>
+<wire x1="195.58" y1="86.36" x2="205.74" y2="86.36" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$2" class="0">
+<segment>
 <pinref part="U$1" gate="G$1" pin="8/TX2"/>
-<wire x1="205.74" y1="83.82" x2="195.58" y2="83.82" width="0.1524" layer="91"/>
 <pinref part="LEFTPINS" gate="G$1" pin="5"/>
-<label x="195.58" y="83.82" size="1.778" layer="95"/>
+<wire x1="205.74" y1="83.82" x2="195.58" y2="83.82" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
