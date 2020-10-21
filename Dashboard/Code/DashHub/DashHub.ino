@@ -28,25 +28,25 @@ void loop(){
             l_driver.writePWM(count, 255);
             r_driver.writePWM(count, 255);
             h_driver.writePWM(count, 255);
-            l_servo.writeDeg( (count * 270) / 24 );
-            r_servo.writeDeg( (count * 270) / 24 );
+            l_servo .writeDeg( (count * 270) / 24 );
+            r_servo .writeDeg( (count * 270) / 24 );
         } else if (count < 48){
             uint8_t led = count - 24;
             l_driver.writePWM(led, 0);
             r_driver.writePWM(led, 0);
             h_driver.writePWM(led, 0);
-            l_servo.writeDeg( (led * 270) / 24 );
-            r_servo.writeDeg( (led * 270) / 24 );
+            l_servo .writeDeg( (led * 270) / 24 );
+            r_servo .writeDeg( (led * 270) / 24 );
         } else if (count < 56){
-            uint16_t pwm = 32*(count - 48);
-            l_driver.writeAll(pwm);
-            r_driver.writeAll(pwm);
-            h_driver.writeAll(pwm);
+            uint16_t pwma = 32*(count - 48);
+            l_driver.writeAll(pwma);
+            r_driver.writeAll(pwma);
+            h_driver.writeAll(pwma);
         } else {
-            uint16_t pwm = 32*(63 - count);
-            l_driver.writeAll(pwm);
-            r_driver.writeAll(pwm);
-            h_driver.writeAll(pwm);
+            uint16_t pwma = 32*(63 - count);
+            l_driver.writeAll(pwma);
+            r_driver.writeAll(pwma);
+            h_driver.writeAll(pwma);
         }
     }
 

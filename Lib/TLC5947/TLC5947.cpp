@@ -3,6 +3,9 @@
 
 #include "TLC5947.h"
 
+/**
+ * Basic constructor.
+ */
 TLC5947::TLC5947(uint8_t _o_sin, uint8_t _o_sclk, uint8_t _o_xlat, uint8_t _T_sclk){
     o_sin  = _o_sin;
     o_sclk = _o_sclk;
@@ -10,11 +13,16 @@ TLC5947::TLC5947(uint8_t _o_sin, uint8_t _o_sclk, uint8_t _o_xlat, uint8_t _T_sc
     T_sclk = _T_sclk;
 }
 
+/**
+ * Sets up pins and variables used within its functionality.
+ * To be run in setup() function.
+ */
 void TLC5947::begin(){
     pinMode(o_sin , OUTPUT);
     pinMode(o_sclk, OUTPUT);
     pinMode(o_xlat, OUTPUT);
 
+    // Start all LEDs at 0.
     writeAll(0);
 
     sin_state  = 0;
