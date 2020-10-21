@@ -1,0 +1,11 @@
+#Dyno test (beta)
+- todo
+-- Emergency stop
+-- Leds
+-- HE sensor
+-- Load cell
+-- Thermocouple
+- ready to test
+--
+- complete
+-- 
