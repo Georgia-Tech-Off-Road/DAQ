@@ -12,7 +12,7 @@
 /**
  * Sets up the digital out pins and the PID if specified.
  */
-HallEffectSpeedSensor::HallEffectSpeedSensor(int inputPin, uint8_t toneWheelTeeth, uint16_t intervalLength = 50,uint16_t averagingAmount = 200){
+HallEffectSpeedSensor::HallEffectSpeedSensor(int inputPin, uint16_t toneWheelTeeth, uint16_t intervalLength = 50,uint16_t averagingAmount = 200){
   _inputPin = inputPin;
   _toneWheelTeeth = toneWheelTeeth; //Multiply by 2 when using FREQMEASUREMULTI_ALTERNATE mode
   _averagingAmount = averagingAmount;

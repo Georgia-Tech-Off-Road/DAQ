@@ -8,7 +8,7 @@ unsigned long timeInterval = 100000;
 int he1pin = 3;
 int he2pin = 4;
 int he3pin = 5;
-uint8_t ppm = 500;
+uint16_t ppm = 500;
 
 int val1, val2, val3; 
 
