@@ -6455,6 +6455,9 @@ Designer: Akash Harapanahalli</text>
 <junction x="-33.02" y="78.74"/>
 <pinref part="C1" gate="G$1" pin="1"/>
 <pinref part="C2" gate="G$1" pin="1"/>
+<wire x1="-33.02" y1="71.12" x2="-33.02" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="BLANK"/>
+<wire x1="-33.02" y1="68.58" x2="-30.48" y2="68.58" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="GND_2"/>

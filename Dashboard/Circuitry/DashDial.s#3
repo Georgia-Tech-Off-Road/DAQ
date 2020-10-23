@@ -6112,7 +6112,7 @@ Commonly used for small ceramic capacitors. Like our 0.1uF (http://www.sparkfun.
 <wire x1="144.78" y1="0" x2="144.78" y2="101.6" width="0.1524" layer="98"/>
 <wire x1="144.78" y1="101.6" x2="-45.72" y2="101.6" width="0.1524" layer="98"/>
 <text x="-40.64" y="93.98" size="5.08" layer="98">LED Control</text>
-<text x="157.48" y="2.54" size="5.08" layer="98">DashDial V1
+<text x="157.48" y="2.54" size="5.08" layer="98">DashDial V2
 Designer: Akash Harapanahalli</text>
 </plain>
 <instances>
@@ -6412,9 +6412,9 @@ Designer: Akash Harapanahalli</text>
 <pinref part="D23" gate="D1" pin="A"/>
 </segment>
 <segment>
-<pinref part="X3" gate="-4" pin="KL"/>
-<wire x1="-20.32" y1="147.32" x2="-22.86" y2="147.32" width="0.1524" layer="91"/>
-<label x="-22.86" y="147.32" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="X3" gate="-1" pin="KL"/>
+<wire x1="-20.32" y1="132.08" x2="-22.86" y2="132.08" width="0.1524" layer="91"/>
+<label x="-22.86" y="132.08" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -6465,9 +6465,9 @@ Designer: Akash Harapanahalli</text>
 <label x="-15.24" y="12.7" size="1.778" layer="95" rot="R270" xref="yes"/>
 </segment>
 <segment>
-<pinref part="X3" gate="-1" pin="KL"/>
-<wire x1="-20.32" y1="132.08" x2="-22.86" y2="132.08" width="0.1524" layer="91"/>
-<label x="-22.86" y="132.08" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="X3" gate="-4" pin="KL"/>
+<wire x1="-20.32" y1="147.32" x2="-22.86" y2="147.32" width="0.1524" layer="91"/>
+<label x="-22.86" y="147.32" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="7.4V" class="0">
@@ -6477,9 +6477,9 @@ Designer: Akash Harapanahalli</text>
 <label x="86.36" y="147.32" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="X3" gate="-2" pin="KL"/>
-<wire x1="-20.32" y1="137.16" x2="-22.86" y2="137.16" width="0.1524" layer="91"/>
-<label x="-22.86" y="137.16" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="X3" gate="-3" pin="KL"/>
+<wire x1="-20.32" y1="142.24" x2="-22.86" y2="142.24" width="0.1524" layer="91"/>
+<label x="-22.86" y="142.24" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="SIN" class="0">
@@ -6489,9 +6489,9 @@ Designer: Akash Harapanahalli</text>
 <label x="-33.02" y="63.5" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="X1" gate="-3" pin="KL"/>
-<wire x1="-20.32" y1="119.38" x2="-22.86" y2="119.38" width="0.1524" layer="91"/>
-<label x="-22.86" y="119.38" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="X1" gate="-2" pin="KL"/>
+<wire x1="-20.32" y1="114.3" x2="-22.86" y2="114.3" width="0.1524" layer="91"/>
+<label x="-22.86" y="114.3" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="SCLK" class="0">
@@ -6501,9 +6501,9 @@ Designer: Akash Harapanahalli</text>
 <label x="-33.02" y="66.04" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="X1" gate="-4" pin="KL"/>
-<wire x1="-20.32" y1="124.46" x2="-22.86" y2="124.46" width="0.1524" layer="91"/>
-<label x="-22.86" y="124.46" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="X1" gate="-1" pin="KL"/>
+<wire x1="-20.32" y1="109.22" x2="-22.86" y2="109.22" width="0.1524" layer="91"/>
+<label x="-22.86" y="109.22" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="LAT" class="0">
@@ -6513,9 +6513,9 @@ Designer: Akash Harapanahalli</text>
 <label x="2.54" y="66.04" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="X1" gate="-2" pin="KL"/>
-<wire x1="-20.32" y1="114.3" x2="-22.86" y2="114.3" width="0.1524" layer="91"/>
-<label x="-22.86" y="114.3" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="X1" gate="-3" pin="KL"/>
+<wire x1="-20.32" y1="119.38" x2="-22.86" y2="119.38" width="0.1524" layer="91"/>
+<label x="-22.86" y="119.38" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT0" class="0">
@@ -6789,9 +6789,9 @@ Designer: Akash Harapanahalli</text>
 <label x="45.72" y="142.24" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="X1" gate="-1" pin="KL"/>
-<wire x1="-20.32" y1="109.22" x2="-22.86" y2="109.22" width="0.1524" layer="91"/>
-<label x="-22.86" y="109.22" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="X1" gate="-4" pin="KL"/>
+<wire x1="-20.32" y1="124.46" x2="-22.86" y2="124.46" width="0.1524" layer="91"/>
+<label x="-22.86" y="124.46" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -6812,9 +6812,9 @@ Designer: Akash Harapanahalli</text>
 <junction x="20.32" y="147.32"/>
 </segment>
 <segment>
-<pinref part="X3" gate="-3" pin="KL"/>
-<wire x1="-20.32" y1="142.24" x2="-22.86" y2="142.24" width="0.1524" layer="91"/>
-<label x="-22.86" y="142.24" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="X3" gate="-2" pin="KL"/>
+<wire x1="-20.32" y1="137.16" x2="-22.86" y2="137.16" width="0.1524" layer="91"/>
+<label x="-22.86" y="137.16" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="N$32" class="0">
