@@ -2020,7 +2020,6 @@ design rules under a new name.</description>
 <wire x1="-27.048" y1="-18.037" x2="-27.051" y2="-18.034" width="0.1524" layer="1"/>
 <contactref element="J1" pad="07"/>
 <contactref element="J2" pad="07"/>
-<wire x1="-41.529" y1="3.429" x2="-34.29" y2="3.429" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GND">
 <contactref element="R1" pad="P$1"/>
