@@ -35,6 +35,8 @@ class Data:
 
         logger.info("Data object successfully initialized")
 
+
+
     def get_most_recent_index(self):
         with self.lock:
             return self.__data['time'].most_recent_index

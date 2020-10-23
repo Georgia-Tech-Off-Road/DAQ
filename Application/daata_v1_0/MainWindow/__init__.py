@@ -12,7 +12,7 @@ from Layouts.DataCollection import DataCollection
 from Layouts.Layout_Test import Widget_Test
 
 
-from Utilities.Popups.parentChildrenTree import popup_ParentChildrenTree
+from Utilities.findAncestryTree.parentChildrenTree import popup_ParentChildrenTree
 from MainWindow._tabHandler import closeTab
 import DataAcquisition
 
@@ -41,7 +41,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.populate_menu()
 
 
-
         self.create_homepage()
         #
         # self.settings_debug()
@@ -56,6 +55,81 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.timer.setInterval(1000 / self.refreshFreq)
 
         self.connectSignalsSlots()
+        self.loadStylesheet()
+
+    def loadStylesheet(self):
+        stylesheet = """        
+        
+        /*  General color scheme  */
+
+        
+        /*  MainWindow color scheme  */
+        QMainWindow {{
+            background: {bgColor};
+            }}
+
+        QMainWindow [objectName^="tab_layouts"] {{
+            background: {bgColor};
+            }}
+        QMainWindow QTabWidget {{
+            }}
+        QStackedWidget {{
+            background-color: {bgColor2};
+        }}
+        QMenuBar {{
+            background: white;
+            }}
+        QMenuBar::item {{
+            padding: 4px;
+            background: transparent;
+            border-right: 1px solid lightGray;
+
+            }}
+        QMenuBar::item:selected {{
+            background: rgb(237,237,237,100);
+            }}
+        
+        
+        
+        /*  DataCollection layout color scheme   */
+        DataCollection QWidget {{
+            background-color: {foreColor};
+            }}
+        DataCollection QPushButton {{
+            background-color: white;
+            }}
+        DataCollection CustomPlotWidget {{
+            border-radius: 7px;
+            border: 1px solid gray;
+            }}
+        
+        
+        
+        /*  Homepage layout color scheme */
+        Homepage .QWidget {{
+            background-color: {foreColor};
+            }}
+        Homepage .QFrame {{
+            background-color: {foreColor};
+            }}
+            
+
+            
+        """
+
+
+
+        stylesheet = stylesheet.format(
+            testColor = "pink",
+            bgColor = "#dbcc93",
+            bgColor2 = "#white",
+            foreColor = "#f4f4f4",
+            # windowBorder = "#B3A369",
+            windowBorder = "white",
+            defaultText = "white"
+            )
+        print(stylesheet)
+        self.setStyleSheet(stylesheet)
 
     ## Imported methods
     from ._tabHandler import resetTabs_tabWidget, create_layoutTab, rename_tab, closeTab
@@ -123,3 +197,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tabWidget.tabCloseRequested.connect(partial(self.closeTab, self))
         self.action_parentChildrenTree.triggered.connect(partial(popup_ParentChildrenTree, self))
         self.action_Preferences.triggered.connect(self.SettingsDialog)
+
+    ##################################
+    #### Overridden event methods ####
+
+    ## allow color scheme of class to be changed by CSS stylesheets
+    def paintEvent(self, pe):
+        opt = QtGui.QStyleOption()
+        opt.initFrom(self)
+        p = QtGui.QPainter(self)
+        s = self.style()
+        s.drawPrimitive(QtGui.QStyle.PE_Widget, opt, p, self)

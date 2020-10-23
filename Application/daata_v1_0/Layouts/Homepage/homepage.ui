@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>Homepage</class>
+ <widget class="QWidget" name="Homepage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -41,37 +41,7 @@
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">QCheckBox::indicator {
-    width: 13px;
-    height: 13px;
-	border: 1px solid black;
-}
-
-QCheckBox::indicator::unchecked {
-	background-color : #d60000	/* red */
-
-
-}
-
-QCheckBox::indicator:unchecked:hover {
-	background-color : #d60000	/* red */
-}
-
-QCheckBox::indicator:unchecked:pressed {
-	background-color :  #d60000	/* red */
-}
-
-QCheckBox::indicator::checked {
-	background-color : #16c916	/* dark green */
-}
-
-QCheckBox::indicator:checked:hover {
-	background-color : #16c916	/* dark green */
-}
-
-QCheckBox::indicator:checked:pressed {
-	background-color : #16c916	/* dark green */
-}</string>
+      <string notr="true"/>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -89,6 +59,9 @@ QCheckBox::indicator:checked:pressed {
          <font>
           <pointsize>12</pointsize>
          </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
         </property>
         <property name="styleSheet">
          <string notr="true"/>
@@ -111,11 +84,7 @@ QCheckBox::indicator:checked:pressed {
       <item>
        <widget class="QScrollArea" name="scrollArea_sensorStatus">
         <property name="styleSheet">
-         <string notr="true">QScrollArea {
-background-color : white
-
-}
-</string>
+         <string notr="true"/>
         </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
@@ -136,9 +105,7 @@ background-color : white
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">QWidget { 
-background-color: rgba(0, 0, 0, 0);
-}\n</string>
+          <string notr="true"/>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_sensorStatus">
           <item>
@@ -220,37 +187,7 @@ background-color: rgba(0, 0, 0, 0);
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">QCheckBox::indicator {
-    width: 13px;
-    height: 13px;
-	border: 1px solid black;
-}
-
-QCheckBox::indicator::unchecked {
-	background-color : #d60000	/* red */
-
-
-}
-
-QCheckBox::indicator:unchecked:hover {
-	background-color : #d60000	/* red */
-}
-
-QCheckBox::indicator:unchecked:pressed {
-	background-color :  #d60000	/* red */
-}
-
-QCheckBox::indicator::checked {
-	background-color : #16c916	/* dark green */
-}
-
-QCheckBox::indicator:checked:hover {
-	background-color : #16c916	/* dark green */
-}
-
-QCheckBox::indicator:checked:pressed {
-	background-color : #16c916	/* dark green */
-}</string>
+      <string notr="true"/>
      </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>

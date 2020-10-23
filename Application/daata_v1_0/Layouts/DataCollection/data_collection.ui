@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="2" column="2">
     <widget class="QScrollArea" name="scrollable_enabledSensors">
@@ -35,7 +38,7 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #EEEEEE</string>
+      <string notr="true"/>
      </property>
      <property name="widgetResizable">
       <bool>true</bool>
@@ -141,10 +144,7 @@
    <item row="0" column="0" rowspan="3">
     <widget class="QScrollArea" name="scrollArea_graphs">
      <property name="styleSheet">
-      <string notr="true">QScrollArea {
-background-color: #F3F3F3
-}
-</string>
+      <string notr="true"/>
      </property>
      <property name="widgetResizable">
       <bool>true</bool>
@@ -167,7 +167,7 @@ background-color: #F3F3F3
    <item row="0" column="2" rowspan="2">
     <widget class="QFrame" name="frame_displayingBox">
      <property name="styleSheet">
-      <string notr="true">background-color: #EEEEEE</string>
+      <string notr="true"/>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -209,7 +209,7 @@ background-color: #F3F3F3
         <item>
          <widget class="QPushButton" name="button_display">
           <property name="styleSheet">
-           <string notr="true">background-color: light</string>
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>Start Displaying Data</string>

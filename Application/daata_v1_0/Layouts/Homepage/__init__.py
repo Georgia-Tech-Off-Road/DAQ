@@ -23,6 +23,9 @@ class Homepage(DAATALayout, uiFile):
         self.updateFreq =  2    # how often the gridPlotLayout checks for new sensors (Hz)
 
 
+    ## imported methods
+    from Utilities.CustomWidgets.indicatorWidget import QIndicator
+
     def export_data(self):
         dir_ = QtGui.QFileDialog.getExistingDirectory(None, 'Select GTOR Network Drive', os.path.expanduser('~'), QtGui.QFileDialog.ShowDirsOnly)       #select a folder in the C drive
         print(dir_)
@@ -37,13 +40,9 @@ class Homepage(DAATALayout, uiFile):
         all_sensors = data.get_sensors()
         for sensor in all_sensors:
             self.dict_sensorStatus[sensor] = {}
-            self.dict_sensorStatus[sensor]['indicator'] = QtWidgets.QCheckBox(data.get_display_name(sensor),
-                                                                              objectName=sensor)
+            self.dict_sensorStatus[sensor]['indicator'] = self.QIndicator(data.get_display_name(sensor), objectName=sensor)
             self.verticalLayout_sensorStatus.addWidget(self.dict_sensorStatus[sensor]['indicator'])
 
-            # disables user input for checkboxes
-            self.dict_sensorStatus[sensor]['indicator'].setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
-            self.dict_sensorStatus[sensor]['indicator'].setFocusPolicy(QtCore.Qt.NoFocus)
 
 
         # Create a vertical spacer that forces checkboxes to the top
@@ -61,23 +60,14 @@ class Homepage(DAATALayout, uiFile):
                 self.dict_sensorStatus[sensor]['indicator'].setChecked(False)
 
     def create_connectionStatusCheckboxes(self):
-        self.ind_RFBox = QtWidgets.QCheckBox("RF Box Disconnected", objectName = "ind_RFBox")
+        self.ind_RFBox = self.QIndicator("RF Box Disconnected", objectName = "ind_RFBox")
         self.verticalLayout_connectionStatus.addWidget(self.ind_RFBox)
-        # disables user input for checkboxes
-        self.ind_RFBox.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
-        self.ind_RFBox.setFocusPolicy(QtCore.Qt.NoFocus)
 
-        self.ind_SDCard = QtWidgets.QCheckBox("SD Card Disconnected", objectName = "ind_SDCard")
+        self.ind_SDCard = self.QIndicator("SD Card Disconnected", objectName = "ind_SDCard")
         self.verticalLayout_connectionStatus.addWidget(self.ind_SDCard)
-        # disables user input for checkboxes
-        self.ind_SDCard.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
-        self.ind_SDCard.setFocusPolicy(QtCore.Qt.NoFocus)
 
-        self.ind_connectionStatus = QtWidgets.QCheckBox("Network Drive Disconnected", objectName = "ind_connectionStatus")
+        self.ind_connectionStatus = self.QIndicator("Network Drive Disconnected", objectName = "ind_connectionStatus")
         self.verticalLayout_connectionStatus.addWidget(self.ind_connectionStatus)
-        # disables user input for checkboxes
-        self.ind_connectionStatus.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
-        self.ind_connectionStatus.setFocusPolicy(QtCore.Qt.NoFocus)
 
 
         # Create a vertical spacer that forces checkboxes to the top
@@ -90,3 +80,15 @@ class Homepage(DAATALayout, uiFile):
     def update(self):
         self.update_sensorStatus()
         logger.debug('updating ' + self.objectName() + "...")
+
+
+    ##################################
+    #### Overridden event methods ####
+
+    ## allow color scheme of class to be changed by CSS stylesheets
+    def paintEvent(self, pe):
+        opt = QtGui.QStyleOption()
+        opt.initFrom(self)
+        p = QtGui.QPainter(self)
+        s = self.style()
+        s.drawPrimitive(QtGui.QStyle.PE_Widget, opt, p, self)

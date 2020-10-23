@@ -15,16 +15,16 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="leftMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>10</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="spacing">
     <number>0</number>
@@ -40,8 +40,8 @@
      <widget class="QPushButton" name="button_settings">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>0</y>
+        <x>8</x>
+        <y>6</y>
         <width>20</width>
         <height>20</height>
        </rect>

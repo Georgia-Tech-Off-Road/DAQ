@@ -32,6 +32,9 @@
   <property name="windowTitle">
    <string>DAATA GUI</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="centralLayout">
     <property name="leftMargin">
@@ -52,6 +55,9 @@
        <font>
         <pointsize>10</pointsize>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::West</enum>
@@ -176,18 +182,6 @@
     <property name="title">
      <string>File</string>
     </property>
-    <widget class="QMenu" name="menuNew_Layout">
-     <property name="tearOffEnabled">
-      <bool>false</bool>
-     </property>
-     <property name="title">
-      <string>New Layout</string>
-     </property>
-     <property name="toolTipsVisible">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <addaction name="menuNew_Layout"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -204,7 +198,6 @@
     <property name="title">
      <string>Add Layout</string>
     </property>
-    <addaction name="action_parentChildrenTree"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>

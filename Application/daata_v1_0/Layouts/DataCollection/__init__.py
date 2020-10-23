@@ -1,5 +1,6 @@
-from PyQt5 import QtWidgets, uic, QtGui
+from PyQt5 import QtWidgets, uic, QtGui, QtCore
 from PyQt5.QtCore import QSettings
+from PyQt5.QtGui import QPalette
 import os
 
 import pyqtgraph as pg
@@ -58,8 +59,10 @@ class DataCollection(DAATALayout, uiFile):
         self.load_settings()
 
 
+
     ## imported methods
-    from Utilities.Popups.saveLocationDialog import popup_dataSaveLocation
+    from Utilities.DataExport.dataSaveLocation import popup_dataSaveLocation
+    from Utilities.DataExport.exportMAT import saveMAT
 
 
 
@@ -126,10 +129,7 @@ class DataCollection(DAATALayout, uiFile):
         leftMar, topMar, rightMar, botMar = self.gridPlotLayout.getContentsMargins()
         hSpace = self.gridPlotLayout.horizontalSpacing()
         vSpace = self.gridPlotLayout.verticalSpacing()
-
-        graphHeight = (self.scrollArea_graphs.height()-topMar-botMar-vSpace*(maxRows)) / maxRows
-        print(self.scrollArea_graphs.height())
-        print(graphHeight)
+        graphHeight = (self.scrollArea_graphs.height()-topMar-botMar-vSpace*(maxRows-1)) / maxRows
 
         for key in self.dict_sensors.keys():
             if self.dict_sensors[key]['graph_widget'].isVisible():
@@ -164,10 +164,7 @@ class DataCollection(DAATALayout, uiFile):
 
         # self.gridPlotLayout.moveWidgetDown(self.dict_sensors['bl_lds']['graph_widget'])
         # self.scrollAreaWidgetContents.setLayout(self.gridPlotLayout)
-        print("gridplotlayout")
 
-        print("gridrows" + str(self.gridPlotLayout.rowCount()))
-        print("gridcols" + str(self.gridPlotLayout.columnCount()))
         self.spacerItem_gridPlotLayout = QtWidgets.QSpacerItem(20, 1000000, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridPlotLayout.addItem(self.spacerItem_gridPlotLayout)
 
@@ -176,7 +173,7 @@ class DataCollection(DAATALayout, uiFile):
 
     def create_graphs(self):
         for key in self.currentKeys:
-            self.dict_sensors[key]['graph_widget'] = CustomPlotWidget(key, parent=self.scrollAreaWidgetContents, graph_width_seconds = 8)
+            self.dict_sensors[key]['graph_widget'] = CustomPlotWidget(key, parent=self.scrollAreaWidgetContents, layout=self.gridPlotLayout, graph_width_seconds = 8)
             self.dict_sensors[key]['graph_widget'].setObjectName(key)
             self.dict_sensors[key]['graph_widget'].hide()
 
@@ -213,8 +210,7 @@ class DataCollection(DAATALayout, uiFile):
             # self.activeSensorCount = 0
         # self.label_activeSensorCount.setText('(' + str(self.activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')
         self.update_sensorCount()
-        self.slot_graphDimension()
-
+        self.create_gridPlotLayout()
 
 
     def update_sensorCount(self):
@@ -225,12 +221,11 @@ class DataCollection(DAATALayout, uiFile):
                     self.activeSensorCount = self.activeSensorCount + 1
         self.label_activeSensorCount.setText('(' + str(self.activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')
 
-    def updateGraph(self):
+
+    def updateGraphs(self):
         for key in self.currentKeys:
             if self.dict_sensors[key]['graph_widget'].isVisible():
                 self.dict_sensors[key]['graph_widget'].update_graph()
-
-
 
     def updateTimeElapsed(self):
         try:
@@ -251,7 +246,7 @@ class DataCollection(DAATALayout, uiFile):
         # or if the Layouts tab is the current tab
 
         if self.is_data_collecting.is_set():
-            self.updateGraph()
+            self.updateGraphs()
             self.updateTimeElapsed()
             self.update_sensorCheckboxes()
             # logger.debug('updating ' + self.objectName() + "...")
@@ -282,18 +277,12 @@ class DataCollection(DAATALayout, uiFile):
         self.comboBox_graphDimension.currentTextChanged.connect(self.save_settings)
 
         ## connections to GridPlotLayout
-        # for key in self.dict_sensors.keys():
-        #     widget = self.dict_sensors[key]['graph_widget']
-        #     widget.button_settings.clicked.connect(partial())
-        #     widget.button_moveUp.clicked.connect(partial(self.gridPlotLayout.moveWidget, widget, 'up'))
-        #     widget.button_moveLeft.clicked.connect(partial(self.gridPlotLayout.moveWidget, widget, 'left'))
-        #     widget.button_moveRight.clicked.connect(partial(self.gridPlotLayout.moveWidget, widget, 'right'))
-        #     widget.button_moveDown.clicked.connect(partial(self.gridPlotLayout.moveWidget, widget, 'down'))
+        for key in self.dict_sensors.keys():
+            widget = self.dict_sensors[key]['graph_widget']
+            settings = widget.button_settings.clicked.connect(partial(self.dict_sensors[key]['graph_widget'].open_SettingsWindow))
 
 
-    def closeEvent(self):
-        self.save_settings()
-        self.window().setWindowTitle('closed tab')
+
 
     def save_settings(self):
         self.configFile.setValue('graph_dimension', self.comboBox_graphDimension.currentText())
@@ -308,7 +297,6 @@ class DataCollection(DAATALayout, uiFile):
         # logger.debug("Data Collection config files saved")
         # self.debug_settings()
 
-
     def load_settings(self):
         try:
             activeSensorCount = 0
@@ -322,9 +310,6 @@ class DataCollection(DAATALayout, uiFile):
             # logger.debug("creating new config file")
             pass
 
-
-
-
         self.comboBox_graphDimension.setCurrentText(self.configFile.value('graph_dimension'))
         # self.slot_graphDimension()
         self.create_gridPlotLayout()
@@ -334,3 +319,19 @@ class DataCollection(DAATALayout, uiFile):
     def debug_settings(self):
         for key in self.configFile.allKeys():
             print(key + ":\t\t" + str(self.configFile.value(key)))
+
+    ##################################
+    #### Overridden event methods ####
+    def closeEvent(self):
+        self.save_settings()
+        self.window().setWindowTitle('closed tab')
+
+
+    ## allow color scheme of class to be changed by CSS stylesheets
+    def paintEvent(self, pe):
+        opt = QtGui.QStyleOption()
+        opt.initFrom(self)
+        p = QtGui.QPainter(self)
+        s = self.style()
+        s.drawPrimitive(QtGui.QStyle.PE_Widget, opt, p, self)
+
