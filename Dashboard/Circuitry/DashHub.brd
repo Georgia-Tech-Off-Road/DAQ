@@ -177,14 +177,14 @@
 <text x="-25.4" y="-12.7" size="1.016" layer="21">7V4</text>
 <text x="-33.02" y="-15.24" size="1.016" layer="21">SERVO_L</text>
 <text x="-25.4" y="-15.24" size="1.016" layer="21">GND</text>
-<text x="27.94" y="-7.62" size="1.016" layer="21">SCLK_R</text>
-<text x="22.86" y="-7.62" size="1.016" layer="21">3V3</text>
-<text x="27.94" y="-10.16" size="1.016" layer="21">SIN_R</text>
-<text x="22.86" y="-10.16" size="1.016" layer="21">5V</text>
-<text x="27.94" y="-12.7" size="1.016" layer="21">LAT_R</text>
-<text x="22.86" y="-12.7" size="1.016" layer="21">7V4</text>
-<text x="27.94" y="-15.24" size="1.016" layer="21">SERVO_L</text>
-<text x="22.86" y="-15.24" size="1.016" layer="21">GND</text>
+<text x="22.86" y="-8.128" size="1.016" layer="21">SCLK_R</text>
+<text x="30.48" y="-8.128" size="1.016" layer="21">3V3</text>
+<text x="22.86" y="-10.668" size="1.016" layer="21">SIN_R</text>
+<text x="30.48" y="-10.668" size="1.016" layer="21">5V</text>
+<text x="22.86" y="-13.208" size="1.016" layer="21">LAT_R</text>
+<text x="30.48" y="-13.208" size="1.016" layer="21">7V4</text>
+<text x="22.86" y="-15.748" size="1.016" layer="21">SERVO_L</text>
+<text x="30.48" y="-15.748" size="1.016" layer="21">GND</text>
 <text x="28.448" y="-28.448" size="1.27" layer="22" rot="MR0">33</text>
 <text x="28.448" y="-30.48" size="1.27" layer="22" rot="MR0">32</text>
 <text x="30.988" y="-28.448" size="1.27" layer="22" rot="MR0">31</text>
@@ -242,6 +242,8 @@
 <text x="-12.192" y="27.94" size="1.27" layer="22" rot="MR0">DIFF_F2 (R)</text>
 <text x="-41.656" y="-32.004" size="1.27" layer="21">GND</text>
 <text x="-36.068" y="-32.004" size="1.27" layer="21">7V4</text>
+<text x="9.398" y="-32.258" size="1.016" layer="21">DashHub V2
+Designer: Akash Harapanahalli</text>
 </plain>
 <libraries>
 <library name="con-wago-500" urn="urn:adsk.eagle:library:195">
