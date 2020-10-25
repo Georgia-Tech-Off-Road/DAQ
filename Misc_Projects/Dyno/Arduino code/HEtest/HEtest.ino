@@ -40,7 +40,7 @@ void loop() {
 
     Serial.print("Sensor 1 speed: " + val1);
     Serial.print("  Sensor 2 speed: " + val2);
-    Serial.print("  Sensor 3 speed: " + val3);
+    Serial.println("  Sensor 3 speed: " + val3);
     previousTime = currentTime;
   }
   
