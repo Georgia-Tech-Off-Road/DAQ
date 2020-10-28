@@ -4362,11 +4362,6 @@ Source: &lt;a href="http://www.bourns.com/data/global/pdfs/SRN8040.pdf"&gt; Data
 <wire x1="170.18" y1="144.78" x2="172.72" y2="144.78" width="0.1524" layer="91"/>
 <label x="172.72" y="144.78" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="J12" gate="G$1" pin="7"/>
-<wire x1="241.3" y1="147.32" x2="243.84" y2="147.32" width="0.1524" layer="91"/>
-<label x="243.84" y="147.32" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="22" class="0">
 <segment>
@@ -4379,11 +4374,6 @@ Source: &lt;a href="http://www.bourns.com/data/global/pdfs/SRN8040.pdf"&gt; Data
 <pinref part="J10" gate="G$1" pin="7"/>
 <wire x1="170.18" y1="147.32" x2="172.72" y2="147.32" width="0.1524" layer="91"/>
 <label x="172.72" y="147.32" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="J12" gate="G$1" pin="8"/>
-<wire x1="218.44" y1="147.32" x2="215.9" y2="147.32" width="0.1524" layer="91"/>
-<label x="215.9" y="147.32" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="5V" class="0">
@@ -4645,6 +4635,11 @@ Source: &lt;a href="http://www.bourns.com/data/global/pdfs/SRN8040.pdf"&gt; Data
 <junction x="223.52" y="60.96"/>
 <label x="223.52" y="66.04" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="J12" gate="G$1" pin="8"/>
+<wire x1="218.44" y1="147.32" x2="215.9" y2="147.32" width="0.1524" layer="91"/>
+<label x="215.9" y="147.32" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="31" class="0">
 <segment>
@@ -4655,6 +4650,11 @@ Source: &lt;a href="http://www.bourns.com/data/global/pdfs/SRN8040.pdf"&gt; Data
 <wire x1="223.52" y1="48.26" x2="220.98" y2="48.26" width="0.1524" layer="91"/>
 <junction x="223.52" y="48.26"/>
 <label x="223.52" y="53.34" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="J12" gate="G$1" pin="7"/>
+<wire x1="241.3" y1="147.32" x2="243.84" y2="147.32" width="0.1524" layer="91"/>
+<label x="243.84" y="147.32" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
