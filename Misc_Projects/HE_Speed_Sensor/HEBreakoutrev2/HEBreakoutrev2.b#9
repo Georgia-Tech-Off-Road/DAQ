@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.01" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="50" unitdist="mil" unit="inch" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -52,7 +52,7 @@
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
@@ -186,38 +186,10 @@
 </layers>
 <board>
 <plain>
-<wire x1="-9.652" y1="-7.62" x2="9.652" y2="-7.62" width="0" layer="20"/>
-<wire x1="9.652" y1="-7.62" x2="9.652" y2="7.62" width="0" layer="20"/>
-<wire x1="9.652" y1="7.62" x2="-9.652" y2="7.62" width="0" layer="20"/>
-<wire x1="-9.652" y1="7.62" x2="-9.652" y2="-7.62" width="0" layer="20"/>
-<hole x="-7.112" y="-5.08" drill="2.3876"/>
-<hole x="7.112" y="-5.08" drill="2.3876"/>
-<hole x="7.112" y="5.08" drill="2.3876"/>
-<hole x="-7.112" y="5.08" drill="2.3876"/>
-<polygon width="0.0254" layer="25">
-<vertex x="-9.652" y="-7.62"/>
-<vertex x="-4.064" y="-7.62"/>
-<vertex x="-4.064" y="-2.032"/>
-<vertex x="-9.652" y="-2.032"/>
-</polygon>
-<polygon width="0.0254" layer="25">
-<vertex x="-9.652" y="2.032"/>
-<vertex x="-4.064" y="2.032"/>
-<vertex x="-4.064" y="7.62"/>
-<vertex x="-9.652" y="7.62"/>
-</polygon>
-<polygon width="0.0254" layer="25">
-<vertex x="4.064" y="2.032"/>
-<vertex x="9.652" y="2.032"/>
-<vertex x="9.652" y="7.62"/>
-<vertex x="4.064" y="7.62"/>
-</polygon>
-<polygon width="0.0254" layer="25">
-<vertex x="4.064" y="-7.62"/>
-<vertex x="9.652" y="-7.62"/>
-<vertex x="9.652" y="-2.032"/>
-<vertex x="4.064" y="-2.032"/>
-</polygon>
+<wire x1="19.05" y1="0" x2="54.59" y2="0" width="0" layer="20"/>
+<wire x1="54.59" y1="0" x2="54.59" y2="21.26" width="0" layer="20"/>
+<wire x1="54.59" y1="21.26" x2="19.05" y2="21.26" width="0" layer="20"/>
+<wire x1="19.05" y1="21.26" x2="19.05" y2="0" width="0" layer="20"/>
 </plain>
 <libraries>
 <library name="HyTechDevices">
@@ -400,12 +372,12 @@ design rules under a new name.</description>
 </designrules>
 <autorouter>
 <pass name="Default">
-<param name="RoutingGrid" value="12.5mil"/>
+<param name="RoutingGrid" value="50mil"/>
 <param name="AutoGrid" value="1"/>
 <param name="Efforts" value="0"/>
 <param name="TopRouterVariant" value="1"/>
 <param name="tpViaShape" value="round"/>
-<param name="PrefDir.1" value="-"/>
+<param name="PrefDir.1" value="a"/>
 <param name="PrefDir.2" value="0"/>
 <param name="PrefDir.3" value="0"/>
 <param name="PrefDir.4" value="0"/>
@@ -420,7 +392,7 @@ design rules under a new name.</description>
 <param name="PrefDir.13" value="0"/>
 <param name="PrefDir.14" value="0"/>
 <param name="PrefDir.15" value="0"/>
-<param name="PrefDir.16" value="|"/>
+<param name="PrefDir.16" value="a"/>
 <param name="cfVia" value="8"/>
 <param name="cfNonPref" value="5"/>
 <param name="cfChangeDir" value="2"/>
@@ -495,42 +467,42 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="A" library="HyTechDevices" package="SOLDER_PAD_XSMALL" value="SOLDER_PAD" x="-3.048" y="-4.318" smashed="yes" rot="R90">
-<attribute name="NAME" x="-2.54" y="-6.223" size="1.016" layer="21" rot="R180"/>
+<element name="A" library="HyTechDevices" package="SOLDER_PAD_XSMALL" value="SOLDER_PAD" x="30.48" y="7.62" smashed="yes" rot="R90">
+<attribute name="NAME" x="30.48" y="4.445" size="1.27" layer="25" rot="R180"/>
 </element>
-<element name="C1" library="HyTechDevices" package="0603-CAP" value="100nf" x="5.334" y="0" smashed="yes" rot="R90">
-<attribute name="NAME" x="4.7244" y="-0.889" size="0.4064" layer="25" font="vector" rot="R90"/>
-<attribute name="VALUE" x="6.858" y="-0.127" size="0.4064" layer="21" font="vector"/>
+<element name="C1" library="HyTechDevices" package="0603-CAP" value="100nf" x="41.91" y="13.97" smashed="yes" rot="R90">
+<attribute name="NAME" x="41.3004" y="13.081" size="0.4064" layer="25" font="vector" rot="R90"/>
+<attribute name="VALUE" x="42.926" y="13.081" size="0.4064" layer="27" font="vector" rot="R90"/>
 </element>
-<element name="GND" library="HyTechDevices" package="SOLDER_PAD_XSMALL" value="SOLDER_PAD" x="0" y="-4.318" smashed="yes" rot="R90">
-<attribute name="NAME" x="1.27" y="-6.223" size="1.016" layer="21" rot="R180"/>
+<element name="GND" library="HyTechDevices" package="SOLDER_PAD_XSMALL" value="SOLDER_PAD" x="40.64" y="7.62" smashed="yes" rot="R90">
+<attribute name="NAME" x="40.64" y="4.445" size="1.27" layer="25" rot="R180"/>
 </element>
-<element name="IC1" library="AS5047D-ATSM" package="SOP65P640X120-14N" value="AS5047D-ATSM" x="0" y="0" smashed="yes">
-<attribute name="ARROW_PART_NUMBER" value="AS5047D-ATSM" x="20.32" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/as5047d-atsm/ams-ag" x="20.32" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="ams AS5047D-ATSM Hall Effect Sensor 14-Pin TSSOP, 3  3.6 V, 4.5  5.5 V" x="20.32" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="HEIGHT" value="1.2mm" x="20.32" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_NAME" value="ams" x="20.32" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="AS5047D-ATSM" x="20.32" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PART_NUMBER" value="985-AS5047D-ATSM" x="20.32" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/ams/AS5047D-ATSM?qs=qEcPHXRbv51jEdbehV7Mjw%3D%3D" x="20.32" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="0" y="0" size="1.27" layer="25" align="center"/>
-<attribute name="VALUE" x="-0.254" y="6.35" size="1.27" layer="27" align="center"/>
+<element name="IC1" library="AS5047D-ATSM" package="SOP65P640X120-14N" value="AS5047D-ATSM" x="35.56" y="13.97" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="AS5047D-ATSM" x="55.88" y="10.16" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/as5047d-atsm/ams-ag" x="55.88" y="10.16" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="ams AS5047D-ATSM Hall Effect Sensor 14-Pin TSSOP, 3  3.6 V, 4.5  5.5 V" x="55.88" y="10.16" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="1.2mm" x="55.88" y="10.16" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="ams" x="55.88" y="10.16" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="AS5047D-ATSM" x="55.88" y="10.16" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="985-AS5047D-ATSM" x="55.88" y="10.16" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/ams/AS5047D-ATSM?qs=qEcPHXRbv51jEdbehV7Mjw%3D%3D" x="55.88" y="10.16" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="35.56" y="13.97" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="35.56" y="13.97" size="1.27" layer="27" align="center"/>
 </element>
-<element name="R1" library="HyTechDevices" package="0603-RES" value="4.7k" x="0" y="3.81" smashed="yes" rot="R180">
-<attribute name="NAME" x="0.8636" y="3.2004" size="0.4064" layer="25" font="vector" rot="R180"/>
-<attribute name="VALUE" x="-1.9304" y="4.064" size="0.4064" layer="21" font="vector" rot="R180"/>
+<element name="R1" library="HyTechDevices" package="0603-RES" value="4.7k" x="26.67" y="15.24" smashed="yes" rot="R90">
+<attribute name="NAME" x="26.0604" y="14.3764" size="0.4064" layer="25" font="vector" rot="R90"/>
+<attribute name="VALUE" x="27.686" y="14.3764" size="0.4064" layer="27" font="vector" rot="R90"/>
 </element>
-<element name="R2" library="HyTechDevices" package="0603-RES" value="4.7k" x="-7.62" y="0" smashed="yes" rot="R90">
-<attribute name="NAME" x="-8.2296" y="-0.8636" size="0.4064" layer="25" font="vector" rot="R90"/>
-<attribute name="VALUE" x="-8.636" y="-0.3556" size="0.4064" layer="21" font="vector" rot="R90"/>
+<element name="R2" library="HyTechDevices" package="0603-RES" value="4.7k" x="29.21" y="16.51" smashed="yes" rot="R270">
+<attribute name="NAME" x="29.8196" y="17.3736" size="0.4064" layer="25" font="vector" rot="R270"/>
+<attribute name="VALUE" x="28.194" y="17.3736" size="0.4064" layer="27" font="vector" rot="R270"/>
 </element>
-<element name="R3" library="HyTechDevices" package="0603-RES" value="4.7k" x="-5.334" y="0" smashed="yes" rot="R90">
-<attribute name="NAME" x="-5.943596875" y="-0.863596875" size="0.4064" layer="25" font="vector" rot="R90"/>
-<attribute name="VALUE" x="-4.318" y="-0.863596875" size="0.4064" layer="27" font="vector" rot="R90"/>
+<element name="R3" library="HyTechDevices" package="0603-RES" value="4.7k" x="29.21" y="12.7" smashed="yes" rot="R90">
+<attribute name="NAME" x="28.600403125" y="11.836403125" size="0.4064" layer="25" font="vector" rot="R90"/>
+<attribute name="VALUE" x="30.226" y="11.836403125" size="0.4064" layer="27" font="vector" rot="R90"/>
 </element>
-<element name="VCC" library="HyTechDevices" package="SOLDER_PAD_XSMALL" value="SOLDER_PAD" x="3.048" y="-4.318" smashed="yes" rot="R90">
-<attribute name="NAME" x="4.572" y="-6.223" size="1.016" layer="21" rot="R180"/>
+<element name="VCC" library="HyTechDevices" package="SOLDER_PAD_XSMALL" value="SOLDER_PAD" x="35.56" y="7.62" smashed="yes" rot="R90">
+<attribute name="NAME" x="35.56" y="4.445" size="1.27" layer="25" rot="R180"/>
 </element>
 </elements>
 <signals>
@@ -541,21 +513,11 @@ design rules under a new name.</description>
 <contactref element="R2" pad="1"/>
 <contactref element="R3" pad="1"/>
 <contactref element="IC1" pad="5"/>
-<wire x1="5.334" y1="0.85" x2="4.914" y2="1.27" width="0.1524" layer="1"/>
-<wire x1="4.914" y1="1.27" x2="2.968" y2="1.27" width="0.1524" layer="1"/>
-<wire x1="2.968" y1="1.27" x2="2.938" y2="1.3" width="0.1524" layer="1"/>
-<wire x1="-7.62" y1="-0.85" x2="-5.334" y2="-0.85" width="0.1524" layer="1"/>
-<wire x1="-2.938" y1="-0.65" x2="-5.134" y2="-0.65" width="0.1524" layer="1"/>
-<wire x1="-5.134" y1="-0.65" x2="-5.334" y2="-0.85" width="0.1524" layer="1"/>
-<wire x1="-2.938" y1="-0.65" x2="-2.032" y2="-0.65" width="0.1524" layer="1"/>
-<wire x1="2.938" y1="1.3" x2="0.7782125" y2="1.3" width="0.1524" layer="1"/>
-<wire x1="0" y1="-2.682" x2="0" y2="-3.81" width="0.1524" layer="1"/>
-<wire x1="-2.032" y1="-0.65" x2="0" y2="-2.682" width="0.1524" layer="1"/>
-<wire x1="0" y1="-4.572" x2="0" y2="-4.318" width="0.1524" layer="1"/>
-<wire x1="0" y1="0.508" x2="0" y2="-2.682" width="0.1524" layer="1"/>
-<wire x1="0.792" y1="1.3" x2="0" y2="0.508" width="0.1524" layer="1"/>
-<wire x1="0" y1="-3.81" x2="0" y2="-4.318" width="0" layer="19" extent="1-1"/>
-<wire x1="0.7782125" y1="1.3" x2="0.792" y2="1.3" width="0" layer="19" extent="1-1"/>
+<wire x1="41.91" y1="14.82" x2="38.498" y2="15.27" width="0" layer="19" extent="1-1"/>
+<wire x1="32.622" y1="13.32" x2="38.498" y2="15.27" width="0" layer="19" extent="1-1"/>
+<wire x1="29.21" y1="11.85" x2="32.622" y2="13.32" width="0" layer="19" extent="1-1"/>
+<wire x1="29.21" y1="17.36" x2="32.622" y2="13.32" width="0" layer="19" extent="1-1"/>
+<wire x1="40.64" y1="7.62" x2="41.91" y2="14.82" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VCC">
 <contactref element="IC1" pad="12"/>
@@ -563,50 +525,51 @@ design rules under a new name.</description>
 <contactref element="C1" pad="1"/>
 <contactref element="R1" pad="1"/>
 <contactref element="VCC" pad="P$1"/>
-<wire x1="5.334" y1="-0.85" x2="4.914" y2="-0.85" width="0.1524" layer="1"/>
-<wire x1="4.826" y1="-0.85" x2="4.914" y2="-0.85" width="0.1524" layer="1"/>
-<wire x1="4.914" y1="-0.85" x2="4.064" y2="0" width="0.1524" layer="1"/>
-<wire x1="4.064" y1="0" x2="2.938" y2="0" width="0.1524" layer="1"/>
-<wire x1="2.938" y1="0.65" x2="2.938" y2="0" width="0.1524" layer="1"/>
-<wire x1="6.096" y1="1.524" x2="6.096" y2="-0.508" width="0.1524" layer="1"/>
-<wire x1="6.096" y1="-0.508" x2="5.754" y2="-0.85" width="0.1524" layer="1"/>
-<wire x1="5.754" y1="-0.85" x2="5.334" y2="-0.85" width="0.1524" layer="1"/>
-<wire x1="0.85" y1="3.81" x2="2.54" y2="3.81" width="0.1524" layer="1"/>
-<wire x1="4.572" y1="1.778" x2="5.842" y2="1.778" width="0.1524" layer="1"/>
-<wire x1="4.572" y1="1.778" x2="2.54" y2="3.81" width="0.1524" layer="1"/>
-<wire x1="5.842" y1="1.778" x2="6.096" y2="1.524" width="0.1524" layer="1"/>
-<wire x1="3.048" y1="-4.318" x2="3.048" y2="-3.302" width="0.1524" layer="1"/>
-<wire x1="3.048" y1="-3.302" x2="5.08" y2="-1.27" width="0.1524" layer="1"/>
-<wire x1="5.08" y1="-1.27" x2="4.826" y2="-0.85" width="0" layer="19" extent="1-1"/>
+<wire x1="41.91" y1="13.12" x2="41.91" y2="12.7" width="0.1524" layer="1"/>
+<wire x1="41.91" y1="12.7" x2="41.91" y2="11.43" width="0.1524" layer="1"/>
+<wire x1="41.91" y1="11.43" x2="40.64" y2="10.16" width="0.1524" layer="1"/>
+<wire x1="40.64" y1="10.16" x2="36.83" y2="10.16" width="0.1524" layer="1"/>
+<wire x1="36.83" y1="10.16" x2="35.56" y2="8.89" width="0.1524" layer="1"/>
+<wire x1="35.56" y1="8.89" x2="35.56" y2="7.62" width="0.1524" layer="1"/>
+<wire x1="38.498" y1="13.97" x2="40.64" y2="13.97" width="0.1524" layer="1"/>
+<wire x1="40.64" y1="13.97" x2="41.91" y2="12.7" width="0.1524" layer="1"/>
+<wire x1="38.498" y1="13.97" x2="38.498" y2="14.62" width="0" layer="19" extent="1-1"/>
+<wire x1="26.67" y1="14.39" x2="35.56" y2="7.62" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$1">
 <contactref element="R1" pad="2"/>
 <contactref element="IC1" pad="1"/>
-<wire x1="-0.85" y1="3.81" x2="-2.71" y2="1.95" width="0.1524" layer="1"/>
-<wire x1="-2.71" y1="1.95" x2="-2.938" y2="1.95" width="0.1524" layer="1"/>
+<wire x1="32.622" y1="15.92" x2="31.07" y2="15.92" width="0.1524" layer="1"/>
+<wire x1="31.07" y1="15.92" x2="30.48" y2="16.51" width="0.1524" layer="1"/>
+<wire x1="27.09" y1="16.51" x2="26.67" y2="16.09" width="0.1524" layer="1"/>
+<wire x1="30.48" y1="16.51" x2="27.09" y2="16.51" width="0.1524" layer="1"/>
 </signal>
 <signal name="N$2">
 <contactref element="IC1" pad="2"/>
 <contactref element="R2" pad="2"/>
-<wire x1="-2.968" y1="1.27" x2="-2.938" y2="1.3" width="0.1524" layer="1"/>
-<wire x1="-2.938" y1="1.3" x2="-3.84" y2="1.3" width="0.1524" layer="1"/>
-<wire x1="-3.84" y1="1.3" x2="-4.318" y2="1.778" width="0.1524" layer="1"/>
-<wire x1="-4.318" y1="1.778" x2="-7.112" y2="1.778" width="0.1524" layer="1"/>
-<wire x1="-7.112" y1="1.778" x2="-7.62" y2="1.27" width="0.1524" layer="1"/>
-<wire x1="-7.62" y1="1.27" x2="-7.62" y2="0.85" width="0.1524" layer="1"/>
+<wire x1="29.21" y1="15.66" x2="30.06" y2="15.66" width="0.1524" layer="1"/>
+<wire x1="30.06" y1="15.66" x2="30.48" y2="15.24" width="0.1524" layer="1"/>
+<wire x1="30.48" y1="15.24" x2="32.592" y2="15.24" width="0.1524" layer="1"/>
+<wire x1="32.592" y1="15.24" x2="32.622" y2="15.27" width="0.1524" layer="1"/>
 </signal>
 <signal name="N$3">
 <contactref element="IC1" pad="4"/>
 <contactref element="R3" pad="2"/>
-<wire x1="-4.484" y1="0" x2="-5.334" y2="0.85" width="0.1524" layer="1"/>
-<wire x1="-2.938" y1="0" x2="-4.484" y2="0" width="0.1524" layer="1"/>
+<wire x1="29.21" y1="13.55" x2="29.63" y2="13.97" width="0.1524" layer="1"/>
+<wire x1="29.63" y1="13.97" x2="32.622" y2="13.97" width="0.1524" layer="1"/>
 </signal>
 <signal name="N$5">
 <contactref element="A" pad="P$1"/>
 <contactref element="IC1" pad="7"/>
-<wire x1="-2.938" y1="-1.95" x2="-2.938" y2="-3.446" width="0.1524" layer="1"/>
-<wire x1="-2.938" y1="-3.446" x2="-3.048" y2="-3.556" width="0.1524" layer="1"/>
-<wire x1="-3.048" y1="-3.556" x2="-3.048" y2="-4.318" width="0" layer="19" extent="1-1"/>
+<wire x1="32.622" y1="12.02" x2="30.48" y2="9.878" width="0.1524" layer="1"/>
+<wire x1="30.48" y1="9.878" x2="30.48" y2="8.89" width="0.1524" layer="1"/>
+<wire x1="30.48" y1="8.89" x2="30.48" y2="7.62" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$4">
+<via x="26.67" y="11.43" extent="1-16" drill="0.35"/>
+</signal>
+<signal name="N$6">
+<via x="34.29" y="10.16" extent="1-16" drill="0.35"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
