@@ -3242,6 +3242,8 @@ design rules under a new name.</description>
 <wire x1="-25.019" y1="-31.5496" x2="-25.273" y2="-31.2956" width="0.1524" layer="16"/>
 <wire x1="-25.273" y1="-31.2956" x2="-25.273" y2="-30.622" width="0.1524" layer="16"/>
 <wire x1="-16.256" y1="-29.718" x2="-18.0876" y2="-31.5496" width="0.1524" layer="1"/>
+<contactref element="U1" pad="6"/>
+<wire x1="-30.988" y1="-30.613" x2="-28.448" y2="-30.613" width="0" layer="19" extent="16-16"/>
 </signal>
 <signal name="XBEE_RX">
 <contactref element="U$1" pad="0/RX"/>
