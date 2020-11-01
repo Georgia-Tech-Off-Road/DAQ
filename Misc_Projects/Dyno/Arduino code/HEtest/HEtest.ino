@@ -1,9 +1,11 @@
 #include <HallEffectSpeedSensor.h>
 
+#include <HallEffectSpeedSensor.h>
+
 
 
 unsigned long previousTime = 0;
-unsigned long timeInterval = 100000000;
+unsigned long timeInterval = 100000;
 
 int he1pin = 3;
 int he2pin = 4;
@@ -32,22 +34,21 @@ void loop() {
   he3.updateSensor();
 
   unsigned long currentTime = micros();
-  Serial.println("I got here 0");
-    
+
   if (currentTime - previousTime > timeInterval) {
-    Serial.println("I got here 1");
 
     val1 = he1.getSpeed();
     val2 = he2.getSpeed();
     val3 = he3.getSpeed();
 
     Serial.print("Sensor 1 speed: ");
-    Serial.print(val1);
+    Serial.print(val1, DEC);
     Serial.print("  Sensor 2 speed: ");
-    Serial.print(val2);
+    Serial.print(val2, DEC);
     Serial.print("  Sensor 3 speed: ");
-    Serial.print(val2);
-    Serial.println("The time is: "+ micros());
+    Serial.print(val3, DEC);
+    Serial.print("   The time is: ");
+    Serial.println(micros(), DEC);
     previousTime = currentTime;
   }
   

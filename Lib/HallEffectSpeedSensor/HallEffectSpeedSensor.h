@@ -17,7 +17,7 @@ private:
     uint16_t _currSpeed;
     uint16_t * _readings;
     uint32_t _intervalTime;
-    uint16_t _toneWheelTeeth;
+    uint8_t _toneWheelTeeth;
     uint16_t _averagingAmount;
     uint16_t _intervalLength; //How often _currSpeed is updated in microseconds (limited by processor speed)
     uint16_t _index;
@@ -31,7 +31,7 @@ public:
     /**
      * Sets up the digital input pin for the sensor.
      */
-    HallEffectSpeedSensor(int inputPin, uint16_t toneWheelTeeth, uint16_t intervalLength = 50,uint16_t averagingAmount = 200);
+    HallEffectSpeedSensor(int inputPin, uint8_t toneWheelTeeth, uint16_t intervalLength = 50,uint16_t averagingAmount = 200);
 
     ~HallEffectSpeedSensor(){
         delete _readings;
