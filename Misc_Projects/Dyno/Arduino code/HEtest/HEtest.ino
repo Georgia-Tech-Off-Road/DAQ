@@ -1,4 +1,3 @@
-#include <HallEffectSpeedSensor.h>
 
 #include <HallEffectSpeedSensor.h>
 
@@ -37,9 +36,9 @@ void loop() {
 
   if (currentTime - previousTime > timeInterval) {
 
-    val1 = he1.getSpeed();
-    val2 = he2.getSpeed();
-    val3 = he3.getSpeed();
+    val1 = he1.getSpeed()/5;
+    val2 = he2.getSpeed()/5;
+    val3 = he3.getSpeed()/5;
 
     Serial.print("Sensor 1 speed: ");
     Serial.print(val1, DEC);
