@@ -54,7 +54,6 @@ class DataCollection(DAATALayout, uiFile):
         self.is_data_collecting = is_data_collecting
 
         self.connect_slotsAndSignals()
-
         self.configFile = QSettings('DAATA', 'data_collection')
         self.load_settings()
 
@@ -62,8 +61,8 @@ class DataCollection(DAATALayout, uiFile):
 
     ## imported methods
     from Utilities.DataExport.dataSaveLocation import popup_dataSaveLocation
+    from Utilities.Popups.popups import popup_stopDataConfirmation
     from Utilities.DataExport.exportMAT import saveMAT
-
 
 
 
@@ -189,9 +188,12 @@ class DataCollection(DAATALayout, uiFile):
         else:
             self.indicator_onOrOff.setText("Off")
             self.indicator_onOrOff.setStyleSheet("color: red;")
-            self.button_display.setText("Start Collecting Data")
-            self.is_data_collecting.clear()
-            self.popup_dataSaveLocation()
+            conf = self.popup_stopDataConfirmation()
+            if conf == QtWidgets.QDialog.Accepted:
+                self.button_display.setText("Start Collecting Data")
+                self.is_data_collecting.clear()
+                self.popup_dataSaveLocation()
+
 
 
 
@@ -245,11 +247,12 @@ class DataCollection(DAATALayout, uiFile):
         # if the Data Collection tab is the current tab
         # or if the Layouts tab is the current tab
 
+        self.update_sensorCheckboxes()
         if self.is_data_collecting.is_set():
-            self.updateGraphs()
-            self.updateTimeElapsed()
-            self.update_sensorCheckboxes()
-            # logger.debug('updating ' + self.objectName() + "...")
+            if self.button_display.isChecked():
+                self.updateGraphs()
+                self.updateTimeElapsed()
+                # logger.debug('updating ' + self.objectName() + "...")
 
         #### temporary implementation of global recording button update
         if self.is_data_collecting.is_set():
@@ -258,6 +261,7 @@ class DataCollection(DAATALayout, uiFile):
             self.button_display.setText("Stop Collecting Data")
             self.button_display.setChecked(True)
         else:
+
             self.indicator_onOrOff.setText("Off")
             self.indicator_onOrOff.setStyleSheet("color: red;")
             self.button_display.setText("Start Collecting Data")

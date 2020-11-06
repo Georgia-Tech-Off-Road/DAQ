@@ -47,7 +47,7 @@ def closeTab(self, parent, index):
     ans = QtWidgets.QMessageBox.warning(parent, "Warning",
                                         "Do you want to close this tab? Any unsaved progress will be lost",
                                         QtWidgets.QMessageBox.Close | QtWidgets.QMessageBox.Cancel)
-    # self.setWindowIcon(QtGui.QIcon(os.directory.join(os.directory.dirname(__file__), 'warningIcon.png')))
+    # self.setWindowIcon(QtGui.QIcon(os.directory.join(os.directory.dirname(__file__), 'iconWarning.png')))
     if ans == QtWidgets.QMessageBox.Close:
         widget = parent.tabWidget.widget(index)
         if widget is not None:

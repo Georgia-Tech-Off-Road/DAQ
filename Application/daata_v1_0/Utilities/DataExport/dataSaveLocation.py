@@ -12,6 +12,7 @@ class popup_dataSaveLocation(QtWidgets.QDialog, uiFile):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)     # hide the question mark in title bar
         self.configFile = QtCore.QSettings('DAATA', 'saveLocationDialog')
         self.loadSettings()
 

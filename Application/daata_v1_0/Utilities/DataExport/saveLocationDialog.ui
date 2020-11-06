@@ -65,7 +65,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../Icons/browseDirectoryIcon.svg</normaloff>../Icons/browseDirectoryIcon.svg</iconset>
+          <normaloff>browseDirectoryIcon.svg</normaloff>browseDirectoryIcon.svg</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -139,7 +139,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../Icons/browseDirectoryIcon.svg</normaloff>../Icons/browseDirectoryIcon.svg</iconset>
+          <normaloff>browseDirectoryIcon.svg</normaloff>browseDirectoryIcon.svg</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -206,7 +206,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../Icons/browseDirectoryIcon.svg</normaloff>../Icons/browseDirectoryIcon.svg</iconset>
+          <normaloff>browseDirectoryIcon.svg</normaloff>browseDirectoryIcon.svg</iconset>
         </property>
         <property name="iconSize">
          <size>

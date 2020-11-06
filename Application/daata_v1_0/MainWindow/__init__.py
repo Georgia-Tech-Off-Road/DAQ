@@ -12,7 +12,7 @@ from Layouts.DataCollection import DataCollection
 from Layouts.Layout_Test import Widget_Test
 
 
-from Utilities.findAncestryTree.parentChildrenTree import popup_ParentChildrenTree
+from Utilities.Popups.popups import popup_ParentChildrenTree
 from MainWindow._tabHandler import closeTab
 import DataAcquisition
 
@@ -35,7 +35,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.dict_layouts = {}  # instantiates dictionary that holds objects for widgets
         self.import_Layouts()
-        self.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname(__file__), 'icon_application.svg')))
 
         self.resetTabs_tabWidget()
         self.populate_menu()
@@ -55,7 +54,28 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.timer.setInterval(1000 / self.refreshFreq)
 
         self.connectSignalsSlots()
+
+        self.set_appIcon()
         self.loadStylesheet()
+
+
+    # set app icon on taskbar and titlebar
+    def set_appIcon(self):
+        import ctypes
+        myappid = 'mycompany.myproduct.subproduct.version'  # arbitrary string
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
+
+        path = os.path.join(os.path.dirname(__file__), 'icon_GTORLogo.png')
+        self.setWindowIcon(QtGui.QIcon(path))
+
+        # app_icon = QtGui.QIcon()
+        # app_icon.addFile('icon_GTORLogo/icon_GTORLogo16x16.png', QtCore.QSize(16, 16))
+        # app_icon.addFile('icon_GTORLogo/icon_GTORLogo24x24.png', QtCore.QSize(24, 24))
+        # app_icon.addFile('icon_GTORLogo/icon_GTORLogo32x32.png', QtCore.QSize(32, 32))
+        # app_icon.addFile('icon_GTORLogo/icon_GTORLogo48x48.png', QtCore.QSize(48, 48))
+        # app_icon.addFile('icon_GTORLogo/icon_GTORLogo256x256.png', QtCore.QSize(256, 256))
+        # self.setWindowIcon(app_icon)
 
     def loadStylesheet(self):
         stylesheet = """        
@@ -128,7 +148,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             windowBorder = "white",
             defaultText = "white"
             )
-        print(stylesheet)
         self.setStyleSheet(stylesheet)
 
     ## Imported methods
