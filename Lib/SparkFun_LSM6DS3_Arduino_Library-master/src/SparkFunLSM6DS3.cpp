@@ -45,7 +45,7 @@ Distributed as-is; no warranty is given.
 //  Default construction is I2C mode, address 0x6B.
 //
 //****************************************************************************//
-LSM6DS3Core::LSM6DS3Core( uint8_t busType, uint8_t inputArg) : commInterface(I2C_MODE), I2CAddress(0x6B), chipSelectPin(10)
+LSM6DS3Core::LSM6DS3Core( uint8_t busType, uint8_t inputArg) : commInterface(I2C_MODE), I2CAddress(0x6B), chipSelectPin(12)
 {
 	commInterface = busType;
 	if( commInterface == I2C_MODE )
