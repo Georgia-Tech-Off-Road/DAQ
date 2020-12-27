@@ -2,7 +2,6 @@
 #include <HallEffectSpeedSensor.h>
 
 
-
 unsigned long previousTime = 0;
 unsigned long timeInterval = 100000;
 
