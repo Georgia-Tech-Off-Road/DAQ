@@ -1,6 +1,7 @@
 #include <Wire.h>
 #include <SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h>
 
+
 NAU7802 load;
 void setup() {
   Serial.begin(9600);
