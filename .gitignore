@@ -303,3 +303,9 @@ dmypy.json
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,python,visualstudiocode
+
+
+
+### Microsoft Office ###
+# Ignores all temporary files made for word document, excel sheet, etc. 
+~$*
