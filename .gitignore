@@ -1,6 +1,56 @@
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm,python,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm,python,visualstudiocode
 
+
+### Eagle ###
+# Created by https://www.gitignore.io/api/eagle
+# Ignore list for Eagle, a PCB layout tool
+
+# Backup files
+*.s#?
+*.b#?
+*.l#?
+*.b$?
+*.s$?
+*.l$?
+
+# Eagle project file
+# It contains a serial number and references to the file structure
+# on your computer.
+# comment the following line if you want to have your project file included.
+eagle.epf
+
+# Autorouter files
+*.pro
+*.job
+
+# CAM files
+*.$$$
+*.cmp
+*.ly2
+*.l15
+*.sol
+*.plc
+*.stc
+*.sts
+*.crc
+*.crs
+*.dri
+*.drl
+*.gpi
+*.pls
+*.drd
+*.drd.*
+*.info
+*.eps
+
+# file locks introduced since 7.x
+*.lck
+
+# End of https://www.gitignore.io/api/eagle
+
+
+
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
@@ -253,3 +303,9 @@ dmypy.json
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,python,visualstudiocode
+
+
+
+### Microsoft Office ###
+# Ignores all temporary files made for word document, excel sheet, etc. 
+~$*
