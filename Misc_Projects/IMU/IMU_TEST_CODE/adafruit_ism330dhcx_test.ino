@@ -4,10 +4,6 @@
 
 // For SPI mode, we need a CS pin
 #define LSM_CS 10
-// For software-SPI mode we need SCK/MOSI/MISO pins
-#define LSM_SCK 13
-#define LSM_MISO 12
-#define LSM_MOSI 11
 
 Adafruit_ISM330DHCX ism330dhcx;
 void setup(void) {
@@ -19,7 +15,6 @@ void setup(void) {
 
   //if (!ism330dhcx.begin_I2C()) {
      if (!ism330dhcx.begin_SPI(LSM_CS)) {
-    // if (!ism330dhcx.begin_SPI(LSM_CS, LSM_SCK, LSM_MISO, LSM_MOSI)) {
     Serial.println("Failed to find ISM330DHCX chip");
     while (1) {
       delay(10);
