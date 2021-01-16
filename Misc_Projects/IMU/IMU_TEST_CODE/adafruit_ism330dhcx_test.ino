@@ -23,7 +23,7 @@ void setup(void) {
 
   Serial.println("ISM330DHCX Found!");
 
-  // ism330dhcx.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);
+  ism330dhcx.setAccelRange(LSM6DS_ACCEL_RANGE_16_G);
   Serial.print("Accelerometer range set to: ");
   switch (ism330dhcx.getAccelRange()) {
   case LSM6DS_ACCEL_RANGE_2_G:
@@ -40,7 +40,7 @@ void setup(void) {
     break;
   }
 
-  // ism330dhcx.setGyroRange(LSM6DS_GYRO_RANGE_250_DPS);
+  ism330dhcx.setGyroRange(LSM6DS_GYRO_RANGE_4000_DPS);
   Serial.print("Gyro range set to: ");
   switch (ism330dhcx.getGyroRange()) {
   case LSM6DS_GYRO_RANGE_125_DPS:
@@ -63,7 +63,7 @@ void setup(void) {
     break;
   }
 
-  // ism330dhcx.setAccelDataRate(LSM6DS_RATE_12_5_HZ);
+  ism330dhcx.setAccelDataRate(LSM6DS_RATE_6_66K_HZ);
   Serial.print("Accelerometer data rate set to: ");
   switch (ism330dhcx.getAccelDataRate()) {
   case LSM6DS_RATE_SHUTDOWN:
@@ -101,7 +101,7 @@ void setup(void) {
     break;
   }
 
-  // ism330dhcx.setGyroDataRate(LSM6DS_RATE_12_5_HZ);
+  ism330dhcx.setGyroDataRate(LSM6DS_RATE_6_66K_HZ);
   Serial.print("Gyro data rate set to: ");
   switch (ism330dhcx.getGyroDataRate()) {
   case LSM6DS_RATE_SHUTDOWN:
