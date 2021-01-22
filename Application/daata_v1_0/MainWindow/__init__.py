@@ -21,7 +21,8 @@ is_data_collecting = threading.Event()  # Creates an event to know if the data c
 data_collection_thread = threading.Thread(target=DataAcquisition.collect_data)  # Creates thread for collecting data
 logger = logging.getLogger("MainWindow")
 
-Ui_MainWindow, _ = uic.loadUiType(r'MainWindow\MainWindow.ui')  # loads the .ui file from QT Desginer
+
+Ui_MainWindow, _ = uic.loadUiType(os.path.join(os.path.dirname(__file__), 'MainWindow.ui'))  # loads the .ui file from QT Desginer
 
 
 
