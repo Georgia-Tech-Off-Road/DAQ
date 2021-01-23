@@ -1,0 +1,45 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "Q_locked",
+					"strict" : false
+				},
+				{
+					"name" : "Q_limitedSlip",
+					"strict" : false
+				},
+				{
+					"name" : "Q_auto",
+					"strict" : false
+				},
+				{
+					"name" : "Q_enFlipFlop",
+					"strict" : false
+				},
+				{
+					"name" : "Q_en_CLK",
+					"strict" : false
+				},
+				{
+					"name" : "locked",
+					"strict" : false
+				},
+				{
+					"name" : "limitedSlip",
+					"strict" : false
+				},
+				{
+					"name" : "auto",
+					"strict" : false
+				},
+				{
+					"name" : "clock",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
