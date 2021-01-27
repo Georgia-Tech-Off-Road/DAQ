@@ -2,7 +2,7 @@
 #define DIFFERENTIAL_CONTROLLER_H
 
 #include <Arduino.h>
-#include <Single_MAX14870_Motor_Shield.h>
+#include <Single_MAX14870_MotorShield.h>
 
 #define STATE_4WD  0
 #define STATE_LS   1
@@ -16,7 +16,7 @@
 
 class Differential_Controller {
   public:
-    Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, Single_MAX14870_Motor_Shield& motor_shield, uint8_t pin_switch1, uint8_t pin_switch2, uint8_t pin_switch3, HallEffectSpeedSensor& HE1, HallEffectSpeedSensor& HE2);
+    Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, Single_MAX14870_MotorShield& motor_shield, uint8_t pin_switch1, uint8_t pin_switch2, uint8_t pin_switch3, HallEffectSpeedSensor& HE1, HallEffectSpeedSensor& HE2);
     void setup();
     void update();
     void changeMode(uint8_t desired_state);
@@ -24,7 +24,7 @@ class Differential_Controller {
     uint8_t get_switchPos();
 
   private:
-    Single_MAX14870_Motor_Shield _motor_driver;
+    Single_MAX14870_MotorShield _motor_driver;
     HallEffectSpeedSensor _HE1;
     HallEffectSpeedSensor _HE2;
 

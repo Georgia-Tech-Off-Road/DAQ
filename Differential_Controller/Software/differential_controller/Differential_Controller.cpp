@@ -4,7 +4,7 @@
 #include "Differential_Controller.h"
 
 
-Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, Single_MAX14870_Motor_Shield& motor_shield, uint8_t pin_switch1, uint8_t pin_switch2, uint8_t pin_switch3, HallEffectSpeedSensor& HE1, HallEffectSpeedSensor& HE2) : 
+Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, Single_MAX14870_MotorShield& motor_shield, uint8_t pin_switch1, uint8_t pin_switch2, uint8_t pin_switch3, HallEffectSpeedSensor& HE1, HallEffectSpeedSensor& HE2) : 
   _pin_diff1(pin_diff1),
   _pin_diff2(pin_diff2),
   _pin_diff3(pin_diff3),
