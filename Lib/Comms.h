@@ -28,7 +28,13 @@
  * 
  * To determine the max baud rate, refer to the chart at the bottom of this website: https://www.pjrc.com/teensy/td_uart.html
  * 
- * @TODO: Add support for Teensy < 4.0 and for Arduino
+ * @TODO:
+ *  - Add support for Teensy < 4.0 and for Arduino
+ *  - Make sure port settings default to neither for all ports
+ *  - Add functionality for wririting data to SD card as well
+ *  - Define all static variables
+ *  - Do all the logic for the update function
+ *  - Make the packData and unpackData functions
  */
 
 
@@ -52,7 +58,9 @@ enum sensor_name_t : uint8_t
     ACCEL2_Z = 15,
     GYRO2_ROLL = 16,
     GYRO2_YAW = 17,
-    GYRO2_PITCH = 18
+    GYRO2_PITCH = 18,
+    IS_DATA_COLLECTING = 19,
+    SD_CARD_FILENAME = 20
 };
 
 enum port_setting_t : uint8_t
@@ -67,12 +75,14 @@ class Comms {
 private:
     Comms() {}
 
+    // These arrays store the settings for each individual port
     static uint16_t _baud_rate[9];
     static HardwareSerial *_serial_ports[9];
     static port_setting_t _port_setting[9];
     static bool _is_settings_need_sent[9];
     static bool _has_updated_settings[9];
     static bool _has_settings_requested[9];
+    static bool _is_connected[9];
 
     static constexpr uint8_t _sensor_bytes[] = {
         2, //0
@@ -93,21 +103,27 @@ private:
         2, //15
         2, //16
         2, //17
-        2 //18
+        2, //18
+        1, //19
+        12 //20
     };
 
     // Make sure these 4 arrays have a large enough size
-    static bool _sensor_is_sending[64];
+    // The first two arrays store port specific settings and the last two are data storage shared between all ports
+    static bool _sensor_is_sending[9][64];
     static bool _sensor_is_receiving[9][64];
     static uint8_t _data_store[64][12];
-    static bool _has_new_data[64];
+    static bool _has_new_data[64]; // This means that the device has received new data for a specific sensor since last read
 
     // Currently accepts max 'packet' size of 72 bytes. If you try to send more it will break everything (It will compile/run, but no data will be received)
+    // These arrays store temp data before unpacking/after packing
     static uint8_t _data_receive[9][72];
     static uint8_t _index[9];
     static uint8_t _data_send[72];
 
+    // These variables are used to make sure data is sent periodically and to check connectivity
     static uint32_t _last_time;
+    static uint32_t _last_verified_connection;
     static uint16_t _period;
 
     static constexpr uint8_t _end_code[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF0};
@@ -196,7 +212,7 @@ public:
      * @param period The period in which data is sent in microseconds (us) (for 200Hz -> 5000us)
      *      **Note: Can't be greater than 65,535 us
      */
-    static void begin(uint16_t period){
+    static void begin(uint16_t period = 5000){
         _period = period;
         _serial_ports[0] = &Serial;
         _serial_ports[1] = &Serial1;
@@ -206,11 +222,11 @@ public:
         _serial_ports[5] = &Serial5;
         _serial_ports[6] = &Serial6;
         _serial_ports[7] = &Serial7;
-        #if defined(__IMXRT1052__)   // Depending on the hardware, this is not always defined
+        #if defined(__IMXRT1052__)   // Only defined for Teensy 4.1
         _serial_ports[8] = &Serial8;
         #endif
         for(uint8_t i = 0; i <= 8; i++){
-            if(_is_enabled & (1<<i)){
+            if(_port_setting[i] == SENDING || _port_setting[i] == RECEIVING || _port_setting[i] == BOTH){
                 _serial_ports[i]->begin(_baud_rate[i]);
             }
         }
@@ -231,18 +247,23 @@ public:
             sendData(num_elements);
         }
         for (uint8_t i = 0; i <= 8; i++){
-            if (_port_setting[i] != 0 && _serial_ports[i]->available()){
-                if (_is_settings_needed[i]){
-                    // Send a settings request
-                    _serial_ports[i]->write(0);
-                    // Write end code here too
-                }
-                else {
-                    // Either is getting data bc recieving/both or is getting a settings request bc sending/both or is getting 1's to show new settings bc recieving/both
-                    _data_receive[_index[i]] = _serial_ports[i]->read();
-                    bool end_of_packet = receivedEndCode(i);
+            // Could be recieving data, recieving an ack, or receiving a settings request
+            if (_port_setting[i] != NEITHER && _serial_ports[i]->available()){
+                _data_receive[_index[i]] = _serial_ports[i]->read();
+                bool end_of_packet = receivedEndCode(i);
+                if (end_of_packet){
+                    _index[i] = 0;
+                    // ########### Handle stuff here
+                } else {
                     _index[i]++;
                 }
+            }
+
+            // If the port is recieving data and it needs settings, send a settings request
+            if ((_port_setting[i] == RECEIVING || _port_setting[i] == BOTH) && _is_settings_needed[i]){
+                // Send a settings request
+                _serial_ports[i]->write(0);
+                // Write end code here too
             }
         }
     }
@@ -264,7 +285,8 @@ public:
 
 
     /*
-     * @brief Used to retrieve data corresponding to a specific sensor
+     * @brief Used to retrieve data corresponding to a specific sensor. Will return the last collected value or 0 if no values have been
+     *        collected ever. Use hasNewData() to check if a value you are reading is new.
      * 
      * @param *data Pointer to the data for the corresponding sensor. Must be correct size for that sensor.
      * 
@@ -275,7 +297,28 @@ public:
              typename = typename std::enable_if<(sizeof(T) == _sensor_bytes[sensor])>::type >
     static void readData(T *data) {
         memcpy(data, _data_store[sensor], _sensor_bytes[sensor]);
+        _has_new_data[sensor] = false;
     }
+
+
+    /*
+     * @brief Used to check if a sensor has recieved updated data since the last read.
+     * 
+     * @param sensor A sensor_name_t type that corresponds to which sensor you want to check.
+     */
+    static bool hasNewData(sensor_name_t sensor) {
+        return _has_new_data[sensor];
+    }
+
+    /*
+     * @brief Used to check if a port is currently connected (this auto-updates about every second)
+     * 
+     * @param serial_number The serial port which you wish to check the connection of (must be a number from 0-8)
+     */
+    static bool checkConnected(uint8_t serial_number){
+        return _is_connected[serial_number];
+    }
+
 };
 
 
