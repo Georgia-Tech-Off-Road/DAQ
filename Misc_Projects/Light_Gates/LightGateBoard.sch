@@ -9,6 +9,20 @@
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
+<layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
+<layer number="3" name="Route3" color="17" fill="1" visible="no" active="no"/>
+<layer number="4" name="Route4" color="18" fill="1" visible="no" active="no"/>
+<layer number="5" name="Route5" color="19" fill="1" visible="no" active="no"/>
+<layer number="6" name="Route6" color="25" fill="1" visible="no" active="no"/>
+<layer number="7" name="Route7" color="26" fill="1" visible="no" active="no"/>
+<layer number="8" name="Route8" color="27" fill="1" visible="no" active="no"/>
+<layer number="9" name="Route9" color="28" fill="1" visible="no" active="no"/>
+<layer number="10" name="Route10" color="29" fill="1" visible="no" active="no"/>
+<layer number="11" name="Route11" color="30" fill="1" visible="no" active="no"/>
+<layer number="12" name="Route12" color="20" fill="1" visible="no" active="no"/>
+<layer number="13" name="Route13" color="21" fill="1" visible="no" active="no"/>
+<layer number="14" name="Route14" color="22" fill="1" visible="no" active="no"/>
+<layer number="15" name="Route15" color="23" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="no"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="no" active="no"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="no" active="no"/>
@@ -1635,24 +1649,6 @@ Source: transistor-fet.lbr</description>
 <circle x="0" y="11.176" radius="4.191" width="0" layer="43"/>
 <hole x="0" y="11.176" drill="3.302"/>
 </package>
-<package name="LED-5MM">
-<description>5mm LED
-&lt;br&gt;
-&lt;a href="https://github.com/DangerousPrototypes/Eagle_Part_Library"&gt;Source: Dangerous Prototypes Eagle Library&lt;/a&gt;</description>
-<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.2032" layer="21"/>
-<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.254" layer="21" curve="-286.260205"/>
-<wire x1="-1.143" y1="0" x2="0" y2="1.143" width="0.1524" layer="51" curve="-90"/>
-<wire x1="0" y1="-1.143" x2="1.143" y2="0" width="0.1524" layer="51" curve="90"/>
-<wire x1="-1.651" y1="0" x2="0" y2="1.651" width="0.1524" layer="51" curve="-90"/>
-<wire x1="0" y1="-1.651" x2="1.651" y2="0" width="0.1524" layer="51" curve="90"/>
-<wire x1="-2.159" y1="0" x2="0" y2="2.159" width="0.1524" layer="51" curve="-90"/>
-<wire x1="0" y1="-2.159" x2="2.159" y2="0" width="0.1524" layer="51" curve="90"/>
-<circle x="0" y="0" radius="2.54" width="0.1524" layer="21"/>
-<pad name="A" x="-1.27" y="0" drill="0.8128" shape="octagon"/>
-<pad name="K" x="1.27" y="0" drill="0.8128" shape="octagon"/>
-<text x="3.175" y="0.5334" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="3.2004" y="-1.8034" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
-</package>
 <package name="DIL14" urn="urn:adsk.eagle:footprint:16136/1">
 <description>&lt;b&gt;Dual In Line Package&lt;/b&gt;</description>
 <wire x1="8.89" y1="2.921" x2="-8.89" y2="2.921" width="0.1524" layer="21"/>
@@ -1701,27 +1697,6 @@ Source: transistor-fet.lbr</description>
 <text x="-2.032" y="-4.318" size="1.524" layer="95">GND</text>
 <text x="-4.445" y="-0.635" size="1.524" layer="95">IN</text>
 <text x="0.635" y="-0.635" size="1.524" layer="95">OUT</text>
-</symbol>
-<symbol name="OT-NO">
-<wire x1="-3.048" y1="-2.54" x2="-1.27" y2="-0.762" width="0.1524" layer="94"/>
-<wire x1="-1.27" y1="-0.762" x2="-2.413" y2="-1.143" width="0.1524" layer="94"/>
-<wire x1="-2.413" y1="-1.143" x2="-1.651" y2="-1.905" width="0.1524" layer="94"/>
-<wire x1="-1.651" y1="-1.905" x2="-1.27" y2="-0.762" width="0.1524" layer="94"/>
-<wire x1="-1.143" y1="1.143" x2="-2.286" y2="0.762" width="0.1524" layer="94"/>
-<wire x1="-2.286" y1="0.762" x2="-1.524" y2="0" width="0.1524" layer="94"/>
-<wire x1="-1.524" y1="0" x2="-1.143" y2="1.143" width="0.1524" layer="94"/>
-<wire x1="-2.921" y1="-0.635" x2="-1.143" y2="1.143" width="0.1524" layer="94"/>
-<wire x1="2.54" y1="2.54" x2="0" y2="0" width="0.1524" layer="94"/>
-<wire x1="0" y1="0" x2="2.286" y2="-2.286" width="0.1524" layer="94"/>
-<wire x1="1.778" y1="-1.016" x2="2.286" y2="-2.286" width="0.1524" layer="94"/>
-<wire x1="2.286" y1="-2.286" x2="2.54" y2="-2.54" width="0.1524" layer="94"/>
-<wire x1="2.286" y1="-2.286" x2="1.016" y2="-1.778" width="0.1524" layer="94"/>
-<wire x1="1.016" y1="-1.778" x2="1.778" y2="-1.016" width="0.1524" layer="94"/>
-<text x="5.08" y="2.54" size="1.778" layer="95">&gt;NAME</text>
-<text x="5.08" y="0" size="1.778" layer="96">&gt;VALUE</text>
-<rectangle x1="-0.381" y1="-2.54" x2="0.381" y2="2.54" layer="94"/>
-<pin name="E" x="2.54" y="-5.08" visible="off" length="short" direction="pas" rot="R90"/>
-<pin name="C" x="2.54" y="5.08" visible="off" length="short" direction="pas" rot="R270"/>
 </symbol>
 <symbol name="+UB-3">
 <circle x="0" y="-0.635" radius="0.635" width="0.1524" layer="94"/>
@@ -1793,23 +1768,6 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <connect gate="G$1" pin="GND" pad="2"/>
 <connect gate="G$1" pin="IN" pad="1"/>
 <connect gate="G$1" pin="OUT" pad="3"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="PHOTOTRANSISTOR" prefix="T">
-<description>&lt;B&gt;PHOTO TRANSISTOR&lt;/B&gt;</description>
-<gates>
-<gate name="1" symbol="OT-NO" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="LED-5MM">
-<connects>
-<connect gate="1" pin="C" pad="A"/>
-<connect gate="1" pin="E" pad="K"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -1942,6 +1900,266 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 </deviceset>
 </devicesets>
 </library>
+<library name="GTOR - Passive Components">
+<packages>
+<package name="TO46-VT200" urn="urn:adsk.eagle:footprint:22188/1">
+<description>&lt;b&gt;Photoconductive Cell&lt;/b&gt; VT200 Series&lt;p&gt;
+Source: http://optoelectronics.perkinelmer.com/content/Datasheets/DTS_vt200seriesdatasheet.pdf</description>
+<wire x1="-0.5" y1="2" x2="-0.5" y2="1.5" width="0.1016" layer="21" curve="180"/>
+<wire x1="-0.5" y1="1.5" x2="1" y2="1.5" width="0.1016" layer="21"/>
+<wire x1="1" y1="1.5" x2="1" y2="1" width="0.1016" layer="21" curve="-180"/>
+<wire x1="1" y1="1" x2="-0.5" y2="1" width="0.1016" layer="21"/>
+<wire x1="-0.5" y1="1" x2="-0.5" y2="0.5" width="0.1016" layer="21" curve="180"/>
+<wire x1="-0.5" y1="0.5" x2="0.25" y2="0.5" width="0.1016" layer="21"/>
+<wire x1="0.25" y1="0.5" x2="0.25" y2="0" width="0.1016" layer="21" curve="-180"/>
+<wire x1="0.25" y1="0" x2="-0.25" y2="0" width="0.1016" layer="21"/>
+<wire x1="-0.25" y1="0" x2="-0.25" y2="-0.5" width="0.1016" layer="21" curve="180"/>
+<wire x1="-0.25" y1="-0.5" x2="0.25" y2="-0.5" width="0.1016" layer="21"/>
+<wire x1="0.25" y1="-0.5" x2="0.25" y2="-1" width="0.1016" layer="21" curve="-180"/>
+<wire x1="0.25" y1="-1" x2="-1" y2="-1" width="0.1016" layer="21"/>
+<wire x1="-1" y1="-1" x2="-1" y2="-1.5" width="0.1016" layer="21" curve="180"/>
+<wire x1="-1" y1="-1.5" x2="0.75" y2="-1.5" width="0.1016" layer="21"/>
+<wire x1="0.75" y1="-1.5" x2="0.75" y2="-2" width="0.1016" layer="21" curve="-180"/>
+<wire x1="0.75" y1="-2" x2="-0.5" y2="-2" width="0.1016" layer="21"/>
+<wire x1="-0.5" y1="-2" x2="-0.75" y2="-2.25" width="0.1016" layer="21" curve="90"/>
+<wire x1="-0.5" y1="2" x2="0.5" y2="2" width="0.1016" layer="21"/>
+<wire x1="0.5" y1="2" x2="0.75" y2="2.25" width="0.1016" layer="21" curve="90"/>
+<circle x="0" y="0" radius="2.8" width="0.2032" layer="21"/>
+<circle x="0" y="0" radius="2.35" width="0.2032" layer="21"/>
+<pad name="1" x="-1.27" y="0" drill="0.8" diameter="1.4"/>
+<pad name="2" x="1.27" y="0" drill="0.8" diameter="1.4"/>
+<text x="-2.25" y="-4.25" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2.75" y="3" size="1.27" layer="27">&gt;VALUE</text>
+</package>
+<package name="3RP/1610N" urn="urn:adsk.eagle:footprint:22673/1">
+<description>&lt;b&gt;16mm Potentiometer&lt;/b&gt; one level&lt;p&gt;
+Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
+<wire x1="-8.35" y1="-3.7" x2="8.35" y2="-3.7" width="0.2032" layer="21"/>
+<wire x1="-8.35" y1="-5.7" x2="-7.25" y2="-5.7" width="0.2032" layer="21"/>
+<wire x1="-8.35" y1="-3.7" x2="-8.35" y2="-5.7" width="0.2032" layer="21"/>
+<wire x1="-7.25" y1="-5.7" x2="-7.25" y2="-3.8" width="0.2032" layer="21"/>
+<wire x1="-8.35" y1="-1.7" x2="8.35" y2="-1.7" width="0.2032" layer="21"/>
+<wire x1="-8.35" y1="5.4" x2="8.35" y2="5.4" width="0.2032" layer="21"/>
+<wire x1="-2.9" y1="-10.2" x2="-2.9" y2="-13.7" width="0.2032" layer="21"/>
+<wire x1="2.9" y1="-13.7" x2="2.9" y2="-10.2" width="0.2032" layer="21"/>
+<wire x1="-3.4" y1="-3.8" x2="-3.4" y2="-9.9" width="0.2032" layer="21"/>
+<wire x1="-3.4" y1="-9.9" x2="-2.9" y2="-10.2" width="0.2032" layer="21"/>
+<wire x1="2.9" y1="-10.2" x2="3.4" y2="-9.9" width="0.2032" layer="21"/>
+<wire x1="3.4" y1="-9.9" x2="3.4" y2="-3.8" width="0.2032" layer="21"/>
+<wire x1="-2.9" y1="-10.2" x2="2.9" y2="-10.2" width="0.2032" layer="21"/>
+<wire x1="-2.9" y1="-13.7" x2="2.9" y2="-13.7" width="0.2032" layer="21"/>
+<wire x1="-8.35" y1="-3.7" x2="-8.35" y2="5.4" width="0.2032" layer="21"/>
+<wire x1="8.35" y1="-3.7" x2="8.35" y2="5.4" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-9.525" x2="3.3" y2="-9" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-9.025" x2="3.3" y2="-8.5" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-8.525" x2="3.3" y2="-8" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-8.025" x2="3.3" y2="-7.5" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-7.525" x2="3.3" y2="-7" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-7.025" x2="3.3" y2="-6.5" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-6.525" x2="3.3" y2="-6" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-6.025" x2="3.3" y2="-5.5" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-5.525" x2="3.3" y2="-5" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-5.025" x2="3.3" y2="-4.5" width="0.2032" layer="21"/>
+<wire x1="-3.3" y1="-4.525" x2="3.3" y2="-4" width="0.2032" layer="21"/>
+<wire x1="-3.075" y1="-10.025" x2="3.3" y2="-9.5" width="0.2032" layer="21"/>
+<pad name="1" x="-5" y="0" drill="1.2" diameter="2.1844"/>
+<pad name="2" x="0" y="0" drill="1.2" diameter="2.1844"/>
+<pad name="3" x="5" y="0" drill="1.2" diameter="2.1844"/>
+<text x="-8.255" y="5.715" size="1.27" layer="25">&gt;NAME</text>
+<text x="-3.175" y="2.54" size="1.27" layer="27">&gt;VALUE</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="TO46-VT200" urn="urn:adsk.eagle:package:22223/1" type="box">
+<description>Photoconductive Cell VT200 Series
+Source: http://optoelectronics.perkinelmer.com/content/Datasheets/DTS_vt200seriesdatasheet.pdf</description>
+<packageinstances>
+<packageinstance name="TO46-VT200"/>
+</packageinstances>
+</package3d>
+<package3d name="3RP/1610N" urn="urn:adsk.eagle:package:22726/1" type="box">
+<description>16mm Potentiometer one level
+Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
+<packageinstances>
+<packageinstance name="3RP/1610N"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="PHOTOCELL">
+<wire x1="-3.048" y1="2.413" x2="-1.651" y2="1.016" width="0.1524" layer="94"/>
+<wire x1="-3.175" y1="1.27" x2="-1.778" y2="-0.127" width="0.1524" layer="94"/>
+<wire x1="0" y1="-2.54" x2="-1.016" y2="-1.905" width="0.254" layer="94"/>
+<wire x1="1.016" y1="-1.143" x2="-1.016" y2="-0.381" width="0.254" layer="94"/>
+<wire x1="-1.016" y1="-0.381" x2="1.016" y2="0.381" width="0.254" layer="94"/>
+<wire x1="1.016" y1="0.381" x2="-1.016" y2="1.143" width="0.254" layer="94"/>
+<wire x1="-1.016" y1="1.143" x2="1.016" y2="1.905" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="1.016" y2="1.905" width="0.254" layer="94"/>
+<wire x1="-1.016" y1="-1.905" x2="1.016" y2="-1.143" width="0.254" layer="94"/>
+<text x="2.54" y="0" size="1.778" layer="95">&gt;NAME</text>
+<text x="2.54" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="1" x="0" y="5.08" visible="off" length="short" direction="pas" swaplevel="1" rot="R270"/>
+<pin name="2" x="0" y="-5.08" visible="off" length="short" direction="pas" swaplevel="1" rot="R90"/>
+<polygon width="0.1524" layer="94">
+<vertex x="-1.778" y="-0.127"/>
+<vertex x="-2.667" y="0.254"/>
+<vertex x="-2.159" y="0.762"/>
+</polygon>
+<polygon width="0.1524" layer="94">
+<vertex x="-1.651" y="1.016"/>
+<vertex x="-2.54" y="1.397"/>
+<vertex x="-2.032" y="1.905"/>
+</polygon>
+</symbol>
+<symbol name="POT_EU-">
+<wire x1="-0.762" y1="2.54" x2="-0.762" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0.762" y1="-2.54" x2="0.762" y2="2.54" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0" x2="1.651" y2="0" width="0.1524" layer="94"/>
+<wire x1="1.651" y1="0" x2="-1.8796" y2="1.7526" width="0.1524" layer="94"/>
+<wire x1="0.762" y1="2.54" x2="-0.762" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-0.762" y1="-2.54" x2="0.762" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="-2.1597" y1="1.2939" x2="-3.1989" y2="2.4495" width="0.1524" layer="94"/>
+<wire x1="-3.1989" y1="2.4495" x2="-1.7018" y2="2.2352" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="-2.54" x2="-2.54" y2="-0.508" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="-0.508" x2="-3.048" y2="-1.524" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="-0.508" x2="-2.032" y2="-1.524" width="0.1524" layer="94"/>
+<wire x1="-2.1597" y1="1.2939" x2="-1.7018" y2="2.2352" width="0.1524" layer="94"/>
+<text x="-5.969" y="-3.81" size="1.778" layer="95" rot="R90">&gt;NAME</text>
+<text x="-3.81" y="-3.81" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<pin name="A" x="0" y="-5.08" visible="pad" length="short" direction="pas" rot="R90"/>
+<pin name="E" x="0" y="5.08" visible="pad" length="short" direction="pas" rot="R270"/>
+<pin name="S" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="PHOTORESISTOR" prefix="PH">
+<description>&lt;b&gt;Photoconductive Cell&lt;/b&gt; VT200 Series&lt;p&gt;
+Source: http://optoelectronics.perkinelmer.com/content/Datasheets/DTS_vt200seriesdatasheet.pdf</description>
+<gates>
+<gate name="G$1" symbol="PHOTOCELL" x="0" y="0" swaplevel="1"/>
+</gates>
+<devices>
+<device name="" package="TO46-VT200">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:22223/1"/>
+</package3dinstances>
+<technologies>
+<technology name="0N1">
+<attribute name="POPULARITY" value="1" constant="no"/>
+</technology>
+<technology name="0N2">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+<technology name="0N3">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+<technology name="0N4">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+<technology name="3N1">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+<technology name="3N2">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+<technology name="3N3">
+<attribute name="POPULARITY" value="0" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="POTENTIOMETER" prefix="R" uservalue="yes">
+<description>&lt;b&gt;16mm Potentiometer&lt;/b&gt; one level&lt;p&gt;
+Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
+<gates>
+<gate name="G$1" symbol="POT_EU-" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="3RP/1610N">
+<connects>
+<connect gate="G$1" pin="A" pad="1"/>
+<connect gate="G$1" pin="E" pad="3"/>
+<connect gate="G$1" pin="S" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:22726/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="8" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="GTOR - Connectors">
+<packages>
+<package name="1X01" urn="urn:adsk.eagle:footprint:22382/1">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<wire x1="-0.635" y1="1.27" x2="0.635" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="1.27" x2="1.27" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="0.635" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-0.635" x2="0.635" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="0.635" x2="-1.27" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="1.27" x2="-1.27" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-0.635" x2="-0.635" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="-1.27" x2="-0.635" y2="-1.27" width="0.1524" layer="21"/>
+<pad name="1" x="0" y="0" drill="1.016" shape="octagon"/>
+<text x="-1.3462" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.27" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
+</package>
+</packages>
+<packages3d>
+<package3d name="1X01" urn="urn:adsk.eagle:package:22485/2" type="model">
+<description>PIN HEADER</description>
+<packageinstances>
+<packageinstance name="1X01"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="PINHD1">
+<wire x1="-6.35" y1="-2.54" x2="1.27" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="1.27" y1="-2.54" x2="1.27" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="1.27" y1="2.54" x2="-6.35" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="-6.35" y1="2.54" x2="-6.35" y2="-2.54" width="0.4064" layer="94"/>
+<text x="-6.35" y="3.175" size="1.778" layer="95">&gt;NAME</text>
+<text x="-6.35" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="1" x="-2.54" y="0" visible="pad" length="short" direction="pas" function="dot"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="PINHD-1X1" prefix="JP" uservalue="yes">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<gates>
+<gate name="G$1" symbol="PINHD1" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="1X01">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:22485/2"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="POPULARITY" value="64" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1961,14 +2179,16 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <part name="JP3" library="1-Connectors" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
 <part name="IC1" library="1-Active Components" deviceset="REG_5V_L7805" device="_HOR"/>
 <part name="U$3" library="1-Breakout Boards" deviceset="OLED_SSD1306" device=""/>
-<part name="T1" library="1-Active Components" deviceset="PHOTOTRANSISTOR" device=""/>
 <part name="LED1" library="1-Passive Components" deviceset="LED" device="-5MM" value="Green"/>
-<part name="R3" library="1-Passive Components" deviceset="RES_AXIAL" device="1/4W-0.3" package3d_urn="urn:adsk.eagle:package:23493/2" value="4.7k"/>
 <part name="V1" library="1-Active Components" deviceset="LOGIC_HEX_INVERTER_7404" device="N" package3d_urn="urn:adsk.eagle:package:16407/2"/>
 <part name="R4" library="1-Passive Components" deviceset="RES_AXIAL" device="1/4W-0.3" package3d_urn="urn:adsk.eagle:package:23493/2" value="220"/>
 <part name="R5" library="1-Passive Components" deviceset="RES_AXIAL" device="1/4W-0.3" package3d_urn="urn:adsk.eagle:package:23493/2" value="220"/>
 <part name="LED2" library="1-Passive Components" deviceset="LED" device="-5MM" value="Red"/>
 <part name="JP4" library="1-Connectors" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
+<part name="PH1" library="GTOR - Passive Components" deviceset="PHOTORESISTOR" device="" package3d_urn="urn:adsk.eagle:package:22223/1" technology="0N1"/>
+<part name="R6" library="GTOR - Passive Components" deviceset="POTENTIOMETER" device="" package3d_urn="urn:adsk.eagle:package:22726/1"/>
+<part name="JP5" library="GTOR - Connectors" deviceset="PINHD-1X1" device="" package3d_urn="urn:adsk.eagle:package:22485/2"/>
+<part name="JP6" library="GTOR - Connectors" deviceset="PINHD-1X1" device="" package3d_urn="urn:adsk.eagle:package:22485/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -2019,17 +2239,9 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <attribute name="VALUE" x="-68.58" y="17.78" size="1.778" layer="96"/>
 </instance>
 <instance part="U$3" gate="G$1" x="78.74" y="15.24" smashed="yes"/>
-<instance part="T1" gate="1" x="-104.14" y="58.42" smashed="yes">
-<attribute name="NAME" x="-99.06" y="60.96" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-99.06" y="53.34" size="1.778" layer="96"/>
-</instance>
 <instance part="LED1" gate="LED" x="-38.1" y="88.9" smashed="yes" rot="R90">
 <attribute name="NAME" x="-33.528" y="92.456" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-33.528" y="94.615" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="R3" gate="G$1" x="-101.6" y="76.2" smashed="yes" rot="R90">
-<attribute name="NAME" x="-103.0986" y="72.39" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="-98.298" y="72.39" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="V1" gate="/1" x="-73.66" y="88.9" smashed="yes">
 <attribute name="NAME" x="-78.74" y="94.615" size="2.032" layer="95"/>
@@ -2060,6 +2272,22 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <instance part="JP4" gate="A" x="68.58" y="50.8" smashed="yes">
 <attribute name="NAME" x="62.23" y="56.515" size="1.778" layer="95"/>
 <attribute name="VALUE" x="62.23" y="43.18" size="1.778" layer="96"/>
+</instance>
+<instance part="PH1" gate="G$1" x="-93.98" y="38.1" smashed="yes">
+<attribute name="NAME" x="-91.44" y="38.1" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-91.44" y="35.56" size="1.778" layer="96"/>
+</instance>
+<instance part="R6" gate="G$1" x="-99.06" y="25.4" smashed="yes">
+<attribute name="NAME" x="-102.489" y="21.59" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="-102.87" y="21.59" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="JP5" gate="G$1" x="-99.06" y="88.9" smashed="yes" rot="R180">
+<attribute name="NAME" x="-92.71" y="85.725" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-92.71" y="93.98" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="JP6" gate="G$1" x="-99.06" y="81.28" smashed="yes" rot="R180">
+<attribute name="NAME" x="-92.71" y="78.105" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="-92.71" y="86.36" size="1.778" layer="96" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -2125,11 +2353,6 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <label x="-7.62" y="5.08" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="T1" gate="1" pin="E"/>
-<wire x1="-101.6" y1="53.34" x2="-101.6" y2="45.72" width="0.1524" layer="91"/>
-<label x="-106.68" y="48.26" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="LED1" gate="LED" pin="C"/>
 <wire x1="-33.02" y1="88.9" x2="-25.4" y2="88.9" width="0.1524" layer="91"/>
 <label x="-30.48" y="88.9" size="1.778" layer="95"/>
@@ -2148,6 +2371,11 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <wire x1="66.04" y1="50.8" x2="55.88" y2="50.8" width="0.1524" layer="91"/>
 <pinref part="JP4" gate="A" pin="2"/>
 <label x="55.88" y="50.8" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="-99.06" y1="20.32" x2="-99.06" y2="12.7" width="0.1524" layer="91"/>
+<label x="-99.06" y="10.16" size="1.778" layer="95"/>
+<pinref part="R6" gate="G$1" pin="A"/>
 </segment>
 </net>
 <net name="5V" class="0">
@@ -2179,20 +2407,26 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <label x="119.38" y="55.88" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R3" gate="G$1" pin="1"/>
-<pinref part="T1" gate="1" pin="C"/>
-<wire x1="-101.6" y1="71.12" x2="-101.6" y2="63.5" width="0.1524" layer="91"/>
-<label x="-106.68" y="68.58" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="V1" gate="/1" pin="A"/>
+<label x="-88.9" y="88.9" size="1.778" layer="95"/>
 <wire x1="-83.82" y1="88.9" x2="-91.44" y2="88.9" width="0.1524" layer="91"/>
-<label x="-91.44" y="88.9" size="1.778" layer="95"/>
+<pinref part="JP5" gate="G$1" pin="1"/>
+<pinref part="JP6" gate="G$1" pin="1"/>
+<wire x1="-91.44" y1="88.9" x2="-96.52" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="-96.52" y1="81.28" x2="-91.44" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="-91.44" y1="81.28" x2="-91.44" y2="88.9" width="0.1524" layer="91"/>
+<junction x="-91.44" y="88.9"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="3"/>
 <wire x1="2.54" y1="76.2" x2="-2.54" y2="76.2" width="0.1524" layer="91"/>
 <label x="-2.54" y="76.2" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="-93.98" y1="33.02" x2="-93.98" y2="25.4" width="0.1524" layer="91"/>
+<label x="-99.06" y="30.48" size="1.778" layer="95"/>
+<pinref part="PH1" gate="G$1" pin="2"/>
+<pinref part="R6" gate="G$1" pin="S"/>
 </segment>
 </net>
 <net name="SDA" class="0">
@@ -2264,11 +2498,6 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <label x="-7.62" y="27.94" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="-101.6" y1="81.28" x2="-101.6" y2="88.9" width="0.1524" layer="91"/>
-<label x="-106.68" y="86.36" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="53.34" y1="33.02" x2="58.42" y2="33.02" width="0.1524" layer="91"/>
 <label x="55.88" y="33.02" size="1.778" layer="95"/>
@@ -2277,6 +2506,11 @@ Standard 7805 5V regulator. IGO (Input Ground Output). Spark Fun Electronics SKU
 <pinref part="R2" gate="G$1" pin="2"/>
 <wire x1="63.5" y1="33.02" x2="68.58" y2="33.02" width="0.1524" layer="91"/>
 <label x="66.04" y="33.02" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="PH1" gate="G$1" pin="1"/>
+<label x="-93.98" y="60.96" size="1.778" layer="95"/>
+<wire x1="-93.98" y1="58.42" x2="-93.98" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$1" class="0">
