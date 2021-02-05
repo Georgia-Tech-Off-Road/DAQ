@@ -182,6 +182,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             'Layout Test': {
                 'create_layout': Widget_Test
+            },
+
+            'Engine Dyno': {
+                'create_layout': partial(DataCollection, data_collection_thread, is_data_collecting)
             }
         }
 
