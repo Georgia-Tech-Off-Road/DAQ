@@ -1,4 +1,16 @@
-
+/*
+ * Hall effect Sensor for Dyno important links
+ * 
+ * Sensor Chip
+ * https://www.digikey.com.mx/en/products/detail/ams/AS5047D-ATST/7793473
+ * Magnets
+ * https://www.digikey.com.mx/en/products/detail/radial-magnets-inc/9049/6030786?s=N4IgTCBcDaICwDYCcBaAjABgOwFYUDkAREAXQF8g
+ * Chip datasheet
+ * https://ams.com/documents/20143/36005/AS5047D_DS000394_2-00.pdf
+ * Board files
+ * https://github.com/GTOR-BajaSAE/DAQ/tree/he_speed_sensor/Misc_Projects/HE_Speed_Sensor
+ * 
+ */
 #include <HallEffectSpeedSensor.h>
 
 

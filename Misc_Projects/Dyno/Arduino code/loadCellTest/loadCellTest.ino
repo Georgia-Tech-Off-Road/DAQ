@@ -1,3 +1,13 @@
+/*
+ * Load Cell for Dyno important links
+ * 
+ * Load Cell
+ * https://www.digikey.com/en/products/detail/te-connectivity-measurement-specialties/FX1901-0001-0200-L/5277314
+ * Load Cell Amplifier
+ * https://www.amazon.com/SparkFun-Qwiic-Scale-chip-temperature/dp/B082MPLRCS/ref=sr_1_7?dchild=1&keywords=SparkFun+Qwiic&qid=1602027887&sr=8-7
+ * Documentation
+ * https://learn.sparkfun.com/tutorials/qwiic-scale-hookup-guide?_ga=2.89089179.1660775929.1612854803-1613491761.1610674487
+ */
 #include <Wire.h>
 #include <SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h>
 
