@@ -1,4 +1,7 @@
-#include "Differential_Controller.h"
+#include <Differential_Controller.h>
+#include <Single_MAX14870_MotorShield.h>
+#include <HallEffectSpeedSensor.h>
+
 
 #define PIN_DIFF1 13
 #define PIN_DIFF2 14
@@ -9,18 +12,21 @@
 
 #define PIN_PWM 23
 #define PIN_DIR 21
-#define PIN_nEN 19
-#define PIN_nFAULT 20
+#define PIN_NEN 19
+#define PIN_NFAULT 20
 
-#define PIN_RX2 7
-#define PIN_TX2 8
+#define PIN_HE1 
+#define PIN_HE2 
 
 #define PIN_SWITCH1 999999
 #define PIN_SWITCH2 999999
 #define PIN_SWITCH3 999999
 
+Single_MAX14870_MotorShield motor_shield(PIN_PWM, PIN_DIR, PIN_NEN, PIN_NFAULT);
+HallEffectSpeedSensor he_sensor1(PIN_HE1, 500);
+HallEffectSpeedSensor he_sensor2(PIN_HE2, 500);
+Differential_Controller diff_controller(PIN_DIFF1, PIN_DIFF2, PIN_DIFF3, PIN_DIFF4, PIN_DIFF5, PIN_DIFF6, PIN_SWITCH1, PIN_SWITCH2, PIN_SWITCH3, motor_shield, he_sensor1, he_sensor2);
 
-Differential_Controller diff_controller(PIN_DIFF1, PIN_DIFF2, PIN_DIFF3, PIN_DIFF4, PIN_DIFF5, PIN_DIFF6, PIN_PWM, PIN_DIR, PIN_nEN, PIN_nFAULT, PIN_RX2, PIN_TX2, PIN_SWITCH1, PIN_SWITCH2, PIN_SWITCH3);
 
 void setup() {
   // put your setup code here, to run once:
