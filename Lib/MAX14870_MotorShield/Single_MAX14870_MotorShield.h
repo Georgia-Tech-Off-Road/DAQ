@@ -1,3 +1,6 @@
+#ifndef SINGLE_MAX14870_MOTORSHIELD
+#define SINGLE_MAX14870_MOTORSHIELD
+
 #include <Arduino.h>
 
 class Single_MAX14870_MotorShield
@@ -16,3 +19,5 @@ class Single_MAX14870_MotorShield
     const uint8_t _pin_nEN;
     const uint8_t _pin_nFAULT;
 };
+
+#endif

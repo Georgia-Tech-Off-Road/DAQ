@@ -3,27 +3,23 @@
 
 #include "Differential_Controller.h"
 
-#define PLACEHOLDER1 1
-#define PLACEHOLDER2 2
-#define PLACEHOLDER3 3
 #define PLACEHOLDERGOUP 4
 #define PLACEHOLDERGODOWN 5
 
 
-Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, uint8_t pin_switch1, uint8_t pin_switch2, uint8_t pin_switch3, Single_MAX14870_MotorShield& motor_shield, HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2) : 
+Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, uint8_t pin_switchLeft, uint8_t pin_switchRight, Single_MAX14870_MotorShield& motor_shield, HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2) : 
   _pin_diff1(pin_diff1),
   _pin_diff2(pin_diff2),
   _pin_diff3(pin_diff3),
   _pin_diff4(pin_diff4),
   _pin_diff5(pin_diff5),
   _pin_diff6(pin_diff6),
-  _pin_switch1(pin_switch1),
-  _pin_switch2(pin_switch2),
-  _pin_switch3(pin_switch3),
+  _pin_switchLeft(pin_switchLeft),
+  _pin_switchRight(pin_switchRight),
   _motor_driver(motor_shield),
   _he_sensor1(he_sensor1),
-  _he_sensor1(he_sensor2),
-  _desired_state(STARTPOS)
+  _he_sensor2(he_sensor2),
+  _desiredState(STARTPOS)
 {
 
 }
@@ -40,57 +36,42 @@ void Differential_Controller::setup()
     
     _motor_driver.setup();
 
-    pinMode(_pin_switch1, INPUT);
-    pinMode(_pin_switch2, INPUT);
-    pinMode(_pin_switch3, INPUT);
+    pinMode(_pin_switchLeft, INPUT_PULLUP);
+    pinMode(_pin_switchRight, INPUT_PULLUP);
 
-    pinMode(_pin_HE1, INPUT);
-    pinMode(_pin_HE2, INPUT);
 }
 
 void Differential_Controller::update()
 {
-  uint8_t curr_state = get_state();
+//  if ((he_sensor1.get_speed() < 0) && (he_sensor2.get_speed() < 0 ))
+  uint8_t currState = get_state();
+  uint8_t desiredState = decode_desiredState();
   
-  //TODO: ADD CHECK TO MAKE SURE CAR IS NOT MOVING USING HE SPEED SENSORS BEFORE SWITCHING DIFFERENTIAL MODES
-  //TODO: ADD CHECK TO MAKE SURE CAR IS NOT MOVING USING HE SPEED SENSORS BEFORE SWITCHING DIFFERENTIAL MODES
-  //TODO: ADD CHECK TO MAKE SURE CAR IS NOT MOVING USING HE SPEED SENSORS BEFORE SWITCHING DIFFERENTIAL MODES
-  //TODO: ADD CHECK TO MAKE SURE CAR IS NOT MOVING USING HE SPEED SENSORS BEFORE SWITCHING DIFFERENTIAL MODES
-  if ((he_sensor1.get_speed() < 0) && (he_sensor2.get_speed() < 0 ))
+  if (currState != 0)
   {
-    if (_desired_state != curr_state)
+    if (desiredState != currState)
     {
-      if (_desired_state == PLACEHOLDER2)          // logic to change the state to pos 2
+      if (currState < desiredState)
       {
-        if (curr_state == PLACEHOLDER3)
-        {
-          // go forward
-          _motor_driver.set_speed(PLACEHOLDERGOUP);
-        } 
-        else if (curr_state) == PLACEHOLDER1)
-        {
-          _motor_driver.set_speed(PLACEHOLDERGODOWN);
-        }
+        rotate_R();
       }
-      else if (_desired_state == PLACEHOLDER1)     // logic to change the state to pos 1
+      else if (currState > desiredState)
       {
-        _motor_driver.set_speed(PLACEHOLDERGOUP);
-      }
-      else if (_desired_state == PLACEHOLDER3)     // logic to change the state to pos 3
+        rotate_F();
+      } 
+      else
       {
-        _motor_driver.set_speed(PLACEHOLDERGODOWN);
+        rotate_stop();
       }
-    }
+    } 
     else
     {
-        _motor_driver.set_speed(0)
+      rotate_stop();
     }
   }
-}
 
-void Differential_Controller::changeMode(uint8_t desired_state);
-{
-  _desired_state = desired_state;
+
+  
 }
 
 
@@ -98,48 +79,121 @@ uint8_t Differential_Controller::get_state()
 {
   digitalWrite(_pin_diff5, HIGH);
   
-  _diff_wiper_combo = (digitalRead(_pin_diff6) << 5) | (16) | (digitalRead(_pin_diff4) << 3) | (digitalRead(_pin_diff3) << 2) | (digitalRead(_pin_diff2) << 1) | (digitalRead(_pin_diff1)); // 16 (00010000) for _diff5
-  switch (_diff_wiper_combo) 
+  _diffWiperCombo = (digitalRead(_pin_diff6) << 5) | (1 << 4) | (digitalRead(_pin_diff4) << 3) | 
+                    (digitalRead(_pin_diff3) << 2) | (digitalRead(_pin_diff2) << 1) | (digitalRead(_pin_diff1)); // 16 (00010000) for _diff5
+
+  // decode the current state using the currently energized tracks
+  switch (_diffWiperCombo) 
   {
-    case 0x30:    // state 1 (00110000)
-      return PLACEHOLDER1;
+    case 0b110000:    // state 1 // This state is the limit of going in the F direction
+      _currState = STATE1;
       break;
-    case 0x31:    // state 2 (00110001)
-      return PLACEHOLDER1;
+    case 0b110001:    // state 2 
+      _currState = STATE2;
       break;
-    case 0x39:    // state 3 (00111001)
-      return PLACEHOLDER1;
+    case 0b111001:    // state 3 
+      _currState = STATE3;
       break;
-    case 0x19:    // state 4 (00011001)
-      return PLACEHOLDER2;
+    case 0b011001:    // state 4 
+      _currState = STATE4;
       break;
-    case 0x1B:    // state 5 (00011011)
-      return PLACEHOLDER2;
+    case 0b011011:    // state 5 
+      _currState = STATE5;
       break;
-    case 0x13:    // state 6 (00010011)
-      return PLACEHOLDER3;
+    case 0b010011:    // state 6 
+      _currState = STATE6;
       break;
-    case 0x17:    // state 7 (00010111)
-      return PLACEHOLDER3;
+    case 0b010111:    // state 7 
+      _currState = STATE7;
       break;
-    case 0x16:    // state 8 (00010110)
-      return PLACEHOLDER3;
+    case 0b010110:    // state 8      // This state is the limit of going in the R direction
+      _currState = STATE8;
       break;
     default:      // all other unused combinations 
       return 0;
   }
+
+  return _currState;
   
 }
 
+uint8_t Differential_Controller::get_desiredState()
+{
+   return decode_desiredState();
+}
 
+
+uint8_t Differential_Controller::decode_desiredState() 
+{
+  switch(decode_desiredDiffMode())
+  {
+    case PH_1:
+      _desiredState = STATE2;
+      break;
+    case PH_2:
+      _desiredState = STATE5;
+      break;
+    case PH_3:
+      _desiredState = STATE7;
+      break;
+    default:
+      _desiredState = 0;
+  }
+  
+  return _desiredState;
+}
+
+uint8_t Differential_Controller::decode_desiredDiffMode()
+{
+  switch (get_switchPos())
+  {
+    case SWITCHPOSLEFT:
+      _desiredDiffMode = PH_1;
+      break;
+    case SWITCHPOSMIDDLE:
+      _desiredDiffMode = PH_2;
+      break;
+    case SWITCHPOSRIGHT:
+      _desiredDiffMode = PH_3;
+      break;
+    default:
+      _desiredDiffMode = 0;
+  }
+
+  return _desiredDiffMode;
+}
+
+/*  
+ *  This function gets the position of the dashboard switch 
+ *  
+ *  @return - integer value of the SWITCHPOS
+ */
 uint8_t Differential_Controller::get_switchPos()
 {
-  if (digitalRead(_pin_switch2))
-    return SWITCHPOS2;
-  if (digitalRead(_pin_switch1))
-    return SWITCHPOS1;
-  if (digitalRead(_pin_switch3))
-    return SWITCHPOS3;
+  return (!(digitalRead(_pin_switchRight))<<1) | !digitalRead(_pin_switchLeft);
+
 }
+
+
+/*  
+ *  This function 
+ *  
+ *  @return - integer value of the SWITCHPOS
+ */
+void Differential_Controller::rotate_stop()
+{
+  _motor_driver.set_speed(0);
+}
+
+void Differential_Controller::rotate_F()
+{
+  _motor_driver.set_speed(-255);
+}
+
+void Differential_Controller::rotate_R()
+{
+  _motor_driver.set_speed(255);
+}
+
 
 #endif
