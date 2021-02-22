@@ -2187,7 +2187,6 @@ Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
 <part name="JP4" library="1-Connectors" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
 <part name="PH1" library="GTOR - Passive Components" deviceset="PHOTORESISTOR" device="" package3d_urn="urn:adsk.eagle:package:22223/1" technology="0N1"/>
 <part name="R6" library="GTOR - Passive Components" deviceset="POTENTIOMETER" device="" package3d_urn="urn:adsk.eagle:package:22726/1"/>
-<part name="JP5" library="GTOR - Connectors" deviceset="PINHD-1X1" device="" package3d_urn="urn:adsk.eagle:package:22485/2"/>
 <part name="JP6" library="GTOR - Connectors" deviceset="PINHD-1X1" device="" package3d_urn="urn:adsk.eagle:package:22485/2"/>
 </parts>
 <sheets>
@@ -2281,13 +2280,9 @@ Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
 <attribute name="NAME" x="-102.489" y="21.59" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="-102.87" y="21.59" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="JP5" gate="G$1" x="-99.06" y="88.9" smashed="yes" rot="R180">
+<instance part="JP6" gate="G$1" x="-99.06" y="88.9" smashed="yes" rot="R180">
 <attribute name="NAME" x="-92.71" y="85.725" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-92.71" y="93.98" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="JP6" gate="G$1" x="-99.06" y="81.28" smashed="yes" rot="R180">
-<attribute name="NAME" x="-92.71" y="78.105" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="-92.71" y="86.36" size="1.778" layer="96" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -2409,13 +2404,8 @@ Source: http://www.alphapotentiometers.net/html/16mm_pot_2.html</description>
 <segment>
 <pinref part="V1" gate="/1" pin="A"/>
 <label x="-88.9" y="88.9" size="1.778" layer="95"/>
-<wire x1="-83.82" y1="88.9" x2="-91.44" y2="88.9" width="0.1524" layer="91"/>
-<pinref part="JP5" gate="G$1" pin="1"/>
+<wire x1="-83.82" y1="88.9" x2="-96.52" y2="88.9" width="0.1524" layer="91"/>
 <pinref part="JP6" gate="G$1" pin="1"/>
-<wire x1="-91.44" y1="88.9" x2="-96.52" y2="88.9" width="0.1524" layer="91"/>
-<wire x1="-96.52" y1="81.28" x2="-91.44" y2="81.28" width="0.1524" layer="91"/>
-<wire x1="-91.44" y1="81.28" x2="-91.44" y2="88.9" width="0.1524" layer="91"/>
-<junction x="-91.44" y="88.9"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="3"/>
