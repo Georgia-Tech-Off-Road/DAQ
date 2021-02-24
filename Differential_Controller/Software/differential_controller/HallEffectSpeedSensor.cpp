@@ -8,6 +8,7 @@
 #include "HallEffectSpeedSensor.h"
 #include <Arduino.h>
 
+#include <stdint.h>
 
 /**
  * Sets up the digital out pins and the PID if specified.

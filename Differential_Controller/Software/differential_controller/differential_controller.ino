@@ -1,5 +1,6 @@
 #include "Differential_Controller.h"
 #include "HallEffectSpeedSensor.h"
+#include <stdint.h>       // delete later (adds uint types for Arduino
 
 //#define PIN_BUILTINLED 13
 //#define PIN_DIFF1 14
@@ -40,11 +41,12 @@
 
 HallEffectSpeedSensor he_sensor1(PIN_HE1, 50);
 HallEffectSpeedSensor he_sensor2(PIN_HE2, 50);
-Differential_Controller diff_controller(PIN_DIFF1, PIN_DIFF2, PIN_DIFF3, PIN_DIFF4, PIN_DIFF5, PIN_DIFF6, pin_switchLeft, pin_switchRight, motor_shield, he_sensor1, he_sensor2);
+Differential_Controller diff_controller(PIN_DIFF1, PIN_DIFF2, PIN_DIFF3, PIN_DIFF4, PIN_DIFF5, PIN_DIFF6, PIN_MOTORPOS, PIN_MOTORNEG, pin_switchLeft, pin_switchRight, he_sensor1, he_sensor2);
 
 
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
   diff_controller.setup();
 
   

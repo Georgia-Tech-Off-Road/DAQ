@@ -20,7 +20,6 @@ Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_
   _pin_motorNeg(pin_motorNeg),
   _pin_switchLeft(pin_switchLeft),
   _pin_switchRight(pin_switchRight),
-  _motor_driver(motor_shield),
   _he_sensor1(he_sensor1),
   _he_sensor2(he_sensor2),
   _desiredState(STARTPOS)
@@ -37,9 +36,10 @@ void Differential_Controller::setup()
     pinMode(_pin_diff4, INPUT);
     pinMode(_pin_diff5, OUTPUT);
     pinMode(_pin_diff6, INPUT);
-    
-    _motor_driver.setup();
 
+    pinMode(_pin_motorPos, OUTPUT);
+    pinMode(_pin_motorNeg, OUTPUT);
+    
     pinMode(_pin_switchLeft, INPUT_PULLUP);
     pinMode(_pin_switchRight, INPUT_PULLUP);
 
@@ -180,25 +180,26 @@ uint8_t Differential_Controller::get_switchPos()
 
 
 /*  
- *  This function 
+ *  This function sets the P-channel MOSFETs to be open to prevent current from flowing into the motor
  *  
  *  @return - integer value of the SWITCHPOS
  */
 void Differential_Controller::rotate_stop()
 {
-  _motor_driver.set_speed(0);
+  digitalWrite(_pin_motorPos, HIGH);
+  digitalWrite(_pin_motorNeg, HIGH);
 }
 
 void Differential_Controller::rotate_F()
 {
-  digitalWrite(pin_motorPos, HIGH);
-  digitalWrite(pin_motorNeg, LOW);
+  digitalWrite(_pin_motorPos, HIGH);
+  digitalWrite(_pin_motorNeg, LOW);
 }
 
 void Differential_Controller::rotate_R()
 {
-  digitalWrite(pin_motorPos, HIGH);
-  digitalWrite(pin_motorNeg, LOW);  
+  digitalWrite(_pin_motorPos, HIGH);
+  digitalWrite(_pin_motorNeg, LOW);  
 }
 
 

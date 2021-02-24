@@ -1,6 +1,8 @@
 #ifndef __HALLEFFECTSPEEDSENSOR_H__
 #define __HALLEFFECTSPEEDSENSOR_H__
 
+#include <stdint.h>
+
 /**
  * HallEffectSpeedSensor.h
  * A wrapper to work with a hall effect sensor.
@@ -24,7 +26,7 @@ private:
     uint16_t _count;
     uint32_t _sum;
     uint16_t _timeCounter;
-//    FreqMeasureMulti _fr/eq;
+//    FreqMeasureMulti _freq;
     
 
 public:

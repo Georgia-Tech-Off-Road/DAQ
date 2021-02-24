@@ -2,6 +2,7 @@
 #define DIFFERENTIAL_CONTROLLER_H
 
 #include <Arduino.h>
+#include <stdint.h>           // DELETE LATER (ADDS uint types for Arduinos)
 #include "HallEffectSpeedSensor.h"
 
 #define STATE_4WD  0
@@ -29,10 +30,10 @@
 #define PH_3 3
 
 class Differential_Controller {
-  public:
-Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6,
+  public:   
+    Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6,
                                                  uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight, 
-                                                 HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2) : 
+                                                 HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2);
     void setup();
     void update();
     void change_state(uint8_t desired_state);
