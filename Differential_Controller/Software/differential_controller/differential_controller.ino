@@ -1,6 +1,5 @@
 #include "Differential_Controller.h"
-#include <Single_MAX14870_MotorShield.h>
-#include <HallEffectSpeedSensor.h>
+#include "HallEffectSpeedSensor.h"
 
 //#define PIN_BUILTINLED 13
 //#define PIN_DIFF1 14
@@ -21,27 +20,24 @@
 //#define pin_switchLeft 5
 //#define pin_switchRight 4
 
-#define PIN_DIFF1 12
-#define PIN_DIFF2 11
-#define PIN_DIFF3 10
-#define PIN_DIFF4 9
-#define PIN_DIFF5 8
+#define PIN_DIFF1 2
+#define PIN_DIFF2 3
+#define PIN_DIFF3 4
+#define PIN_DIFF4 5
+#define PIN_DIFF5 6
 #define PIN_DIFF6 7
-
-#define PIN_PWM 2
-#define PIN_DIR 3
-#define PIN_NEN 5
-#define PIN_NFAULT 4
 
 #define PIN_HE1 53
 #define PIN_HE2 54
 
-#define pin_switchLeft 14
-#define pin_switchRight 15
+#define PIN_MOTORPOS 9
+#define PIN_MOTORNEG 8
+
+#define pin_switchLeft 11
+#define pin_switchRight 10
 
 
 
-Single_MAX14870_MotorShield motor_shield(PIN_PWM, PIN_DIR, PIN_NEN, PIN_NFAULT);
 HallEffectSpeedSensor he_sensor1(PIN_HE1, 50);
 HallEffectSpeedSensor he_sensor2(PIN_HE2, 50);
 Differential_Controller diff_controller(PIN_DIFF1, PIN_DIFF2, PIN_DIFF3, PIN_DIFF4, PIN_DIFF5, PIN_DIFF6, pin_switchLeft, pin_switchRight, motor_shield, he_sensor1, he_sensor2);

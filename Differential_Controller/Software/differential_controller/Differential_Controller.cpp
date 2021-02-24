@@ -7,13 +7,17 @@
 #define PLACEHOLDERGODOWN 5
 
 
-Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, uint8_t pin_switchLeft, uint8_t pin_switchRight, Single_MAX14870_MotorShield& motor_shield, HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2) : 
+Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6,
+                                                 uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight, 
+                                                 HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2) : 
   _pin_diff1(pin_diff1),
   _pin_diff2(pin_diff2),
   _pin_diff3(pin_diff3),
   _pin_diff4(pin_diff4),
   _pin_diff5(pin_diff5),
   _pin_diff6(pin_diff6),
+  _pin_motorPos(pin_motorPos),
+  _pin_motorNeg(pin_motorNeg),
   _pin_switchLeft(pin_switchLeft),
   _pin_switchRight(pin_switchRight),
   _motor_driver(motor_shield),
@@ -187,12 +191,14 @@ void Differential_Controller::rotate_stop()
 
 void Differential_Controller::rotate_F()
 {
-  _motor_driver.set_speed(-255);
+  digitalWrite(pin_motorPos, HIGH);
+  digitalWrite(pin_motorNeg, LOW);
 }
 
 void Differential_Controller::rotate_R()
 {
-  _motor_driver.set_speed(255);
+  digitalWrite(pin_motorPos, HIGH);
+  digitalWrite(pin_motorNeg, LOW);  
 }
 
 

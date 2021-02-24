@@ -2,8 +2,7 @@
 #define DIFFERENTIAL_CONTROLLER_H
 
 #include <Arduino.h>
-#include <Single_MAX14870_MotorShield.h>
-#include <HallEffectSpeedSensor.h>
+#include "HallEffectSpeedSensor.h"
 
 #define STATE_4WD  0
 #define STATE_LS   1
@@ -31,7 +30,9 @@
 
 class Differential_Controller {
   public:
-    Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, uint8_t pin_switchLeft, uint8_t pin_switchRight, Single_MAX14870_MotorShield& motor_shield, HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2);
+Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6,
+                                                 uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight, 
+                                                 HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2) : 
     void setup();
     void update();
     void change_state(uint8_t desired_state);
@@ -45,7 +46,6 @@ class Differential_Controller {
     void rotate_R();
 
   private:
-    Single_MAX14870_MotorShield _motor_driver;
     HallEffectSpeedSensor _he_sensor1;
     HallEffectSpeedSensor _he_sensor2;
 
@@ -55,6 +55,9 @@ class Differential_Controller {
     const uint8_t _pin_diff4; 
     const uint8_t _pin_diff5; 
     const uint8_t _pin_diff6; 
+
+    const uint8_t _pin_motorPos;
+    const uint8_t _pin_motorNeg;
     
     const uint8_t _pin_switchLeft;    // pin assigned for left-side active-low switch on dashboard
     const uint8_t _pin_switchRight;   // pin assigned for right-side active-low switch on dashboard
