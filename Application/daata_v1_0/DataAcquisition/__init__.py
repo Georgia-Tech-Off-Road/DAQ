@@ -18,17 +18,13 @@ use_fake_inputs = True
 def collect_data():
     from MainWindow import is_data_collecting
     data_import = DataImport(data, data_collection_lock, use_fake_inputs, is_data_collecting)
-    is_reset = False
     logger.debug("Running collect_data")
     while True:
-        if not is_reset:
-            data.reset()
-            is_reset = True
         data_import.check_connected()
         time.sleep(.1)
-        while is_data_collecting.is_set():
-            if is_reset:
-                is_reset = False
-                logger.debug("Collecting data")
-            data_import.read_data()
-            time.sleep(.0001)
+        if is_data_collecting.is_set():
+            data.reset()
+            logger.debug("Collecting data")
+            while is_data_collecting.is_set():
+                data_import.read_data()
+                time.sleep(.0001)
