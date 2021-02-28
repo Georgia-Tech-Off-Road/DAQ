@@ -72,6 +72,8 @@ void loop() {
   Serial.println(diff_controller.get_state());
   Serial.print("Desired state: ");
   Serial.println(diff_controller.decode_desiredState());
+  Serial.print("switch pos: ");
+  Serial.println(diff_controller.get_switchPos());
   Serial.println();
-  delay(10);
+  delay(100);
 }

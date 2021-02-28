@@ -30,12 +30,12 @@ Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_
 
 void Differential_Controller::setup()
 {
-    pinMode(_pin_diff1, INPUT);
-    pinMode(_pin_diff2, INPUT);
-    pinMode(_pin_diff3, INPUT);
-    pinMode(_pin_diff4, INPUT);
+    pinMode(_pin_diff1, INPUT_PULLUP);
+    pinMode(_pin_diff2, INPUT_PULLUP);
+    pinMode(_pin_diff3, INPUT_PULLUP);
+    pinMode(_pin_diff4, INPUT_PULLUP);
     pinMode(_pin_diff5, OUTPUT);
-    pinMode(_pin_diff6, INPUT);
+    pinMode(_pin_diff6, INPUT_PULLUP);
 
     pinMode(_pin_motorPos, OUTPUT);
     pinMode(_pin_motorNeg, OUTPUT);
@@ -72,6 +72,8 @@ void Differential_Controller::update()
     {
       rotate_stop();
     }
+  } else {
+    rotate_stop();
   }
 
 
@@ -81,10 +83,10 @@ void Differential_Controller::update()
 
 uint8_t Differential_Controller::get_state()
 {
-  digitalWrite(_pin_diff5, HIGH);
+  digitalWrite(_pin_diff5, LOW);
   
-  _diffWiperCombo = (digitalRead(_pin_diff6) << 5) | (1 << 4) | (digitalRead(_pin_diff4) << 3) | 
-                    (digitalRead(_pin_diff3) << 2) | (digitalRead(_pin_diff2) << 1) | (digitalRead(_pin_diff1)); // 16 (00010000) for _diff5
+  _diffWiperCombo = (!digitalRead(_pin_diff6) << 5) | (1 << 4) | (!digitalRead(_pin_diff4) << 3) | 
+                    (!digitalRead(_pin_diff3) << 2) | (!digitalRead(_pin_diff2) << 1) | (!digitalRead(_pin_diff1)); // 16 (010000) for _diff5
 
   // decode the current state using the currently energized tracks
   switch (_diffWiperCombo) 
@@ -192,8 +194,8 @@ void Differential_Controller::rotate_stop()
 
 void Differential_Controller::rotate_F()
 {
-  digitalWrite(_pin_motorPos, HIGH);
-  digitalWrite(_pin_motorNeg, LOW);
+  digitalWrite(_pin_motorPos, LOW);
+  digitalWrite(_pin_motorNeg, HIGH);
 }
 
 void Differential_Controller::rotate_R()
