@@ -2569,6 +2569,16 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="JP2" gate="A" pin="3"/>
 <wire x1="76.2" y1="93.98" x2="93.98" y2="93.98" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="R6" gate="G$1" pin="2"/>
+<wire x1="-17.78" y1="149.86" x2="-17.78" y2="152.4" width="0.1524" layer="91"/>
+<label x="-17.78" y="152.4" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="129.54" y1="162.56" x2="129.54" y2="165.1" width="0.1524" layer="91"/>
+<label x="129.54" y="165.1" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="HE2_A" class="0">
 <segment>
@@ -2594,16 +2604,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="U1" gate="A" pin="OUTPUT"/>
 <wire x1="157.48" y1="83.82" x2="162.56" y2="83.82" width="0.1524" layer="91"/>
 <label x="162.56" y="83.82" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="R6" gate="G$1" pin="2"/>
-<wire x1="-17.78" y1="149.86" x2="-17.78" y2="152.4" width="0.1524" layer="91"/>
-<label x="-17.78" y="152.4" size="1.778" layer="95"/>
-</segment>
-<segment>
-<pinref part="R8" gate="G$1" pin="2"/>
-<wire x1="129.54" y1="162.56" x2="129.54" y2="165.1" width="0.1524" layer="91"/>
-<label x="129.54" y="165.1" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="VBAT" class="0">
