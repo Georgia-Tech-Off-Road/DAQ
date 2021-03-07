@@ -50,7 +50,7 @@ void Differential_Controller::update()
 //  if ((he_sensor1.get_speed() < 0) && (he_sensor2.get_speed() < 0 ))
   uint8_t currState = get_state();
   uint8_t desiredState = decode_desiredState();
-  
+
   if (currState != 0)
   {
     if (desiredState != currState)
@@ -124,9 +124,11 @@ uint8_t Differential_Controller::get_state()
 }
 
 uint8_t Differential_Controller::get_desiredState()
-{
-   return decode_desiredState();
+{  
+  return decode_desiredState();
 }
+
+
 
 
 uint8_t Differential_Controller::decode_desiredState() 
@@ -194,14 +196,14 @@ void Differential_Controller::rotate_stop()
 
 void Differential_Controller::rotate_F()
 {
-  digitalWrite(_pin_motorPos, LOW);
-  digitalWrite(_pin_motorNeg, HIGH);
+  digitalWrite(_pin_motorPos, HIGH);
+  digitalWrite(_pin_motorNeg, LOW);
 }
 
 void Differential_Controller::rotate_R()
 {
-  digitalWrite(_pin_motorPos, HIGH);
-  digitalWrite(_pin_motorNeg, LOW);  
+  digitalWrite(_pin_motorPos, LOW);
+  digitalWrite(_pin_motorNeg, HIGH);  
 }
 
 
