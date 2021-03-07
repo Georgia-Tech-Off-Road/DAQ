@@ -4,17 +4,30 @@
 template <class DataType>
 class Sensor {
 private:
+    uint16_t _id;
     bool     _is_connected;
+
     DataType _data;
 
 public:
-    SensorInfo *info;
-    virtual void packetize(byte *packet);
-    virtual  get_data() = 0;
-}
+    /**
+     * Constructors
+     */
+    Sensor();
 
-Sensor(_,_,_);
+    /**
+     * Getters and Setters
+     */
+    virtual DataType get_data() = 0;
+    uint16_t get_id();
+    uint16_t set_id();
 
+    /**
+     * Member functions
+     */
+    virtual void Pack  (byte *pack) = 0;
+    virtual void Unpack(byte *pack) = 0;
+};
 
 class GenericSensor : public Sensor<std::vector<byte>> {
 

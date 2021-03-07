@@ -14,11 +14,14 @@ private:
     std::vector<Sensor*> _input_sensors;
     std::vector<Sensor*> _received_sensors;
     std::vector<Sensor*> _transmit_sensors;
+    std::vector<Sensor*> _detatched_sensors;
 
 public:
-    void attach_input_sensor    (Sensor *sensor, SensorInfo *info);
-    void attach_output_sensor   (Sensor *sensor);
-    void attach_throughput_uart (UARTComms *comms, std::vector<SensorInfo> ignore);
+    void attach_input_sensor    (Sensor *sensor, sensor_id_t id);
+    void attach_output_sensor   (Sensor *sensor, sensor_id_t id);
+    // Appends GenericSensor(s) from through_comms's _received_sensors to this->_transmit_sensors
+    void attach_throughput_uart (UARTComms *through_comms);
+    void detatch_output_sensor  (sensor_id_t id);
 
 
     void receive_settings(){
