@@ -1,40 +1,38 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
+#include <vector>
+#include "./SensorId.h"
+
 template <class DataType>
 class Sensor {
-private:
-    uint16_t _id;
-    bool     _is_connected;
+protected:
+    sensor_id_t _id;
+    uint8_t  _pack_bytes;
 
     DataType _data;
 
 public:
     /**
-     * Constructors
-     */
-    Sensor();
-
-    /**
      * Getters and Setters
      */
-    virtual DataType get_data() = 0;
-    uint16_t get_id();
-    uint16_t set_id();
+    virtual const DataType& get_data() = 0;
+    sensor_id_t get_id();
+    void set_id(sensor_id_t id);
 
     /**
      * Member functions
      */
-    virtual void Pack  (byte *pack) = 0;
-    virtual void Unpack(byte *pack) = 0;
+    virtual void pack   (byte *pack);
+    virtual void unpack (byte *pack);
 };
 
 class GenericSensor : public Sensor<std::vector<byte>> {
-
 public:
-    GenericSensor (uint8_t id, uint8_t num_bytes) {
-        _data.resize(num_bytes)
-    }
-}
+    GenericSensor (sensor_id_t id, uint8_t pack_bytes);
+    void pack   (byte *pack);
+    void unpack (byte *pack);
+    const std::vector<byte>& get_data();
+};
 
 #endif
