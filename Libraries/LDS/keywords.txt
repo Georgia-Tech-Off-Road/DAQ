@@ -1,0 +1,21 @@
+#######################################
+# Syntax Coloring Map LDS
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+LDS	KEYWORD1	LDS
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+getPositionMM	KEYWORD2
+getPositionInches	KEYWORD2
+getRawAnalog	KEYWORD2
+begin   KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
