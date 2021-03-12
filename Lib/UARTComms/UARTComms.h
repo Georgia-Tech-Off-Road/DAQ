@@ -5,25 +5,24 @@
 #include <Sensor.h>
 #include <vector>
 
-#include "SensorList.h"
-
 class UARTComms {
 private:
-    uint8_t _port_num;
-    HardwareSerial *_port;
-    uint32_t _baud;
+    HardwareSerial * const _port;
+    const uint32_t _baud;
 
-    uint16_t _sending_period_us;
+    const uint16_t _sending_period_us;
+    uint32_t _time_at_last_receive;
     uint32_t _time_at_last_send;
 
-    bool _is_receiving;
-    std::vector<byte> _data_receive;
-    std::vector<byte> _data_send;
+    bool _is_sending_data;
+    bool _is_receiving_data;
+    std::vector<byte> _packet_receive;
+    std::vector<byte> _packet_send;
     static constexpr byte _end_code[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF0};
 
-    std::vector<Sensor*> _input_sensors;
-    std::vector<Sensor*> _received_sensors;
-    std::vector<Sensor*> _transmit_sensors;
+    std::vector<BaseSensor*> _input_sensors;
+    std::vector<BaseSensor*> _received_sensors;
+    std::vector<BaseSensor*> _transmit_sensors;
     std::vector<sensor_id_t> _detached_sensors;
     std::vector<UARTComms*> _throughput_uart_comms;
 
@@ -47,7 +46,7 @@ public:
     void attach_throughput_uart(UARTComms &through_comms);
     void detach_output_sensor(sensor_id_t id);
 
-    uint8_t get_port_num();
-}
+    HardwareSerial *get_port();
+};
 
 #endif

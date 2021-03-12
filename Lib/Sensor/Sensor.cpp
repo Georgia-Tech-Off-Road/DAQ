@@ -17,6 +17,16 @@ void Sensor<DataType>::set_id(sensor_id_t id) {
     _id = id;
 }
 
+template <class DataType>
+uint8_t Sensor<DataType>::get_pack_bytes() {
+    return _pack_bytes;
+}
+
+template <class DataType>
+void Sensor<DataType>::set_pack_bytes(uint8_t pack_bytes) {
+    _pack_bytes = pack_bytes;
+}
+
 // Defaulted to no implementation. Child classes need to define this to work with UARTComms.
 // TODO: add defaults for common types
 template <class DataType>
