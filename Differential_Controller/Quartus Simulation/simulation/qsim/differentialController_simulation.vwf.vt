@@ -1,0 +1,111 @@
+// Copyright (C) 2019  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and any partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details, at
+// https://fpgasoftware.intel.com/eula.
+
+// *****************************************************************************
+// This file contains a Verilog test bench with test vectors .The test vectors  
+// are exported from a vector file in the Quartus Waveform Editor and apply to  
+// the top level entity of the current Quartus project .The user can use this   
+// testbench to simulate his design using a third-party simulation tool .       
+// *****************************************************************************
+// Generated on "11/10/2020 11:03:59"
+                                                                                
+// Verilog Test Bench (with test vectors) for design :                          differentialController_simulation
+// 
+// Simulation tool : 3rd Party
+// 
+
+`timescale 1 ps/ 1 ps
+module differentialController_simulation_vlg_vec_tst();
+// constants                                           
+// general purpose registers
+reg auto;
+reg clock;
+reg limitedSlip;
+reg locked;
+// wires                                               
+wire Q_auto;
+wire Q_en_CLK;
+wire Q_enFlipFlop;
+wire Q_limitedSlip;
+wire Q_locked;
+
+// assign statements (if any)                          
+differentialController_simulation i1 (
+// port map - connection between master ports and signals/registers   
+	.auto(auto),
+	.clock(clock),
+	.limitedSlip(limitedSlip),
+	.locked(locked),
+	.Q_auto(Q_auto),
+	.Q_en_CLK(Q_en_CLK),
+	.Q_enFlipFlop(Q_enFlipFlop),
+	.Q_limitedSlip(Q_limitedSlip),
+	.Q_locked(Q_locked)
+);
+initial 
+begin 
+#1000000 $finish;
+end 
+
+// clock
+initial
+begin
+	repeat(66)
+	begin
+		clock = 1'b0;
+		clock = #7500 1'b1;
+		# 7500;
+	end
+	clock = 1'b0;
+	clock = #7500 1'b1;
+end 
+
+// locked
+initial
+begin
+	locked = 1'b0;
+	locked = #40000 1'b1;
+	locked = #50000 1'b0;
+	locked = #110000 1'b1;
+	locked = #40000 1'b0;
+	locked = #130000 1'b1;
+	locked = #70000 1'b0;
+	locked = #90000 1'b1;
+	locked = #110000 1'b0;
+end 
+
+// limitedSlip
+initial
+begin
+	limitedSlip = 1'b0;
+	limitedSlip = #130000 1'b1;
+	limitedSlip = #30000 1'b0;
+	limitedSlip = #260000 1'b1;
+	limitedSlip = #60000 1'b0;
+	limitedSlip = #140000 1'b1;
+	limitedSlip = #120000 1'b0;
+end 
+
+// auto
+initial
+begin
+	auto = 1'b0;
+	auto = #270000 1'b1;
+	auto = #50000 1'b0;
+	auto = #130000 1'b1;
+	auto = #100000 1'b0;
+end 
+endmodule
+
