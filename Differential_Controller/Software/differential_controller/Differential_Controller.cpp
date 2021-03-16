@@ -8,8 +8,8 @@
 
 
 Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6,
-                                                 uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight, 
-                                                 HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2) : 
+    uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight,
+    HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2) :
   _pin_diff1(pin_diff1),
   _pin_diff2(pin_diff2),
   _pin_diff3(pin_diff3),
@@ -22,7 +22,8 @@ Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_
   _pin_switchRight(pin_switchRight),
   _he_sensor1(he_sensor1),
   _he_sensor2(he_sensor2),
-  _desiredState(STARTPOS)
+  _desiredState(STARTPOS),
+  _prevSwitchPos(-1)
 {
 
 }
@@ -30,110 +31,158 @@ Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_
 
 void Differential_Controller::setup()
 {
-    pinMode(_pin_diff1, INPUT_PULLUP);
-    pinMode(_pin_diff2, INPUT_PULLUP);
-    pinMode(_pin_diff3, INPUT_PULLUP);
-    pinMode(_pin_diff4, INPUT_PULLUP);
-    pinMode(_pin_diff5, OUTPUT);
-    pinMode(_pin_diff6, INPUT_PULLUP);
+  pinMode(_pin_diff1, INPUT_PULLUP);
+  pinMode(_pin_diff2, INPUT_PULLUP);
+  pinMode(_pin_diff3, INPUT_PULLUP);
+  pinMode(_pin_diff4, INPUT_PULLUP);
+  pinMode(_pin_diff5, OUTPUT);
+  pinMode(_pin_diff6, INPUT_PULLUP);
 
-    pinMode(_pin_motorPos, OUTPUT);
-    pinMode(_pin_motorNeg, OUTPUT);
-    
-    pinMode(_pin_switchLeft, INPUT_PULLUP);
-    pinMode(_pin_switchRight, INPUT_PULLUP);
+  pinMode(_pin_motorPos, OUTPUT);
+  pinMode(_pin_motorNeg, OUTPUT);
+
+  pinMode(_pin_switchLeft, INPUT_PULLUP);
+  pinMode(_pin_switchRight, INPUT_PULLUP);
 
 }
 
+/*
+   Controls the rotation of the motor inside the differential controller based on physical state of hardware
+*/
 void Differential_Controller::update()
 {
-//  if ((he_sensor1.get_speed() < 0) && (he_sensor2.get_speed() < 0 ))
-  uint8_t currState = get_state();
-  uint8_t desiredState = decode_desiredState();
-
-  if (currState != 0)
+  //  if ((he_sensor1.get_speed() < 0) && (he_sensor2.get_speed() < 0 ))
   {
-    if (desiredState != currState)
+
+    uint8_t currState = get_currState();
+    uint8_t desiredState = get_desiredState();
+
+
+    // if an invalid state has been returned, stop the differential controller
+    if (currState != 0)
     {
-      if (currState < desiredState)
+
+      // if not at the desired state, rotate the motor in the direction of the desired state
+      // else stop rotating the motor and change the boolean to show the differential controller has reached the desired state
+      if (desiredState != currState)
       {
-        rotate_R();
+        if (currState < desiredState)
+        {
+          rotate_R();
+        }
+        else if (currState > desiredState)
+        {
+          rotate_F();
+        }
+        else
+        {
+          rotate_stop();
+          _changingDiffType = false;
+        }
       }
-      else if (currState > desiredState)
-      {
-        rotate_F();
-      } 
       else
       {
         rotate_stop();
+         _changingDiffType = false;
       }
-    } 
-    else
-    {
+    } else {
       rotate_stop();
     }
-  } else {
-    rotate_stop();
   }
 
 
-  
 }
 
 
-uint8_t Differential_Controller::get_state()
-{
-  digitalWrite(_pin_diff5, LOW);
-  
-  _diffWiperCombo = (!digitalRead(_pin_diff6) << 5) | (1 << 4) | (!digitalRead(_pin_diff4) << 3) | 
-                    (!digitalRead(_pin_diff3) << 2) | (!digitalRead(_pin_diff2) << 1) | (!digitalRead(_pin_diff1)); // 16 (010000) for _diff5
 
-  // decode the current state using the currently energized tracks
-  switch (_diffWiperCombo) 
+/*
+   Gets the current state of the physical differential controller wipers and tracks
+
+   @return - value of the macro for the current state
+*/
+uint8_t Differential_Controller::get_currState()
+{
+  // differential pin 5 pulls all differential pins (pulled high by defualt)
+  // that are in contact through the wipers/tracks low
+  digitalWrite(_pin_diff5, LOW);
+
+  // differential pins are active low
+  uint8_t diffWiperCombo = (!digitalRead(_pin_diff6) << 5) | (1 << 4) | (!digitalRead(_pin_diff4) << 3) |
+                           (!digitalRead(_pin_diff3) << 2) | (!digitalRead(_pin_diff2) << 1) | (!digitalRead(_pin_diff1)); // 16 (010000) for _diff5
+
+  // decode the current state using the current tracks that are pulled low
+  switch (diffWiperCombo)
   {
     case 0b110000:    // state 1 // This state is the limit of going in the F direction
       _currState = STATE1;
       break;
-    case 0b110001:    // state 2 
+    case 0b110001:    // state 2
       _currState = STATE2;
       break;
-    case 0b111001:    // state 3 
+    case 0b111001:    // state 3
       _currState = STATE3;
       break;
-    case 0b011001:    // state 4 
+    case 0b011001:    // state 4
       _currState = STATE4;
       break;
-    case 0b011011:    // state 5 
+    case 0b011011:    // state 5
       _currState = STATE5;
       break;
-    case 0b010011:    // state 6 
+    case 0b010011:    // state 6
       _currState = STATE6;
       break;
-    case 0b010111:    // state 7 
+    case 0b010111:    // state 7
       _currState = STATE7;
       break;
     case 0b010110:    // state 8      // This state is the limit of going in the R direction
       _currState = STATE8;
       break;
-    default:      // all other unused combinations 
+    default:      // all other unused combinations
       return 0;
   }
 
   return _currState;
-  
+
 }
 
+
+
+/*
+    This function gets the desired state of the physical differential controller wipers and tracks
+    based on the phsysical position of the switch
+
+    @return - value of the macro for the desired state
+*/
 uint8_t Differential_Controller::get_desiredState()
-{  
-  return decode_desiredState();
-}
-
-
-
-
-uint8_t Differential_Controller::decode_desiredState() 
 {
-  switch(decode_desiredDiffMode())
+  // decodes the desired differential type
+  // based on the current physical position of switch
+  uint8_t currSwitchPos = (!(digitalRead(_pin_switchLeft)) << 1) | !digitalRead(_pin_switchRight);
+  switch (currSwitchPos)
+  {
+    case 100:         // switch is rotated to the left position
+      _desiredDiffType = PH_1;
+      break;
+    case 000:         // switch is rotated to the middle position
+      _desiredDiffType = PH_2;
+      break;
+    case 001:         // switch is rotated to the right position
+      _desiredDiffType = PH_3;
+      break;
+    default:
+      _desiredDiffType = 0;
+  }
+
+  // check if the switch position has changed since last call
+  if (currSwitchPos != _prevSwitchPos)
+  {
+    _changingDiffType = true;
+  } 
+  _prevSwitchPos = currSwitchPos;     // update what the prevous switch position was
+
+  // decodes the desired state of physical differential controller wiper and tracks
+  // based on the desired differential type
+  switch (_desiredDiffType)
   {
     case PH_1:
       _desiredState = STATE2;
@@ -147,63 +196,39 @@ uint8_t Differential_Controller::decode_desiredState()
     default:
       _desiredState = 0;
   }
-  
+
   return _desiredState;
-}
-
-uint8_t Differential_Controller::decode_desiredDiffMode()
-{
-  switch (get_switchPos())
-  {
-    case SWITCHPOSLEFT:
-      _desiredDiffMode = PH_1;
-      break;
-    case SWITCHPOSMIDDLE:
-      _desiredDiffMode = PH_2;
-      break;
-    case SWITCHPOSRIGHT:
-      _desiredDiffMode = PH_3;
-      break;
-    default:
-      _desiredDiffMode = 0;
-  }
-
-  return _desiredDiffMode;
-}
-
-/*  
- *  This function gets the position of the dashboard switch 
- *  
- *  @return - integer value of the SWITCHPOS
- */
-uint8_t Differential_Controller::get_switchPos()
-{
-  return (!(digitalRead(_pin_switchRight))<<1) | !digitalRead(_pin_switchLeft);
 
 }
 
 
-/*  
- *  This function sets the P-channel MOSFETs to be open to prevent current from flowing into the motor
- *  
- *  @return - integer value of the SWITCHPOS
- */
+/*
+    This function sets the P-channel MOSFETs to be open to prevent current from flowing into the motor
+*/
 void Differential_Controller::rotate_stop()
 {
   digitalWrite(_pin_motorPos, HIGH);
   digitalWrite(_pin_motorNeg, HIGH);
 }
 
+
+/*
+    This function rotates the motor in the direction of the F on the differential controller case
+*/
 void Differential_Controller::rotate_F()
 {
   digitalWrite(_pin_motorPos, HIGH);
   digitalWrite(_pin_motorNeg, LOW);
 }
 
+
+/*
+    This function rotates the motor in the direction of the R on the differential controller case
+*/
 void Differential_Controller::rotate_R()
 {
-  digitalWrite(_pin_motorPos, LOW);
-  digitalWrite(_pin_motorNeg, HIGH);  
+  digitalWrite(_pin_motorPos, HIGH);
+  digitalWrite(_pin_motorNeg, LOW);
 }
 
 
