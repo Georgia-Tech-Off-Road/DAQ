@@ -26,7 +26,7 @@ private:
     ElapsedCycles _cycle_counter;       // number of elapsed processor clock cycles
     uint32_t _latest_cycle_count;       // number of elapsed clock cycles between the last two interrupts
     uint32_t _current_tick;         // tracks the current rotational position
-
+    double _prev_rpm;
 };
 
 

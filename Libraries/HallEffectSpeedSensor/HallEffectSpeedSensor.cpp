@@ -42,11 +42,23 @@ void HallEffectSpeedSensor::interrupt()
 	// }
 }
 
-double HallEffectSpeedSensor::get_rpm()
+int HallEffectSpeedSensor::get_rpm()
 {
+
+	// if (_cycle_counter >= ) 		// 1 second 
 	double dt = (double) _latest_cycle_count/_mcu_clock_speed;
-	Serial.println(_ticks_per_revolution);
-	return 1/(dt*_ticks_per_revolution)*60;		// rpm
+	double rpm = 1/(dt*_ticks_per_revolution)*60;
+	
+	if ((rpm == _prev_rpm)&&(_cycle_counter>_mcu_clock_speed*.1))
+	{
+		_prev_rpm = rpm;
+		return 0;
+	} 
+	else 
+	{
+		_prev_rpm = rpm;
+		return (int) rpm;
+	}
 }
 
 uint32_t HallEffectSpeedSensor::get_pos()
