@@ -11,6 +11,8 @@ enum sensor_id_t : uint16_t
     DEFAULT_NO_SENSOR          = 000,
     FLAG_DATACOLLECTING        = 001,
     COMMAND_SDCARDFILENAME_STR = 002,
+    TEST_SENSOR_1              = 010,
+    TEST_SENSOR_2              = 011,
 
     /**
      * 100 - TIME "SENSORS"

@@ -10,6 +10,7 @@ protected:
     uint8_t  _pack_bytes;
 
 public:
+
     /**
      * Getters and Setters
      */
@@ -29,6 +30,8 @@ template <class DataType>
 class Sensor : public BaseSensor {
 protected:
     DataType _data;
+    using BaseSensor::_id;
+    using BaseSensor::_pack_bytes;
 
 public:
     /**

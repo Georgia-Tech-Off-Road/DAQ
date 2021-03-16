@@ -5,6 +5,32 @@
 #include <Sensor.h>
 #include <vector>
 
+// #if not defined(__IMXRT1062__)
+// namespace std {
+//   void __throw_bad_alloc()
+//   {
+//     Serial.println("Unable to allocate memory");
+//   }
+
+//   void __throw_length_error( char const*e )
+//   {
+//     Serial.print("Length Error :");
+//     Serial.println(e);
+//   }
+// }
+// #endif
+
+struct end_code_t {
+    byte code[10];
+    end_code_t() {
+        for(uint8_t i = 0; i < 9; ++i) code[i] = 0xFF;
+        code[9] = 0xF0;
+    }
+    const byte& operator[] (uint8_t i) const {
+        return code[i];
+    }
+};
+
 class UARTComms {
 private:
     HardwareSerial * const _port;
@@ -18,7 +44,8 @@ private:
     bool _is_receiving_data;
     std::vector<byte> _packet_receive;
     std::vector<byte> _packet_send;
-    static constexpr byte _end_code[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF0};
+    // static constexpr byte _end_code[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF0};
+    const end_code_t _end_code;
 
     std::vector<BaseSensor*> _input_sensors;
     std::vector<BaseSensor*> _received_sensors;
@@ -35,13 +62,13 @@ private:
     uint8_t get_expected_receive_bytes();
     
 public:
-    UARTComms(uint16_t baud, uint8_t port_num);
+    UARTComms(uint32_t baud, HardwareSerial &port);
 
     void update();
     void begin();
 
-    void attach_input_sensor (Sensor &sensor, sensor_id_t id);
-    void attach_output_sensor(Sensor &sensor, sensor_id_t id);
+    void attach_input_sensor (BaseSensor &sensor, sensor_id_t id);
+    void attach_output_sensor(BaseSensor &sensor, sensor_id_t id);
 
     void attach_throughput_uart(UARTComms &through_comms);
     void detach_output_sensor(sensor_id_t id);

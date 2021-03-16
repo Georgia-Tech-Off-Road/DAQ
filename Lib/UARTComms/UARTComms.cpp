@@ -8,7 +8,7 @@
 /*
  * Constructor
  */
-UARTComms::UARTComms(uint16_t baud, HardwareSerial &port) : 
+UARTComms::UARTComms(uint32_t baud, HardwareSerial &port) : 
     _baud(baud), 
     _port(&port),
     _sending_period_us(5000),
@@ -34,8 +34,10 @@ void UARTComms::update(){
 
 void UARTComms::read_packet() {
     // RESET _IS_RECEIVING_DATA WHEN TIME SINCE LAST BYTE RECEIVED IS LARGE
+    Serial.print("r");
     if(_port->available()){
-        while(_port->available()) _packet_receive.push_back(_port.read());
+        Serial.print("p");
+        while(_port->available()) _packet_receive.push_back(_port->read());
         _time_at_last_receive = micros();
 
         if(_packet_receive.size() >= 8) {
@@ -45,6 +47,8 @@ void UARTComms::read_packet() {
                 if(_packet_receive[packet_size - 8 + i] != _end_code[i]) is_end_of_packet = 0;
             }
             if(is_end_of_packet){
+                Serial.print("\n\npacket length: ");
+                Serial.println(_packet_receive.size());
                 unpacketize();
                 _packet_receive.clear();
             }
@@ -74,8 +78,8 @@ void UARTComms::unpacketize() {
         if(get_expected_receive_bytes() == _packet_receive.size()) { // packet lengths good
             const byte *packet_loc = _packet_receive.data() + 1; // pointer to constant data, +1 to skip ack
             for(auto it = _received_sensors.begin(); it != _received_sensors.end(); it++){
-                it->unpack(packet_loc);
-                packet_loc += it->get_pack_bytes();
+                (*it)->unpack(packet_loc);
+                packet_loc += (*it)->get_pack_bytes();
             }
         } else { // packet lengths not good
             // CHANGE LOGIC TO DO THIS AFTER X AMOUNTS OF MISSES.
@@ -90,12 +94,12 @@ void UARTComms::unpacketize() {
             uint8_t pack_bytes = *((uint8_t *) (packet_loc + 2));
 
             // Check if Sensor is in list of input sensors.
-            Sensor *existing_input_sensor = null;
+            BaseSensor *existing_input_sensor = 0;
             for (auto it = _input_sensors.begin(); it != _input_sensors.end(); it++){
-                if(it->get_id() == id) existing_input_sensor = &(*it);
+                if((*it)->get_id() == id) existing_input_sensor = *it;
             }
-            if(existing_input_sensor != null) _received_sensors.push_back(existing_input_sensor);
-            else _received_sensors.push_back(new GenericSensor(id, pack_bytes));
+            if(existing_input_sensor != 0) _received_sensors.push_back(existing_input_sensor);
+            else _received_sensors.push_back(new GenericSensor((sensor_id_t) id, pack_bytes));
 
             packet_loc += 3;
         }
@@ -118,7 +122,7 @@ void UARTComms::send_packet() {
     uint32_t time_current = micros();
     if(abs(time_current - _time_at_last_send) >= _sending_period_us){
         packetize();
-        Serial.write(_packet_send.data(), _packet_send.size());
+        _port->write(_packet_send.data(), _packet_send.size());
         _time_at_last_send = time_current;
         _packet_send.clear();
     }
@@ -126,52 +130,52 @@ void UARTComms::send_packet() {
 
 void UARTComms::packetize() {
     byte ack = (0x02 & (_is_sending_data << 1)) | (0x01 & (_is_receiving_data));
-    _packet_send.push_pack(ack);
+    _packet_send.push_back(ack);
     if(_is_sending_data){
         // ack should be 0x03 or 0x02
-        for(auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(), it++){
-            byte *pack = new byte[it->get_pack_bytes()];
-            it->pack(pack);
-            for(int i = 0; i < it->get_pack_bytes(); ++i) _packet_send.push_back(pack[i]);
+        for(auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(); it++){
+            byte *pack = new byte[(*it)->get_pack_bytes()];
+            (*it)->pack(pack);
+            for(int i = 0; i < (*it)->get_pack_bytes(); ++i) _packet_send.push_back(pack[i]);
             delete pack;
         }
-        for(auto tp = _throughput_uart_comms.begin(); tp != _throughput_uart_comms.end(), tp++){
-            for(auto it = tp->_received_sensors.begin(); it != tp->_received_sensors.end(), it++){
-                sensor_id_t id = it->get_id();
+        for(auto tp = _throughput_uart_comms.begin(); tp != _throughput_uart_comms.end(); tp++){
+            for(auto it = (*tp)->_received_sensors.begin(); it != (*tp)->_received_sensors.end(); it++){
+                sensor_id_t id = (*it)->get_id();
                 bool detached = 0;
                 for(auto ds = _detached_sensors.begin(); (ds != _detached_sensors.end() && !detached); ds++){
-                    if(ds->get_id() == id) detached = 1;
+                    if((*ds) == id) detached = 1;
                 }
                 if(!detached){
-                    byte *pack = new byte[it->get_pack_bytes()];
-                    it->pack(pack);
-                    for(int i = 0; i < it->get_pack_bytes(); ++i) _packet_send.push_back(pack[i]);
+                    byte *pack = new byte[(*it)->get_pack_bytes()];
+                    (*it)->pack(pack);
+                    for(int i = 0; i < (*it)->get_pack_bytes(); ++i) _packet_send.push_back(pack[i]);
                     delete pack;
                 }
             }
         }
     } else {
         // ack should be 0x01 or 0x00
-        for(auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(), it++){
-            uint16_t id = it->get_id();
+        for(auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(); it++){
+            uint16_t id = (*it)->get_id();
             byte id_msb = *((byte *)(&id));
             byte id_lsb = (byte) id;
-            byte pack_bytes = it->get_pack_bytes();
+            byte pack_bytes = (*it)->get_pack_bytes();
             _packet_send.push_back(id_msb);
             _packet_send.push_back(id_lsb);
             _packet_send.push_back(pack_bytes);
         }
-        for(auto tp = _throughput_uart_comms.begin(); tp != _throughput_uart_comms.end(), tp++){
-            for(auto it = tp->_received_sensors.begin(); it != tp->_received_sensors.end(), it++){
+        for(auto tp = _throughput_uart_comms.begin(); tp != _throughput_uart_comms.end(); tp++){
+            for(auto it = (*tp)->_received_sensors.begin(); it != (*tp)->_received_sensors.end(); it++){
                 bool detached = 0;
-                uint16_t id = it->get_id();
+                uint16_t id = (*it)->get_id();
                 for(auto ds = _detached_sensors.begin(); (ds != _detached_sensors.end() && !detached); ds++){
-                    if(ds->get_id() == id) detached = 1;
+                    if((*ds) == id) detached = 1;
                 }
                 if(!detached){
                     byte id_msb = *((byte *)(&id));
                     byte id_lsb = (byte) id;
-                    byte pack_bytes = it->get_pack_bytes();
+                    byte pack_bytes = (*it)->get_pack_bytes();
                     _packet_send.push_back(id_msb);
                     _packet_send.push_back(id_lsb);
                     _packet_send.push_back(pack_bytes);
@@ -193,21 +197,21 @@ void UARTComms::packetize() {
 
 uint8_t UARTComms::get_expected_receive_bytes() {
     uint8_t bytes = 0;
-    for(auto it = _received_sensors.begin(); it != _received_sensors.end(); it++) bytes += it->get_pack_bytes();
+    for(auto it = _received_sensors.begin(); it != _received_sensors.end(); it++) bytes += (*it)->get_pack_bytes();
     return (9 + bytes);
 }
 
 uint8_t UARTComms::get_expected_transmit_bytes() {
     uint8_t bytes = 0;
-    for(auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(); it++) bytes += it->get_pack_bytes();
-    for(auto tp = _throughput_uart_comms.begin(); tp != _throughput_uart_comms.end(), tp++){
-        for(auto it = tp->_received_sensors.begin(); it != tp->_received_sensors.end(), it++){
+    for(auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(); it++) bytes += (*it)->get_pack_bytes();
+    for(auto tp = _throughput_uart_comms.begin(); tp != _throughput_uart_comms.end(); tp++){
+        for(auto it = (*tp)->_received_sensors.begin(); it != (*tp)->_received_sensors.end(); it++){
             bool detached = 0;
-            uint16_t id = it->get_id();
+            uint16_t id = (*it)->get_id();
             for(auto ds = _detached_sensors.begin(); (ds != _detached_sensors.end() && !detached); ds++){
-                if(ds->get_id() == id) detached = 1;
+                if((*ds) == id) detached = 1;
             }
-            if(!detached) bytes += it->get_pack_bytes();
+            if(!detached) bytes += (*it)->get_pack_bytes();
         }
     }
 
@@ -220,10 +224,10 @@ uint8_t UARTComms::get_expected_transmit_bytes() {
  * @param sensor A pointer to a sensor object (derived from Sensor class)
  * @param id The ID of the sensor being attached from SensorList
  */
-void UARTComms::attach_input_sensor(Sensor &sensor, sensor_id_t id) {
+void UARTComms::attach_input_sensor(BaseSensor &sensor, sensor_id_t id) {
     // Check to see if it is already attached. If so, do nothing
     for (auto it = _input_sensors.begin(); it != _input_sensors.end(); it++){
-        if(it->get_id() == id)
+        if((*it)->get_id() == id)
             return;
     }
     // Attach the sensor
@@ -231,9 +235,9 @@ void UARTComms::attach_input_sensor(Sensor &sensor, sensor_id_t id) {
     _input_sensors.push_back(&sensor);
     // Check to see if the sensor ID is in received sensors, if so, replace generic sensor with actual sensor
     for (auto it = _received_sensors.begin(); it != _received_sensors.end(); it++){
-        if(it->get_id() == id) {
-            Sensor *old_sensor = it;
-            it = &sensor;
+        if((*it)->get_id() == id) {
+            BaseSensor *old_sensor = (*it);
+            *it = &sensor;
             delete old_sensor;
         }
     }
@@ -245,15 +249,15 @@ void UARTComms::attach_input_sensor(Sensor &sensor, sensor_id_t id) {
  * @param sensor A pointer to a sensor object (derived from Sensor class)
  * @param id The ID of the sensor being attached from SensorList
  */
-void UARTComms::attach_output_sensor(Sensor &sensor, sensor_id_t id){
+void UARTComms::attach_output_sensor(BaseSensor &sensor, sensor_id_t id){
     // Check to see if it is detached. If so, remove it from the detached list
-    for (auto it = _detached_sensors.begin(); it != _detached_sensors.end(); it++){
-        if(it->get_id() == id)
-            _detached_sensors.erase(it);
+    for (auto ds = _detached_sensors.begin(); ds != _detached_sensors.end(); ds++){
+        if((*ds) == id)
+            _detached_sensors.erase(ds);
     }
     // Check to see if it is already attached. If so, do nothing
     for (auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(); it++){
-        if(it->get_id() == id)
+        if((*it)->get_id() == id)
             return;
     }
     // Attach the sensor
@@ -270,7 +274,7 @@ void UARTComms::attach_output_sensor(Sensor &sensor, sensor_id_t id){
 void UARTComms::attach_throughput_uart(UARTComms &through_comms){
     // Check to see if it is already attached. If so, do nothing
     for (auto it = _throughput_uart_comms.begin(); it != _throughput_uart_comms.end(); it++){
-        if(it->get_port() == through_comms.get_port())
+        if((*it)->get_port() == through_comms.get_port())
             return;
     }
     // Attach the comm port
@@ -285,7 +289,7 @@ void UARTComms::attach_throughput_uart(UARTComms &through_comms){
 void UARTComms::detach_output_sensor(sensor_id_t id){
     // Check to see if it is already attached. If so, remove it
     for (auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(); it++){
-        if(it->get_id() == id)
+        if((*it)->get_id() == id)
             _transmit_sensors.erase(it);
     }
     // Check to see if it is already detached. If so, do nothing

@@ -33,17 +33,17 @@ template <class DataType>
 void Sensor<DataType>::pack(byte *pack) { }
 
 template <class DataType>
-void Sensor<DataType>::unpack(byte *pack) { }
+void Sensor<DataType>::unpack(const byte *pack) { }
 
 
 /**
  * GenericSensor Implementation
  */
 
-GenericSensor::GenericSensor(sensor_id_t, uint8_t pack_bytes){
-    _id(id),
-    _pack_bytes(pack_bytes) {
-    _data.resize(num_bytes);
+GenericSensor::GenericSensor(sensor_id_t id, uint8_t pack_bytes) {
+    _id = id;
+    _pack_bytes = pack_bytes;
+    _data.resize(pack_bytes);
 }
 
 void GenericSensor::pack(byte *pack){
@@ -56,6 +56,6 @@ void GenericSensor::unpack(byte *pack){
 
 const std::vector<byte>& GenericSensor::get_data(){
     return _data;
-};
+}
 
 #endif
