@@ -9,9 +9,7 @@
 #define STATE_LS   1
 #define STATE_LOCK 2
 
-#define SWITCHPOSLEFT 1
-#define SWITCHPOSMIDDLE 0
-#define SWITCHPOSRIGHT 2
+
 
 #define STARTPOS 3
 
@@ -37,10 +35,7 @@ class Differential_Controller {
     void setup();
     void update();
     void change_state(uint8_t desired_state);
-    uint8_t decode_desiredState();
-    uint8_t decode_desiredDiffMode();
-    uint8_t get_state();
-    uint8_t get_switchPos();
+    uint8_t get_currState();
     uint8_t get_desiredState();
     void rotate_stop();
     void rotate_F();
@@ -65,8 +60,9 @@ class Differential_Controller {
 
     uint8_t _currState;
     uint8_t _desiredState;
-    uint8_t _desiredDiffMode;
-    uint8_t _diffWiperCombo;
+    uint8_t _desiredDiffType;
+    uint8_t _prevSwitchPos;   // NOT TO BE USED CARELESSLY. Does not indicate previous switch position accurately. Only used to change _changingDiffTypeType variable.
+    bool _changingDiffType;
         
 
 
