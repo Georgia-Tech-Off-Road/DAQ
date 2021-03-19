@@ -23,12 +23,12 @@ void DashDial::update() {
     const uint8_t to_led = 23 * setting_diff / diff;
 
     for(uint8_t i = 0; i < to_led; ++i)
-        _driver.setPWM(i, _max_brightness);
+        _driver.setPWM(23 - i, _max_brightness);
 
-    _driver.setPWM(to_led, _min_brightness + brightness_diff * setting_diff / diff);
+    _driver.setPWM(23 - to_led, _min_brightness + brightness_diff * setting_diff / diff);
 
     for(uint8_t i = to_led + 1; i < 24; ++i)
-        _driver.setPWM(i, _min_brightness);
+        _driver.setPWM(23 - i, _min_brightness);
 
     _driver.write();
 
