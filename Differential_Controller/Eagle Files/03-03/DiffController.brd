@@ -1469,7 +1469,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <contactref element="U$2" pad="20/A6"/>
 <contactref element="JP2" pad="7"/>
 <contactref element="R7" pad="P$1"/>
-<contactref element="R10" pad="P$1"/>
 <wire x1="29.40149375" y1="40.5892" x2="29.1592" y2="40.5892" width="0.2032" layer="1"/>
 <wire x1="29.1592" y1="40.5892" x2="27.94" y2="39.37" width="0.2032" layer="1"/>
 <wire x1="31.75" y1="44.45" x2="31.75" y2="42.93770625" width="0.2032" layer="1"/>
@@ -1482,7 +1481,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="35.00001875" y1="45.6438" x2="42.03301875" y2="45.6438" width="0.2032" layer="16"/>
 <wire x1="42.03301875" y1="45.6438" x2="44.72541875" y2="48.3362" width="0.2032" layer="16"/>
 <wire x1="66.1162" y1="42.62238125" x2="64.77" y2="41.27618125" width="0.2032" layer="16"/>
-<wire x1="64.77" y1="41.27618125" x2="64.77" y2="35.56" width="0.2032" layer="16"/>
 <wire x1="44.72541875" y1="48.3362" x2="53.34" y2="48.3362" width="0.2032" layer="16"/>
 <wire x1="53.34" y1="48.3362" x2="53.7504625" y2="48.3362" width="0.2032" layer="16"/>
 <wire x1="53.7504625" y1="48.3362" x2="62.3062" y2="48.3362" width="0.2032" layer="16"/>
@@ -1495,6 +1493,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <contactref element="U$2" pad="21/A7"/>
 <contactref element="JP2" pad="6"/>
 <wire x1="27.94" y1="41.91" x2="23.749" y2="41.91" width="0.2032" layer="16"/>
+<contactref element="R10" pad="P$1"/>
+<wire x1="27.94" y1="41.91" x2="64.77" y2="35.56" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="M_OUT_POS">
 <contactref element="X1" pad="1"/>
@@ -1735,6 +1735,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
 <mfgpreviewcolor name="substratecolor" color="0xFF786E46"/>
 </mfgpreviewcolors>
+<errors>
+<approved hash="23,1,01487dfc459c0398"/>
+</errors>
 </board>
 </drawing>
 <compatibility>
