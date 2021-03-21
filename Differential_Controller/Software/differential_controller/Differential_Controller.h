@@ -63,6 +63,7 @@ class Differential_Controller {
     uint8_t _desiredDiffType;
     uint8_t _prevSwitchPos;   // NOT TO BE USED CARELESSLY. Does not indicate previous switch position accurately. Only used to change _changingDiffTypeType variable.
     bool _changingDiffType;
+    bool _switchInputMode;
         
 
 

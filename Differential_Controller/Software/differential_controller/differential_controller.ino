@@ -1,6 +1,6 @@
 #include "Differential_Controller.h"
 #include "HallEffectSpeedSensor.h"
-#include <stdint.h>       // delete later (adds uint types for Arduino
+#include <stdint.h>       // delete later (adds uint types for Arduino)
 
 //#define PIN_BUILTINLED 13
 //#define PIN_DIFF1 14
@@ -66,6 +66,6 @@ void loop() {
 //    } 
 //  }
 //  
-  
+
   diff_controller.update();
 }

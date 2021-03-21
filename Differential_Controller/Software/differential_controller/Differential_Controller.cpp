@@ -46,6 +46,7 @@ void Differential_Controller::setup()
 
 }
 
+
 /*
    Controls the rotation of the motor inside the differential controller based on physical state of hardware
 */
@@ -55,8 +56,37 @@ void Differential_Controller::update()
   {
 
     uint8_t currState = get_currState();
-    uint8_t desiredState = get_desiredState();
+    uint8_t desiredState;
 
+    int mode;
+
+    if (Serial.available() > 0) {
+      if (Serial.read() == "switch") {
+        mode = 0;
+      } else if (Serial.read() == "serial") {
+        mode = 1;
+      }
+    }
+    
+    if (!_changingDiffType) {
+      switch (mode) {
+        case 1:
+            if (Serial.available() == 1) {
+              uint8_t inputState = Serial.read();
+              if (inputState >= 1 && inputState <= 8) {
+                desiredState = inputState;
+                _changingDiffType = true;
+                _switchInputMode = false;
+              }
+            }
+        case 0:
+           desiredState = get_desiredState();
+            _changingDiffType = true;
+            _switchInputMode = true;
+        default:
+            
+        }
+      }
 
     // if an invalid state has been returned, stop the differential controller
     if (currState != 0)
@@ -89,7 +119,6 @@ void Differential_Controller::update()
       rotate_stop();
     }
   }
-
 
 }
 
