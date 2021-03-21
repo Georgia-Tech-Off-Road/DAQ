@@ -2780,11 +2780,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="-27.94" y1="132.08" x2="-33.02" y2="132.08" width="0.1524" layer="91"/>
 <label x="-40.64" y="132.08" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="R10" gate="G$1" pin="1"/>
-<wire x1="139.7" y1="144.78" x2="144.78" y2="144.78" width="0.1524" layer="91"/>
-<label x="152.4" y="144.78" size="1.778" layer="95" rot="MR0"/>
-</segment>
 </net>
 <net name="M_IN_NEG" class="0">
 <segment>
@@ -2792,6 +2787,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="JP2" gate="A" pin="6"/>
 <wire x1="76.2" y1="86.36" x2="93.98" y2="86.36" width="0.1524" layer="91"/>
 <label x="81.28" y="86.36" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R10" gate="G$1" pin="1"/>
+<wire x1="139.7" y1="144.78" x2="144.78" y2="144.78" width="0.1524" layer="91"/>
+<label x="152.4" y="144.78" size="1.778" layer="95" rot="MR0"/>
 </segment>
 </net>
 <net name="M_OUT_POS" class="0">
