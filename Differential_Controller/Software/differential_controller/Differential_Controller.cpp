@@ -56,6 +56,9 @@ void Differential_Controller::update()
 
     uint8_t currState = get_currState();
     uint8_t desiredState = get_desiredState();
+    Serial.println(currState);
+    Serial.println(desiredState);
+    Serial.println();
 
 
     // if an invalid state has been returned, stop the differential controller
@@ -64,10 +67,11 @@ void Differential_Controller::update()
 
       // if not at the desired state, rotate the motor in the direction of the desired state
       // else stop rotating the motor and change the boolean to show the differential controller has reached the desired state
-      if (desiredState != currState)
+      if ((desiredState != currState) & _changingDiffType)
       {
         if (currState < desiredState)
         {
+          Serial.println("changing");
           rotate_R();
         }
         else if (currState > desiredState)
@@ -78,6 +82,7 @@ void Differential_Controller::update()
         {
           rotate_stop();
           _changingDiffType = false;
+          Serial.println("changing no");
         }
       }
       else
@@ -110,6 +115,8 @@ uint8_t Differential_Controller::get_currState()
   uint8_t diffWiperCombo = (!digitalRead(_pin_diff6) << 5) | (1 << 4) | (!digitalRead(_pin_diff4) << 3) |
                            (!digitalRead(_pin_diff3) << 2) | (!digitalRead(_pin_diff2) << 1) | (!digitalRead(_pin_diff1)); // 16 (010000) for _diff5
 
+  Serial.println(diffWiperCombo,BIN);
+  
   // decode the current state using the current tracks that are pulled low
   switch (diffWiperCombo)
   {
@@ -209,6 +216,7 @@ void Differential_Controller::rotate_stop()
 {
   digitalWrite(_pin_motorPos, HIGH);
   digitalWrite(_pin_motorNeg, HIGH);
+  Serial.println("stopping");
 }
 
 
@@ -219,6 +227,7 @@ void Differential_Controller::rotate_F()
 {
   digitalWrite(_pin_motorPos, HIGH);
   digitalWrite(_pin_motorNeg, LOW);
+  Serial.println("rotating to F");
 }
 
 
@@ -229,6 +238,7 @@ void Differential_Controller::rotate_R()
 {
   digitalWrite(_pin_motorPos, HIGH);
   digitalWrite(_pin_motorNeg, LOW);
+  Serial.println("rotating to R");
 }
 
 

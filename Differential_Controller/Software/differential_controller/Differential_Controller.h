@@ -2,7 +2,6 @@
 #define DIFFERENTIAL_CONTROLLER_H
 
 #include <Arduino.h>
-#include <stdint.h>           // DELETE LATER (ADDS uint types for Arduinos)
 #include "HallEffectSpeedSensor.h"
 
 #define STATE_4WD  0
