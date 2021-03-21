@@ -55,56 +55,70 @@ void Differential_Controller::update()
   //  if ((he_sensor1.get_speed() < 0) && (he_sensor2.get_speed() < 0 ))
   {
 
+
+
+    
     uint8_t currState = get_currState();
-    uint8_t desiredState = get_desiredState();
-    Serial.println(currState);
-    Serial.println(desiredState);
-    Serial.println();
 
-    int mode;
-
+    String user_input_str;
+    long user_input;
+    
     if (Serial.available() > 0) {
-      if (Serial.read() == "switch") {
-        mode = 0;
-      } else if (Serial.read() == "serial") {
-        mode = 1;
-      }
+      user_input_str = Serial.readString();
+      user_input = user_input_str.toInt();
+    }
+
+    
+    if (user_input_str.indexOf("switch") > -1) {
+      _controlMode = CONTROLMODE_SWITCH;
+      Serial.println("Changing to switch control mode");
+    } else if (user_input_str.indexOf("serial") > -1) {
+      _controlMode = CONTROLMODE_SERIAL;
+      Serial.println("Changing to serial control mode");
+    }
+
+    switch (_controlMode) {
+      case CONTROLMODE_SERIAL:
+          if ((user_input >= 1) && (user_input <= 8)) {
+            _desiredState = user_input;
+            _changingDiffType = true;
+          }
+        break;
+      case CONTROLMODE_SWITCH:
+        _desiredState = get_desiredState();
+        break;
+      default:
+        Serial.println("Invalid control mode");
+        break;
+    }
+
+
+    
+    if (_changingDiffType) {
+      Serial.print("Current state: ");
+      Serial.println(currState);
     }
     
-    if (!_changingDiffType) {
-      switch (mode) {
-        case 1:
-            if (Serial.available() == 1) {
-              uint8_t inputState = Serial.read();
-              if (inputState >= 1 && inputState <= 8) {
-                desiredState = inputState;
-                _changingDiffType = true;
-                _switchInputMode = false;
-              }
-            }
-        case 0:
-           desiredState = get_desiredState();
-            _changingDiffType = true;
-            _switchInputMode = true;
-        default:
-            
-        }
-      }
+    if (_changingDiffType) {
+      Serial.print("Desired state: ");
+      Serial.println(_desiredState);
+    }
 
+      
     // if an invalid state has been returned, stop the differential controller
-    if (currState != 0)
+    if (currState != 0 && (1 <= _desiredState && _desiredState <= 8))
     {
 
       // if not at the desired state, rotate the motor in the direction of the desired state
       // else stop rotating the motor and change the boolean to show the differential controller has reached the desired state
-      if ((desiredState != currState) & _changingDiffType)
+      if ((_desiredState != currState) & _changingDiffType)
       {
-        if (currState < desiredState)
+        if (currState < _desiredState)
         {
-          Serial.println("changing");
+//          Serial.println("changing");
           rotate_R();
         }
-        else if (currState > desiredState)
+        else if (currState > _desiredState)
         {
           rotate_F();
         }
@@ -112,19 +126,21 @@ void Differential_Controller::update()
         {
           rotate_stop();
           _changingDiffType = false;
-          Serial.println("changing no");
+//          Serial.println("changing no");
         }
       }
       else
       {
         rotate_stop();
-         _changingDiffType = false;
+        _changingDiffType = false;
       }
     } else {
       rotate_stop();
     }
   }
 
+  if (_changingDiffType)
+    Serial.println();
 }
 
 
@@ -144,8 +160,10 @@ uint8_t Differential_Controller::get_currState()
   uint8_t diffWiperCombo = (!digitalRead(_pin_diff6) << 5) | (1 << 4) | (!digitalRead(_pin_diff4) << 3) |
                            (!digitalRead(_pin_diff3) << 2) | (!digitalRead(_pin_diff2) << 1) | (!digitalRead(_pin_diff1)); // 16 (010000) for _diff5
 
-  Serial.println(diffWiperCombo,BIN);
-  
+
+//  if (_changingDiffType)
+//    Serial.println(diffWiperCombo, BIN);
+
   // decode the current state using the current tracks that are pulled low
   switch (diffWiperCombo)
   {
@@ -193,16 +211,16 @@ uint8_t Differential_Controller::get_desiredState()
 {
   // decodes the desired differential type
   // based on the current physical position of switch
-  uint8_t currSwitchPos = (!(digitalRead(_pin_switchLeft)) << 1) | !digitalRead(_pin_switchRight);
+  uint8_t currSwitchPos = (!(digitalRead(_pin_switchLeft)) << 2) | !digitalRead(_pin_switchRight);
   switch (currSwitchPos)
   {
-    case 100:         // switch is rotated to the left position
+    case 0b100:         // switch is rotated to the left position
       _desiredDiffType = PH_1;
       break;
-    case 000:         // switch is rotated to the middle position
+    case 0b000:         // switch is rotated to the middle position
       _desiredDiffType = PH_2;
       break;
-    case 001:         // switch is rotated to the right position
+    case 0b001:         // switch is rotated to the right position
       _desiredDiffType = PH_3;
       break;
     default:
@@ -213,9 +231,10 @@ uint8_t Differential_Controller::get_desiredState()
   if (currSwitchPos != _prevSwitchPos)
   {
     _changingDiffType = true;
-  } 
+  }
   _prevSwitchPos = currSwitchPos;     // update what the prevous switch position was
 
+  
   // decodes the desired state of physical differential controller wiper and tracks
   // based on the desired differential type
   switch (_desiredDiffType)
@@ -245,7 +264,9 @@ void Differential_Controller::rotate_stop()
 {
   digitalWrite(_pin_motorPos, HIGH);
   digitalWrite(_pin_motorNeg, HIGH);
-  Serial.println("stopping");
+//  
+//  if (_changingDiffType)
+//    Serial.println("stopping");
 }
 
 
@@ -254,9 +275,9 @@ void Differential_Controller::rotate_stop()
 */
 void Differential_Controller::rotate_F()
 {
-  digitalWrite(_pin_motorPos, HIGH);
-  digitalWrite(_pin_motorNeg, LOW);
-  Serial.println("rotating to F");
+  digitalWrite(_pin_motorPos, LOW);
+  digitalWrite(_pin_motorNeg, HIGH);
+//  Serial.println("rotating to F");
 }
 
 
@@ -267,7 +288,7 @@ void Differential_Controller::rotate_R()
 {
   digitalWrite(_pin_motorPos, HIGH);
   digitalWrite(_pin_motorNeg, LOW);
-  Serial.println("rotating to R");
+//  Serial.println("rotating to R");
 }
 
 

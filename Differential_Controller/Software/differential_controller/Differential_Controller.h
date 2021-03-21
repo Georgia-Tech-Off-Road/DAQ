@@ -26,6 +26,10 @@
 #define PH_2 2
 #define PH_3 3
 
+#define CONTROLMODE_SWITCH 0
+#define CONTROLMODE_SERIAL 1
+
+
 class Differential_Controller {
   public:   
     Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6,
@@ -63,6 +67,8 @@ class Differential_Controller {
     uint8_t _prevSwitchPos;   // NOT TO BE USED CARELESSLY. Does not indicate previous switch position accurately. Only used to change _changingDiffTypeType variable.
     bool _changingDiffType;
     bool _switchInputMode;
+
+    uint8_t _controlMode = CONTROLMODE_SWITCH;
         
 
 
