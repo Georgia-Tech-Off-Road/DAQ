@@ -1,9 +1,8 @@
 #ifndef __HALLEFFECTSPEEDSENSOR_CPP__
 #define __HALLEFFECTSPEEDSENSOR_CPP__
 
-#include "HallEffectSpeedSensor.h"
-#include "ElapsedCycles.h"
-#include <Arduino.h>
+#include <HallEffectSpeedSensor.h>
+
 
 
 // /**
@@ -20,20 +19,52 @@ HallEffectSpeedSensor::HallEffectSpeedSensor(uint8_t pin_input, uint32_t ticks_p
 } 
 
 /**
- *
+ *	@param useAlternate: Set to 1 to use alternate mode
+ *		Only use alternate mode when tone wheel teeth width and air gap are same size.		
  */
-void HallEffectSpeedSensor::setup()
+void HallEffectSpeedSensor::setup(bool useAlternate = false)
 {
-	pinMode(_pin_input, INPUT_PULLUP);
-	// attachInterrupt(digitalPinToInterrupt(_pin_input), interrupt, FALLING)
+	if (useAlternate) {
+		_freq.begin(_pin_input, FREQMEASUREMULTI_ALTERNATE);
+		_ticks_per_revolution *= 2;
+	} else {
+		_freq.begin(_pin_input);
+	}
 	
 }
 
-void HallEffectSpeedSensor::interrupt()
+// void HallEffectSpeedSensor::interrupt()
+// {
+// 	_latest_cycle_count = _cycle_counter;
+// 	_cycle_counter = 0;
+// 	++_current_tick;
+
+// 	// // prevent overflow of _current_tick by checking if near max value of data type
+// 	// if (_current_tick>3000000000) 
+// 	// {
+// 	// 	_current_tick = _current_tick%_ticks_per_revolution;
+// 	// }
+// }
+
+void HallEffectSpeedSensor::update()
 {
-	_latest_cycle_count = _cycle_counter;
-	_cycle_counter = 0;
-	++_current_tick;
+	// uint32_t elapsed_ticks = 0;
+	
+	// // clear the buffer except for the most recent reading
+	// while (_freq.available() > 1) {
+	// 	_freq.read();
+	// 	elapsed_ticks++;
+		
+	// 	Serial.println(_latest_cycle_count);
+	// }
+
+	// if (_freq.available()>0) {
+	// 	_latest_cycle_count = _freq.read();
+	// 	Serial.println(_latest_cycle_count);
+	// 	elapsed_ticks++;
+	// }
+
+	// _current_tick += elapsed_ticks;
 
 	// // prevent overflow of _current_tick by checking if near max value of data type
 	// if (_current_tick>3000000000) 
@@ -42,30 +73,88 @@ void HallEffectSpeedSensor::interrupt()
 	// }
 }
 
-int HallEffectSpeedSensor::get_rpm()
+uint32_t HallEffectSpeedSensor::get_tick_frequency()
 {
+	update();
+	return _freq.countToFrequency(_latest_cycle_count);
+}
 
-	// if (_cycle_counter >= ) 		// 1 second 
-	double dt = (double) _latest_cycle_count/_mcu_clock_speed;
-	double rpm = 1/(dt*_ticks_per_revolution)*60;
+uint32_t HallEffectSpeedSensor::get_rpm()
+{
+	uint32_t averaging_interval = 1;
+	uint32_t reads = 0;
+	uint32_t elapsed_ticks = 0;
+
+	do {
+		_freq.read();
+		elapsed_ticks++;
+  	} while (_freq.available() > averaging_interval);
+
+	uint32_t elapsed_cycles = 0;
+	do {
+		elapsed_cycles = elapsed_cycles + _freq.read();
+		
+		elapsed_ticks++;
+		reads++;
+	} while (reads < averaging_interval);
 	
-	if ((rpm == _prev_rpm)&&(_cycle_counter>_mcu_clock_speed*.1))
-	{
-		_prev_rpm = rpm;
-		return 0;
-	} 
-	else 
-	{
-		_prev_rpm = rpm;
-		return (int) rpm;
-	}
+	
+	uint32_t avg_elapsed_cycles = elapsed_cycles/reads; 
+
+	_current_tick += elapsed_ticks;
+
+	double dt = (double) avg_elapsed_cycles/_mcu_clock_speed;
+	uint32_t rpm = (uint32_t) 1/(dt*_ticks_per_revolution)*60;
+
+	// Serial.print("Average Ticks: ");
+	// Serial.println(avg_elapsed_cycles);
+	// Serial.print("Average Freq: ");
+	// // Serial.println(_freq.countToFrequency(sum2 / count2));
+	// Serial.println(_freq.countToFrequency(avg_elapsed_cycles));
+	// Serial.print("dt: ");
+	// // Serial.println(_freq.countToNanoseconds(sum2 / count2));
+	// Serial.println(dt, 18);
+	// Serial.print("rpm: ");
+	// // Serial.println(_freq.countToNanoseconds(sum2 / count2));
+	// Serial.println(rpm);
+	// Serial.print("counts: ");
+	// Serial.println(get_pos());
+
+
+	// if (count2 > 400) {
+	// 	sum2 = 0;
+	// 	count2 = 0;
+	// }
+
+	return rpm;
+
+
+
+
+	// update();
+	// // if (_cycle_counter >= ) 		// 1 second 
+	// double dt = (double) _latest_cycle_count/_mcu_clock_speed;
+	// uint32_t rpm = (uint32_t) 1/(dt*_ticks_per_revolution)*60;
+	
+	// // 
+	// if (_latest_cycle_count > 0)	
+	// {
+	// 	_prev_rpm = rpm;
+	// 	return (uint32_t) rpm;
+	// } 
+	// else 
+	// {
+	// 	_prev_rpm = rpm;
+	// 	return 0;
+	// }
 }
 
 uint32_t HallEffectSpeedSensor::get_pos()
 {
+	update();
 	if (_current_tick >= _ticks_per_revolution)
 	{
-		_current_tick = _current_tick%_ticks_per_revolution;
+		// _current_tick = _current_tick%_ticks_per_revolution;
 	}
 	return _current_tick;
 }
