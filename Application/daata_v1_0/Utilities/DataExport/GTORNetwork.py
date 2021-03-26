@@ -1,67 +1,59 @@
-
-
-# available_drives = ['%s:' % d for d in string.ascii_uppercase if os.directory.exists('%s:' % d)]
-# print(available_drives)
-# from pywin32 import win32wnet
-# import sys
-#
-# print(win32wnet.WNetGetUniversalName(sys.argv[1], 1))
-
-# drive_letters = 'ABCDEFGHIJKLMNOPQRSTUVWYXZ'
-# for char in drive_letters:
-#     print(char)
-
-
-
-##################### Experimental auto-fetch  of GTOR network drive
 import os
-import multiprocessing
-import win32api     # installed with "pip3.6 install pywin32"
-import ctypes
-import ctypes.util
+from win32 import win32api     # installed with "pip3.6 install pywin32"
 
-from func_timeout import func_set_timeout, func_timeout, FunctionTimedOut
+from func_timeout import func_timeout, FunctionTimedOut
+import datetime
 import logging
 logger = logging.getLogger("GTORNetwork")
 
+def get_GTORNetworkDrive():
+    try:
+        return_value = func_timeout(.05, _get_GTORNetworkDrive)  # win32api will time out if a network drive is present but not accessible
+        return return_value
+    except FunctionTimedOut:
+        logger.error('DriveConnectionError: GTOR Network Drive may exist but is not connected, try connecting to GaTech VPN or opening GTOR Network Drive')
 
-def find_GTORNetworkDrive():
+
+def _get_GTORNetworkDrive():
+    # create a list of all possible drive letter combinations
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWYXZ'
     drive_possibilities = list()
     for letter in alphabet:
         drive = '{}:\\'.format(letter)
         drive_possibilities.append(drive)
-    networkDrive = ''
 
+    # check if the GTOR Network drive is present
     for drive in drive_possibilities:
-        try:
-            networkDrive = check_driveLetter(drive)
-        except FunctionTimedOut:
-            errorMsg = 'DriveConnectionError: {} drive may exist but is not connected, try reconnecting {} drive by opening network drive folder'.format(drive,drive)
-            logger.error(errorMsg)
+        if os.path.exists(drive):
+            drive_info = win32api.GetVolumeInformation(drive)
+            logger.debug("Drive info: ({})".format(drive))
+            if drive_info[0] == 'Data':         # GTOR Network drive has the name "Data"
+                logger.debug("Network drive found ({})".format(drive))
+                return drive
+
+    logger.error("DriveConnectionError: Network drive cannot be found")
+    return
+
+def generate_data_save_location():
+    return os.path.join(get_GTORNetworkDrive(), "DAATA Archive")
+
+def generate_standardized_filename(filename,category = ""):
+    now = datetime.datetime.today()
+    date = now.strftime("%Y-%m-%d")
+    list = [
+        date,
+        filename,
+        category
+    ]
+
+    standardized_filename = ""
+
+    for element in list:
+        standardized_filename += element+"_"
 
 
-    if networkDrive == '':
-        logger.error("DriveConnectionError: Network drive cannot be found")
-        return ''
-    else:
-        return networkDrive
-
-
-@func_set_timeout(.05)
-def check_driveLetter(drive):
-    if os.path.exists(drive):
-        drive_info = win32api.GetVolumeInformation(drive)
-        print(drive_info)
-        if drive_info[0] == 'Data':
-            return drive
-            print("Network drive is {}".format(drive))
-        else:
-            return ''
-    else:
-        return ''
-
+    return standardized_filename[:-1]
 
 if __name__ == "__main__":
-    something = find_GTORNetworkDrive()
-    print(something)
+    print(generate_standardized_filename("hello","tests"))
+    pass
