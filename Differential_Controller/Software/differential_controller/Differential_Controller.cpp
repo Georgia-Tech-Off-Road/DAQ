@@ -275,8 +275,8 @@ void Differential_Controller::rotate_stop()
 */
 void Differential_Controller::rotate_F()
 {
-  digitalWrite(_pin_motorPos, LOW);
-  digitalWrite(_pin_motorNeg, HIGH);
+  digitalWrite(_pin_motorPos, HIGH);
+  digitalWrite(_pin_motorNeg, LOW);
 //  Serial.println("rotating to F");
 }
 
@@ -286,8 +286,8 @@ void Differential_Controller::rotate_F()
 */
 void Differential_Controller::rotate_R()
 {
-  digitalWrite(_pin_motorPos, HIGH);
-  digitalWrite(_pin_motorNeg, LOW);
+  digitalWrite(_pin_motorPos, LOW);
+  digitalWrite(_pin_motorNeg, HIGH);
 //  Serial.println("rotating to R");
 }
 
