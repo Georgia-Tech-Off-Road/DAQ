@@ -8,6 +8,12 @@
  */
 
 template <class DataType>
+Sensor<DataType>::Sensor() {
+    _id = DEFAULT_NO_SENSOR;
+    _type = ACTIVE;
+}
+
+template <class DataType>
 sensor_id_t Sensor<DataType>::get_id() {
     return _id;
 }
@@ -15,6 +21,16 @@ sensor_id_t Sensor<DataType>::get_id() {
 template <class DataType>
 void Sensor<DataType>::set_id(sensor_id_t id) {
     _id = id;
+}
+
+template <class DataType>
+sensor_type_t Sensor<DataType>::get_type() {
+    return _type;
+}
+
+template <class DataType>
+void Sensor<DataType>::set_type(sensor_type_t type) {
+    _type = type;
 }
 
 template <class DataType>

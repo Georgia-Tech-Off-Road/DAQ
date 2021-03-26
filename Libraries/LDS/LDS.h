@@ -5,9 +5,10 @@
  * LDS.h
  * A wrapper to work with any analog LDS.
  */
+#include <Sensor.h>
 #include <Arduino.h>
 
-class LDS {
+class LDS : public Sensor<uint8_t> {
 private:
     /**
      * 
@@ -16,6 +17,8 @@ private:
     uint8_t _travelMM;
     float _travelIn;
     bool _isReversed;
+
+    uint8_t read_position();
 
 public:
     /**
@@ -31,7 +34,7 @@ public:
     /**
      * Returns position to nearest milimeter
      */
-    int getPositionMM();
+    uint8_t getPositionMM();
 
     /**
      * Returns position in inches to 3 decimal places
@@ -41,10 +44,12 @@ public:
     /**
      * Returns the raw analog reading of the LDS sensor
      */
-    int getRawAnalog();
+    uint8_t getRawAnalog();
 
+    const uint8_t& get_data();
 
-
+    void pack(byte* pack); 
+    void unpack(const byte* pack);
 };
 
 #endif

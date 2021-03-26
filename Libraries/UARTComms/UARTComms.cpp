@@ -254,6 +254,7 @@ void UARTComms::attach_input_sensor(BaseSensor &sensor, sensor_id_t id) {
     }
     // Attach the sensor
     sensor.set_id(id);
+    sensor.set_type(PASSIVE);
     _input_sensors.push_back(&sensor);
     // Check to see if the sensor ID is in received sensors, if so, replace generic sensor with actual sensor
     for (auto it = _received_sensors.begin(); it != _received_sensors.end(); it++){
