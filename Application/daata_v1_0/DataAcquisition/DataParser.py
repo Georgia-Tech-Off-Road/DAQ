@@ -1,5 +1,6 @@
 import xlwt
 from xlwt import Workbook
+import matplotlib.pylab as plt
 
 """
 Data parser for sensor data from wireless communication utility.
@@ -8,6 +9,7 @@ Data is stored in an excel spreadsheet.
 version: 1.0
 """
 
+#Enter in the bin file using it's absolute directory as the first paramater of this declaration
 dataFile = open("/Users/Benjamin/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/TEST1.bin", "rb")
 
 byte = dataFile.read(1)
@@ -44,8 +46,7 @@ while byteIndex < len(dataRecord):
 		byteIndex += 1
 		while tempBytes != endCode:
 			tempBytes.clear()
-			DataDict[((dataRecord[byteIndex + 1]) << 8) 
-				| dataRecord[byteIndex]] = dataRecord[byteIndex + 2]
+			DataDict[((dataRecord[byteIndex + 1]) << 8) | dataRecord[byteIndex]] = dataRecord[byteIndex + 2]
 			byteIndex += 3
 			tempBytes = dataRecord[(byteIndex):(byteIndex + 8)]
 		byteIndex += 8
@@ -64,9 +65,7 @@ while byteIndex < len(dataRecord):
 		for i in range(len(keyList)):
 			tempBytes = 0
 			for i in range(0, dataSize[keyList[keyIndex]]):
-				tempBytes = (tempBytes | (dataRecord[byteIndex 
-					+ dataSize[keyList[keyIndex]] - i]))
-					<< ((dataSize[keyList[keyIndex]] - i - 1) * 8)
+				tempBytes = (tempBytes | (dataRecord[byteIndex + dataSize[keyList[keyIndex]] - i])) << ((dataSize[keyList[keyIndex]] - i - 1) * 8)
 			DataDict[keyList[keyIndex]].append(tempBytes)
 			sheet1.write(packetCount + 1, keyIndex, tempBytes)
 			byteIndex += dataSize[keyList[keyIndex]]
@@ -78,6 +77,12 @@ while byteIndex < len(dataRecord):
 	if tempBytes == endCode:
 		byteIndex += 8
 			
-	
+#Sorted list of dictionary pairs
+plotList = sorted(DataDict.items())
+x, y = zip(*plotList)
+
+plt.plot(x, y)
+plt.show()
+
 dataSheet.save('example.xls')
 dataFile.close()
