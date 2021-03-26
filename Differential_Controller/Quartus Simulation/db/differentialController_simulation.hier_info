@@ -1,0 +1,16 @@
+|differentialController_simulation
+Q_locked <= inst27.DB_MAX_OUTPUT_PORT_TYPE
+locked => inst36.IN0
+locked => inst44.IN0
+limitedSlip => inst37.IN0
+limitedSlip => inst43.IN0
+auto => inst37.IN1
+auto => inst43.IN1
+auto => inst44.IN1
+clock => inst63.IN1
+Q_limitedSlip <= inst29.DB_MAX_OUTPUT_PORT_TYPE
+Q_auto <= inst35.DB_MAX_OUTPUT_PORT_TYPE
+Q_enFlipFlop <= inst36.DB_MAX_OUTPUT_PORT_TYPE
+Q_en_CLK <= inst63.DB_MAX_OUTPUT_PORT_TYPE
+
+

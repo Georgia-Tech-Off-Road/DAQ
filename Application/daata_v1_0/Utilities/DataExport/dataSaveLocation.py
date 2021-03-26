@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtGui, uic, QtCore
 import os
+from Utilities.DataExport.GTORNetwork import get_GTORNetworkDrive, generate_data_save_location
 
 ''' "saveLocationDialog" configFile settings
 
@@ -22,6 +23,7 @@ class popup_dataSaveLocation(QtWidgets.QDialog, uiFile):
 
     ## imported methods
     from Utilities.DataExport.exportCSV import saveCSV
+    from Utilities.DataExport.exportMAT import saveMAT
 
 
     def loadSettings(self):
@@ -30,13 +32,13 @@ class popup_dataSaveLocation(QtWidgets.QDialog, uiFile):
         self.checkBox_SDCard.setChecked(self.configFile.value("checkBox_SD") == 'true')
 
 
-        self.lineEdit_filenameLocal.setText(self.configFile.value("default_localFilename"))
+        self.lineEdit_filenameLocal.setText("")
         self.lineEdit_folderLocal.setText(self.configFile.value("default_localDirectory"))
 
-        self.lineEdit_filenameND.setText(self.configFile.value("default_NDFilename"))
-        self.lineEdit_folderND.setText(self.configFile.value("default_NDFolder"))
+        self.lineEdit_filenameND.setText("")
+        self.lineEdit_folderND.setText(generate_data_save_location())
 
-        self.lineEdit_filenameSD.setText(self.configFile.value("default_SDFilename"))
+        self.lineEdit_filenameSD.setText("")
         self.lineEdit_folderSD.setText(self.configFile.value("default_SDFolder"))
 
     def toggle_frames(self):
@@ -58,29 +60,25 @@ class popup_dataSaveLocation(QtWidgets.QDialog, uiFile):
 
     def saveData(self):
         if self.checkBox_local.isChecked():
-            localFilename = self.lineEdit_filenameLocal.text()
-            localFolder = self.lineEdit_folderLocal.text()
-            localPath = os.path.join(localFolder,localFilename)
+            local_filename = self.lineEdit_filenameLocal.text()
+            local_folder = self.lineEdit_folderLocal.text()
 
-            self.saveCSV(localFilename,localFolder)
+            self.saveCSV(local_filename,local_folder)
+            self.saveMAT(local_filename,local_folder)
 
             # save current values as defaults
-            self.configFile.setValue("default_localFilename", localFilename)
-            self.configFile.setValue("default_localDirectory", localFolder)
+            self.configFile.setValue("default_localDirectory", local_folder)
 
 
 
 
         if self.checkBox_networkDrive.isChecked():
-            NDFilename = self.lineEdit_filenameND.text()
-            NDFolder = self.lineEdit_folderND.text()
-            NDPath = os.path.join(NDFolder, NDFilename)
-            NDFile = open(NDPath, 'w')
-            NDFile.write("this is a test file for saving to the network drive")
-            NDFile.close()
+            nd_filename = self.lineEdit_filenameND.text()
+            nd_folder = self.lineEdit_folderND.text()
 
-            self.configFile.setValue("default_NDFilename", NDFilename)
-            self.configFile.setValue("default_NDFolder", NDFolder)
+
+            self.saveCSV(nd_filename,nd_folder)
+            self.saveMAT(nd_filename,nd_folder)
 
 
 
@@ -92,7 +90,7 @@ class popup_dataSaveLocation(QtWidgets.QDialog, uiFile):
             SDFile.write("this is a test file for saving to the SD Card")
             SDFile.close()
 
-            self.configFile.setValue("default_SDFilename", SDFilename)
+
             self.configFile.setValue("default_SDFolder", SDFolder)
 
         self.configFile.setValue("checkBox_local", self.checkBox_local.isChecked())
