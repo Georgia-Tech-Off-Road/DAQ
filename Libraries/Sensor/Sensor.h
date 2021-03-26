@@ -10,7 +10,6 @@ protected:
     uint8_t  _pack_bytes;
 
 public:
-
     /**
      * Getters and Setters
      */
@@ -54,7 +53,7 @@ class GenericSensor : public Sensor<std::vector<byte>> {
 public:
     GenericSensor (sensor_id_t id, uint8_t pack_bytes);
     void pack   (byte *pack);
-    void unpack (byte *pack);
+    void unpack (const byte *pack);
     const std::vector<byte>& get_data();
 };
 

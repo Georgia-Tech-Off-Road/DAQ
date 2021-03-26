@@ -5,26 +5,13 @@
 #include <Sensor.h>
 #include <vector>
 
-// #if not defined(__IMXRT1062__)
-// namespace std {
-//   void __throw_bad_alloc()
-//   {
-//     Serial.println("Unable to allocate memory");
-//   }
-
-//   void __throw_length_error( char const*e )
-//   {
-//     Serial.print("Length Error :");
-//     Serial.println(e);
-//   }
-// }
-// #endif
+class SDWrite;
 
 struct end_code_t {
-    byte code[10];
+    byte code[8];
     end_code_t() {
-        for(uint8_t i = 0; i < 9; ++i) code[i] = 0xFF;
-        code[9] = 0xF0;
+        for(uint8_t i = 0; i < 7; ++i) code[i] = 0xFF;
+        code[7] = 0xF0;
     }
     const byte& operator[] (uint8_t i) const {
         return code[i];
@@ -44,7 +31,6 @@ private:
     bool _is_receiving_data;
     std::vector<byte> _packet_receive;
     std::vector<byte> _packet_send;
-    // static constexpr byte _end_code[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF0};
     const end_code_t _end_code;
 
     std::vector<BaseSensor*> _input_sensors;
@@ -58,8 +44,8 @@ private:
     void packetize();
     void unpacketize();
 
-    uint8_t get_expected_transmit_bytes();
-    uint8_t get_expected_receive_bytes();
+    friend class SDWrite;
+
     
 public:
     UARTComms(uint32_t baud, HardwareSerial &port);
@@ -74,6 +60,9 @@ public:
     void detach_output_sensor(sensor_id_t id);
 
     HardwareSerial *get_port();
+
+    uint8_t get_expected_receive_bytes();
+    uint8_t get_expected_transmit_bytes();
 };
 
 #endif

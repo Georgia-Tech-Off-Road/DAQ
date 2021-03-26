@@ -50,7 +50,7 @@ void GenericSensor::pack(byte *pack){
     memcpy(pack, _data.data(), _pack_bytes);
 }
 
-void GenericSensor::unpack(byte *pack){
+void GenericSensor::unpack(const byte *pack){
     memcpy(_data.data(), pack, _pack_bytes);
 }
 

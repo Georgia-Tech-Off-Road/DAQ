@@ -11,7 +11,7 @@
 UARTComms::UARTComms(uint32_t baud, HardwareSerial &port) : 
     _baud(baud), 
     _port(&port),
-    _sending_period_us(5000),
+    _sending_period_us(10000),
     _time_at_last_send(0),
     _time_at_last_receive(0),
     _is_sending_data(0),
@@ -34,9 +34,8 @@ void UARTComms::update(){
 
 void UARTComms::read_packet() {
     // RESET _IS_RECEIVING_DATA WHEN TIME SINCE LAST BYTE RECEIVED IS LARGE
-    Serial.print("r");
     if(_port->available()){
-        Serial.print("p");
+        // Serial.print("p");
         while(_port->available()) _packet_receive.push_back(_port->read());
         _time_at_last_receive = micros();
 
@@ -47,8 +46,6 @@ void UARTComms::read_packet() {
                 if(_packet_receive[packet_size - 8 + i] != _end_code[i]) is_end_of_packet = 0;
             }
             if(is_end_of_packet){
-                Serial.print("\n\npacket length: ");
-                Serial.println(_packet_receive.size());
                 unpacketize();
                 _packet_receive.clear();
             }
@@ -76,19 +73,39 @@ void UARTComms::unpacketize() {
 
     if(sender_is_sending_data) { // RECEIVING DATA
         if(get_expected_receive_bytes() == _packet_receive.size()) { // packet lengths good
+            // Serial.print("\nreceived data of length: ");
+            // Serial.println(_packet_receive.size());
             const byte *packet_loc = _packet_receive.data() + 1; // pointer to constant data, +1 to skip ack
             for(auto it = _received_sensors.begin(); it != _received_sensors.end(); it++){
+                // Serial.println("sensor");
                 (*it)->unpack(packet_loc);
+                    // Serial.println(*((uint32_t*)packet_loc));
+                // Serial.print("location inside uartcomms: ");
+                // Serial.println((uint32_t)(*it)->get_id());
                 packet_loc += (*it)->get_pack_bytes();
-            }
+                           }
         } else { // packet lengths not good
             // CHANGE LOGIC TO DO THIS AFTER X AMOUNTS OF MISSES.
             _is_receiving_data = 0;
         }
     } else { // RECEIVING SETTINGS
+        Serial.print("\nreceived settings of length: ");
+        Serial.println(_packet_receive.size());
+
+        for(auto rs = _received_sensors.begin(); rs != _received_sensors.end(); rs++){
+            bool match = 0;
+            for(auto is = _input_sensors.begin(); (is != _input_sensors.end() && !match); is++){
+                if((*rs)->get_id() == (*is)->get_id()) match = 1;
+            }
+            if(!match) delete (*rs);
+        }
+
         _received_sensors.clear();
         const byte *packet_loc = _packet_receive.data() + 1; // pointer to constant data, +1 to skip ack
-        const byte * const packet_end = _packet_receive.data() - 8;
+        // const byte * const packet_end = _packet_receive.data() - 8;
+        const byte * const packet_end = _packet_receive.data() + _packet_receive.size() - 9;
+        // Serial.println((uint32_t)packet_loc, HEX);
+        // Serial.println((uint32_t)packet_end, HEX);
         while (packet_loc < packet_end) {
             uint16_t id = *((uint16_t *) packet_loc);
             uint8_t pack_bytes = *((uint8_t *) (packet_loc + 2));
@@ -98,11 +115,15 @@ void UARTComms::unpacketize() {
             for (auto it = _input_sensors.begin(); it != _input_sensors.end(); it++){
                 if((*it)->get_id() == id) existing_input_sensor = *it;
             }
+            Serial.print(existing_input_sensor != 0);
             if(existing_input_sensor != 0) _received_sensors.push_back(existing_input_sensor);
             else _received_sensors.push_back(new GenericSensor((sensor_id_t) id, pack_bytes));
 
             packet_loc += 3;
         }
+        Serial.print("created ");
+        Serial.print(_received_sensors.size());
+        Serial.println(" _received_sensors");
         _is_receiving_data = 1;
     }
 
@@ -158,11 +179,12 @@ void UARTComms::packetize() {
         // ack should be 0x01 or 0x00
         for(auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(); it++){
             uint16_t id = (*it)->get_id();
-            byte id_msb = *((byte *)(&id));
+            // byte id_msb = *((byte *)(&id));
+            byte id_msb = (byte) id >> 8;
             byte id_lsb = (byte) id;
             byte pack_bytes = (*it)->get_pack_bytes();
-            _packet_send.push_back(id_msb);
             _packet_send.push_back(id_lsb);
+            _packet_send.push_back(id_msb);
             _packet_send.push_back(pack_bytes);
         }
         for(auto tp = _throughput_uart_comms.begin(); tp != _throughput_uart_comms.end(); tp++){
@@ -173,11 +195,11 @@ void UARTComms::packetize() {
                     if((*ds) == id) detached = 1;
                 }
                 if(!detached){
-                    byte id_msb = *((byte *)(&id));
+                    byte id_msb = (byte) id >> 8;
                     byte id_lsb = (byte) id;
                     byte pack_bytes = (*it)->get_pack_bytes();
-                    _packet_send.push_back(id_msb);
                     _packet_send.push_back(id_lsb);
+                    _packet_send.push_back(id_msb);
                     _packet_send.push_back(pack_bytes);
                 }
             }
