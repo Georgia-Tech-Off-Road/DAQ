@@ -24,13 +24,17 @@ HallEffectSpeedSensor::HallEffectSpeedSensor(uint8_t pin_input, uint32_t ticks_p
  */
 void HallEffectSpeedSensor::setup(bool useAlternate = false)
 {
-	if (useAlternate) {
-		_freq.begin(_pin_input, FREQMEASUREMULTI_ALTERNATE);
-		_ticks_per_revolution *= 2;
-	} else {
-		_freq.begin(_pin_input);
-	}
+	// if (useAlternate) {
+	// 	_freq.begin(_pin_input, FREQMEASUREMULTI_ALTERNATE);
+	// 	_ticks_per_revolution *= 2;
+	// } else {
+	// 	_freq.begin(_pin_input);
+	// }
+
 	
+	_freq.begin(_pin_input);
+	
+	_recent_pulse_freqs.assign(INTERVALSIZE, 0);
 }
 
 // void HallEffectSpeedSensor::interrupt()
@@ -81,30 +85,45 @@ uint32_t HallEffectSpeedSensor::get_tick_frequency()
 
 uint32_t HallEffectSpeedSensor::get_rpm()
 {
-	uint32_t averaging_interval = 1;
-	uint32_t reads = 0;
-	uint32_t elapsed_ticks = 0;
-
-	do {
-		_freq.read();
+	uint32_t elapsed_ticks = 0; 
+	while(_freq.available()) {
+		_recent_pulse_freqs.push_back(_freq.read());
 		elapsed_ticks++;
-  	} while (_freq.available() > averaging_interval);
+		_recent_pulse_freqs.erase(_recent_pulse_freqs.begin());
+	}
+	Serial.println(_recent_pulse_freqs.size());
 
-	uint32_t elapsed_cycles = 0;
-	do {
-		elapsed_cycles = elapsed_cycles + _freq.read();
-		
-		elapsed_ticks++;
-		reads++;
-	} while (reads < averaging_interval);
+	uint32_t sum = 0;
+	for (uint8_t i = 0; i < INTERVALSIZE; i++) {
+		sum += _recent_pulse_freqs[i];
+	}
+	Serial.print("Sum: ");
+	Serial.println(sum);
+	double avg_elapsed_cycles = ((double) sum)/INTERVALSIZE; 
 	
+	Serial.print("avg elapsed cycles: ");
+	Serial.println(avg_elapsed_cycles);
 	
-	uint32_t avg_elapsed_cycles = elapsed_cycles/reads; 
+	Serial.print("Paul's Freq: ");
+	Serial.println(_freq.countToFrequency(avg_elapsed_cycles));
+	// uint32_t avg_elapsed_cycles = _freq.read(); 
 
+	// Serial.println(_freq.countToFrequency(avg_elapsed_cycles));
 	_current_tick += elapsed_ticks;
+	// float dt = (float) _freq.countToNanoseconds(avg_elapsed_cycles)/1000000000.0;
+	// Serial.println(dt);
+	// uint32_t rpm = (uint32_t) 1/(dt*_ticks_per_revolution)*60;
 
-	double dt = (double) avg_elapsed_cycles/_mcu_clock_speed;
-	uint32_t rpm = (uint32_t) 1/(dt*_ticks_per_revolution)*60;
+		
+	double dt = avg_elapsed_cycles/ ((double) _mcu_clock_speed);
+	Serial.print("change in time: ");
+	Serial.println(dt);
+	double freq = 1.0/dt;
+
+	
+	Serial.print("Our freq: ");
+	Serial.println(freq);
+	uint32_t rpm = freq/_ticks_per_revolution*60;
 
 	// Serial.print("Average Ticks: ");
 	// Serial.println(avg_elapsed_cycles);

@@ -1,12 +1,12 @@
 #include <ElapsedCycles.h>
 #include <HallEffectSpeedSensor.h>
 
-HallEffectSpeedSensor he_sensor_1(5,20);
+HallEffectSpeedSensor he_sensor_1(5,1);
 HallEffectSpeedSensor he_sensor_2(17,20);
 HallEffectSpeedSensor he_sensor_3(18,20);
 ElapsedCycles first;
 ElapsedCycles second;
-ElapsedCycles third;
+ElapsedCycles third; 
 uint32_t modul;
 uint32_t temp = 0;
 uint32_t temp2 = 0;
@@ -26,17 +26,7 @@ void setup() {
 }
 
 void loop() {  
-  uint32_t d_us = 10000;
-  uint32_t t2 = micros();
-  if (he_sensor_1.get_pos() < 1500000) {
-    if((t2 - temp2) > d_us) {
-      digitalWrite(2, HIGH);
-      delayMicroseconds(1);
-      digitalWrite(2, LOW);
-//      Serial.println(t2 - temp2);
-      temp2 = t2;
-    }
-  }
+
 
 
   uint32_t t = micros();
@@ -45,7 +35,6 @@ void loop() {
     temp = t;
     digitalWrite(13, led_on);
     Serial.println(he_sensor_1.get_rpm());
-
     Serial.println();
   }
 

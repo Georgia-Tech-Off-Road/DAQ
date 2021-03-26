@@ -3,6 +3,10 @@
 
 #include <ElapsedCycles.h>
 #include <FreqMeasureMulti.h>
+#include <vector>
+
+#define INTERVALSIZE 10.0
+
 // /**
 //  * HallEffectSpeedSensor.h
 //  * A wrapper to work with a hall effect sensor.
@@ -22,7 +26,9 @@ public:
 
 
 
+
 private:
+    std::vector<uint32_t> _recent_pulse_freqs;
     FreqMeasureMulti _freq;
     const static uint32_t _mcu_clock_speed = F_CPU;
     uint16_t _ticks_per_revolution;    // 
