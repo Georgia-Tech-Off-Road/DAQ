@@ -17,7 +17,7 @@ public:
 
     const uint16_t& get_data() {
         if(_type == ACTIVE) {
-            _data = analogRead();
+            _data = analogRead(_inputPin);
         }
         return _data;
     }
