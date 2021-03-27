@@ -45,7 +45,7 @@ enum sensor_id_t : uint16_t
     /**
      * 400 - LDS SENSORS
      */
-    LDS_GENERIC            = 300,
+    LDS_GENERIC            = 205,
     LDS_FRONTLEFTSHOCK_MM  = 301,
     LDS_FRONTRIGHTSHOCK_MM = 302,
     LDS_BACKLEFTSHOCK_MM   = 303,

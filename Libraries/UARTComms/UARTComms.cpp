@@ -83,7 +83,7 @@ void UARTComms::unpacketize() {
                 // Serial.print("location inside uartcomms: ");
                 // Serial.println((uint32_t)(*it)->get_id());
                 packet_loc += (*it)->get_pack_bytes();
-                           }
+            }
         } else { // packet lengths not good
             // CHANGE LOGIC TO DO THIS AFTER X AMOUNTS OF MISSES.
             _is_receiving_data = 0;
@@ -107,7 +107,10 @@ void UARTComms::unpacketize() {
         // Serial.println((uint32_t)packet_loc, HEX);
         // Serial.println((uint32_t)packet_end, HEX);
         while (packet_loc < packet_end) {
-            uint16_t id = *((uint16_t *) packet_loc);
+            // uint8_t id = *((uint16_t *) packet_loc);
+            uint8_t id_lsb = *((uint8_t *) packet_loc);
+            uint8_t id_msb = *((uint8_t *) (packet_loc + 1));
+            uint16_t id = ((uint16_t) id_msb << 8) | (uint16_t) id_lsb;
             uint8_t pack_bytes = *((uint8_t *) (packet_loc + 2));
 
             // Check if Sensor is in list of input sensors.

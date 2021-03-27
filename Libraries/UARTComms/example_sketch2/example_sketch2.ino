@@ -1,4 +1,5 @@
 #include <UARTComms.h>
+#include <Sensor.h>
 #include <vector>
 #include <memory>
 
@@ -22,18 +23,21 @@ UARTComms uart1 (115200, Serial1);
 GenericSensor s1(TEST_SENSOR_0, 4);
 GenericSensor r1(TEST_SENSOR_1, 4);
 GenericSensor r2(TEST_SENSOR_2, 2);
-GenericSensor chonk(1067, 20);
+LDS lds(A9, 100, false);
+GenericSensor chonk((sensor_id_t)1067, 20);
 
 void setup() {
   uart1.begin();
   uart1.attach_input_sensor(r1, TEST_SENSOR_1);
   uart1.attach_input_sensor(r2, TEST_SENSOR_2);
-  uart1.attach_input_sensor(chonk, 1067);
+//  uart1.attach_input_sensor(chonk, (sensor_id_t)1067);
   uart1.attach_output_sensor(s1, TEST_SENSOR_0);
+  uart1.attach_output_sensor(lds, LDS_GENERIC);
+
+  lds.begin();
   Serial.begin(2000000);
 }
 
-uint32_t uart_t = 0;
 uint32_t wrote_t = 0;
 void loop() {
   uint32_t t = micros();
@@ -50,6 +54,8 @@ void loop() {
     Serial.println(*((uint16_t*)bruh2.data()));
     Serial.print("Packet Size: ");
     Serial.println(uart1.get_expected_receive_bytes());
+    Serial.print("LDS: ");
+    Serial.println(lds.get_data());
     wrote_t = t;
   }
 }

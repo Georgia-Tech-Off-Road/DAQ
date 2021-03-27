@@ -21,14 +21,16 @@ UARTComms uart1 (115200, Serial1);
 GenericSensor r1(TEST_SENSOR_0, 4);
 GenericSensor s1(TEST_SENSOR_1, 4);
 GenericSensor s2(TEST_SENSOR_2, 2);
+LDS lds;
 GenericSensor chonk(1067, 60);
 
 void setup() {
   uart1.begin();
   uart1.attach_output_sensor(s1, TEST_SENSOR_1);
   uart1.attach_output_sensor(s2, TEST_SENSOR_2);
-  uart1.attach_output_sensor(chonk, 1067);
+//  uart1.attach_output_sensor(chonk, 1067);
   uart1.attach_input_sensor (r1, TEST_SENSOR_0);
+  uart1.attach_input_sensor (lds, LDS_GENERIC);
   Serial.begin(2000000);
 }
 
@@ -45,6 +47,10 @@ void loop() {
     Serial.print("Reci Time: ");
     std::vector<byte> bruh = r1.get_data();
     Serial.println(*((uint32_t*)bruh.data()));
+    Serial.print("Packet Size: ");
+    Serial.println(uart1.get_expected_receive_bytes());
+    Serial.print("LDS: ");
+    Serial.println(lds.get_data());
     wrote_t = t;
   }
 }
