@@ -9,9 +9,9 @@
 #define 3V3DIG_3 16
 #define 3V3DIG_4 6
 #define 3V3DIG_5 15
-#define 3V3DIG_1 2
-#define 3V3DIG_1 38
-#define 3V3DIG_1 3
+#define 3V3DIG_6 2
+#define 3V3DIG_7 38
+#define 3V3DIG_8 3
 
 #define RX_1 17
 #define RX_2 39
