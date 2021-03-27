@@ -1,4 +1,5 @@
 #include <UARTComms.h>
+#include <Sensor.h>
 
 // NEEDED FOR STL LIBRARY ON TEENSY 3.X
 
@@ -18,8 +19,8 @@ void __throw_length_error( char const*e )
 #endif
 
 UARTComms uart1 (115200, Serial1);
-GenericSensor r1(TEST_SENSOR_0, 4);
-GenericSensor s1(TEST_SENSOR_1, 4);
+TimeSensor r1 (MICROS);
+TimeSensor s1 (MICROS);
 GenericSensor s2(TEST_SENSOR_2, 2);
 LDS lds;
 GenericSensor chonk(1067, 60);
@@ -45,8 +46,7 @@ void loop() {
     Serial.print("Curr Time: ");
     Serial.println(t);
     Serial.print("Reci Time: ");
-    std::vector<byte> bruh = r1.get_data();
-    Serial.println(*((uint32_t*)bruh.data()));
+    Serial.println(r1.get_data());
     Serial.print("Packet Size: ");
     Serial.println(uart1.get_expected_receive_bytes());
     Serial.print("LDS: ");
