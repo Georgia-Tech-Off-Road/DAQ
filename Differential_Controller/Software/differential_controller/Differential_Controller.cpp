@@ -160,9 +160,9 @@ uint8_t Differential_Controller::get_currState()
   uint8_t diffWiperCombo = (!digitalRead(_pin_diff6) << 5) | (1 << 4) | (!digitalRead(_pin_diff4) << 3) |
                            (!digitalRead(_pin_diff3) << 2) | (!digitalRead(_pin_diff2) << 1) | (!digitalRead(_pin_diff1)); // 16 (010000) for _diff5
 
-
+  
 //  if (_changingDiffType)
-//    Serial.println(diffWiperCombo, BIN);
+    Serial.println(diffWiperCombo, BIN);
 
   // decode the current state using the current tracks that are pulled low
   switch (diffWiperCombo)
@@ -240,7 +240,7 @@ uint8_t Differential_Controller::get_desiredState()
   switch (_desiredDiffType)
   {
     case PH_1:
-      _desiredState = STATE2;
+      _desiredState = STATE3;
       break;
     case PH_2:
       _desiredState = STATE5;
