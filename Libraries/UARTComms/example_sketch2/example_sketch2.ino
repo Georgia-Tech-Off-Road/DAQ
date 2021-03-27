@@ -20,8 +20,8 @@ namespace std {
 #endif
 
 UARTComms uart1 (115200, Serial1);
-GenericSensor s1(TEST_SENSOR_0, 4);
-GenericSensor r1(TEST_SENSOR_1, 4);
+TimeSensor s1(MICROS);
+TimeSensor r1(MICROS);
 GenericSensor r2(TEST_SENSOR_2, 2);
 LDS lds(A9, 100, false);
 GenericSensor chonk((sensor_id_t)1067, 20);
@@ -47,8 +47,7 @@ void loop() {
     Serial.print("Curr Time: ");
     Serial.println(t);
     Serial.print("Rec1 Time: ");
-    std::vector<byte> bruh = r1.get_data();
-    Serial.println(*((uint32_t*)bruh.data()));
+    Serial.println(r1.get_data());
     Serial.print("Rec2 Time: ");
     std::vector<byte> bruh2 = r2.get_data();
     Serial.println(*((uint16_t*)bruh2.data()));

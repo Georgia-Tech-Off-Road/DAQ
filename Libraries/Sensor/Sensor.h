@@ -92,5 +92,7 @@ public:
 };
 
 #include "../LDS/LDS.h"
+#include "../TimeSensor/TimeSensor.h"
+#include "../HallEffectSpeedSensor/HallEffectSpeedSensor.h"
 
 #endif
