@@ -41,7 +41,8 @@ enum sensor_id_t : uint16_t
     SPEED_GENERIC       = 200,
     SPEED_ENGINE_RPM    = 201,
     SPEED_SECONDARY_RPM = 202,
-    BRAKE_SENSOR = 203,
+    BRAKE_SENSOR1 = 203,
+    BRAKE_SENSOR2 = 204,
 
     /**
      * 400 - LDS SENSORS
