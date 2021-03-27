@@ -3,9 +3,9 @@
 
 SDWrite sd(BUILTIN_SDCARD);
 
-HallEffectSpeedSensor speedSensor (3V3ANA_1, 20);
-BrakePressureTransducer brakeSensor1 (3V3ANA_10);
-BrakePressureTransducer brakeSensor2 (3V3ANA_9);
+HallEffectSpeedSensor speedSensor (THREEV3ANA_1, 20);
+BrakePressureTransducer brakeSensor1 (THREEV3ANA_10);
+BrakePressureTransducer brakeSensor2 (THREEV3ANA_9);
 
 void setup() {
   sd.begin("test1.bin");
@@ -14,6 +14,6 @@ void setup() {
   sd.attach_output_sensor(brakeSensor2, BRAKE_SENSOR2);
 }
 
-void loop {
+void loop() {
     sd.update();
 }

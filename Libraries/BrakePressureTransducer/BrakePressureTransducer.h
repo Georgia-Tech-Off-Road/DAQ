@@ -2,11 +2,12 @@
 #define BRAKEPRESSURETRANSDUCER_H  
 
 class BrakePressureTransducer : public Sensor<uint16_t> {
-        uint8_t _inputPin;
-}
+    
 
 public:
-    BrakePressureTransducer(inputPin) {
+    uint8_t _inputPin;
+
+    BrakePressureTransducer(uint8_t inputPin) {
         _pack_bytes = 2;
     }
 
@@ -32,5 +33,6 @@ public:
     int getBrakePressure() {
         return get_data();
     }
+};
 
 #endif
