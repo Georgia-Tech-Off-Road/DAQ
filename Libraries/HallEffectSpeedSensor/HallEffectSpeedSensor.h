@@ -1,7 +1,11 @@
 #ifndef __HALLEFFECTSPEEDSENSOR_H__
 #define __HALLEFFECTSPEEDSENSOR_H__
 
-#include "ElapsedCycles.h"
+#include <ElapsedCycles.h>
+#include <FreqMeasureMulti.h>
+#include <vector>
+
+#define INTERVALSIZE 10.0
 
 // /**
 //  * HallEffectSpeedSensor.h
@@ -12,21 +16,27 @@ class HallEffectSpeedSensor {
 public:
     HallEffectSpeedSensor(uint8_t pin_input, uint32_t ticks_per_revolution);
 
-    void setup();
-    void interrupt();
+    void setup(bool useAlternate = false);
+    void update();
 
-    double get_rpm();
+    uint32_t get_rpm();
     uint32_t get_pos();
+    uint32_t get_tick_frequency();
     uint8_t get_input_pin();
 
+
+
+
 private:
+    std::vector<uint32_t> _recent_pulse_freqs;
+    FreqMeasureMulti _freq;
     const static uint32_t _mcu_clock_speed = F_CPU;
-    const uint16_t _ticks_per_revolution;    // 
+    uint16_t _ticks_per_revolution;    // 
     const uint8_t _pin_input;
     ElapsedCycles _cycle_counter;       // number of elapsed processor clock cycles
     uint32_t _latest_cycle_count;       // number of elapsed clock cycles between the last two interrupts
     uint32_t _current_tick;         // tracks the current rotational position
-    double _prev_rpm;
+    uint32_t _prev_rpm;
 };
 
 
