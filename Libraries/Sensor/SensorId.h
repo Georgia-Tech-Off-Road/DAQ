@@ -35,6 +35,8 @@ enum sensor_id_t : uint16_t
     TIME_DAATA_MS  = 107,
     TIME_DAATA_US  = 108,
 
+    RTC_UNIXTIME = 199,
+
     /**
      * 200 - SPEED SENSORS
      */
