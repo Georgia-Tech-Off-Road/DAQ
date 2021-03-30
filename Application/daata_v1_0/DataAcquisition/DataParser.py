@@ -10,7 +10,7 @@ version: 1.0
 """
 
 #Enter in the bin file using it's absolute directory as the first paramater of this declaration
-dataFile = open("/Users/Benjamin/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/TEST1.bin", "rb")
+dataFile = open("C:/Users/user/Documents/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/REALTEST.bin", mode="rb")
 
 byte = dataFile.read(1)
 
@@ -18,7 +18,9 @@ dataRecord = []
 
 dataSheet = Workbook()
 
-sheet1 = dataSheet.add_sheet('Sheet 1')
+#currentSheet = dataSheet.add_sheet('Sheet 1', cell_overwrite_ok=True)
+
+sheetCounter = 1
 
 DataDict = {}
 
@@ -42,6 +44,10 @@ while byteIndex < len(dataRecord):
 #for i in range(len(dataRecord)):	
 	if dataRecord[byteIndex] == 0x00:
 		keyIndex = 0
+		dataSize.clear()
+		DataDict.clear()
+		keyList.clear()
+		currentSheet = dataSheet.add_sheet('Sheet ' + str(sheetCounter), cell_overwrite_ok=True)
 		tempBytes = dataRecord[(byteIndex):(byteIndex + 8)]
 		byteIndex += 1
 		while tempBytes != endCode:
@@ -55,8 +61,9 @@ while byteIndex < len(dataRecord):
 		for i in range(len(keyList)):
 			dataSize[keyList[keyIndex]] = DataDict[keyList[keyIndex]]
 			DataDict[keyList[keyIndex]] = []
-			sheet1.write(0, keyIndex, keyList[keyIndex])
+			currentSheet.write(0, keyIndex, keyList[keyIndex])
 			keyIndex += 1
+		sheetCounter += 1
 
 	if dataRecord[byteIndex] == 0x02:
 		#byteIndex += 1
@@ -67,7 +74,7 @@ while byteIndex < len(dataRecord):
 			for i in range(0, dataSize[keyList[keyIndex]]):
 				tempBytes = (tempBytes | (dataRecord[byteIndex + dataSize[keyList[keyIndex]] - i])) << ((dataSize[keyList[keyIndex]] - i - 1) * 8)
 			DataDict[keyList[keyIndex]].append(tempBytes)
-			sheet1.write(packetCount + 1, keyIndex, tempBytes)
+			currentSheet.write(packetCount + 1, keyIndex, tempBytes)
 			byteIndex += dataSize[keyList[keyIndex]]
 			keyIndex += 1
 		byteIndex += 1
@@ -76,13 +83,13 @@ while byteIndex < len(dataRecord):
 	tempBytes = dataRecord[(byteIndex):(byteIndex + 8)]
 	if tempBytes == endCode:
 		byteIndex += 8
-			
+
+dataSheet.save('example.xls')
+dataFile.close()
+
 #Sorted list of dictionary pairs
 plotList = sorted(DataDict.items())
 x, y = zip(*plotList)
 
-plt.plot(x, y)
-plt.show()
-
-dataSheet.save('example.xls')
-dataFile.close()
+#plt.plot(x, y)
+#plt.show()
