@@ -1,6 +1,8 @@
 import xlwt
 from xlwt import Workbook
 import matplotlib.pylab as plt
+from pathlib import Path
+import csv
 
 """
 Data parser for sensor data from wireless communication utility.
@@ -10,11 +12,16 @@ version: 1.0
 """
 
 #Enter in the bin file using it's absolute directory as the first paramater of this declaration
-dataFile = open("C:/Users/user/Documents/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/REALTEST.bin", mode="rb")
+dataFile = open("C:/Users/Benjamin/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/REALTEST.bin", mode="rb")
 
-byte = dataFile.read(1)
+bytes = dataFile.read()
 
-dataRecord = []
+dataRecord = list(bytes)
+
+"""
+print(len(dataRecord))
+print(dataRecord[0])
+"""
 
 dataSheet = Workbook()
 
@@ -36,14 +43,15 @@ dataSize = {}
 
 endCode = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xf0]
 
-while byte:
-	dataRecord.append(int.from_bytes(byte, byteorder='big'))
-	byte = dataFile.read(1)
+"""while bytes:
+	dataRecord.append(int.from_bytes(bytes, byteorder='big'))
+	bytes = dataFile.read(1)"""
 
 while byteIndex < len(dataRecord):
 #for i in range(len(dataRecord)):	
 	if dataRecord[byteIndex] == 0x00:
 		keyIndex = 0
+		packetCount = 0
 		dataSize.clear()
 		DataDict.clear()
 		keyList.clear()
@@ -80,16 +88,24 @@ while byteIndex < len(dataRecord):
 		byteIndex += 1
 		packetCount += 1
 
-	tempBytes = dataRecord[(byteIndex):(byteIndex + 8)]
+	tempBytes = dataRecord[(byteIndex) : (byteIndex + 8)]
 	if tempBytes == endCode:
-		byteIndex += 8
+		byteIndex += 8 
 
+#Saves the data in excel form to "example.xls" in the root of the directory (most likely inside \DAQ folder)
 dataSheet.save('example.xls')
 dataFile.close()
 
 #Sorted list of dictionary pairs
 plotList = sorted(DataDict.items())
-x, y = zip(*plotList)
+#x, y = zip(*plotList)
 
-#plt.plot(x, y)
-#plt.show()
+print(sheetCounter)
+
+#Optional plotting of the data after the most recent settings are sent
+"""
+
+plt.plot(x, y)
+plt.show()
+
+"""
