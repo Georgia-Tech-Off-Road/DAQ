@@ -19,9 +19,11 @@ class Data:
         self.__data['unix_time'] = Time(display_name='Unix Time', unit='Seconds', unit_short='s', is_external=False)
         self.__data['timestamp'] = Time(display_name='Timestamp', is_external=False)
         self.__data['time'] = Time(display_name="Time", unit='Seconds', unit_short='s', is_external=False)
+        self.__data['flag_data_collecting'] = Command(id=1, display_name="Is Data Being Collected", is_external=False)
 
         # External sensors
-        self.__data['teensy_time'] = Time(display_name='Time Since Start', unit='Micro-seconds', unit_short='us')
+        self.__data['teensy_time'] = Time(id=100, display_name='Time Since Start', unit='Micro-seconds', unit_short='us')
+        self.__data['time_dash_ms'] = Time(id=101, display_name='Dashboard Time Since Start', unit='Miliseconds', unit_short='ms')
         self.__data['engine_rpm'] = HESpeedSensor(0, display_name='Engine RPM')
         self.__data['secondary_rpm'] = HESpeedSensor(0, display_name='Secondary RPM')
         self.__data['fl_lds'] = LDS(0, display_name='Front Left LDS')

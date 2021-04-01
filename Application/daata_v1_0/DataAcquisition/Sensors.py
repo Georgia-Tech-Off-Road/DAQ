@@ -9,6 +9,7 @@ logger = logging.getLogger("DataAcquisition")
 class Sensor(metaclass=ABCMeta):
     def __init__(self, **kwargs):
         self.values = list()
+        self.id = kwargs.get('id')
         self.most_recent_index = 0
         self.display_name = kwargs.get('display_name')
         self.unit = kwargs.get('unit')
