@@ -20,7 +20,8 @@ public:
         if(_type == ACTIVE){
             _data = _rtc.now(); 
         }
-        return _data; }
+        return _data; 
+    }
     void pack(byte* pack){ *((uint32_t*)pack) = get_data().unixtime(); }
     void unpack(const byte* pack){ _data = DateTime(*((uint32_t*)pack)); }
 };
