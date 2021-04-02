@@ -30,15 +30,28 @@ class DataImport:
         for sensor in data.get_sensors(is_external=True, is_derived=False):
             self.temp_data[sensor] = {'value': None, 'has_been_updated': False, 'is_used': False}
 
-    def check_connected(self):
+    def update(self):
         if self.use_fake_inputs:
             self.check_connected_fake()
         # TODO implement actual serial reading
 
-    def read_data(self):
+    def is_connected(self):
+        
+
+    def read_packet(self):
         if self.use_fake_inputs:
             self.read_data_fake()
         # TODO implement actual serial reading
+
+    def send_packet(self):
+
+    def packetize(self):
+
+    def unpacketize(self):
+
+    def attach_output_sensor(self):
+
+
 
     def check_connected_fake(self):
         self.data.set_connected("time")
