@@ -96,14 +96,12 @@ while byteIndex < len(dataRecord):
 dataSheet.save('example.xls')
 dataFile.close()
 
-#Sorted list of dictionary pairs
-plotList = sorted(DataDict.items())
-#x, y = zip(*plotList)
-
-print(sheetCounter)
+#print(sheetCounter)
 
 #Optional plotting of the data after the most recent settings are sent
 """
+plotList = sorted(DataDict.items())
+x, y = zip(*plotList)
 
 plt.plot(x, y)
 plt.show()
