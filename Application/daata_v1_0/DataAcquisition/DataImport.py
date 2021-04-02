@@ -1,4 +1,6 @@
+import sys
 import serial
+from serial.tools import list_ports
 import time
 import logging
 from datetime import datetime
@@ -34,10 +36,56 @@ class DataImport:
         if self.use_fake_inputs:
             self.check_connected_fake()
         # TODO implement actual serial reading
+        TeensyPort = getTeensyPort()
+        TeensySer = serial.Serial(port=TeensyPort)
+        if TeensyPort:
+            print("Teensy found on port %s"%TeensyPort)
+            while TeensySer.is_open:
+               
+                
+                ackCode = TeensySer.read(1)
+                #if 0x00, then parse settings and send settings
+                if ackCode == 0x00:
+
+                #if 0x01, then parse settings and send data
+                else if ackCode == 0x01:
+                    
+                #f 0x02, then parse data but send settings
+                else if ackCode == 0x02:
+                    
+                #if 0x03, then parse data and send data
+                else if ackCode == 0x03:
+
+                else:
+
+                
+        else:
+            print("No compatible Teensy found.")
+
+
+    def findEndCode(self):
+        endCode = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xf0]
+        endCodeProbe = list()
+                tempByte = TeensySer.read(1)
+                while (endCodeProbe != endCode):
+                    if tempByte == 0xff:
+                        endCodeProbe = list(TeensySer.read(8))
+                        break
+                    tempByte = TeensySer.read(1)
+    
+    def getTeensyPort(self):
+        # Teensy USB serial microcontroller program id data:
+        VENDOR_ID = "16C0"
+        PRODUCT_ID = "0483"
+        SERIAL_NUMBER = "12345"
+
+        for port in list(list_ports.comports()):
+            if port[2] == "USB VID:PID=%s:%s SNR=%s"%(VENDOR_ID, PRODUCT_ID, SERIAL_NUMBER):
+                return port[0]
+       
 
     def is_connected(self):
         
-
     def read_packet(self):
         if self.use_fake_inputs:
             self.read_data_fake()
