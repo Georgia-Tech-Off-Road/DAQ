@@ -36,7 +36,7 @@ class DataImport:
         # TODO implement actual serial reading
 
     def is_connected(self):
-        
+
 
     def read_packet(self):
         if self.use_fake_inputs:

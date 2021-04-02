@@ -9,7 +9,8 @@ logger = logging.getLogger("DataAcquisition")
 class Sensor(metaclass=ABCMeta):
     def __init__(self, **kwargs):
         self.values = list()
-        self.id = kwargs.get('id')
+        self.name = kwargs.get('name')
+        self.object = kwargs.get('object')
         self.most_recent_index = 0
         self.display_name = kwargs.get('display_name')
         self.unit = kwargs.get('unit')
@@ -17,7 +18,7 @@ class Sensor(metaclass=ABCMeta):
         self.is_plottable = kwargs.get('is_plottable', True)
         self.is_external = kwargs.get('is_external', True)
         self.is_derived = False
-        self.is_connected = kwargs.get('is_connected', False)
+        self.is_connected = False
 
     @abstractmethod
     def add_value(self, value):
@@ -51,6 +52,44 @@ class Sensor(metaclass=ABCMeta):
             logger.error(e)
 
 
+class Generic(Sensor):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def add_value(self, value):
+        try:
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
+        except Exception as e:
+            logger.error(e)
+
+
+class Flag(Sensor):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.is_plottable = False
+
+    def add_value(self, value):
+        try:
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
+        except Exception as e:
+            logger.error(e)
+
+
+class Command(Sensor):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.is_plottable = False
+
+    def add_value(self, value):
+        try:
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
+        except Exception as e:
+            logger.error(e)
+
+
 class Time(Sensor):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -65,7 +104,7 @@ class Time(Sensor):
             logger.error(e)
 
 
-class HESpeedSensor(Sensor):
+class SpeedSensor(Sensor):
     def __init__(self, pulses_per_revolution, **kwargs):
         super().__init__(**kwargs)
         self.ppr = pulses_per_revolution
