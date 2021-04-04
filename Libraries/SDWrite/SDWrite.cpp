@@ -72,12 +72,10 @@ void SDWrite::packetize() {
         // ack should be 0x00
         for(auto it = _transmit_sensors.begin(); it != _transmit_sensors.end(); it++){
             uint16_t id = (*it)->get_id();
-            // byte id_msb = *((byte *)(&id));
-            byte id_msb = (byte) id >> 8;
-            byte id_lsb = (byte) id;
+            byte *id_ptr = (byte*) &id;
             byte pack_bytes = (*it)->get_pack_bytes();
-            _packet_send.push_back(id_lsb);
-            _packet_send.push_back(id_msb);
+            _packet_send.push_back(*id_ptr);
+            _packet_send.push_back(*(id_ptr + 1));
             _packet_send.push_back(pack_bytes);
         }
         for(auto tp = _throughput_uart_comms.begin(); tp != _throughput_uart_comms.end(); tp++){
