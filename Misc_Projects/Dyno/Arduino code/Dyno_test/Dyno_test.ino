@@ -20,16 +20,18 @@ unsigned long timeInterval = 100000;
 int he1pin = 3;
 int he2pin = 4;
 int he3pin = 5;
+int he4pin = 6;
 uint16_t ppm = 100;
 
-int val1, val2, val3; 
+int val1, val2, val3, val4;
 
 
 
 HallEffectSpeedSensor he1(he1pin, ppm);
 HallEffectSpeedSensor he2(he2pin, ppm);
 HallEffectSpeedSensor he3(he3pin, ppm);
- 
+HallEffectSpeedSensor he4(he4pin, ppm);
+
 void setup() {
     //Thermocouple setup code
     Serial.begin(115200);
@@ -53,6 +55,7 @@ void setup() {
     he1.begin(1);
     he2.begin(1);  
     he3.begin(1);
+    he4.begin(1);
 
     //Load Cell setup code
       Wire.begin();
@@ -75,7 +78,7 @@ void loop() {
       he1.updateSensor();
       he2.updateSensor();
       he3.updateSensor();
-    
+      he4.updateSensor();
       unsigned long currentTime = micros();
     
       if (currentTime - previousTime > timeInterval) {
@@ -83,13 +86,15 @@ void loop() {
           val1 = he1.getSpeed();
           val2 = he2.getSpeed();
           val3 = he3.getSpeed();
-      
+          val4 = he4.getSpeed();   
           Serial.print("Sensor 1 speed: ");
           Serial.print(val1, DEC);
           Serial.print("  Sensor 2 speed: ");
           Serial.print(val2, DEC);
           Serial.print("  Sensor 3 speed: ");
           Serial.print(val3, DEC);
+          Serial.print("  Sensor 3 speed: ");
+          Serial.print(val4, DEC);
           Serial.print("   The time is: ");
           Serial.println(micros(), DEC);
           previousTime = currentTime;
