@@ -26,5 +26,5 @@ def collect_data():
             data.reset()
             logger.debug("Collecting data")
             while is_data_collecting.is_set():
-                data_import.read_data()
+                data_import.update()
                 time.sleep(.0001)

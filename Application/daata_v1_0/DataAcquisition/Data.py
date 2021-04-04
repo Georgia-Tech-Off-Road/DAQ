@@ -22,21 +22,21 @@ class Data:
             except KeyError:
                 logger.error("Sensor with ID {} missing required parameters".format(sensor_id))
                 break
-            if object_type is "Generic":
+            if object_type == "Generic":
                 self.__data[sensor_id] = Generic(**SensorId[sensor_id])
-            if object_type is "Flag":
+            if object_type == "Flag":
                 self.__data[sensor_id] = Flag(**SensorId[sensor_id])
-            if object_type is "Command":
+            if object_type == "Command":
                 self.__data[sensor_id] = Command(**SensorId[sensor_id])
-            if object_type is "Time":
+            if object_type == "Time":
                 self.__data[sensor_id] = Time(**SensorId[sensor_id])
-            if object_type is "SpeedSensor":
+            if object_type == "SpeedSensor":
                 self.__data[sensor_id] = SpeedSensor(**SensorId[sensor_id])
-            if object_type is "LDS":
+            if object_type == "LDS":
                 self.__data[sensor_id] = LDS(**SensorId[sensor_id])
-            if object_type is "WheelSpeed":
+            if object_type == "WheelSpeed":
                 self.__data[sensor_id] = WheelSpeed(**SensorId[sensor_id])
-            if object_type is "CarSpeed":
+            if object_type == "CarSpeed":
                 self.__data[sensor_id] = CarSpeed(**SensorId[sensor_id])
 
         # TODO: remove this stuff once SensorId list has been filled out

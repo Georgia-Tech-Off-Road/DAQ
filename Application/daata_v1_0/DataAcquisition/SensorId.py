@@ -1,9 +1,11 @@
 """
 This file stores all the information needed for creating sensor objects
 
-To add a sensor, add an element to the SensorId dictionary with the keyword being the id of that sensor. This should
-match the id that is found in the SensorId.h file in the comms utility (DAQ>Libraries>Sensor). Then add all the
-required parameters for that sensor along with any additional optional parameters.
+To add a sensor, add an element to the SensorId dictionary with the 
+keyword being the id of that sensor. This shouldmatch the id that is 
+found in the SensorId.h file in the comms utility (DAQ>Libraries>Sensor). 
+Then add all the required parameters for that sensor along with any 
+additional optional parameters.
 
 Required parameters:
     - name
@@ -58,5 +60,73 @@ SensorId = {
         "unit": "Miliseconds",
         "unit_short": "ms",
         "class": "dashboard"
+    },
+    102: {
+        "name": "time_dash_us",
+        "object": "Time"
+    },
+    103: {
+        "name": "time_auxdaq_ms",
+        "object": "Time"
+    },
+    104: {
+        "name": "time_auxdaq_us",
+        "object": "Time"
+    },
+    105: {
+        "name": "time_diff_ms",
+        "object": "Time"
+    },
+    106: {
+        "name": "time_diff_us",
+        "object": "Time"
+    },
+    107: {
+        "name": "time_daata_ms",
+        "object": "Time"
+    },
+    108: {
+        "name": "time_daata_us",
+        "object": "Time"
+    },
+
+
+
+    # 200 - SPEED SENSORS
+    200: {
+        "name": "speed_generic",
+        "object": "SpeedSensor"
+    },
+    201: {
+        "name": "speed_engine_rpm",
+        "object": "SpeedSensor"
+    },
+    202: {
+        "name": "speed_secondary_rpm",
+        "object": "SpeedSensor"
+    },
+
+
+
+    # 400 - LDS SENSORS
+    205: {
+        "name": "lds_generic",
+        "object": "LDS"
+    },
+    301: {
+        "name": "lds_frontleftshock_mm",
+        "object": "LDS"
+    },
+    302: {
+        "name": "lds_frontrightshock_mm",
+        "object": "LDS"
+    },
+    303: {
+        "name": "lds_backleftshock_mm",
+        "object": "LDS"
+    },
+    304: {
+        "name": "lds_backrightshock_mm",
+        "object": "LDS"
     }
 }
