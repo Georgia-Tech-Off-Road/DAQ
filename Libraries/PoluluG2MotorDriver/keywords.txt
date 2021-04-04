@@ -1,0 +1,21 @@
+#######################################
+# Syntax Coloring Map LDS
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+PoluluG2MotorDriver KEYWORD1	PoluluG2MotorDriver
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin	KEYWORD2
+set_power	KEYWORD2
+step_pid	KEYWORD2
+get_pid	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
