@@ -2,6 +2,8 @@
 #include <ServoControl.h>
 #include "DashDial.h"
 #include "SevenSegment.h"
+#include <UARTComms.h>
+#include <Sensor.h>
 
 Adafruit_TLC5947 l_driver(1, 3, 2, 4);
 Adafruit_TLC5947 r_driver(1, 12, 11, 10);
