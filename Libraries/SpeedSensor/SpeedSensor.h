@@ -128,6 +128,47 @@ public:
         _encoder.time_pos; // The position in the array that the most recent time measurement was taken (see update function)
         _ppr; // The pulses per revolution of the sensor
         
+        uint32_t dts[10];
+
+        uint8_t interval_counter = 0;
+        uint8_t sum_limiter_multiplier = 4;
+
+        // if abrupt stop, return 0 rpm
+        if (micros()-_encoder.times[10] > sum_limiter_multiplier*(_encoder.times[10]_encoder.times[9]) {
+            return 0;
+        } else {
+            dts[10] = micros()-_encoder.times[10];
+            interval_counter++;
+        }
+
+        // change in time between the i-th index and the i-th+1 index
+        for (uint8_t i = 9; i >= 0; i--) {
+            uint32_t dt = _encoder.times[i+1] - _encoder.times[i]; 
+            // stop the summing for loop if there is sudden acceleration/deceleration  
+            if (dt > sum_limiter_multiplier*dts[i+1]) {
+                break;
+            } else {
+                dts[i] = dt;
+                interval_counter++;
+            }
+        }
+
+        if (interval_counter == 0) {
+            return 0;
+        }
+
+        uint32_t sum = 0;
+        // average the numbers summed
+        for (uint8_t i = interval_counter; i >= 0; i--) {
+        {
+            sum += dts[i];
+        }
+        uint32_t avg_dt = sum/interval_counter;
+        uint32_t rpm = 1/avg_dt/_ppr*60;
+
+        return rpm;
+
+
         // I'm thinking that if speed is relatively slow, you only want to do time derivative averaged over less measurements
         // ie if you were to stop sensor immediately, you don't want to average the speed over last 10 values because you probably
         // only care about the last 2 or 3. You would only want to average over all 10 measurements at high speeds for more
