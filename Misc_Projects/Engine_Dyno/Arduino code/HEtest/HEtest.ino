@@ -13,54 +13,48 @@
  */
 #include <HallEffectSpeedSensor.h>
 
-
-unsigned long previousTime = 0;
-unsigned long timeInterval = 100000;
-
-int he1pin = 3;
-int he2pin = 4;
-int he3pin = 5;
-uint16_t ppm = 100;
-
-int val1, val2, val3; 
+#define ENGINE_SPEED 5
+#define ENGINE_PPR 4
+#define SECONDARY_SPEED 6
+#define SECONDARY_PPR 600
+#define LED 13
 
 
+uint32_t sns_interval = 100000;
+uint32_t led_interval = 50000;
+uint32_t sns_prev_time = 0;
+uint32_t led_prev_time = 0;
 
-HallEffectSpeedSensor he1(he1pin, ppm);
-HallEffectSpeedSensor he2(he2pin, ppm);
-HallEffectSpeedSensor he3(he3pin, ppm);
+bool led_on = 0;
+
+
+
+HallEffectSpeedSensor he1(ENGINE_SPEED, ENGINE_PPR);
+HallEffectSpeedSensor he2(SECONDARY_SPEED, SECONDARY_PPR);
 
 void setup() {
   
   Serial.begin(9600);
   Serial.println("Starting");
-  he1.begin(1);
-  he2.begin(1);  
-  he3.begin(1);
+  he1.setup();
+  he2.setup();  
 }
 
 void loop() {
-  he1.updateSensor();
-  he2.updateSensor();
-  he3.updateSensor();
+  if (abs(micros() - sns_prev_time) > sns_interval) {
+    sns_prev_time = micros();
 
-  unsigned long currentTime = micros();
-
-  if (currentTime - previousTime > timeInterval) {
-
-    val1 = he1.getSpeed()/5;
-    val2 = he2.getSpeed()/5;
-    val3 = he3.getSpeed()/5;
-
-    Serial.print("Sensor 1 speed: ");
-    Serial.print(val1, DEC);
-    Serial.print("  Sensor 2 speed: ");
-    Serial.print(val2, DEC);
-    Serial.print("  Sensor 3 speed: ");
-    Serial.print(val3, DEC);
-    Serial.print("   The time is: ");
-    Serial.println(micros(), DEC);
-    previousTime = currentTime;
+    Serial.print("Engine speed:\t");
+    Serial.print(he1.get_rpm(), DEC);
+    Serial.print("\tSecondary speed:\t");
+    Serial.print(he2.get_rpm(), DEC);
+    Serial.print("\tTime:\t");
+    Serial.println(micros());
+  }
+  if(abs(micros() - led_prev_time) > led_interval) {
+    led_on = !led_on;
+    digitalWrite(13, led_on);
+    led_prev_time = micros();
   }
   
   
