@@ -36,7 +36,7 @@ void SDWrite::send_packet() {
         File datafile = SD.open(_filename.c_str(), FILE_WRITE);
         datafile.write(_packet_send.data(), _packet_send.size());
         datafile.close();
-        Serial.println("Wrote data");
+        // Serial.println("Wrote data");
         _time_at_last_send = time_current;
         _packet_send.clear();
     }

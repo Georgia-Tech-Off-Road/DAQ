@@ -17,7 +17,7 @@ SDWrite sd(BUILTIN_SDCARD);
 #include "SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h" // Click here to get the library: http://librarymanager/All#SparkFun_NAU8702
 
 NAU7802 myScale; //Create instance of the NAU7802 class
-SpeedSensor engine_speed(4, H1, 255, CHANGE);
+SpeedSensor engine_speed(600, H1, 255, CHANGE);
 SpeedSensor secondary_speed(30, H2, 255, CHANGE);
 
 //EEPROM locations to store 4-byte variables
@@ -37,7 +37,7 @@ byte avgWeightSpot = 0;
 
 
 void setup() {
-  sd.begin("dyno1.bin");
+  sd.begin("dyno2.bin");
   sd.attach_output_sensor(myScale, FORCE_ENGINEDYNO_LBS);
   sd.attach_output_sensor(engine_speed, SPEED_ENGINE_RPM);
   sd.attach_output_sensor(secondary_speed, SPEED_SECONDARY_RPM);
@@ -100,11 +100,11 @@ void loop() {
     Serial.print(engine_speed.get_speed());
     Serial.print("\tSecondary Speed: \t");
     Serial.print(secondary_speed.get_speed());
-    if(  digitalRead(killSwitch)) {
-       Serial.print("\t Not Killed");
-    } else {
-       killed();
-    }
+//    if(  digitalRead(killSwitch)) {
+//       Serial.print("\t Not Killed");
+//    } else {
+//       killed();
+//    }
     if(settingsDetected == false)
     {
       Serial.print("\tScale not calibrated. Press 'c'.");
