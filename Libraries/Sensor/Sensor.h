@@ -95,6 +95,7 @@ public:
 #include "../TimeSensor/TimeSensor.h"
 #include "../HallEffectSpeedSensor/HallEffectSpeedSensor.h"
 #include "../BrakePressureTransducer/BrakePressureTransducer.h"
-#include "../RTCSensor/RTCSensor.h"
+#include "./DerivedSensors/RTCSensor.h"
+#include "./DerivedSensors/IMUSensor.h"
 
 #endif

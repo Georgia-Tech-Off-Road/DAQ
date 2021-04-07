@@ -24,10 +24,10 @@ public:
     } 
 
 
-    void setup(bool useAlternate = false){
+    void begin(bool useAlternate = false){
         _freq.begin(_pin_input);
         
-        _recent_pulse_freqs.assign(INTERVALSIZE, 0);
+        _recent_pulse_freqs.assign(INTERVALSIZE, 0xFFFFFFFF);
     }
 
     const uint32_t& get_rpm(){
@@ -37,6 +37,7 @@ public:
                 _recent_pulse_freqs.push_back(_freq.read());
                 elapsed_ticks++;
                 _recent_pulse_freqs.erase(_recent_pulse_freqs.begin());
+                // Serial.println("bruh");
             }
             uint32_t sum = 0;
             for (uint8_t i = 0; i < INTERVALSIZE; i++) {
@@ -45,7 +46,8 @@ public:
             double avg_elapsed_cycles = ((double) sum)/INTERVALSIZE; 
             
             double dt = avg_elapsed_cycles/ ((double) _mcu_clock_speed);
-            double freq = 1.0/dt;
+            double freq = _freq.countToFrequency(avg_elapsed_cycles);
+            // Serial.println(freq);
             
             uint32_t rpm = freq/_ticks_per_revolution*60;
 
