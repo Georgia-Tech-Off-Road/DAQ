@@ -89,6 +89,10 @@ SensorId = {
         "name": "time_daata_us",
         "object": "Time"
     },
+    199: {
+        "name": "rtc_unixtime",
+        "object": "Time"
+    },
 
 
 
@@ -105,6 +109,16 @@ SensorId = {
         "name": "speed_secondary_rpm",
         "object": "SpeedSensor"
     },
+    
+    # BRAKE SENSORS
+    203: {
+        "name": "brake_sensor1",
+        "object": "BrakeSensor"
+    },
+    204: {
+        "name": "brake_sensor2",
+        "object": "BrakeSensor"
+    },
 
 
 
@@ -113,20 +127,25 @@ SensorId = {
         "name": "lds_generic",
         "object": "LDS"
     },
-    301: {
+    206: {
         "name": "lds_frontleftshock_mm",
         "object": "LDS"
     },
-    302: {
+    207: {
         "name": "lds_frontrightshock_mm",
         "object": "LDS"
     },
-    303: {
+    208: {
         "name": "lds_backleftshock_mm",
         "object": "LDS"
     },
-    304: {
+    209: {
         "name": "lds_backrightshock_mm",
         "object": "LDS"
+    },
+
+    220: {
+        "name": "imu_sensor",
+        "object": "IMU"
     }
 }
