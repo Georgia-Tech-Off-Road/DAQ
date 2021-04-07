@@ -1,0 +1,18 @@
+Requirements for aux daq unit
+- Need to support up to 8 SPI devices (8 digital pins, 1 MOSI, 1 MISO, 1 SCLK)
+- Need to support I2C bus
+- Need to support up to 6 frequency inputs
+- Need to support up to 6 digital inputs
+- Need to support up to 10 3.3V Analog inputs
+- Need to support up to 4 5V Analog inputs
+- Need to have 2 UART connections available (probably Serial2, and Serial3)
+- Should have the ability to configure some inputs and attach a "shield" or breadboard
+- Need to have an onboard XBee unit for wireless
+- Should be water-resistant and dust/mud proof
+- Should be reasonably shock/vibration resistant
+
+
+Optional
+- Could have it support CAN bus too. Not sure why we would need it but who know 1-2 years from now
+- Fully waterproof
+- Shouldn't need it but it might be nice to have RTC (real time clock) functionality
