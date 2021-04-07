@@ -162,7 +162,7 @@ typedef enum
   NAU7802_CAL_FAILURE = 2,
 } NAU7802_Cal_Status;
 
-class NAU7802 : public Sensor<int32_t>
+class NAU7802 : public Sensor<float>
 {
 public:
   NAU7802(){
@@ -241,18 +241,18 @@ public:
   uint8_t getRegister(uint8_t registerAddress);             //Get contents of a register
   bool setRegister(uint8_t registerAddress, uint8_t value); //Send a given value to be written to given address. Return true if successful
 
-  const int32_t& get_data() {
+  const float& get_data() {
     if(_type == ACTIVE){
-      _data = this->getReading();
+      _data = this->getWeight();
     }
     return _data;
   }
 
   void pack(byte* pack){
-    *((int32_t*)pack) = get_data();
+    *((float*)pack) = get_data();
   }
   void unpack(const byte* pack){
-    _data = *((int32_t*)pack);
+    _data = *((float*)pack);
   }
 
 private:

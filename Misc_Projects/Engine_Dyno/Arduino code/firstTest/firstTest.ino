@@ -1,8 +1,14 @@
 #include "Dyno.h"
 
 //HE sensor
+#include <SpeedSensor.h>
+#include <SDWrite.h>
+#include <Sensor.h>
 
+unsigned __exidx_start;
+unsigned __exidx_end;
 
+SDWrite sd(BUILTIN_SDCARD);
 
 //Load Cell
 #include <Wire.h>
@@ -11,6 +17,8 @@
 #include "SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h" // Click here to get the library: http://librarymanager/All#SparkFun_NAU8702
 
 NAU7802 myScale; //Create instance of the NAU7802 class
+SpeedSensor engine_speed(4, H1, 255, CHANGE);
+SpeedSensor secondary_speed(30, H2, 255, CHANGE);
 
 //EEPROM locations to store 4-byte variables
 #define LOCATION_CALIBRATION_FACTOR 0 //Float, requires 4 bytes of EEPROM
@@ -29,18 +37,20 @@ byte avgWeightSpot = 0;
 
 
 void setup() {
+  sd.begin("dyno1.bin");
+  sd.attach_output_sensor(myScale, FORCE_ENGINEDYNO_LBS);
+  sd.attach_output_sensor(engine_speed, SPEED_ENGINE_RPM);
+  sd.attach_output_sensor(secondary_speed, SPEED_SECONDARY_RPM);
+  
+  
   pinMode(safeLED, OUTPUT);
   pinMode(testingLED, OUTPUT);
   pinMode(errorLED, OUTPUT);
   pinMode(shutdownSig, OUTPUT);
   pinMode(killSwitch, INPUT_PULLUP);
-  //HE sensor
-
-
 
   //Load Cell
   Serial.begin(9600);
-  Serial.println("Qwiic Scale Example");
 
   Wire.begin();
   Wire.setClock(400000); //Qwiic Scale is capable of running at 400kHz if desired
@@ -62,15 +72,12 @@ void setup() {
   Serial.println(myScale.getZeroOffset());
   Serial.print("Calibration factor: ");
   Serial.println(myScale.getCalibrationFactor());
-
-  //Teensy SD card
-
 }
 
 void loop() {
-  digitalWrite(testingLED, HIGH);
-  //HE sensor
+  sd.update();
   
+  digitalWrite(testingLED, HIGH);
 
 
   //Load Cell
@@ -89,6 +96,10 @@ void loop() {
     avgWeight /= AVG_SIZE;
 
     Serial.print(avgWeight, 2); //Print 2 decimal places
+    Serial.print("\tEngine Speed: \t");
+    Serial.print(engine_speed.get_speed());
+    Serial.print("\tSecondary Speed: \t");
+    Serial.print(secondary_speed.get_speed());
     if(  digitalRead(killSwitch)) {
        Serial.print("\t Not Killed");
     } else {
