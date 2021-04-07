@@ -25,6 +25,7 @@
 
 #include "Arduino.h"
 #include <Wire.h>
+#include <Sensor.h>
 
 //Register Map
 typedef enum
@@ -161,10 +162,12 @@ typedef enum
   NAU7802_CAL_FAILURE = 2,
 } NAU7802_Cal_Status;
 
-class NAU7802
+class NAU7802 : public Sensor<int32_t>
 {
 public:
-  NAU7802();                                               //Default constructor
+  NAU7802(){
+    _pack_bytes = 4;
+  }                                               //Default constructor
   bool begin(TwoWire &wirePort = Wire, bool reset = true); //Check communication and initialize sensor
   bool isConnected();                                      //Returns true if device acks at the I2C address
 
@@ -208,6 +211,20 @@ public:
 
   uint8_t getRegister(uint8_t registerAddress);             //Get contents of a register
   bool setRegister(uint8_t registerAddress, uint8_t value); //Send a given value to be written to given address. Return true if successful
+
+  const int32_t& get_data() {
+    if(_type == ACTIVE){
+      _data = getReading();
+    }
+    return _data;
+  }
+
+  void pack(byte* pack){
+    *((int32_t*)pack) = get_data();
+  }
+  void unpack(const byte* pack){
+    _data = *((int32_t*)pack);
+  }
 
 private:
   TwoWire *_i2cPort;                   //This stores the user's requested i2c port

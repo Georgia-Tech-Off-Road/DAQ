@@ -22,10 +22,6 @@
 
 #include "SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h"
 
-//Constructor
-NAU7802::NAU7802()
-{
-}
 
 //Sets up the NAU7802 for basic function
 //If initialize is true (or not specified), default init and calibration is performed
