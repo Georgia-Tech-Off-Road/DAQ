@@ -172,7 +172,36 @@ public:
   bool isConnected();                                      //Returns true if device acks at the I2C address
 
   bool available();                          //Returns true if Cycle Ready bit is set (conversion is complete)
-  int32_t getReading();                      //Returns 24-bit reading. Assumes CR Cycle Ready bit (ADC conversion complete) has been checked by .available()
+  int32_t getReading()                      //Returns 24-bit reading. Assumes CR Cycle Ready bit (ADC conversion complete) has been checked by .available()
+{
+  _i2cPort->beginTransmission(_deviceAddress);
+  _i2cPort->write(NAU7802_ADCO_B2);
+  if (_i2cPort->endTransmission() != 0)
+    return (false); //Sensor did not ACK
+
+  _i2cPort->requestFrom((uint8_t)_deviceAddress, (uint8_t)3);
+
+  if (_i2cPort->available())
+  {
+    uint32_t valueRaw = (uint32_t)_i2cPort->read() << 16; //MSB
+    valueRaw |= (uint32_t)_i2cPort->read() << 8;          //MidSB
+    valueRaw |= (uint32_t)_i2cPort->read();               //LSB
+
+    // the raw value coming from the ADC is a 24-bit number, so the sign bit now
+    // resides on bit 23 (0 is LSB) of the uint32_t container. By shifting the
+    // value to the left, I move the sign bit to the MSB of the uint32_t container.
+    // By casting to a signed int32_t container I now have properly recovered
+    // the sign of the original value
+    int32_t valueShifted = (int32_t)(valueRaw << 8);
+
+    // shift the number back right to recover its intended magnitude
+    int32_t value = (valueShifted >> 8);
+
+    return (value);
+  }
+
+  return (0); //Error
+}
   int32_t getAverage(uint8_t samplesToTake); //Return the average of a given number of readings
 
   void calculateZeroOffset(uint8_t averageAmount = 8); //Also called taring. Call this with nothing on the scale
@@ -214,7 +243,7 @@ public:
 
   const int32_t& get_data() {
     if(_type == ACTIVE){
-      _data = getReading();
+      _data = this->getReading();
     }
     return _data;
   }

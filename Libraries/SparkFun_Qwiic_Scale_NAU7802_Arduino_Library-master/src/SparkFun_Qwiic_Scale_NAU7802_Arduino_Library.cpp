@@ -233,36 +233,36 @@ uint8_t NAU7802::getRevisionCode()
 
 //Returns 24-bit reading
 //Assumes CR Cycle Ready bit (ADC conversion complete) has been checked to be 1
-int32_t NAU7802::getReading()
-{
-  _i2cPort->beginTransmission(_deviceAddress);
-  _i2cPort->write(NAU7802_ADCO_B2);
-  if (_i2cPort->endTransmission() != 0)
-    return (false); //Sensor did not ACK
+// int32_t NAU7802::getReading()
+// {
+//   _i2cPort->beginTransmission(_deviceAddress);
+//   _i2cPort->write(NAU7802_ADCO_B2);
+//   if (_i2cPort->endTransmission() != 0)
+//     return (false); //Sensor did not ACK
 
-  _i2cPort->requestFrom((uint8_t)_deviceAddress, (uint8_t)3);
+//   _i2cPort->requestFrom((uint8_t)_deviceAddress, (uint8_t)3);
 
-  if (_i2cPort->available())
-  {
-    uint32_t valueRaw = (uint32_t)_i2cPort->read() << 16; //MSB
-    valueRaw |= (uint32_t)_i2cPort->read() << 8;          //MidSB
-    valueRaw |= (uint32_t)_i2cPort->read();               //LSB
+//   if (_i2cPort->available())
+//   {
+//     uint32_t valueRaw = (uint32_t)_i2cPort->read() << 16; //MSB
+//     valueRaw |= (uint32_t)_i2cPort->read() << 8;          //MidSB
+//     valueRaw |= (uint32_t)_i2cPort->read();               //LSB
 
-    // the raw value coming from the ADC is a 24-bit number, so the sign bit now
-    // resides on bit 23 (0 is LSB) of the uint32_t container. By shifting the
-    // value to the left, I move the sign bit to the MSB of the uint32_t container.
-    // By casting to a signed int32_t container I now have properly recovered
-    // the sign of the original value
-    int32_t valueShifted = (int32_t)(valueRaw << 8);
+//     // the raw value coming from the ADC is a 24-bit number, so the sign bit now
+//     // resides on bit 23 (0 is LSB) of the uint32_t container. By shifting the
+//     // value to the left, I move the sign bit to the MSB of the uint32_t container.
+//     // By casting to a signed int32_t container I now have properly recovered
+//     // the sign of the original value
+//     int32_t valueShifted = (int32_t)(valueRaw << 8);
 
-    // shift the number back right to recover its intended magnitude
-    int32_t value = (valueShifted >> 8);
+//     // shift the number back right to recover its intended magnitude
+//     int32_t value = (valueShifted >> 8);
 
-    return (value);
-  }
+//     return (value);
+//   }
 
-  return (0); //Error
-}
+//   return (0); //Error
+// }
 
 //Return the average of a given number of readings
 //Gives up after 1000ms so don't call this function to average 8 samples setup at 1Hz output (requires 8s)
