@@ -37,6 +37,7 @@
 
 #include "Arduino.h"
 #include "utility/direct_pin_read.h"
+#include <Sensor.h>
 
 #if defined(ENCODER_USE_INTERRUPTS) || !defined(ENCODER_DO_NOT_USE_INTERRUPTS)
 #define ENCODER_USE_INTERRUPTS
@@ -45,6 +46,8 @@
 #else
 #define ENCODER_ARGLIST_SIZE 0
 #endif
+
+#define NUM_MEASUREMENTS 20
 
 
 
@@ -63,7 +66,12 @@ typedef struct {
     uint8_t                time_pos;
 } Encoder_internal_state_t;
 
-class SpeedSensor
+typedef struct {
+    uint32_t position;
+    uint16_t speed;
+} speed_sensor_data_t;
+
+class SpeedSensor : public Sensor<speed_sensor_data_t>
 {
 public:
     // Set pin2 to 255 if it is not used
@@ -71,12 +79,13 @@ public:
         if (mode == RISING) {_mode = RISING;}
         else {_mode = CHANGE;}
         _ppr = ppr;
+        _pack_bytes = 6;
 
         pinMode(pin1, INPUT_PULLUP);
         _encoder.pin1_register = PIN_TO_BASEREG(pin1);
 		_encoder.pin1_bitmask = PIN_TO_BITMASK(pin1);
         _encoder.position = 0;
-        _encoder.times = new uint32_t [10];
+        _encoder.times = new uint32_t [NUM_MEASUREMENTS];
         _encoder.time_pos = 0;
         // allow time for a passive R-C filter to charge
 		// through the pullup resistors, before reading
@@ -118,67 +127,52 @@ public:
         noInterrupts();
         _encoder.position = p;
         interrupts();
-    }
-    
-    // ------------------------------- TODO: implement this function ----------------------------------------------
-    inline void get_speed(){
+    }    
+    inline uint16_t get_speed(){
         noInterrupts();
-        // Code here: have access to the variables below (perform time derivative on measurements)
-        _encoder.times[0]; // Size 10 array of the time in us that most recent interrupts occured
-        _encoder.time_pos; // The position in the array that the most recent time measurement was taken (see update function)
-        _ppr; // The pulses per revolution of the sensor
+        uint16_t rpm = 0;
         
-        uint32_t dts[10];
+        uint32_t time_deltas[NUM_MEASUREMENTS - 1]; // With 10 measurements there are 9 deltas to be calculated
+        uint32_t curr_time_delta;
 
-        uint8_t interval_counter = 0;
-        uint8_t sum_limiter_multiplier = 4;
-
-        // if abrupt stop, return 0 rpm
-        if (micros()-_encoder.times[10] > sum_limiter_multiplier*(_encoder.times[10]_encoder.times[9]) {
-            return 0;
-        } else {
-            dts[10] = micros()-_encoder.times[10];
-            interval_counter++;
+        // find all of the time deltas
+        // TODO: handle the case where the time has wrapped
+        uint8_t delta_pos = 0;
+        for (uint8_t i = _encoder.time_pos; i < _encoder.time_pos + NUM_MEASUREMENTS - 1; i++) {
+            time_deltas[delta_pos] = _encoder.times[(i+2)%NUM_MEASUREMENTS] - _encoder.times[(i+1)%NUM_MEASUREMENTS];
+            delta_pos++;
         }
+        curr_time_delta = micros() - _encoder.times[_encoder.time_pos];
 
-        // change in time between the i-th index and the i-th+1 index
-        for (uint8_t i = 9; i >= 0; i--) {
-            uint32_t dt = _encoder.times[i+1] - _encoder.times[i]; 
-            // stop the summing for loop if there is sudden acceleration/deceleration  
-            if (dt > sum_limiter_multiplier*dts[i+1]) {
-                break;
-            } else {
-                dts[i] = dt;
-                interval_counter++;
-            }
-        }
-
-        if (interval_counter == 0) {
-            return 0;
-        }
 
         uint32_t sum = 0;
         // average the numbers summed
-        for (uint8_t i = interval_counter; i >= 0; i--) {
-        {
-            sum += dts[i];
+        for (uint8_t i = 0; i < NUM_MEASUREMENTS - 1; i++) {
+            sum += time_deltas[i];
         }
-        uint32_t avg_dt = sum/interval_counter;
-        uint32_t rpm = 1/avg_dt/_ppr*60;
-
-        return rpm;
-
-
-        // I'm thinking that if speed is relatively slow, you only want to do time derivative averaged over less measurements
-        // ie if you were to stop sensor immediately, you don't want to average the speed over last 10 values because you probably
-        // only care about the last 2 or 3. You would only want to average over all 10 measurements at high speeds for more
-        // accuracy in the measurement. Also keep in mind that you will also want to take into accound the current time ie if the last
-        // two measurements were taken at 200us and 201us but the current time is 300us because the sensor abruptly stopped moving, the
-        // code will think it is still moving if you only use the times that the measurements were taken.
+        uint32_t avg_delta = sum/(NUM_MEASUREMENTS - 1);
+        rpm = 60*1000*1000/avg_delta/_ppr;
 
         interrupts();
+        return rpm;
     }
-
+    // TODO: Add if statements to make these be able to only send speed or position
+    const speed_sensor_data_t& get_data(){
+        if(_type == ACTIVE){
+            _data.position = get_position();
+            _data.speed = get_speed();
+        }
+        return _data;
+    }
+    void pack(byte* pack){
+        get_data();
+        *((uint32_t*) pack) = _data.position;
+        *((uint16_t*)(pack + 4)) = _data.speed;        
+    }
+    void unpack(const byte* pack){
+        _data.position = *((uint32_t*) pack);
+        _data.speed = *((uint16_t*)(pack + 4));
+    }
 
 private:
 	Encoder_internal_state_t _encoder;
@@ -222,14 +216,18 @@ public:
 	// DO NOT call update() directly from sketches.
 	static void update(Encoder_internal_state_t *arg) {
         if(arg->pin2_bitmask==255){
-            arg->position++;
-            arg->time_pos = arg->time_pos == 9 ? 0 : arg->time_pos + 1;
-            arg->times[arg->time_pos] = micros();            
+            uint8_t p1val = DIRECT_PIN_READ(arg->pin1_register, arg->pin1_bitmask);
+            if (p1val && !arg->state){
+                arg->position++;
+                arg->time_pos = arg->time_pos == NUM_MEASUREMENTS - 1 ? 0 : arg->time_pos + 1;
+                arg->times[arg->time_pos] = micros();            
+            }
+            arg->state = p1val;
         }
         else{
             uint8_t p1val = DIRECT_PIN_READ(arg->pin1_register, arg->pin1_bitmask);
             uint8_t p2val = DIRECT_PIN_READ(arg->pin2_register, arg->pin2_bitmask);
-            arg->time_pos = arg->time_pos == 9 ? 0 : arg->time_pos + 1;
+            arg->time_pos = arg->time_pos == NUM_MEASUREMENTS - 1 ? 0 : arg->time_pos + 1;
             arg->times[arg->time_pos] = micros();            
             uint8_t state = arg->state & 3;
             if (p1val) state |= 4;
