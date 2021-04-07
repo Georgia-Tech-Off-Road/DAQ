@@ -120,6 +120,20 @@ class SpeedSensor(Sensor):
         except Exception as e:
             logger.error(e)
 
+class BrakeSensor(Sensor):
+    def __init__(self, pulses_per_revolution, **kwargs):
+        super().__init__(**kwargs)
+        self.ppr = pulses_per_revolution
+        self.unit = kwargs.get('unit', "Revolutions Per Minute")
+        self.unit_short = kwargs.get('unit_short', "Pressure")
+
+    def add_value(self, value):
+        try:
+            self.is_connected = True
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
+        except Exception as e:
+            logger.error(e)
 
 class LDS(Sensor):
     def __init__(self, stroke_length, **kwargs):
@@ -131,6 +145,21 @@ class LDS(Sensor):
     def add_value(self, value):
         try:
             # TODO: Implement a transfer function for conversion to from raw data to mm
+            self.is_connected = True
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
+        except Exception as e:
+            logger.error(e)
+
+class IMU(Sensor):
+    def __init__(self, pulses_per_revolution, **kwargs):
+        super().__init__(**kwargs)
+        self.ppr = pulses_per_revolution
+        self.unit = kwargs.get('unit', "Revolutions Per Minute")
+        self.unit_short = kwargs.get('unit_short', "RPM")
+
+    def add_value(self, value):
+        try:
             self.is_connected = True
             self.values.append(value)
             self.most_recent_index = len(self.values) - 1
