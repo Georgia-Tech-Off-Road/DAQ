@@ -94,5 +94,9 @@ public:
 #include "../LDS/LDS.h"
 #include "../TimeSensor/TimeSensor.h"
 #include "../HallEffectSpeedSensor/HallEffectSpeedSensor.h"
+#include "../BrakePressureTransducer/BrakePressureTransducer.h"
+#include "../RTCSensor/RTCSensor.h"
+#include "../SpeedSensor/SpeedSensor.h"
+#include "../SparkFun_Qwiic_Scale_NAU7802_Arduino_Library-master/src/SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h"
 
 #endif

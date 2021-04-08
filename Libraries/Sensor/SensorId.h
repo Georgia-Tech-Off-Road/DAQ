@@ -35,21 +35,33 @@ enum sensor_id_t : uint16_t
     TIME_DAATA_MS  = 107,
     TIME_DAATA_US  = 108,
 
+    RTC_UNIXTIME = 199,
+
     /**
      * 200 - SPEED SENSORS
      */
     SPEED_GENERIC       = 200,
     SPEED_ENGINE_RPM    = 201,
     SPEED_SECONDARY_RPM = 202,
+    BRAKE_SENSOR1 = 203,
+    BRAKE_SENSOR2 = 204,
 
     /**
      * 400 - LDS SENSORS
      */
     LDS_GENERIC            = 205,
-    LDS_FRONTLEFTSHOCK_MM  = 301,
-    LDS_FRONTRIGHTSHOCK_MM = 302,
-    LDS_BACKLEFTSHOCK_MM   = 303,
-    LDS_BACKRIGHTSHOCK_MM  = 304
+    LDS_FRONTLEFTSHOCK_MM  = 206,
+    LDS_FRONTRIGHTSHOCK_MM = 207,
+    LDS_BACKLEFTSHOCK_MM   = 208,
+    LDS_BACKRIGHTSHOCK_MM  = 209,
+
+    /**
+     * 500 - FORCE/PRESSURE SENSORS
+     */
+    FORCE_GENERIC          = 210,
+    PRESSURE_GENERIC       = 211,
+    FORCE_ENGINEDYNO_LBS   = 212
+
 };
 
 #endif
