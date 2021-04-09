@@ -13,7 +13,7 @@ Adafruit_TLC5947 h_driver(1, 13, 14, 15);
 ServoControl l_servo(5, 270);
 ServoControl r_servo(9, 270);
 DashDial l_dash(l_driver, l_servo, 0, 4000, 0, 500, 10, 265);
-DashDial r_dash(r_driver, r_servo, 0, 4000, 0, 500, 0, 265);
+DashDial r_dash(r_driver, r_servo, 0, 4000, 0, 500, 10, 265);
 
 SevenSegment h_seg(h_driver);
 
