@@ -55,13 +55,6 @@ enum sensor_id_t : uint16_t
     LDS_BACKLEFTSHOCK_MM   = 208,
     LDS_BACKRIGHTSHOCK_MM  = 209,
 
-    /**
-     * 500 - FORCE/PRESSURE SENSORS
-     */
-    FORCE_GENERIC          = 210,
-    PRESSURE_GENERIC       = 211,
-    FORCE_ENGINEDYNO_LBS   = 212
-
     IMU_SENSOR = 220
 };
 
