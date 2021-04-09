@@ -10,11 +10,11 @@ import struct
 Data parser for sensor data from wireless communication utility.
 Data is stored in a CSV file that can be accessed via Excel.
 
-version: 1.0
+version: 1.1
 """
 
 # Enter in the bin file using it's absolute directory as the first paramater of this declaration
-dataFile = open("C:/Users/Benjamin/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/TEST1.BIN", mode="rb")
+dataFile = open("C:/Users/Benjamin/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/DYNO3.BIN", mode="rb")
 
 # MISC testing
 """
@@ -45,6 +45,8 @@ csvWriter = csv.writer(csvFile)
 csvList = []
 
 imuValues = []
+
+speedSensorValues = []
 
 #dataSheet = Workbook()
 
@@ -108,6 +110,7 @@ while byteIndex < len(dataRecord):
 		csvList.clear()
 		keyIndex = 0
 		imuValues.clear()
+		speedSensorValues.clear()
 
 		for i in range(len(keyList)):
 			tempBytes = 0
@@ -121,15 +124,56 @@ while byteIndex < len(dataRecord):
 					binOfTempBytes = bin(tempBytes)
 					IEEEconvert = bin_to_float(binOfTempBytes)
 					imuValues.append(IEEEconvert)
+				csvList.append(imuValues)
+				DataDict[keyList[keyIndex]].append(tempBytes)
+			elif keyList[keyIndex] == 201:
+				speedSensorValues.clear()
+				"""
+				for i in range(4):
+					tempBytes = (tempBytes |
+							((dataRecord[byteIndex + 4 - i]) <<
+								((4 - i - 1) * 8)))
+				speedSensorValues.append(tempBytes)
+				"""
+				#print(speedSensorValues)
+				tempBytes = 0
+				for i in range(2):
+					tempBytes = (tempBytes |
+							((dataRecord[byteIndex + 6 - i]) <<
+								((2 - i - 1) * 8)))
+				#speedSensorValues.append(tempBytes)
+				#print(speedSensorValues)
+				csvList.append(tempBytes)
+				DataDict[keyList[keyIndex]].append(tempBytes)
+			elif keyList[keyIndex] == 202:
+				speedSensorValues.clear()
+				"""
+				for i in range(4):
+					tempBytes = (tempBytes |
+							((dataRecord[byteIndex + 4 - i]) <<
+								((4 - i - 1) * 8)))
+				speedSensorValues.append(tempBytes)
+				"""
+				#print(speedSensorValues)
+				tempBytes = 0
+				for i in range(2):
+					tempBytes = (tempBytes |
+							((dataRecord[byteIndex + 6 - i]) <<
+								((2 - i - 1) * 8)))
+				#speedSensorValues.append(tempBytes)
+				csvList.append(tempBytes)
+				#print(speedSensorValues)
+				DataDict[keyList[keyIndex]].append(tempBytes)
 			else:
 				for i in range(0, dataSize[keyList[keyIndex]]):
 					tempBytes = (tempBytes |
 						 ((dataRecord[byteIndex + dataSize[keyList[keyIndex]] - i]) <<
 						 	 ((dataSize[keyList[keyIndex]] - i - 1) * 8)))
-			if len(imuValues) > 0:
-				csvList.append(imuValues)
-				DataDict[keyList[keyIndex]].append(tempBytes)
-			else:
+				if keyList[keyIndex] == 212:
+					binOfTempBytes = bin(tempBytes)
+					IEEEconvert = bin_to_float(binOfTempBytes)
+					#print(IEEEconvert)
+					tempBytes = IEEEconvert
 				csvList.append(tempBytes)
 				DataDict[keyList[keyIndex]].append(tempBytes)
 			#currentSheet.write(packetCount + 1, keyIndex, tempBytes)

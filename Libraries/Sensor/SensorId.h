@@ -62,6 +62,7 @@ enum sensor_id_t : uint16_t
     PRESSURE_GENERIC       = 211,
     FORCE_ENGINEDYNO_LBS   = 212
 
+    IMU_SENSOR = 220
 };
 
 #endif

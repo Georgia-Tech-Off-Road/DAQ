@@ -95,8 +95,13 @@ public:
 #include "../TimeSensor/TimeSensor.h"
 #include "../HallEffectSpeedSensor/HallEffectSpeedSensor.h"
 #include "../BrakePressureTransducer/BrakePressureTransducer.h"
+<<<<<<< HEAD
 #include "../RTCSensor/RTCSensor.h"
 #include "../SpeedSensor/SpeedSensor.h"
 #include "../SparkFun_Qwiic_Scale_NAU7802_Arduino_Library-master/src/SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h"
+=======
+#include "./DerivedSensors/RTCSensor.h"
+#include "./DerivedSensors/IMUSensor.h"
+>>>>>>> 470dbf48d11ee28bb8ac14cd73d9b1b89afdfda8
 
 #endif

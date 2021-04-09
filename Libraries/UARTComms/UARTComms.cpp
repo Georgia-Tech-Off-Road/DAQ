@@ -8,9 +8,25 @@
 /*
  * Constructor
  */
-UARTComms::UARTComms(uint32_t baud, HardwareSerial &port) : 
+UARTComms::UARTComms(uint32_t baud, HardwareSerial &hardware_port) : 
     _baud(baud), 
-    _port(&port),
+    _hardware_port(&hardware_port),
+    _port(&hardware_port),
+    _is_hardware_port(1),
+    _sending_period_us(10000),
+    _time_at_last_send(0),
+    _time_at_last_receive(0),
+    _is_sending_data(0),
+    _is_receiving_data(0) { }
+
+/*
+ * Constructor
+ */
+UARTComms::UARTComms(uint32_t baud, usb_serial_class &usb_port) : 
+    _baud(baud), 
+    _usb_port(&usb_port),
+    _port(&usb_port),
+    _is_hardware_port(0),
     _sending_period_us(10000),
     _time_at_last_send(0),
     _time_at_last_receive(0),
@@ -21,7 +37,11 @@ UARTComms::UARTComms(uint32_t baud, HardwareSerial &port) :
  * @brief Initializes the hardware for the Serial Port
  */
 void UARTComms::begin(){
-    _port->begin(_baud);
+    if(_is_hardware_port){
+        _hardware_port->begin(_baud);
+    } else {
+        _usb_port->begin(_baud);
+    }
 }
 
 /*
