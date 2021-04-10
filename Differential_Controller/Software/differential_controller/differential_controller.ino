@@ -23,9 +23,7 @@
 
 
 
-HallEffectSpeedSensor he_sensor1(PIN_HE1, 50);
-HallEffectSpeedSensor he_sensor2(PIN_HE2, 50);
-Differential_Controller diff_controller(PIN_DIFF1, PIN_DIFF2, PIN_DIFF3, PIN_DIFF4, PIN_DIFF5, PIN_DIFF6, PIN_MOTORPOS, PIN_MOTORNEG, PIN_SWITCHLEFT, PIN_SWITCHRIGHT, he_sensor1, he_sensor2);
+Differential_Controller diff_controller(PIN_DIFF1, PIN_DIFF2, PIN_DIFF3, PIN_DIFF4, PIN_DIFF5, PIN_DIFF6, PIN_MOTORPOS, PIN_MOTORNEG, PIN_SWITCHLEFT, PIN_SWITCHRIGHT);
 
 
 void setup() {
@@ -34,6 +32,11 @@ void setup() {
   diff_controller.setup();
   pinMode(13, OUTPUT);
   
+//  diff_controller.rotate_R();
+//  delay(1000);  
+//  diff_controller.rotate_F();
+//  delay(500);
+
 }
 
 uint32_t temp = 0;
@@ -58,7 +61,6 @@ void loop() {
     temp = t;
     digitalWrite(13, led_on);
   }
-//  diff_controller.rotate_R();
   diff_controller.update();
   delay(10);
 }

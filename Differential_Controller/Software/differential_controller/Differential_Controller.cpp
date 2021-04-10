@@ -3,13 +3,10 @@
 
 #include "Differential_Controller.h"
 
-#define PLACEHOLDERGOUP 4
-#define PLACEHOLDERGODOWN 5
 
 
 Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6,
-    uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight,
-    HallEffectSpeedSensor& he_sensor1, HallEffectSpeedSensor& he_sensor2) :
+    uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight) :
   _pin_diff1(pin_diff1),
   _pin_diff2(pin_diff2),
   _pin_diff3(pin_diff3),
@@ -20,8 +17,6 @@ Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_
   _pin_motorNeg(pin_motorNeg),
   _pin_switchLeft(pin_switchLeft),
   _pin_switchRight(pin_switchRight),
-  _he_sensor1(he_sensor1),
-  _he_sensor2(he_sensor2),
   _desiredState(STARTPOS),
   _prevSwitchPos(-1)
 {
@@ -35,7 +30,6 @@ void Differential_Controller::setup()
   pinMode(_pin_diff2, INPUT_PULLUP);
   pinMode(_pin_diff3, INPUT_PULLUP);
   pinMode(_pin_diff4, INPUT_PULLUP);
-  pinMode(_pin_diff5, OUTPUT);
   pinMode(_pin_diff6, INPUT_PULLUP);
 
   pinMode(_pin_motorPos, OUTPUT);
@@ -52,13 +46,6 @@ void Differential_Controller::setup()
 */
 void Differential_Controller::update()
 {
-  //  if ((he_sensor1.get_speed() < 0) && (he_sensor2.get_speed() < 0 ))
-  {
-
-
-
-    
-    uint8_t currState = get_currState();
 
     String user_input_str;
     long user_input;
@@ -83,6 +70,24 @@ void Differential_Controller::update()
             _desiredState = user_input;
             _changingDiffType = true;
           }
+          if (user_input_str.indexOf("reverse") > -1) {
+            rotate_R();
+            _changingDiffType = true;
+            _desiredState = 0;
+            delay(500);
+          }
+          if (user_input_str.indexOf("forward") > -1) {
+            rotate_F();
+            _changingDiffType = true;
+            _desiredState = 0;
+            delay(500);
+          }
+          if (user_input_str.indexOf("stop") > -1) {
+            rotate_stop();
+            _changingDiffType = true;
+            _desiredState = 0;
+            delay(500);
+          }
         break;
       case CONTROLMODE_SWITCH:
         _desiredState = get_desiredState();
@@ -92,8 +97,15 @@ void Differential_Controller::update()
         break;
     }
 
+    rotateToState(_desiredState);
+ 
+}
 
-    
+void Differential_Controller::rotateToState(uint8_t desiredState) {
+
+
+    uint8_t currState = get_currState();
+
     if (_changingDiffType) {
       Serial.print("Current state: ");
       Serial.println(currState);
@@ -104,9 +116,9 @@ void Differential_Controller::update()
       Serial.println(_desiredState);
     }
 
-      
+    
     // if an invalid state has been returned, stop the differential controller
-    if (currState != 0 && (1 <= _desiredState && _desiredState <= 8))
+    if (currState != 0 && (1 <= _desiredState && _desiredState <= 7))
     {
 
       // if not at the desired state, rotate the motor in the direction of the desired state
@@ -115,11 +127,12 @@ void Differential_Controller::update()
       {
         if (currState < _desiredState)
         {
-//          Serial.println("changing");
+          Serial.println("going R");
           rotate_R();
         }
         else if (currState > _desiredState)
         {
+          Serial.println("going F");
           rotate_F();
         }
         else
@@ -137,12 +150,7 @@ void Differential_Controller::update()
     } else {
       rotate_stop();
     }
-  }
-
-  if (_changingDiffType)
-    Serial.println();
 }
-
 
 
 /*
@@ -154,15 +162,21 @@ uint8_t Differential_Controller::get_currState()
 {
   // differential pin 5 pulls all differential pins (pulled high by defualt)
   // that are in contact through the wipers/tracks low
-  digitalWrite(_pin_diff5, LOW);
 
   // differential pins are active low
   uint8_t diffWiperCombo = (!digitalRead(_pin_diff6) << 5) | (1 << 4) | (!digitalRead(_pin_diff4) << 3) |
                            (!digitalRead(_pin_diff3) << 2) | (!digitalRead(_pin_diff2) << 1) | (!digitalRead(_pin_diff1)); // 16 (010000) for _diff5
 
+                           
+//  Serial.print(!digitalRead(_pin_diff6));
+//  Serial.print(1);
+//  Serial.print(!digitalRead(_pin_diff4));
+//  Serial.print(!digitalRead(_pin_diff3));
+//  Serial.print(!digitalRead(_pin_diff2));
+//  Serial.print(!digitalRead(_pin_diff1));
+//  Serial.println();
   
 //  if (_changingDiffType)
-    Serial.println(diffWiperCombo, BIN);
 
   // decode the current state using the current tracks that are pulled low
   switch (diffWiperCombo)
@@ -209,19 +223,19 @@ uint8_t Differential_Controller::get_currState()
 */
 uint8_t Differential_Controller::get_desiredState()
 {
-  // decodes the desired differential type
+  // decodes the desired state
   // based on the current physical position of switch
   uint8_t currSwitchPos = (!(digitalRead(_pin_switchLeft)) << 2) | !digitalRead(_pin_switchRight);
   switch (currSwitchPos)
   {
     case 0b100:         // switch is rotated to the left position
-      _desiredDiffType = PH_1;
+      _desiredState = STATE_RWD;
       break;
     case 0b000:         // switch is rotated to the middle position
-      _desiredDiffType = PH_2;
+      _desiredState = STATE_LIMITEDSLIP;
       break;
     case 0b001:         // switch is rotated to the right position
-      _desiredDiffType = PH_3;
+      _desiredState = STATE_LOCKED;
       break;
     default:
       _desiredDiffType = 0;
@@ -235,23 +249,6 @@ uint8_t Differential_Controller::get_desiredState()
   _prevSwitchPos = currSwitchPos;     // update what the prevous switch position was
 
   
-  // decodes the desired state of physical differential controller wiper and tracks
-  // based on the desired differential type
-  switch (_desiredDiffType)
-  {
-    case PH_1:
-      _desiredState = STATE3;
-      break;
-    case PH_2:
-      _desiredState = STATE5;
-      break;
-    case PH_3:
-      _desiredState = STATE7;
-      break;
-    default:
-      _desiredState = 0;
-  }
-
   return _desiredState;
 
 }
