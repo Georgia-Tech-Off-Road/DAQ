@@ -45,18 +45,8 @@ bool led_on = 0;
 void loop() {
   // put your main code here, to run repeatedly:
   
-//  if (Serial.available() > 0)
-//  {
-//    uint8_t incomingData = Serial.read();
-//    Serial.println(incomingData);
-//    if ((incomingData<=8) && (incomingData >=1))
-//    {
-//      diff_controller.change_state(incomingData);
-//    } 
-//  }
-//  
   uint32_t t = micros();
-  if((t - temp) > 500000) {
+  if((t - temp) > 5000000) {
     led_on = !led_on;
     temp = t;
     digitalWrite(13, led_on);
