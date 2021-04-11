@@ -1,7 +1,7 @@
 #ifndef DIFFERENTIAL_CONTROLLER_H
 #define DIFFERENTIAL_CONTROLLER_H
 
-#include <Sensor.h>
+#include <Arduino.h>
 
 #define STARTPOS 3
 
@@ -16,7 +16,7 @@
 #define STATE8 8
 
 // The differential modes and their corresponding state 
-#define STATE_RWD STATE2
+#define STATE_RWD STATE1
 #define STATE_LIMITEDSLIP STATE5
 #define STATE_LOCKED STATE7
 
@@ -25,10 +25,9 @@
 #define CONTROLMODE_SERIAL 1
 
 
-class Differential_Controller : public Sensor<uint8_t> {
+class Differential_Controller {
     public:   
-        Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6,
-                                                 uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight);
+        Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight);
         void begin();
         void update();
         void rotateToState(uint8_t desired_state);
@@ -60,9 +59,6 @@ class Differential_Controller : public Sensor<uint8_t> {
 
         uint8_t _controlMode = CONTROLMODE_SWITCH;
             
-
-
-
 };
 
 #endif

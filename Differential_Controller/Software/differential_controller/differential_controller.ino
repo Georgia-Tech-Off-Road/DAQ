@@ -1,5 +1,4 @@
 #include "Differential_Controller.h"
-#include "HallEffectSpeedSensor.h"
 
 
 #define PIN_DIFF1 14
@@ -29,7 +28,7 @@ Differential_Controller diff_controller(PIN_DIFF1, PIN_DIFF2, PIN_DIFF3, PIN_DIF
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  diff_controller.setup();
+  diff_controller.begin();
   pinMode(13, OUTPUT);
   
 //  diff_controller.rotate_R();
@@ -46,7 +45,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   uint32_t t = micros();
-  if((t - temp) > 5000000) {
+  if((t - temp) > 1000000) {
     led_on = !led_on;
     temp = t;
     digitalWrite(13, led_on);
