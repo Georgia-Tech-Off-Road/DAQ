@@ -5,8 +5,12 @@
 #include <UARTComms.h>
 #include <Sensor.h>
 
+unsigned __exidx_start;
+unsigned __exidx_end;
+
+
 // TIRE RADIUS IN INCHES
-#define TIRE_RADIUS 10
+#define TIRE_RADIUS 22
 //#define CALIBRATE
 
 Adafruit_TLC5947 l_driver(1, 3, 2, 4);
@@ -46,9 +50,10 @@ void loop(){
       float in_per_min = secondary_rpm.get_rpm() * 2 * 3.1415 * TIRE_RADIUS;
       float mph = (in_per_min * 60.0) / (12.0 * 5280.0);
       uint16_t mph_10 = (uint16_t) (mph * 10);
-
-      l_dash.set(mph_10);
-      r_dash.set(engine_rpm_1.get_rpm());
+      
+      Serial.println(mph);
+      l_dash.set(engine_rpm_1.get_rpm());
+      r_dash.set(mph_10);
       h_seg.set_number(mph_10);
       h_seg.set_dp(1,1);
       prev_change = t;
@@ -60,7 +65,8 @@ void loop(){
       prev_update = t;
         Serial.print("\nEngine Speed 1  (RPM): ");
         Serial.println(engine_rpm_1.get_rpm());
-        Serial.print("Engine Speed 2  (RPM): ");
+        Serial.prin
+        t("Engine Speed 2  (RPM): ");
         Serial.println(engine_rpm_2.get_rpm());
         Serial.print("Secondary Speed (RPM): ");
         Serial.println(secondary_rpm.get_rpm());
