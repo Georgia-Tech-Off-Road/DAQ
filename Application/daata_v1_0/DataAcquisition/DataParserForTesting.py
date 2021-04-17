@@ -260,14 +260,14 @@ while(teensy_ser.is_open):
 	if tempBytes == endCode:
 		byteIndex += 8
 
-	if len(dataRecord) - byteIndex <= 8:
+	if len(dataRecord) - byteIndex < numBytesToRead:
 		dataRecord.clear()
 		byteIndex = 0
 		currentPacket = teensy_ser.read(100)
 		print(currentPacket)
 		dataRecord = list(currentPacket)
 
-	if packetCount > 15:
+	if packetCount > 10:
 		print("closed")
 		teensy_ser.close()
 
@@ -279,7 +279,7 @@ while(teensy_ser.is_open):
 # of the directory (most likely inside \DAQ folder)
 	#dataSheet.save('example.xls')
 
-dataFile.close()
+#dataFile.close()
 
 # Optional plotting of the data after the most recent settings are sent
 """
