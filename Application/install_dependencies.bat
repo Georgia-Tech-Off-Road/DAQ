@@ -7,5 +7,7 @@ pip install datetime
 pip install xlwt
 pip install PySerial
 pip install matplotlib
+pip install pywin32
+pip install func_timeout
 
 cmd /k
