@@ -1,22 +1,23 @@
 #include <SDWrite.h>
+#include <Sensor.h>
 
 SDWrite sd(BUILTIN_SDCARD);
-GenericSensor s1(TEST_SENSOR_1, 4);
-GenericSensor s2(TEST_SENSOR_2, 2);
-HESpeedSensor engine_speed (23423, 2352);
-GenericSensor chonk((sensor_id_t)1067, 60);
+TimeSensor ts (MICROS);
+HallEffectSpeedSensor engine_speed (1, 10);
+LDS lds(A9, 100, false);
 
 void setup() {
-  sd.begin("test1.bin");
-  sd.attach_output_sensor(engine_speed, SPEED_ENGINE_RPM);
+  sd.begin("test4.bin");
+  sd.attach_output_sensor(ts, TIME_GENERIC);
+  sd.attach_output_sensor(engine_speed, SPEED_GENERIC);
+  sd.attach_output_sensor(lds, LDS_GENERIC);
+  lds.begin();
+  engine_speed.setup();
   Serial.begin(2000000);
 }
 
 uint32_t wrote_t = 0;
 void loop() {
-  // uint32_t t = micros();
-  // uint16_t t2 = t << 1;
-  // s1.unpack((byte*)&t);
-  // s2.unpack((byte*)&t2);
+  uint32_t t = micros();
   sd.update();
 }
