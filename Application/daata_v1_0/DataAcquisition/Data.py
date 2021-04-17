@@ -30,10 +30,16 @@ class Data:
                 self.__data[sensor_id] = Command(**SensorId[sensor_id])
             if object_type == "Time":
                 self.__data[sensor_id] = Time(**SensorId[sensor_id])
-            if object_type == "SpeedSensor":
-                self.__data[sensor_id] = SpeedSensor(**SensorId[sensor_id])
+            if object_type == "SpeedPosition":
+                self.__data[sensor_id] = SpeedPosition(**SensorId[sensor_id])
             if object_type == "LDS":
                 self.__data[sensor_id] = LDS(**SensorId[sensor_id])
+            if object_type == "Pressure":
+                self.__data[sensor_id] = Pressure(**SensorId[sensor_id])
+            if object_type == "Force":
+                self.__data[sensor_id] = Force(**SensorId[sensor_id])
+            if object_type == "IMU":
+                self.__data[sensor_id] = IMU(**SensorId[sensor_id])
             if object_type == "WheelSpeed":
                 self.__data[sensor_id] = WheelSpeed(**SensorId[sensor_id])
             if object_type == "CarSpeed":

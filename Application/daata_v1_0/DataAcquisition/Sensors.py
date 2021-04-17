@@ -19,6 +19,7 @@ class Sensor(metaclass=ABCMeta):
         self.is_external = kwargs.get('is_external', True)
         self.is_derived = False
         self.is_connected = False
+        self.is_float = kwargs.get('is_float')
 
     @abstractmethod
     def add_value(self, value):
@@ -104,7 +105,7 @@ class Time(Sensor):
             logger.error(e)
 
 
-class SpeedSensor(Sensor):
+class SpeedPosition(Sensor):
     def __init__(self, pulses_per_revolution, **kwargs):
         super().__init__(**kwargs)
         self.ppr = pulses_per_revolution
@@ -120,7 +121,8 @@ class SpeedSensor(Sensor):
         except Exception as e:
             logger.error(e)
 
-class BrakeSensor(Sensor):
+
+class Pressure(Sensor):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.unit = kwargs.get('unit', "Pounds Per Square Inch")
@@ -133,6 +135,22 @@ class BrakeSensor(Sensor):
             self.most_recent_index = len(self.values) - 1
         except Exception as e:
             logger.error(e)
+
+
+class Force(Sensor):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.unit = kwargs.get('unit', "Pounds")
+        self.unit_short = kwargs.get('unit_short', "lbs")
+
+    def add_value(self, value):
+        try:
+            self.is_connected = True
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
+        except Exception as e:
+            logger.error(e)
+
 
 class LDS(Sensor):
     def __init__(self, stroke_length, **kwargs):
@@ -149,6 +167,7 @@ class LDS(Sensor):
             self.most_recent_index = len(self.values) - 1
         except Exception as e:
             logger.error(e)
+
 
 class IMU(Sensor):
     def __init__(self, **kwargs):
