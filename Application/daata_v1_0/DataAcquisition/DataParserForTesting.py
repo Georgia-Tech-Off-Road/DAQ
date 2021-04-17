@@ -38,7 +38,7 @@ print(dataRecord[0])
 """
 
 #teensy_port = get_Teensy_Port_V2()
-teensy_ser = serial.Serial(port='COM3', baudrate=2000000)
+teensy_ser = serial.Serial(port='COM3', baudrate=115200)
 teensy_found = False
 
 def get_Teensy_port(self):
