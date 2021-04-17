@@ -5,16 +5,20 @@ from pathlib import Path
 import csv
 from codecs import decode
 import struct
+import serial
+from serial.tools import list_ports
+
+# print(list(list_ports.comports()))
 
 """
 Data parser for sensor data from wireless communication utility.
 Data is stored in a CSV file that can be accessed via Excel.
 
-version: 1.1
+version: wirelessTesting
 """
 
 # Enter in the bin file using it's absolute directory as the first paramater of this declaration
-dataFile = open("C:/Users/Benjamin/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/TESTPETER.BIN.part", mode="rb")
+# dataFile = open("C:/Users/user/Documents/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/DYNO3.BIN", mode="rb")
 
 # MISC testing
 """
@@ -33,14 +37,46 @@ print(len(dataRecord))
 print(dataRecord[0])
 """
 
-bytes = dataFile.read()
+#teensy_port = get_Teensy_Port_V2()
+teensy_ser = serial.Serial(port='COM3', baudrate=2000000)
+teensy_found = False
 
-dataRecord = list(bytes)
+def get_Teensy_port(self):
+        # Teensy USB serial microcontroller program id data:
+        vendor_id = "16C0"
+        product_id = "0483"
+        serial_number = "12345"
+
+        for port in list(list_ports.comports()):
+            if port[2] == "USB VID:PID=%s:%s SNR=%s"%(vendor_id, product_id, serial_number):
+                return port[0]
+
+def get_Teensy_Port_V2():
+        """Discover where is Teensy."""
+        ports_avaiable = list(list_ports.comports())
+        #teensy_port = tuple()
+        for port in ports_avaiable:
+            if port[1].startswith("USB Serial Device"):
+                teensy_port = port
+        if teensy_port:
+            return teensy_port
+
+#print(get_Teensy_Port_V2)
+
+teensy_ser.reset_input_buffer()
+
+bytesRead = teensy_ser.read(100)
+#print(bytesRead)
+dataRecord = list(bytesRead)
+#print(len(dataRecord))
+bytesInBuffer = 0
+#print(bytesInBuffer)
+numBytesToRead = 0
 
 # The CSV file that's written to while the data is recorded
 csvFile = open('C:/Users/Benjamin/GitHub/DAQ/Application/daata_v1_0/DataAcquisition/DataRecord.csv', 'w')
 
-csvWriter = csv.writer(csvFile, lineterminator='\n')
+csvWriter = csv.writer(csvFile)
 
 csvList = []
 
@@ -67,6 +103,7 @@ packetCount = 0
 dataSize = {}
 
 endCode = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xf0]
+#print(endCode)
 
 def float_to_bin(num):
     return bin(struct.unpack('!I', struct.pack('!f', num))[0])[2:].zfill(32)
@@ -74,23 +111,44 @@ def float_to_bin(num):
 def bin_to_float(binary):
     return struct.unpack('!f',struct.pack('!I', int(binary, 2)))[0]
 
-while byteIndex < len(dataRecord):	
-	if dataRecord[byteIndex] == 0x00:
+
+settingsReceived = False
+
+#while byteIndex < len(dataRecord):	
+while(teensy_ser.is_open):
+	if settingsReceived == False:
+		teensy_ser.write(b'\x00\xff\xff\xff\xff\xff\xff\xff\xf0')
+
+	if dataRecord[byteIndex] == 0x00 or dataRecord[byteIndex] == 0x01:
+		#print("settings being parsed")
+		settingsReceived = True
 		keyIndex = 0
 		packetCount = 0
 		csvList.clear()
 		dataSize.clear()
 		DataDict.clear()
 		keyList.clear()
+		numBytesToRead = 0
 		
+		send = ((0x01 << 64) | 0xfffffffffffffff0)
+		#print(send)
+		sendbin = bin(send)
+		#bytes([int(i) for i in send])
+		#print(bytes(sendbin.encode()))
+		#print(sendbin.encode())
+		teensy_ser.write(b'\x03\xff\xff\xff\xff\xff\xff\xff\xf0')
+
 		tempBytes = dataRecord[(byteIndex):(byteIndex + 8)]
+		#print(tempBytes)
 		byteIndex += 1
-		while tempBytes != endCode:
+		while not(tempBytes == endCode):
 			tempBytes.clear()
 			DataDict[((dataRecord[byteIndex + 1]) << 8) |
 				 dataRecord[byteIndex]] = dataRecord[byteIndex + 2]
 			byteIndex += 3
 			tempBytes = dataRecord[(byteIndex):(byteIndex + 8)]
+			#print(tempBytes)
+			#print(endCode == tempBytes)
 		byteIndex += 8
 
 		#currentSheet = dataSheet.add_sheet('Sheet ' + str(sheetCounter), cell_overwrite_ok=True)
@@ -98,15 +156,30 @@ while byteIndex < len(dataRecord):
 		keyList = list(DataDict.keys())
 		for i in range(len(keyList)):
 			dataSize[keyList[keyIndex]] = DataDict[keyList[keyIndex]]
+			numBytesToRead += DataDict[keyList[keyIndex]]
 			DataDict[keyList[keyIndex]] = []
 			csvList.append(keyList[keyIndex])
 			#currentSheet.write(0, keyIndex, keyList[keyIndex])
 			keyIndex += 1
 		sheetCounter += 1
 		csvWriter.writerow(csvList)
-		#print(dataSize.values())
+		#print(dataSize.keys())
 		
-	if dataRecord[byteIndex] == 0x02:
+		dataRecord.clear()
+		byteIndex = 0
+		bytesInBuffer = teensy_ser.in_waiting
+		print(bytesInBuffer)
+		currentPacket = teensy_ser.read(bytesInBuffer)
+		print(currentPacket)
+		dataRecord = list(currentPacket)
+
+		numBytesToRead += 8
+		print(numBytesToRead)
+
+		#teensy_ser.write(b'\x03\xff\xff\xff\xff\xff\xff\xff\xf0')
+		
+	if dataRecord[byteIndex] == 0x02 or dataRecord[byteIndex] == 0x03:
+		print("hello you made it")
 		csvList.clear()
 		keyIndex = 0
 		imuValues.clear()
@@ -185,7 +258,22 @@ while byteIndex < len(dataRecord):
 
 	tempBytes = dataRecord[(byteIndex) : (byteIndex + 8)]
 	if tempBytes == endCode:
-		byteIndex += 8 
+		byteIndex += 8
+
+	if len(dataRecord) - byteIndex <= 8:
+		dataRecord.clear()
+		byteIndex = 0
+		currentPacket = teensy_ser.read(100)
+		print(currentPacket)
+		dataRecord = list(currentPacket)
+
+	if packetCount > 15:
+		print("closed")
+		teensy_ser.close()
+
+	 
+
+	
 
 # Saves the data in excel form to "example.xls" in the root 
 # of the directory (most likely inside \DAQ folder)
