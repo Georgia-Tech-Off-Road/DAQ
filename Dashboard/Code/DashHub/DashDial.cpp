@@ -17,8 +17,8 @@ void DashDial::begin() {
 }
 
 void DashDial::update() {
-    const uint16_t diff = _max - _min;
-    const uint16_t setting_diff = _setting - _min;
+    const uint8_t diff = _max - _min;
+    const uint8_t setting_diff = _setting - _min;
     const uint16_t brightness_diff = _max_brightness - _min_brightness;
     const uint8_t to_led = 23 * setting_diff / diff;
 
@@ -42,12 +42,3 @@ void DashDial::set(const int16_t setting){
     if(_setting < _min) _setting = _min;
 }
 
-void DashDial::calibrate_servo(uint8_t passes){
-    do {
-        Serial.println("Calibrating");
-        _servo.writeDeg(_min_servo);
-        delay(4000);
-        _servo.writeDeg(_max_servo);
-        delay(4000);
-    } while (--passes > 0);
-}

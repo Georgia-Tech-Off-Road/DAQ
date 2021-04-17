@@ -21,7 +21,6 @@ public:
     void begin();
     void update();
     void set(const int16_t setting);
-    void calibrate_servo(uint8_t passes);
 };
 
 #endif

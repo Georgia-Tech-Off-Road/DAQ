@@ -11,12 +11,6 @@ void SevenSegment::set_digit(uint8_t segment, uint8_t digit){
     _digit[segment] = digit;
 }
 
-void SevenSegment::set_number(uint16_t number){
-    set_digit(0, number % 10);
-    set_digit(1, number / 10 % 10);
-    set_digit(2, number / 100 % 10);
-}
-
 void SevenSegment::set_dp(uint8_t segment, uint8_t dp){
     if(segment > 2 || dp > 1) return;
     _dp[segment] = dp;
