@@ -20,7 +20,10 @@ struct end_code_t {
 
 class UARTComms {
 private:
-    HardwareSerial * const _port;
+    HardwareSerial * const _hardware_port;
+    usb_serial_class * const _usb_port;
+    Stream * const _port;
+    bool _is_hardware_port;
     const uint32_t _baud;
 
     const uint16_t _sending_period_us;
@@ -48,7 +51,8 @@ private:
 
     
 public:
-    UARTComms(uint32_t baud, HardwareSerial &port);
+    UARTComms(uint32_t baud, HardwareSerial &hardware_port);
+    UARTComms(uint32_t baud, usb_serial_class &usb_port);
 
     void update();
     void begin();
