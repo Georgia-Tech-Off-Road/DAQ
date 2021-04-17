@@ -171,6 +171,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+lib/
 lib64/
 parts/
 sdist/
@@ -308,6 +309,3 @@ dmypy.json
 ### Microsoft Office ###
 # Ignores all temporary files made for word document, excel sheet, etc. 
 ~$*
-
-#Mac DS_store files#
-*.DS_Store
