@@ -19,6 +19,7 @@ private:
 
 public:
     SevenSegment(Adafruit_TLC5947 &driver);
+    void set_number(uint16_t number);
     void set_digit(uint8_t segment, uint8_t digit);
     void set_dp(uint8_t segment, uint8_t dp);
     void update();
