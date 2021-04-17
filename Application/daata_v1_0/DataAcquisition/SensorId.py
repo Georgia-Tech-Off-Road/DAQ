@@ -99,15 +99,18 @@ SensorId = {
     # 200 - SPEED SENSORS
     200: {
         "name": "speed_generic",
-        "object": "SpeedSensor"
+        "object": "SpeedSensor",
+        "pulses_per_revolution": 1
     },
     201: {
         "name": "speed_engine_rpm",
-        "object": "SpeedSensor"
+        "object": "SpeedSensor",
+        "pulses_per_revolution": 600
     },
     202: {
         "name": "speed_secondary_rpm",
-        "object": "SpeedSensor"
+        "object": "SpeedSensor",
+        "pulses_per_revolution": 30
     },
     
     # BRAKE SENSORS
@@ -125,23 +128,28 @@ SensorId = {
     # 400 - LDS SENSORS
     205: {
         "name": "lds_generic",
-        "object": "LDS"
+        "object": "LDS",
+        "stroke_length": 1
     },
     206: {
         "name": "lds_frontleftshock_mm",
-        "object": "LDS"
+        "object": "LDS",
+        "stroke_length": 200
     },
     207: {
         "name": "lds_frontrightshock_mm",
-        "object": "LDS"
+        "object": "LDS",
+        "stroke_length": 200
     },
     208: {
         "name": "lds_backleftshock_mm",
-        "object": "LDS"
+        "object": "LDS",
+        "stroke_length": 225
     },
     209: {
         "name": "lds_backrightshock_mm",
-        "object": "LDS"
+        "object": "LDS",
+        "stroke_length": 225
     },
 
     220: {

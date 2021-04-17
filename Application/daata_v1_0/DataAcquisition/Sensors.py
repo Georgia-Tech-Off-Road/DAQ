@@ -121,11 +121,10 @@ class SpeedSensor(Sensor):
             logger.error(e)
 
 class BrakeSensor(Sensor):
-    def __init__(self, pulses_per_revolution, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.ppr = pulses_per_revolution
-        self.unit = kwargs.get('unit', "Revolutions Per Minute")
-        self.unit_short = kwargs.get('unit_short', "Pressure")
+        self.unit = kwargs.get('unit', "Pounds Per Square Inch")
+        self.unit_short = kwargs.get('unit_short', "PSI")
 
     def add_value(self, value):
         try:
@@ -152,11 +151,10 @@ class LDS(Sensor):
             logger.error(e)
 
 class IMU(Sensor):
-    def __init__(self, pulses_per_revolution, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.ppr = pulses_per_revolution
-        self.unit = kwargs.get('unit', "Revolutions Per Minute")
-        self.unit_short = kwargs.get('unit_short', "RPM")
+        self.unit = kwargs.get('unit', "Acceleration")
+        self.unit_short = kwargs.get('unit_short', "m/s^2")
 
     def add_value(self, value):
         try:
