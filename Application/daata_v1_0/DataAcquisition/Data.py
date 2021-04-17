@@ -50,12 +50,6 @@ class Data:
         # External sensors
         self.__data['teensy_time'] = Time(sensor_id=100, display_name='Time Since Start', unit='Micro-seconds', unit_short='us')
         self.__data['time_dash_ms'] = Time(sensor_id=101, display_name='Dashboard Time Since Start', unit='Miliseconds', unit_short='ms')
-        self.__data['engine_rpm'] = SpeedSensor(0, display_name='Engine RPM')
-        self.__data['secondary_rpm'] = SpeedSensor(0, display_name='Secondary RPM')
-        self.__data['fl_lds'] = LDS(0, display_name='Front Left LDS')
-        self.__data['fr_lds'] = LDS(0, display_name='Front Right LDS')
-        self.__data['bl_lds'] = LDS(0, display_name='Back Left LDS')
-        self.__data['br_lds'] = LDS(0, display_name='Back Right LDS')
 
         # Derived sensors
         self.__data['wheel_speed'] = WheelSpeed(self.__data['secondary_rpm'])
@@ -64,13 +58,26 @@ class Data:
 
         logger.info("Data object successfully initialized")
 
-
-
     def get_most_recent_index(self):
+        """
+        Gives the index of the last value that was collected
+
+        :return:  most_recent_index The index of the most recent value that was collected
+        """
+
         with self.lock:
             return self.__data['time'].most_recent_index
 
     def get_value(self, sensor_id, index):
+        """
+        Safely gives the value for a sensor id at a given index (the most recent index can be retrieved with
+        get_most_recent_index).
+
+        :param sensor_id: The ID of the sensor to get data from
+        :param index: The index to retrieve the data from
+        :return: value The measured value of the sensor at that index
+        """
+
         with self.lock:
             try:
                 return self.__data[sensor_id].get_value(index)
@@ -79,6 +86,17 @@ class Data:
                 return None
 
     def get_values(self, sensor_id, index, num_values):
+        """
+        Safely gives a list of values for a sensor id at a given index (the most recent index can be retrieved with
+        get_most_recent_index). If get_values(1, 10, 5) is called, it will give 5 values of the sensor with ID 1
+        starting at position 10 (i.e. it will give the data points at positions 10, 9, 8, 7, 6).
+
+        :param sensor_id: The ID of the sensor to get data from
+        :param index: The index to retrieve the data from
+        :param num_values: The number of values to measure
+        :return: values: The list of values measured from the sensor at a given index
+        """
+
         with self.lock:
             try:
                 return self.__data[sensor_id].get_values(index, num_values)
@@ -121,6 +139,13 @@ class Data:
         return sensors
 
     def get_display_name(self, sensor_id):
+        """
+        Gives the display name of a certain sensor (to be used for a graph title or whatever else).
+
+        :param sensor_id: The ID of the sensor to get the display name of
+        :return: The display name (string)
+        """
+
         logger.debug(logger.debug("Getting the display name for {}".format(sensor_id)))
         try:
             return self.__data[sensor_id].display_name
@@ -204,6 +229,7 @@ class Data:
         :param sensor_name: The name of the sensor to add the value to (only needed if no sensor_id is given)
         :param sensor_id: The sensor_id of the sensor to add the value to (only needed if no sensor_name is given)
         """
+
         if sensor_id is not None and sensor_name is not None:
             logger.warning("An ID and sensor_name were both given for sensor with ID {}. Choosing the ID".format(sensor_id))
         if sensor_id is not None:
