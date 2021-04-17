@@ -5,6 +5,12 @@
 #include <UARTComms.h>
 #include <Sensor.h>
 
+unsigned __exidx_start;
+unsigned __exidx_end;
+
+
+// TIRE RADIUS IN INCHES
+#define TIRE_RADIUS 22
 //#define CALIBRATE
 
 Adafruit_TLC5947 l_driver(1, 3, 2, 4);
@@ -12,12 +18,12 @@ Adafruit_TLC5947 r_driver(1, 12, 11, 10);
 Adafruit_TLC5947 h_driver(1, 13, 14, 15);
 ServoControl l_servo(5, 270);
 ServoControl r_servo(9, 270);
-DashDial l_dash(l_driver, l_servo, 0, 4000, 0, 500, 10, 265);
+DashDial l_dash(l_driver, l_servo, 0, 400, 0, 500, 10, 265);
 DashDial r_dash(r_driver, r_servo, 0, 4000, 0, 500, 10, 265);
 
 SevenSegment h_seg(h_driver);
 
-HallEffectSpeedSensor engine_rpm_1 (22, 600);
+HallEffectSpeedSensor engine_rpm_1 (22, 20);
 HallEffectSpeedSensor engine_rpm_2 (6, 4);
 HallEffectSpeedSensor secondary_rpm(23, 20);
 
@@ -41,14 +47,16 @@ void loop(){
     static int16_t var = 0;
     uint32_t t = micros();
     if((t - prev_change) >= 1000){
-      l_dash.set(abs(var));
-      r_dash.set(abs(var));
-      h_seg.set_number(abs(var)/10);
+      float in_per_min = secondary_rpm.get_rpm() * 2 * 3.1415 * TIRE_RADIUS;
+      float mph = (in_per_min * 60.0) / (12.0 * 5280.0);
+      uint16_t mph_10 = (uint16_t) (mph * 10);
+      
+      Serial.println(mph);
+      l_dash.set(engine_rpm_1.get_rpm());
+      r_dash.set(mph_10);
+      h_seg.set_number(mph_10);
       h_seg.set_dp(1,1);
-      ++var;
-      if(var > 4000) var = -4000;
       prev_change = t;
-      Serial.println(var);
     }
     if((t - prev_update) >= 10000){
       l_dash.update();
@@ -57,7 +65,8 @@ void loop(){
       prev_update = t;
         Serial.print("\nEngine Speed 1  (RPM): ");
         Serial.println(engine_rpm_1.get_rpm());
-        Serial.print("Engine Speed 2  (RPM): ");
+        Serial.prin
+        t("Engine Speed 2  (RPM): ");
         Serial.println(engine_rpm_2.get_rpm());
         Serial.print("Secondary Speed (RPM): ");
         Serial.println(secondary_rpm.get_rpm());
