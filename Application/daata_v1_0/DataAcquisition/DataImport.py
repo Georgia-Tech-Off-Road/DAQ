@@ -22,9 +22,12 @@ class DataImport:
         
         # Manually change the COM port below to the correct
         # port that the teensy appears on your device manager
-        self.teensy_port = self.get_Teensy_port()
-        self.teensy_ser = serial.Serial(port='COM3')
-        self.teensy_found = True
+        try:
+            self.teensy_port = self.get_Teensy_port()
+            self.teensy_ser = serial.Serial()
+            self.teensy_found = True
+        except Exception as e:
+            logger.error(e)
 
         # self.num_bytes_received
 
@@ -74,7 +77,6 @@ class DataImport:
                 self.teensy_found = True
             else:
                 print("No compatible Teensy found.")
-                self.update()
     
     def get_Teensy_port(self):
         # Teensy USB serial microcontroller program id data:
