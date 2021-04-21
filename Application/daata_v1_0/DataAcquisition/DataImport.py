@@ -26,7 +26,7 @@ class DataImport:
         self.teensy_ser = serial.Serial(port='COM3')
         self.teensy_found = True
 
-        self.num_bytes_received
+        # self.num_bytes_received
 
         self.end_code = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xf0]
         self.current_sensors = {}
@@ -50,6 +50,9 @@ class DataImport:
         for sensor in data.get_sensors(is_external=True, is_derived=False):
             self.temp_data[sensor] = {'value': None, 'has_been_updated': False, 'is_used': False}
 
+    def check_connected(self):
+        return self.teensy_ser.is_open
+
     def update(self):
         """
         if self.use_fake_inputs:
@@ -59,7 +62,7 @@ class DataImport:
         
         if self.teensy_found:
             self.teensy_ser.open()
-            if self.teensy_ser.is_open():
+            if self.teensy_ser.is_open:
                 self.read_packet()
                 self.send_packet()
             else:
@@ -92,11 +95,10 @@ class DataImport:
     def find_encode(self):
         if (len(self.current_packet) - self.packet_index) < (self.expected_size + 8):
             self.read_serial()
-        
         tempIndex = self.packet_index
         tempBytes = self.current_packet[(tempIndex) : (tempIndex + 8)]
-	    while not(tempBytes == self.end_code):
-		    tempIndex += 1
+        while tempBytes != self.end_code:
+            tempIndex += 1
         tempIndex += 8
         return tempIndex
 
@@ -160,8 +162,8 @@ class DataImport:
                 
                 tempBytes = self.current_packet[(self.packet_index) : (self.packet_index + 8)]
                 while not(tempBytes == self.end_code):
-                    this_sensor_id = ((self.current_packet[self.packet_index + 1]) << 8) 
-                        | (self.current_packet[self.packet_index])
+                    this_sensor_id = (((self.current_packet[self.packet_index + 1]) << 8) 
+                        | (self.current_packet[self.packet_index]))
                     this_sensor_size = self.current_packet[self.packet_index + 2]
                     self.current_sensors[this_sensor_id] = this_sensor_size
                     self.data.set_connected(this_sensor_id)
@@ -172,7 +174,7 @@ class DataImport:
                 print("Received settings of length: ", str(self.expected_size))
                 self.packet_index += 8
             
-            else if (ack_code == 0x02 or ack_code == 0x03) and self.settings_received:
+            elif (ack_code == 0x02 or ack_code == 0x03) and self.settings_received:
                 # if 0x02, then parse data but send settings
                 # if 0x03, then parse data and send data
                 
