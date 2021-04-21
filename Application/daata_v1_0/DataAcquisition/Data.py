@@ -10,104 +10,105 @@ logger = logging.getLogger("DataAcquisition")
 
 class Data:
     def __init__(self, lock):
-        logger.debug("Data object is being initialized")
-        self.is_connected = False
-        self.lock = lock
+        with lock:
+            logger.debug("Data object is being initialized")
+            self.is_connected = False
+            self.lock = lock
 
-        # create dictionaries of Sensor objects
-        self.__data = dict()
-        for sensor_id in SensorId:
-            try:
-                object_type = SensorId[sensor_id]["object"]
-            except KeyError:
-                logger.error("Sensor with ID {} missing required parameters".format(sensor_id))
-                break
-            if object_type == "Generic":
-                self.__data[sensor_id] = Generic(**SensorId[sensor_id])
-            if object_type == "Flag":
-                self.__data[sensor_id] = Flag(**SensorId[sensor_id])
-            if object_type == "Command":
-                self.__data[sensor_id] = Command(**SensorId[sensor_id])
-            if object_type == "Time":
-                self.__data[sensor_id] = Time(**SensorId[sensor_id])
-            if object_type == "SpeedPosition":
-                self.__data[sensor_id] = SpeedPosition(**SensorId[sensor_id])
-            if object_type == "LDS":
-                self.__data[sensor_id] = LDS(**SensorId[sensor_id])
-            if object_type == "Pressure":
-                self.__data[sensor_id] = Pressure(**SensorId[sensor_id])
-            if object_type == "Force":
-                self.__data[sensor_id] = Force(**SensorId[sensor_id])
-            if object_type == "IMU":
-                self.__data[sensor_id] = IMU(**SensorId[sensor_id])
-            if object_type == "WheelSpeed":
-                self.__data[sensor_id] = WheelSpeed(**SensorId[sensor_id])
-            if object_type == "CarSpeed":
-                self.__data[sensor_id] = CarSpeed(**SensorId[sensor_id])
+            # create dictionaries of Sensor objects
+            self.__data = dict()
+            for sensor_id in SensorId:
+                try:
+                    object_type = SensorId[sensor_id]["object"]
+                    param_dict = SensorId[sensor_id]
+                    param_dict["id"] = sensor_id
+                    self.generate_object(SensorId[sensor_id]["name"], object_type, param_dict)
+                except KeyError:
+                    try:
+                        i = 0
+                        while True:
+                            object_type = SensorId[sensor_id][i]["object"]
+                            param_dict = SensorId[sensor_id][i]
+                            param_dict["id"] = sensor_id
+                            self.generate_object(SensorId[sensor_id][i]["name"], object_type, param_dict)
+                            i = i + 1
+                    except KeyError:
+                        pass
 
-        # TODO: remove this stuff once SensorId list has been filled out
-        '''
-        # Internal sensors
-        self.__data['unix_time'] = Time(display_name='Unix Time', unit='Seconds', unit_short='s', is_external=False)
-        self.__data['timestamp'] = Time(display_name='Timestamp', is_external=False)
-        self.__data['time'] = Time(display_name="Time", unit='Seconds', unit_short='s', is_external=False)
-        self.__data['flag_data_collecting'] = Command(sensor_id=1, display_name="Is Data Being Collected", is_external=False)
+            '''
+            # Internal sensors
+            self.__data['unix_time'] = Time(display_name='Unix Time', unit='Seconds', unit_short='s', is_external=False)
+            self.__data['timestamp'] = Time(display_name='Timestamp', is_external=False)
+            self.__data['time'] = Time(display_name="Time", unit='Seconds', unit_short='s', is_external=False)
+            self.__data['flag_data_collecting'] = Command(id=1, display_name="Is Data Being Collected", is_external=False)
+    
+            # Derived sensors
+            self.__data['wheel_speed'] = WheelSpeed(self.__data['secondary_rpm'])
+            self.__data['car_speed'] = CarSpeed(self.__data['secondary_rpm'])
+            '''
 
-        # External sensors
-        self.__data['teensy_time'] = Time(sensor_id=100, display_name='Time Since Start', unit='Micro-seconds', unit_short='us')
-        self.__data['time_dash_ms'] = Time(sensor_id=101, display_name='Dashboard Time Since Start', unit='Miliseconds', unit_short='ms')
+            logger.info("Data object successfully initialized")
 
-        # Derived sensors
-        self.__data['wheel_speed'] = WheelSpeed(self.__data['secondary_rpm'])
-        self.__data['car_speed'] = CarSpeed(self.__data['secondary_rpm'])
-        '''
-
-        logger.info("Data object successfully initialized")
-
-    def get_most_recent_index(self):
+    def generate_object(self, sensor_name, object_type, param_dict):
         """
-        Gives the index of the last value that was collected
+        Used for generating the data object (only should be used internally)
 
-        :return:  most_recent_index The index of the most recent value that was collected
+        :param sensor_name: The key used for the data object
+        :param object_type: The type of object to generate
+        :param param_dict: The kwargs used for the object
         """
+        logger.info("Generating {} of type: {}".format(sensor_name, object_type))
+        if object_type == "Generic":
+            self.__data[sensor_name] = Generic(**param_dict)
+        if object_type == "Flag":
+            self.__data[sensor_name] = Flag(**param_dict)
+        if object_type == "Command":
+            self.__data[sensor_name] = Command(**param_dict)
+        if object_type == "Time":
+            self.__data[sensor_name] = Time(**param_dict)
+        if object_type == "Speed":
+            self.__data[sensor_name] = Speed(**param_dict)
+        if object_type == "Position":
+            self.__data[sensor_name] = Position(**param_dict)
+        if object_type == "LDS":
+            self.__data[sensor_name] = LDS(**param_dict)
+        if object_type == "Pressure":
+            self.__data[sensor_name] = Pressure(**param_dict)
+        if object_type == "Force":
+            self.__data[sensor_name] = Force(**param_dict)
+        if object_type == "Acceleration":
+            self.__data[sensor_name] = Acceleration(**param_dict)
+        if object_type == "Gyro":
+            self.__data[sensor_name] = Gyro(**param_dict)
+        if object_type == "Temperature":
+            self.__data[sensor_name] = Temperature(**param_dict)
+        if object_type == "WheelSpeed":
+            self.__data[sensor_name] = WheelSpeed(**param_dict)
+        if object_type == "CarSpeed":
+            self.__data[sensor_name] = CarSpeed(**param_dict)
 
+    def get_most_recent_index(self, sensor_name):
         with self.lock:
-            return self.__data['time'].most_recent_index
-
-    def get_value(self, sensor_id, index):
-        """
-        Safely gives the value for a sensor id at a given index (the most recent index can be retrieved with
-        get_most_recent_index).
-
-        :param sensor_id: The ID of the sensor to get data from
-        :param index: The index to retrieve the data from
-        :return: value The measured value of the sensor at that index
-        """
-
-        with self.lock:
             try:
-                return self.__data[sensor_id].get_value(index)
+                return self.__data[sensor_name].most_recent_index
             except KeyError:
-                logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
+                logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
                 return None
 
-    def get_values(self, sensor_id, index, num_values):
-        """
-        Safely gives a list of values for a sensor id at a given index (the most recent index can be retrieved with
-        get_most_recent_index). If get_values(1, 10, 5) is called, it will give 5 values of the sensor with ID 1
-        starting at position 10 (i.e. it will give the data points at positions 10, 9, 8, 7, 6).
-
-        :param sensor_id: The ID of the sensor to get data from
-        :param index: The index to retrieve the data from
-        :param num_values: The number of values to measure
-        :return: values: The list of values measured from the sensor at a given index
-        """
-
+    def get_value(self, sensor_name, index):
         with self.lock:
             try:
-                return self.__data[sensor_id].get_values(index, num_values)
+                return self.__data[sensor_name].get_value(index)
             except KeyError:
-                logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
+                logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+                return None
+
+    def get_values(self, sensor_name, index, num_values):
+        with self.lock:
+            try:
+                return self.__data[sensor_name].get_values(index, num_values)
+            except KeyError:
+                logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
                 return None
 
     def get_sensors(self, is_external=None, is_plottable=None, is_derived=None, is_connected=None):
@@ -126,129 +127,74 @@ class Data:
         logger.debug("Getting a list of sensors")
 
         sensors = list()
-        for sensor_id in self.__data.keys():
+        for sensor_name in self.__data.keys():
             sensor_fits_params = True
             if is_external is not None:
-                if self.__data[sensor_id].is_external != is_external:
+                if self.__data[sensor_name].is_external != is_external:
                     sensor_fits_params = False
             if is_plottable is not None:
-                if self.__data[sensor_id].is_plottable != is_plottable:
+                if self.__data[sensor_name].is_plottable != is_plottable:
                     sensor_fits_params = False
             if is_derived is not None:
-                if self.__data[sensor_id].is_derived != is_derived:
+                if self.__data[sensor_name].is_derived != is_derived:
                     sensor_fits_params = False
             if is_connected is not None:
-                if self.__data[sensor_id].is_connected != is_connected:
+                if self.__data[sensor_name].is_connected != is_connected:
                     sensor_fits_params = False
             if sensor_fits_params:
-                sensors.append(sensor_id)
+                sensors.append(sensor_name)
         return sensors
 
-    def get_display_name(self, sensor_id):
-        """
-        Gives the display name of a certain sensor (to be used for a graph title or whatever else).
-
-        :param sensor_id: The ID of the sensor to get the display name of
-        :return: The display name (string)
-        """
-
-        logger.debug(logger.debug("Getting the display name for {}".format(sensor_id)))
+    def get_display_name(self, sensor_name):
+        logger.debug(logger.debug("Getting the display name for {}".format(sensor_name)))
         try:
-            return self.__data[sensor_id].display_name
+            if self.__data[sensor_name].display_name is None:
+                return sensor_name
+            return self.__data[sensor_name].display_name
         except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
-    def get_unit(self, sensor_id):
-        logger.debug("Getting the unit for {}".format(sensor_id))
+    def get_unit(self, sensor_name):
+        logger.debug("Getting the unit for {}".format(sensor_name))
         try:
-            return self.__data[sensor_id].unit
+            return self.__data[sensor_name].unit
         except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
-    def get_unit_short(self, sensor_id):
-        logger.debug("Getting the unit_short for {}".format(sensor_id))
+    def get_unit_short(self, sensor_name):
+        logger.debug("Getting the unit_short for {}".format(sensor_name))
         try:
-            return self.__data[sensor_id].unit_short
+            return self.__data[sensor_name].unit_short
         except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
-    def get_is_external(self, sensor_id):
-        logger.debug("Getting if {} is external".format(sensor_id))
+    def get_is_external(self, sensor_name):
+        logger.debug("Getting if {} is external".format(sensor_name))
         try:
-            return self.__data[sensor_id].is_external
+            return self.__data[sensor_name].is_external
         except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
-    def get_is_plottable(self, sensor_id):
-        logger.debug("Getting if {} is plottable".format(sensor_id))
+    def get_is_plottable(self, sensor_name):
+        logger.debug("Getting if {} is plottable".format(sensor_name))
         try:
-            return self.__data[sensor_id].is_plottable
+            return self.__data[sensor_name].is_plottable
         except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
-    def get_is_derived(self, sensor_id):
-        logger.debug("Getting if {} is a derived sensor".format(sensor_id))
+    def get_is_derived(self, sensor_name):
+        logger.debug("Getting if {} is a derived sensor".format(sensor_name))
         try:
-            return self.__data[sensor_id].is_derived
+            return self.__data[sensor_name].is_derived
         except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
-    def get_is_connected(self, sensor_id):
-        logger.debug("Getting the connection status for {}".format(sensor_id))
+    def get_is_connected(self, sensor_name):
+        logger.debug("Getting the connection status for {}".format(sensor_name))
         try:
-            return self.__data[sensor_id].is_connected
+            return self.__data[sensor_name].is_connected
         except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
-
-    def get_id_from_sensor_name(self, sensor_name):
-        for sensor_id in self.__data.keys():
-            if self.__data[sensor_id].name is sensor_name:
-                return sensor_id
-        logger.error("get_id_from_sensor_name failed because there was no sensor with name {}".format(sensor_name))
-
-    def set_connected(self, sensor_id):
-        try:
-            if not self.__data[sensor_id].is_connected:
-                self.__data[sensor_id].is_connected = True
-                logger.info("{} has been connected".format(sensor_id))
-        except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
-
-    def set_disconnected(self, sensor_id):
-        try:
-            if self.__data[sensor_id].is_connected:
-                self.__data[sensor_id].is_connected = False
-                logger.warning("{} has been disconnected".format(sensor_id))
-        except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_id))
-
-    def add_value(self, value, sensor_id=None, sensor_name=None):
-        """
-        Adds a value to a given sensor through it's name or it's id.
-
-        Make sure to wrap this function in the lock as it is not thread-safe.
-        This function can not be locked from within because generally lots of values are added at once and it is
-        desirable to hold the lock while an entire packet is being written which has to be done from outside of this
-        function.
-
-        :param value: The value to be appended to the sensor's data
-        :param sensor_name: The name of the sensor to add the value to (only needed if no sensor_id is given)
-        :param sensor_id: The sensor_id of the sensor to add the value to (only needed if no sensor_name is given)
-        """
-
-        if sensor_id is not None and sensor_name is not None:
-            logger.warning("An ID and sensor_name were both given for sensor with ID {}. Choosing the ID".format(sensor_id))
-        if sensor_id is not None:
-            try:
-                self.__data[sensor_id].add_value(value)
-            except KeyError:
-                logger.error("No sensor found with ID {}".format(sensor_id))
-        elif sensor_name is not None:
-            for sensor_id in self.__data.keys():
-                if self.__data[sensor_id].name is sensor_name:
-                    self.__data[sensor_id].add_value(value)
-        else:
-            logger.error("add_value failed because no sensor_name or sensor_id was given")
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
 
     def reset(self):
         logger.debug("Resetting all the sensors")
@@ -256,3 +202,35 @@ class Data:
         with self.lock:
             for sensor in sensors:
                 self.__data[sensor].reset()
+
+    # ---------------------------- Below are functions to only be used by DataImport ----------------------------
+    def set_connected(self, sensor_name):
+        try:
+            if not self.__data[sensor_name].is_connected:
+                self.__data[sensor_name].is_connected = True
+                logger.info("{} has been connected".format(sensor_name))
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def set_disconnected(self, sensor_name):
+        try:
+            if self.__data[sensor_name].is_connected:
+                self.__data[sensor_name].is_connected = False
+                logger.warning("{} has been disconnected".format(sensor_name))
+        except KeyError:
+            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+
+    def add_value(self, sensor_id, value):
+        # Make sure to wrap this function in the lock as it is not thread-safe
+        try:
+            self.__data[SensorId[sensor_id]["name"]].add_value(value)
+        except KeyError:
+            try:
+                for i in range(len(value)):
+                    self.__data[SensorId[sensor_id][i]["name"]].add_value(value[i])
+            except KeyError:
+                logger.error("Key error occurred in add_value for sensor with ID: {}".format(sensor_id))
+        except Exception as e:
+            logger.error(e)
+
+

@@ -80,7 +80,6 @@ class DataCollection(DAATALayout, uiFile):
         for key in self.currentKeys:
             self.dict_sensors[key]['checkbox'] = QtWidgets.QCheckBox(self.data.get_display_name(key), self.scrollAreaWidgetContents_2, objectName=key)
             self.gridLayout_2.addWidget(self.dict_sensors[key]['checkbox'])
-            print(key)
 
         # Create a vertical spacer that forces checkboxes to the top
         spacerItem1 = QtWidgets.QSpacerItem(20, 1000000, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -305,13 +304,14 @@ class DataCollection(DAATALayout, uiFile):
         try:
             activeSensorCount = 0
             for key in self.configFile.value('enabledSensors'):
+                print(key)
                 self.dict_sensors[key]['checkbox'].setChecked(True)
                 self.dict_sensors[key]['graph_widget'].show()
                 activeSensorCount = activeSensorCount + 1
                 self.label_activeSensorCount.setText(
                     '(' + str(activeSensorCount) + '/' + str(len(self.dict_sensors)) + ')')
         except TypeError or KeyError:
-            # logger.debug("creating new config file")
+            logger.error("Possibly invalid key in config. May need to clear config file using self.configFile.clear()")
             pass
 
         self.comboBox_graphDimension.setCurrentText(self.configFile.value('graph_dimension'))

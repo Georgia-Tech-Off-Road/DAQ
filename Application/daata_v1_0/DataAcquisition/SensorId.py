@@ -2,8 +2,8 @@
 This file stores all the information needed for creating sensor objects
 
 To add a sensor, add an element to the SensorId dictionary with the 
-keyword being the id of that sensor. This shouldmatch the id that is 
-found in the SensorId.h file in the comms utility (DAQ>Libraries>Sensor). 
+keyword being the id of that sensor. This should match the id that is
+found in the SensorId.h file in the comms utility (DAQ>Libraries>Sensor).
 Then add all the required parameters for that sensor along with any 
 additional optional parameters.
 
@@ -14,6 +14,7 @@ Required parameters:
 
 Optional parameters:
     - h_file_comment (not stored within Sensor)
+    - name_multi     (required if multiple sensors are contained within the same ID)
     - is_float       (defaults to None)
     - display_name   (defaults to None)
     - unit           (defaults to None)
@@ -111,6 +112,14 @@ SensorId = {
         "num_bytes": 4
     },
     101: {
+        "name": "time_internal_seconds",
+        "object": "Time",
+        "num_bytes": 2,  # not 100% sure on this
+        "display_name": "Time",
+        "unit": "Seconds",
+        "unit_short": "s"
+    },
+    102: {
         "name": "time_dash_ms",
         "object": "Time",
         "num_bytes": 2,
@@ -119,40 +128,40 @@ SensorId = {
         "unit_short": "ms",
         "class": "dashboard"
     },
-    102: {
+    103: {
         "name": "time_dash_us",
         "object": "Time",
         "num_bytes": 4,
         "class": "dashboard"
     },
-    103: {
+    104: {
         "name": "time_auxdaq_ms",
         "object": "Time",
         "num_bytes": 2,
         "class": "aux_daq"
     },
-    104: {
+    105: {
         "name": "time_auxdaq_us",
         "object": "Time",
         "num_bytes": 4,
         "class": "aux_daq"
     },
-    105: {
+    106: {
         "name": "time_diff_ms",
         "object": "Time",
         "num_bytes": 2
     },
-    106: {
+    107: {
         "name": "time_diff_us",
         "object": "Time",
         "num_bytes": 4
     },
-    107: {
+    108: {
         "name": "time_daata_ms",
         "object": "Time",
         "num_bytes": 2
     },
-    108: {
+    109: {
         "name": "time_daata_us",
         "object": "Time",
         "num_bytes": 4
@@ -168,92 +177,146 @@ SensorId = {
     # 200 - SPEED/POSITION SENSORS
     200: {
         "name": "speed_generic",
-        "object": "SpeedPosition",
+        "object": "Speed",
         "num_bytes": 2,
-        "pulses_per_revolution": 1
+        "pulses_per_revolution": 1,
+        "display_name": "Speed"
     },
     201: {
         "name": "position_generic",
-        "object": "SpeedPosition",
+        "object": "Position",
         "num_bytes": 4,
-        "pulses_per_revolution": 1
+        "pulses_per_revolution": 1,
+        "display_name": "Position"
     },
     202: {
         "name": "speed_position_generic4",
-        "object": "SpeedPosition",
-        "num_bytes": [2, 4],
+        "num_bytes": [4, 4],
         "h_file_comment": "Speed in RPM and position in ticks (4ppr sensor)",
-        "display_name": ["Speed", "Position"],
-        "unit": ["Revolutions Per Minutes", "Ticks"],
-        "unit_short": ["RPM", "Ticks"],
-        "pulses_per_revolution": 4
+        0: {
+            "name": "speed_generic4",
+            "object": "Speed",
+            "display_name": "Speed Generic (4ppr Sensor)",
+            "pulses_per_revolution": 4
+        },
+        1: {
+            "name": "position_generic4",
+            "object": "Position",
+            "display_name": "Position Generic (4ppr Sensor)",
+            "pulses_per_revolution": 4
+        }
     },
     203: {
         "name": "speed_position_generic30",
-        "object": "SpeedPosition",
-        "num_bytes": [2, 4],
+        "num_bytes": [4, 4],
         "h_file_comment": "Speed in RPM and position in ticks (30ppr sensor)",
-        "display_name": ["Speed", "Position"],
-        "unit": ["Revolutions Per Minutes", "Ticks"],
-        "unit_short": ["RPM", "Ticks"],
-        "pulses_per_revolution": 30
+        0: {
+            "name": "speed_generic30",
+            "object": "Speed",
+            "display_name": "Speed Generic (30ppr Sensor)",
+            "pulses_per_revolution": 4
+        },
+        1: {
+            "name": "position_generic30",
+            "object": "Position",
+            "display_name": "Position Generic (30ppr Sensor)",
+            "pulses_per_revolution": 4
+        }
     },
     204: {
         "name": "speed_position_generic500",
-        "object": "SpeedPosition",
-        "num_bytes": [2, 4],
+        "num_bytes": [4, 4],
         "h_file_comment": "Speed in RPM and position in ticks (500ppr sensor)",
-        "display_name": ["Speed", "Position"],
-        "unit": ["Revolutions Per Minutes", "Ticks"],
-        "unit_short": ["RPM", "Ticks"],
-        "pulses_per_revolution": 500
+        0: {
+            "name": "speed_generic500",
+            "object": "Speed",
+            "display_name": "Speed Generic (500ppr Sensor)",
+            "pulses_per_revolution": 500
+        },
+        1: {
+            "name": "position_generic500",
+            "object": "Position",
+            "display_name": "Position Generic (500ppr Sensor)",
+            "pulses_per_revolution": 500
+        }
     },
     205: {
         "name": "speed_position_generic600",
-        "object": "SpeedPosition",
-        "num_bytes": [2, 4],
+        "num_bytes": [4, 4],
         "h_file_comment": "Speed in RPM and position in ticks (600ppr sensor)",
-        "display_name": ["Speed", "Position"],
-        "unit": ["Revolutions Per Minutes", "Ticks"],
-        "unit_short": ["RPM", "Ticks"],
-        "pulses_per_revolution": 600
+        0: {
+            "name": "speed_generic600",
+            "object": "Speed",
+            "display_name": "Speed Generic (600ppr Sensor)",
+            "pulses_per_revolution": 600
+        },
+        1: {
+            "name": "position_generic600",
+            "object": "Position",
+            "display_name": "Position Generic (600ppr Sensor)",
+            "pulses_per_revolution": 600
+        }
     },
     206: {
         "name": "speed_position_engine600",
-        "object": "SpeedPosition",
         "num_bytes": [4, 4],
         "h_file_comment": "Speed in RPM and position in ticks (600ppr sensor)",
-        "display_name": ["Engine Speed", "Engine Position"],
-        "unit": ["Revolutions Per Minutes", "Ticks"],
-        "unit_short": ["RPM", "Ticks"],
-        "pulses_per_revolution": 600,
-        "class": "dashboard"
+        0: {
+            "name": "speed_engine600",
+            "object": "Speed",
+            "display_name": "Speed Engine (600ppr Sensor)",
+            "pulses_per_revolution": 600,
+            "class": "dashboard"
+        },
+        1: {
+            "name": "position_engine600",
+            "object": "Position",
+            "display_name": "Position Engine (600ppr Sensor)",
+            "pulses_per_revolution": 600,
+            "class": "dashboard"
+        }
     },
     207: {
         "name": "speed_position_engine4",
-        "object": "SpeedPosition",
         "num_bytes": [4, 4],
         "h_file_comment": "Speed in RPM and position in ticks (4ppr sensor)",
-        "display_name": ["Engine Speed", "Engine Position"],
-        "unit": ["Revolutions Per Minutes", "Ticks"],
-        "unit_short": ["RPM", "Ticks"],
-        "pulses_per_revolution": 4,
-        "class": "dashboard"
+        0: {
+            "name": "speed_engine4",
+            "object": "Speed",
+            "display_name": "Speed",
+            "pulses_per_revolution": 4,
+            "class": "dashboard"
+        },
+        1: {
+            "name": "position_engine4",
+            "object": "Position",
+            "display_name": "Position",
+            "pulses_per_revolution": 4,
+            "class": "dashboard"
+        }
     },
     208: {
         "name": "speed_position_secondary30",
-        "object": "SpeedPosition",
         "num_bytes": [4, 4],
         "h_file_comment": "Speed in RPM and position in ticks (30ppr on gear)",
-        "display_name": ["Secondary Speed", "Secondary Position"],
-        "unit": ["Revolutions Per Minutes", "Ticks"],
-        "unit_short": ["RPM", "Ticks"],
-        "pulses_per_revolution": 30,
-        "class": "dashboard"
+        0: {
+            "name": "speed_secondary30",
+            "object": "Speed",
+            "display_name": "Speed",
+            "pulses_per_revolution": 30,
+            "class": "dashboard"
+        },
+        1: {
+            "name": "position_secondary30",
+            "object": "Position",
+            "display_name": "Position",
+            "pulses_per_revolution": 30,
+            "class": "dashboard"
+        }
     },
     209: {
         "name": "speed_engine600_rpm",
-        "object": "SpeedPosition",
+        "object": "Speed",
         "num_bytes": 2,
         "h_file_comment": "Speed in RPM (600ppr sensor)",
         "display_name": "Engine Speed",
@@ -264,7 +327,7 @@ SensorId = {
     },
     210: {
         "name": "speed_engine4_rpm",
-        "object": "SpeedPosition",
+        "object": "Speed",
         "num_bytes": 2,
         "h_file_comment": "Speed in RPM (4ppr sensor)",
         "display_name": "Engine Speed",
@@ -275,7 +338,7 @@ SensorId = {
     },
     211: {
         "name": "speed_secondary30_rpm",
-        "object": "SpeedPosition",
+        "object": "Speed",
         "num_bytes": 2,
         "h_file_comment": "Speed in RPM (30ppr sensor)",
         "display_name": "Engine Speed",
@@ -286,7 +349,7 @@ SensorId = {
     },
     212: {
         "name": "speed_dynoengine600_rpm",
-        "object": "SpeedPosition",
+        "object": "Speed",
         "num_bytes": 2,
         "h_file_comment": "Speed in RPM (600ppr sensor)",
         "display_name": "Engine Speed",
@@ -297,7 +360,7 @@ SensorId = {
     },
     213: {
         "name": "speed_dynosecondary30_rpm",
-        "object": "SpeedPosition",
+        "object": "Speed",
         "num_bytes": 2,
         "h_file_comment": "Speed in RPM (30ppr sensor)",
         "display_name": "Engine Speed",
@@ -392,10 +455,50 @@ SensorId = {
     # 500 - IMU SENSORS
     500: {
         "name": "imu_sensor",
-        "object": "IMU",
         "num_bytes": [4, 4, 4, 4, 4, 4, 4],
         "is_float": [True, True, True, True, True, True, True],
         "h_file_comment": "Accel X, Y, Z; Gyro X, Y, Z; Temp",
-        "class": "aux_daq"
+        0: {
+            "name": "imu_acceleration_x",
+            "object": "Acceleration",
+            "display_name": "IMU X Acceleration",
+            "class": "aux_daq"
+        },
+        1: {
+            "name": "imu_acceleration_y",
+            "object": "Acceleration",
+            "display_name": "IMU Y Acceleration",
+            "class": "aux_daq"
+        },
+        2: {
+            "name": "imu_acceleration_z",
+            "object": "Acceleration",
+            "display_name": "IMU Z Acceleration",
+            "class": "aux_daq"
+        },
+        3: {
+            "name": "imu_gyro_x",
+            "object": "Gyro",
+            "display_name": "IMU X Gyro",
+            "class": "aux_daq"
+        },
+        4: {
+            "name": "imu_gyro_y",
+            "object": "Gyro",
+            "display_name": "IMU Y Gyro",
+            "class": "aux_daq"
+        },
+        5: {
+            "name": "imu_gyro_z",
+            "object": "Gyro",
+            "display_name": "IMU Z Gyro",
+            "class": "aux_daq"
+        },
+        6: {
+            "name": "imu_temperature",
+            "object": "Temperature",
+            "display_name": "IMU Temperature",
+            "class": "aux_daq"
+        }
     }
 }

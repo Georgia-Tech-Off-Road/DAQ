@@ -21,9 +21,12 @@ class Sensor(metaclass=ABCMeta):
         self.is_connected = False
         self.is_float = kwargs.get('is_float')
 
-    @abstractmethod
     def add_value(self, value):
-        raise NotImplementedError
+        try:
+            self.values.append(value)
+            self.most_recent_index = len(self.values) - 1
+        except Exception as e:
+            logger.error(e)
 
     def get_value(self, index):
         try:
@@ -57,25 +60,11 @@ class Generic(Sensor):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def add_value(self, value):
-        try:
-            self.values.append(value)
-            self.most_recent_index = len(self.values) - 1
-        except Exception as e:
-            logger.error(e)
-
 
 class Flag(Sensor):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.is_plottable = False
-
-    def add_value(self, value):
-        try:
-            self.values.append(value)
-            self.most_recent_index = len(self.values) - 1
-        except Exception as e:
-            logger.error(e)
 
 
 class Command(Sensor):
@@ -83,43 +72,27 @@ class Command(Sensor):
         super().__init__(**kwargs)
         self.is_plottable = False
 
-    def add_value(self, value):
-        try:
-            self.values.append(value)
-            self.most_recent_index = len(self.values) - 1
-        except Exception as e:
-            logger.error(e)
-
 
 class Time(Sensor):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.is_plottable = False
 
-    def add_value(self, value):
-        try:
-            self.is_connected = True
-            self.values.append(value)
-            self.most_recent_index = len(self.values) - 1
-        except Exception as e:
-            logger.error(e)
 
-
-class SpeedPosition(Sensor):
+class Speed(Sensor):
     def __init__(self, pulses_per_revolution, **kwargs):
         super().__init__(**kwargs)
         self.ppr = pulses_per_revolution
         self.unit = kwargs.get('unit', "Revolutions Per Minute")
         self.unit_short = kwargs.get('unit_short', "RPM")
 
-    def add_value(self, value):
-        try:
-            # TODO: Implement a transfer function for conversion to RPM
-            self.is_connected = True
-            self.values.append(value)
-            self.most_recent_index = len(self.values) - 1
-        except Exception as e:
-            logger.error(e)
+
+class Position(Sensor):
+    def __init__(self, pulses_per_revolution, **kwargs):
+        super().__init__(**kwargs)
+        self.ppr = pulses_per_revolution
+        self.unit = kwargs.get('unit', "Ticks")
+        self.unit_short = kwargs.get('unit_short', "ticks")
 
 
 class Pressure(Sensor):
@@ -128,28 +101,12 @@ class Pressure(Sensor):
         self.unit = kwargs.get('unit', "Pounds Per Square Inch")
         self.unit_short = kwargs.get('unit_short', "PSI")
 
-    def add_value(self, value):
-        try:
-            self.is_connected = True
-            self.values.append(value)
-            self.most_recent_index = len(self.values) - 1
-        except Exception as e:
-            logger.error(e)
-
 
 class Force(Sensor):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.unit = kwargs.get('unit', "Pounds")
         self.unit_short = kwargs.get('unit_short', "lbs")
-
-    def add_value(self, value):
-        try:
-            self.is_connected = True
-            self.values.append(value)
-            self.most_recent_index = len(self.values) - 1
-        except Exception as e:
-            logger.error(e)
 
 
 class LDS(Sensor):
@@ -159,26 +116,23 @@ class LDS(Sensor):
         self.unit = kwargs.get('unit', "Millimeters")
         self.unit_short = kwargs.get('unit_short', "mm")
 
-    def add_value(self, value):
-        try:
-            # TODO: Implement a transfer function for conversion to from raw data to mm
-            self.is_connected = True
-            self.values.append(value)
-            self.most_recent_index = len(self.values) - 1
-        except Exception as e:
-            logger.error(e)
 
-
-class IMU(Sensor):
+class Acceleration(Sensor):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.unit = kwargs.get('unit', "Acceleration")
+        self.unit = kwargs.get('unit', "Meters per Second Squared")
         self.unit_short = kwargs.get('unit_short', "m/s^2")
 
-    def add_value(self, value):
-        try:
-            self.is_connected = True
-            self.values.append(value)
-            self.most_recent_index = len(self.values) - 1
-        except Exception as e:
-            logger.error(e)
+
+class Gyro(Sensor):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.unit = kwargs.get('unit', "Degrees per Second")
+        self.unit_short = kwargs.get('unit_short', "°/s")
+
+
+class Temperature(Sensor):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.unit = kwargs.get('unit', "Degrees Farenheit")
+        self.unit_short = kwargs.get('unit_short', "°F")
