@@ -1,11 +1,12 @@
 #include <UARTComms.h>
 #include <Sensor.h>
+#include <SpeedSensor.h>
 
 #define LED 13
 
 UARTComms uart(115200, Serial);
 TimeSensor t(MICROS);
-HallEffectSpeedSensor he_speed(5, 600);
+SpeedSensor he_speed(600, 5);
 
 uint32_t prev_time = micros();
 bool led_state = 0;
@@ -14,7 +15,7 @@ void setup() {
   // put your setup code here, to run once:
   uart.begin();
   uart.attach_output_sensor(t, TIME_GENERIC);
-  //uart.attach_output_sensor(he_speed, SPEED_GENERIC);
+  uart.attach_output_sensor(he_speed, SPEED_GENERIC);
 
   pinMode(LED, OUTPUT);
 }
