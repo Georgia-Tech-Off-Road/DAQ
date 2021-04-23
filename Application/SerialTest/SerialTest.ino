@@ -15,7 +15,7 @@ void setup() {
   // put your setup code here, to run once:
   uart.begin();
   uart.attach_output_sensor(t, TIME_GENERIC);
-  uart.attach_output_sensor(he_speed, SPEED_POSITION_GENERIC_600);
+  uart.attach_output_sensor(he_speed, SPEED_POSITION_GENERIC600);
 
   pinMode(LED, OUTPUT);
 }

@@ -32,7 +32,7 @@ class Sensor(metaclass=ABCMeta):
         try:
             return self.values[index]
         except IndexError:
-            logger.error("Index out of range, use get_most_recent_index to ensure that the index exists")
+            logger.error("Index: {} out of range, use get_most_recent_index to ensure that the index exists".format(index))
             return None
 
     def get_values(self, index, num_values):
@@ -44,7 +44,7 @@ class Sensor(metaclass=ABCMeta):
                 logger.debug("Tried to get more values than are contained, returning all values")
                 return self.values[0:index]
         except IndexError:
-            logger.error("Index out of range, use get_most_recent_index to ensure that the index exists")
+            logger.error("Index: {} out of range, use get_most_recent_index to ensure that the index exists".format(index))
             return None
 
     def reset(self):

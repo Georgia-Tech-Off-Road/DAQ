@@ -116,9 +116,10 @@ class CustomPlotWidget(QtWidgets.QWidget, uiPlotWidget):
         self.setMaximumSize(QtCore.QSize(16777215, height))
 
     def update_graph(self):
-        index = data.get_most_recent_index()
-        self.valueArray = data.get_values(self.sensor_name, index, self.graph_width)
-        self.timeArray = data.get_values("time", index, self.graph_width)
+        index_time = data.get_most_recent_index()
+        index_sensor = data.get_most_recent_index(sensor_name=self.sensor_name)
+        self.valueArray = data.get_values(self.sensor_name, index_sensor, self.graph_width)
+        self.timeArray = data.get_values("time_internal_seconds", index_time, self.graph_width)
         self.plot.setData(self.timeArray, self.valueArray)
 
     def open_SettingsWindow(self):

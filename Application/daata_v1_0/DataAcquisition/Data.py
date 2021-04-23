@@ -87,7 +87,7 @@ class Data:
         if object_type == "CarSpeed":
             self.__data[sensor_name] = CarSpeed(**param_dict)
 
-    def get_most_recent_index(self, sensor_name):
+    def get_most_recent_index(self, sensor_name="time_internal_seconds"):
         with self.lock:
             try:
                 return self.__data[sensor_name].most_recent_index
@@ -204,21 +204,35 @@ class Data:
                 self.__data[sensor].reset()
 
     # ---------------------------- Below are functions to only be used by DataImport ----------------------------
-    def set_connected(self, sensor_name):
+    def set_connected(self, sensor_id):
         try:
-            if not self.__data[sensor_name].is_connected:
-                self.__data[sensor_name].is_connected = True
-                logger.info("{} has been connected".format(sensor_name))
+            self.__data[SensorId[sensor_id]["name"]].is_connected = True
+            logger.info("{} has been connected".format(SensorId[sensor_id]["name"]))
         except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+            try:
+                for key in SensorId[sensor_id]:
+                    if isinstance(key, int):
+                        self.__data[SensorId[sensor_id][key]["name"]].is_connected = True
+                        logger.info("{} has been connected".format(SensorId[sensor_id][key]["name"]))
+            except KeyError:
+                logger.error("Key error occurred in add_value for sensor with ID: {}".format(sensor_id))
+        except Exception as e:
+            logger.error(e)
 
-    def set_disconnected(self, sensor_name):
+    def set_disconnected(self, sensor_id):
         try:
-            if self.__data[sensor_name].is_connected:
-                self.__data[sensor_name].is_connected = False
-                logger.warning("{} has been disconnected".format(sensor_name))
+            self.__data[SensorId[sensor_id]["name"]].is_connected = False
+            logger.info("{} has been disconnected".format(SensorId[sensor_id]["name"]))
         except KeyError:
-            logger.error("The sensor {} does not exist, check your spelling".format(sensor_name))
+            try:
+                for key in SensorId[sensor_id]:
+                    if isinstance(key, dict):
+                        self.__data[SensorId[sensor_id][key]["name"]].is_connected = False
+                        logger.info("{} has been disconnected".format(SensorId[sensor_id][key]["name"]))
+            except KeyError:
+                logger.error("Key error occurred in add_value for sensor with ID: {}".format(sensor_id))
+        except Exception as e:
+            logger.error(e)
 
     def add_value(self, sensor_id, value):
         # Make sure to wrap this function in the lock as it is not thread-safe

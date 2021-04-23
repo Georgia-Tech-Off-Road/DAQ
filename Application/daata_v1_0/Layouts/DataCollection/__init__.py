@@ -55,6 +55,7 @@ class DataCollection(DAATALayout, uiFile):
 
         self.connect_slotsAndSignals()
         self.configFile = QSettings('DAATA', 'data_collection')
+        #self.configFile.clear()
         self.load_settings()
 
 
@@ -230,7 +231,7 @@ class DataCollection(DAATALayout, uiFile):
 
     def updateTimeElapsed(self):
         try:
-            secondsElapsed = DataAcquisition.data.get_value("time", DataAcquisition.data.get_most_recent_index())
+            secondsElapsed = DataAcquisition.data.get_value("time_internal_seconds", DataAcquisition.data.get_most_recent_index())
             secondsElapsedInt = int(secondsElapsed)
             hoursElapsed = int(secondsElapsedInt / 3600)
             minutesElapsed = int((secondsElapsedInt - hoursElapsed * 3600) / 60)

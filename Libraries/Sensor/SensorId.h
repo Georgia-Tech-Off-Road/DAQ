@@ -91,7 +91,7 @@ enum sensor_id_t : uint16_t
 	IMU_SENSOR                   = 500,	//NumBytes: [4, 4, 4, 4, 4, 4, 4] - Accel X, Y, Z; Gyro X, Y, Z; Temp
 
 
-    MAX_SENSOR_NUM = 65536
+    MAX_SENSOR_NUM = 65535
 };
 
 #endif

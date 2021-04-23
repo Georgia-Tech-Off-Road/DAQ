@@ -1,6 +1,7 @@
 import time
 import threading
 import logging
+from datetime import datetime
 from DataAcquisition.Data import Data
 from DataAcquisition.DataImport import DataImport
 
@@ -19,8 +20,16 @@ def collect_data():
     from MainWindow import is_data_collecting
     data_import = DataImport(data, data_collection_lock, is_data_collecting, use_fake_inputs)
     logger.info("Running collect_data")
+    updateCntr = 0
+    startTime = datetime.now()
     while True:
-        data_import.check_connected()
+        # if is_data_collecting.is_set():
+        data_import.update()
+        # updateCntr += 1
+        # print(updateCntr)
+        # print((datetime.now() - startTime).total_seconds())
+        # data_import.check_connected()
+        """
         time.sleep(.1)
         if is_data_collecting.is_set():
             data.reset()
@@ -28,3 +37,4 @@ def collect_data():
             while is_data_collecting.is_set():
                 data_import.update()
                 time.sleep(.0001)
+        """

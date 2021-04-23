@@ -32,7 +32,7 @@ enum sensor_id_t : uint16_t
 """
 file_end = """
 
-    MAX_SENSOR_NUM = 65536
+    MAX_SENSOR_NUM = 65535
 };
 
 #endif
