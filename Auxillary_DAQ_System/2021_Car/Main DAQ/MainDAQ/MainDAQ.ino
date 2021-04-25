@@ -2,6 +2,10 @@
 #include "MainDAQ.h"
 #include <Sensor.h>
 
+
+unsigned __exidx_start;
+unsigned __exidx_end;
+
 SDWrite sd(BUILTIN_SDCARD);
 
 TimeSensor timeSensor (MICROS);
@@ -70,35 +74,35 @@ void loop() {
     serial_time = t;
   }
 }
-
-/*************************************************************************/
-// “main.ino”
-
-#include <Sensor.h>
-#include <UARTComms.h>
-
-// Create UARTComms object for communication over Serial1 (RX1/TX1)
-UARTComms uart1(Serial1);
-// Create an LDS sensor
-LinearDisplacementSensor lds(1);
-// Create two HE speed sensors
-HallEffectSpeedSensor engine_rpm(6, 200);
-HallEffectSpeedSensor secondary_rpm;
-
-void setup(){
-	uart1.begin();
-	// Attach lds and engine_rpm as output sensors
-	uart1.attach_output_sensor(lds, LDS_TEST1);
-	uart1.attach_output_sensor(engine_rpm, ENGINE_RPM);
-	// secondary_rpm will be received over UART.
-	// Note: it can still be used in code exactly the same as engine_rpm
-	uart1.attach_input_sensor (secondary_rpm, SECONDARY_RPM);
-	// Setup the pins for the two recorded sensors
-	lds.begin();
-	engine_rpm.begin();
-}
-
-void loop() {
-	uart1.update();
-}
-/*************************************************************************/
+//
+///*************************************************************************/
+//// “main.ino”
+//
+//#include <Sensor.h>
+//#include <UARTComms.h>
+//
+//// Create UARTComms object for communication over Serial1 (RX1/TX1)
+//UARTComms uart1(Serial1);
+//// Create an LDS sensor
+//LinearDisplacementSensor lds(1);
+//// Create two HE speed sensors
+//HallEffectSpeedSensor engine_rpm(6, 200);
+//HallEffectSpeedSensor secondary_rpm;
+//
+//void setup(){
+//	uart1.begin();
+//	// Attach lds and engine_rpm as output sensors
+//	uart1.attach_output_sensor(lds, LDS_TEST1);
+//	uart1.attach_output_sensor(engine_rpm, ENGINE_RPM);
+//	// secondary_rpm will be received over UART.
+//	// Note: it can still be used in code exactly the same as engine_rpm
+//	uart1.attach_input_sensor (secondary_rpm, SECONDARY_RPM);
+//	// Setup the pins for the two recorded sensors
+//	lds.begin();
+//	engine_rpm.begin();
+//}
+//
+//void loop() {
+//	uart1.update();
+//}
+///*************************************************************************/
