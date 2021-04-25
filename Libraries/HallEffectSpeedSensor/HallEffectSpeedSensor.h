@@ -62,11 +62,27 @@ public:
     const uint32_t& get_data(){ return get_rpm(); }
     void pack (byte *pack){
         *((uint32_t*)pack) = get_rpm();
-        *((uint32_t*)(pack + 3)) = get_pos();
+        *((uint32_t*)(pack + 4)) = get_pos();
+
+
+uint32_t rpm --> [________]
+uint32_t pos --> [________]
+byte[8]  --> [__][__][__][__][__][__][__][__]
+             [__  __  __  __][__  __  __  __]
+
+pack[0] = rpm;
+pack[1] = rpm >> 8;
+pack[2] = rpm >> 16;
+pack[3] = rpm >> 24;
+pack[4] = pos;
+pack[5] = pos >> 8;
+pack[6] = pos >> 16;
+pack[7] = pos >> 24;
+
     }
     void unpack (const byte *pack){
         _data = *((uint32_t*)pack);
-        _current_tick = *((uint32_t*)(pack+3));
+        _current_tick = *((uint32_t*)(pack + 4));
     }
 
 

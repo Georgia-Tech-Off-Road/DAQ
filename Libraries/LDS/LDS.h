@@ -56,7 +56,8 @@ public:
      * Returns the raw analog reading of the LDS sensor
      */
     uint8_t getRawAnalog(){
-        return analogRead(_inputPin);
+        if(_type == ACTIVE) return analogRead(_inputPin);
+        else return 255;
     }
 
     const uint8_t& get_data(){

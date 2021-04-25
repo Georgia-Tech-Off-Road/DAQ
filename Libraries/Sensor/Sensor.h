@@ -1,6 +1,45 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
+#include <inttypes.h>
+
+
+class ExampleClass {
+private:
+    uint8_t mem1;
+    uint16_t mem2;
+
+public:
+    virtual uint8_t get_mem1() = 0;
+}
+
+
+class Extended : public ExampleClass {
+public:
+    uint8_t get_mem1() {
+        return mem1;
+    }
+    void bruh() {
+
+    }
+};
+
+int t = 0;
+0x0014 -> [________7]
+int y = 5;
+0x0018 -> [________5]
+
+int* p = &t;
+0x001c -> [_______14]
+
+*p = 7;
+
+Extended ext;
+0x00d4 -->
+Extended* point = &ext;
+0x00f0 --> [0x00d4]
+ExampleClass* ex = &ext;
+
 #include <vector>
 #include "./SensorId.h"
 
@@ -31,6 +70,7 @@ public:
     virtual void pack   (byte *pack) = 0;
     virtual void unpack (const byte *pack) = 0;
 };
+
 
 template <class DataType>
 class Sensor : public BaseSensor {
