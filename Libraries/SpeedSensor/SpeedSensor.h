@@ -49,8 +49,8 @@
 
 // Will average data points over a a certain amount of time (or all the data
 // point, whichever is lesser). Will average over a minimum of two data points
-#define NUM_MEASUREMENTS 50
-#define TIME_AVERAGING 10000 //microseconds
+#define NUM_MEASUREMENTS 100
+#define TIME_AVERAGING 100000 //microseconds
 
 
 

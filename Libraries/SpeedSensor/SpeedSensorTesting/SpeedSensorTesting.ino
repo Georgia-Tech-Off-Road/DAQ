@@ -1,6 +1,6 @@
 #include <SpeedSensor.h>
 
-SpeedSensor he_sensor_1(600, 5);
+SpeedSensor he_sensor_1(600, 5, 255);
 
 uint32_t temp = 0;
 bool led_on = 0;
@@ -19,9 +19,9 @@ void loop() {
     led_on = !led_on;
     temp = t;
     digitalWrite(13, led_on);
-    Serial.print(he_sensor_1.get_speed());
-    Serial.print("\t");
-    Serial.println(he_sensor_1.get_position());
+    Serial.println(he_sensor_1.get_speed());
+    //Serial.print("\t");
+    //Serial.println(he_sensor_1.get_position());
   }
   
 }
