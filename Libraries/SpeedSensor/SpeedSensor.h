@@ -47,7 +47,10 @@
 #define ENCODER_ARGLIST_SIZE 0
 #endif
 
-#define NUM_MEASUREMENTS 20
+// Will average data points over a a certain amount of time (or all the data
+// point, whichever is lesser). Will average over a minimum of two data points
+#define NUM_MEASUREMENTS 50
+#define TIME_AVERAGING 10000 //microseconds
 
 
 
@@ -75,9 +78,7 @@ class SpeedSensor : public Sensor<speed_sensor_data_t>
 {
 public:
     // Set pin2 to 255 if it is not used
-	SpeedSensor(uint16_t ppr, uint8_t pin1, uint8_t pin2 = 255, uint8_t mode = CHANGE) {
-        if (mode == RISING) {_mode = RISING;}
-        else {_mode = CHANGE;}
+	SpeedSensor(uint16_t ppr, uint8_t pin1, uint8_t pin2 = 255) {
         _ppr = ppr;
         _pack_bytes = 6;
 
@@ -104,10 +105,8 @@ public:
             _encoder.pin2_bitmask = 255;
         }
 		_encoder.state = s;
-        attach_interrupt(pin1, &_encoder, _mode);
-        if (pin2 != 255) attach_interrupt(pin2, &_encoder, _mode);
-
-
+        attach_interrupt(pin1, &_encoder, CHANGE);
+        if (pin2 != 255) attach_interrupt(pin2, &_encoder, CHANGE);
 	}
 
     inline int32_t get_position() {
@@ -144,14 +143,19 @@ public:
         }
         curr_time_delta = micros() - _encoder.times[_encoder.time_pos];
 
-
         uint32_t sum = 0;
+        uint8_t i = 0;
         // average the numbers summed
-        for (uint8_t i = 0; i < NUM_MEASUREMENTS - 1; i++) {
+        while ((i < NUM_MEASUREMENTS && sum < TIME_AVERAGING) || i < 2){
             sum += time_deltas[i];
+            i++;
         }
-        uint32_t avg_delta = sum/(NUM_MEASUREMENTS - 1);
-        rpm = 60*1000*1000/avg_delta/_ppr;
+        // If measurement hasn't been taken in a while, assume it is slowing down
+        if (curr_time_delta > time_deltas[0] && curr_time_delta > time_deltas[1]){
+            rpm = 60*1000*1000/(curr_time_delta)/_ppr;
+        } else {
+            rpm = 60*1000*1000/(sum/i)/_ppr;
+        }
 
         interrupts();
         return rpm;
@@ -176,7 +180,6 @@ public:
 
 private:
 	Encoder_internal_state_t _encoder;
-    uint8_t _mode;
     uint16_t _ppr;
 
 public:
