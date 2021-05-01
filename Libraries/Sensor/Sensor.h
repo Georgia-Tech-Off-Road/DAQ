@@ -96,5 +96,6 @@ public:
 #include "../TimeSensor/TimeSensor.h"
 #include "../BrakePressureTransducer/BrakePressureTransducer.h"
 #include "../SpeedSensor/SpeedSensor.h"
+#include "../Differential_Controller/Differential_Controller.h"
 
 #endif

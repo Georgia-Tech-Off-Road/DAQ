@@ -265,19 +265,19 @@ void Differential_Controller::rotate_R() {
     digitalWrite(_pin_motorNeg, HIGH);
 }
 
-const uint8_t& Differential_Controller::get_data(){
+const uint8_t& Sensor::get_data(){
     if(_type == ACTIVE){
         _data = get_currState();
     }
     return _data;
 }
 
-void Differential_Controller::pack(byte* pack){
+void Sensor::pack(byte* pack){
     get_data();
     *((uint8_t*) pack) = _data;       
 }
 
-void Differential_Controller::unpack(const byte* pack){
+void Sensor::unpack(const byte* pack){
     _data = *((uint8_t*) pack);
 }
 
