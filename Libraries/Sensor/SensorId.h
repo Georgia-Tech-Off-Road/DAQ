@@ -21,6 +21,7 @@ enum sensor_id_t : uint16_t
 	DEFAULT_NO_SENSOR            = 0,	//NumBytes: 0
 	FLAG_DATACOLLECTING          = 1,	//NumBytes: 1
 	COMMAND_SDCARDFILENAMESTRING = 2,	//NumBytes: 12
+	GENERIC_DIFFPOSITION_READ    = 3,	//NumBytes: 1
 	TEST_SENSOR_0                = 90,	//NumBytes: 4
 	TEST_SENSOR_1                = 91,	//NumBytes: 4
 	TEST_SENSOR_2                = 92,	//NumBytes: 4

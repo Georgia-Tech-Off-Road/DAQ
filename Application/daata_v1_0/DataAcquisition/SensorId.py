@@ -52,6 +52,11 @@ SensorId = {
         "object": "Command",
         "num_bytes": 12
     },
+    3: {
+        "name": "generic_diffposition_read",
+        "object": "Generic",
+        "num_bytes": 1
+    },
     90: {
         "name": "test_sensor_0",
         "object": "Generic",

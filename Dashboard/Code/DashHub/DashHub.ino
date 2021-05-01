@@ -12,21 +12,26 @@ unsigned __exidx_end;
 
 // TIRE RADIUS IN INCHES
 #define TIRE_RADIUS 22
+#define GEARBOX_RATIO 1
+
+// --- Only have one uncommented at a time ---
+#define RUN
 //#define CALIBRATE
+//#define TEST
 
 Adafruit_TLC5947 l_driver(1, 3, 2, 4);
 Adafruit_TLC5947 r_driver(1, 12, 11, 10);
 Adafruit_TLC5947 h_driver(1, 13, 14, 15);
 ServoControl l_servo(5, 270);
-ServoControl r_servo(9, 270);
+ServoControl r_servo(19, 270);
 DashDial l_dash(l_driver, l_servo, 0, 400, 0, 500, 10, 265);
 DashDial r_dash(r_driver, r_servo, 0, 4000, 0, 500, 10, 265);
 
 SevenSegment h_seg(h_driver);
 
-SpeedSensor engine_rpm_1 (22, 20);
-SpeedSensor engine_rpm_2 (1, 6);
-SpeedSensor secondary_rpm(20, 23);
+SpeedSensor engine_rpm_1 (22, 20, 255);
+SpeedSensor engine_rpm_2 (1, 6, 255);
+SpeedSensor secondary_rpm(20, 23, 255);
 
 void setup(){
     Serial.begin(2000000);
@@ -39,13 +44,13 @@ void setup(){
 }
 
 void loop(){
-    #ifndef CALIBRATE
+    #ifdef RUN
     static uint32_t prev_change = 0;
     static uint32_t prev_update = 0;
     static int16_t var = 0;
     uint32_t t = micros();
-    if((t - prev_change) >= 1000){
-      float in_per_min = secondary_rpm.get_data().speed * 2 * 3.1415 * TIRE_RADIUS;
+    if(abs(t - prev_change) >= 1000){
+      float in_per_min = secondary_rpm.get_data().speed * 2 * 3.1415 * TIRE_RADIUS / GEARBOX_RATIO;
       float mph = (in_per_min * 60.0) / (12.0 * 5280.0);
       uint16_t mph_10 = (uint16_t) (mph * 10);
       
@@ -56,7 +61,7 @@ void loop(){
       h_seg.set_dp(1,1);
       prev_change = t;
     }
-    if((t - prev_update) >= 10000){
+    if(abs(t - prev_update) >= 10000){
       l_dash.update();
       r_dash.update();
       h_seg.update();
@@ -71,7 +76,35 @@ void loop(){
 //engine_rpm_2.get_rpm();
 //secondary_rpm.get_rpm();
     }
-    #else
+    #endif
+    #ifdef TEST
+    static uint32_t prev_update = 0;
+    static uint32_t delay_update = 0;
+    static uint16_t delay_state = 0;
+    if(abs(micros() - prev_update) >= 10000){
+      l_dash.update();
+      r_dash.update();
+      h_seg.update();
+      prev_update = micros();
+    }
+    if(abs(micros() - delay_update) >= 20000){
+      if(delay_state > 400){
+        delayMicroseconds(2000000);
+        delay_state = 0;
+      }
+      else if (delay_state == 1){
+        delayMicroseconds(2000000);
+      }
+      if (delay_state <= 400){
+        l_dash.set(delay_state);
+        r_dash.set(delay_state*10);
+        h_seg.set_number(delay_state);
+        delay_state++;
+      }
+      delay_update = micros();
+    }
+    #endif
+    #ifdef CALIBRATE
     l_dash.calibrate_servo(3);
     r_dash.calibrate_servo(3);
     #endif
