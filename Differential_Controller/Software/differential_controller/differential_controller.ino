@@ -27,7 +27,9 @@ UARTComms dashboard_comms(115200, Serial2);
 
 void setup() {
     dashboard_comms.begin();
-    dashboard_comms.attach_output_sensor(diff_controller, GENERIC_DIFFPOSITION_READ);
+    dashboard_comms.attach_output_sensor(
+        diff_controller.get_diff_state_sensor(), 
+        GENERIC_DIFFPOSITION_READ);
     Serial.begin(9600);
     diff_controller.begin();
     pinMode(13, OUTPUT);

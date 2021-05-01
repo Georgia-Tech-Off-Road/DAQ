@@ -81,13 +81,38 @@ public:
         _pack_bytes = pack_bytes;
         _data.resize(pack_bytes);
     }
-    void pack   (byte *pack){
+    void pack   (byte* pack){
         memcpy(pack, _data.data(), _pack_bytes);
     }
-    void unpack (const byte *pack){
+    void unpack (const byte* pack){
         memcpy(_data.data(), pack, _pack_bytes);
     }
     const std::vector<byte>& get_data(){
+        return _data;
+    }
+};
+
+
+// Sending states.
+// Default (initial) state will be 0
+class StateSensor : public Sensor<uint8_t> {
+public:
+    StateSensor(){
+        _pack_bytes = 1;
+    }
+    void pack(byte* pack){
+        *((uint8_t*)pack) = _data;
+    }
+    void unpack (const byte* pack){
+        _data = *((uint8_t*)pack);
+    }
+    void set_state(uint8_t state){
+        _data = state;
+    }
+    uint8_t get_state(){
+        return get_data();
+    }
+    const uint8_t& get_data(){
         return _data;
     }
 };
@@ -96,6 +121,5 @@ public:
 #include "../TimeSensor/TimeSensor.h"
 #include "../BrakePressureTransducer/BrakePressureTransducer.h"
 #include "../SpeedSensor/SpeedSensor.h"
-#include "../Differential_Controller/Differential_Controller.h"
 
 #endif

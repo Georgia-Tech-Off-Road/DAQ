@@ -27,10 +27,9 @@
 #define CONTROLMODE_SERIAL 1
 
 
-class Differential_Controller : public Sensor<uint8_t> {
+class Differential_Controller {
     public:   
         Differential_Controller(uint8_t pin_diff1, uint8_t pin_diff2, uint8_t pin_diff3, uint8_t pin_diff4, uint8_t pin_diff5, uint8_t pin_diff6, uint8_t pin_motorPos, uint8_t pin_motorNeg, uint8_t pin_switchLeft, uint8_t pin_switchRight);
-        Differential_Controller();
         void begin();
         void update();
         void rotateToState(uint8_t desired_state);
@@ -39,9 +38,7 @@ class Differential_Controller : public Sensor<uint8_t> {
         void rotate_stop();
         void rotate_F();
         void rotate_R();
-        const uint8_t& get_data();
-        void pack(byte* pack);
-        void unpack(const byte* pack);
+        BaseSensor& get_diff_state_sensor();
 
 
     private:
@@ -64,6 +61,8 @@ class Differential_Controller : public Sensor<uint8_t> {
         bool _changingDiffType;
 
         uint8_t _controlMode = CONTROLMODE_SWITCH;
+
+        StateSensor _diff_state;
             
 };
 

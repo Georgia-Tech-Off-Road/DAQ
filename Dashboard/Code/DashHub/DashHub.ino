@@ -22,7 +22,7 @@ unsigned __exidx_end;
 #define DIFF_READ
 
 UARTComms diff_comms(115200, Serial2);
-Differential_Controller diff_controller();
+StateSensor diff_state;
 
 Adafruit_TLC5947 l_driver(1, 3, 2, 4);
 Adafruit_TLC5947 r_driver(1, 12, 11, 10);
@@ -40,7 +40,7 @@ SpeedSensor secondary_rpm(20, 23, 255);
 
 void setup(){
     diff_comms.begin();
-    diff_comms.attach_input_sensor(diff_controller, GENERIC_DIFFPOSITION_READ);
+    diff_comms.attach_input_sensor(diff_state, GENERIC_DIFFPOSITION_READ);
     Serial.begin(2000000);
     l_dash.begin();
     r_dash.begin();
@@ -54,9 +54,11 @@ void loop(){
     #ifdef DIFF_READ
     diff_comms.update();
     static uint32_t diff_update = 0;
-    if(abs(micros() - diff_update) > 100000){
+    uint32_t t = micros();
+    if(abs(t - diff_update) > 10000){
+        h_seg.set_number(diff_state.get_state());
         h_seg.update();
-        h_seg.set_number(diff_controller.get_data());
+        diff_update = t;
     }
     #endif
     #ifdef RUN

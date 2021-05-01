@@ -21,12 +21,8 @@ Differential_Controller::Differential_Controller(uint8_t pin_diff1, uint8_t pin_
     _pin_switchLeft(pin_switchLeft),
     _pin_switchRight(pin_switchRight),
     _desiredState(STARTPOS),
-    _prevSwitchPos(-1),
-    _data(0),
-    _type(ACTIVE)
+    _prevSwitchPos(-1)
 {}
-
-Differential_Controller::Differential_Controller(): _data(0), _type(PASSIVE) {}
 
 void Differential_Controller::begin() {
     pinMode(_pin_diff1, INPUT_PULLUP);
@@ -97,7 +93,7 @@ void Differential_Controller::update() {
     //     break;
     // }
 
-	
+    _diff_state.set_state(get_currState());
     _desiredState = get_desiredState();
     rotateToState(_desiredState);
     
@@ -265,20 +261,8 @@ void Differential_Controller::rotate_R() {
     digitalWrite(_pin_motorNeg, HIGH);
 }
 
-const uint8_t& Sensor::get_data(){
-    if(_type == ACTIVE){
-        _data = get_currState();
-    }
-    return _data;
-}
-
-void Sensor::pack(byte* pack){
-    get_data();
-    *((uint8_t*) pack) = _data;       
-}
-
-void Sensor::unpack(const byte* pack){
-    _data = *((uint8_t*) pack);
+BaseSensor& Differential_Controller::get_diff_state_sensor() {
+    return _diff_state;
 }
 
 #endif
