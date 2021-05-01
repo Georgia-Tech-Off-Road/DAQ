@@ -1,4 +1,6 @@
 #include "Differential_Controller.h"
+#include <UARTComms.h>
+#include <Sensor.h>
 
 
 #define PIN_DIFF1 14
@@ -8,11 +10,8 @@
 #define PIN_DIFF5 18
 #define PIN_DIFF6 19
 
-
-
 #define PIN_SWITCHLEFT 4
 #define PIN_SWITCHRIGHT 5
-
 
 #define PIN_HE1 2
 #define PIN_HE2 3
@@ -23,13 +22,15 @@
 
 
 Differential_Controller diff_controller(PIN_DIFF1, PIN_DIFF2, PIN_DIFF3, PIN_DIFF4, PIN_DIFF5, PIN_DIFF6, PIN_MOTORPOS, PIN_MOTORNEG, PIN_SWITCHLEFT, PIN_SWITCHRIGHT);
+UARTComms dashboard_comms(115200, Serial2);
 
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  diff_controller.begin();
-  pinMode(13, OUTPUT);
+    dashboard_comms.begin();
+    dashboard_comms.attach_output_sensor(diff_controller, GENERIC_DIFFPOSITION_READ);
+    Serial.begin(9600);
+    diff_controller.begin();
+    pinMode(13, OUTPUT);
   
 //  diff_controller.rotate_R();
 //  delay(1000);  
@@ -42,14 +43,14 @@ uint32_t temp = 0;
 bool led_on = 0;
 
 void loop() {
-  // put your main code here, to run repeatedly:
+    dashboard_comms.update();
   
-  uint32_t t = micros();
-  if((t - temp) > 1000000) {
-    led_on = !led_on;
-    temp = t;
-    digitalWrite(13, led_on);
-  }
-  diff_controller.update();
-  delay(10);
+    uint32_t t = micros();
+    if((t - temp) > 1000000) {
+        led_on = !led_on;
+        temp = t;
+        digitalWrite(13, led_on);
+    }
+    diff_controller.update();
+    delay(10);
 }

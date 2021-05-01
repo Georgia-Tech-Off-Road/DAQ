@@ -5,6 +5,7 @@
 #include <UARTComms.h>
 #include <Sensor.h>
 #include <SpeedSensor.h>
+#include <Differential_Controller.h>
 
 unsigned __exidx_start;
 unsigned __exidx_end;
@@ -14,10 +15,14 @@ unsigned __exidx_end;
 #define TIRE_RADIUS 22
 #define GEARBOX_RATIO 1
 
-// --- Only have one uncommented at a time ---
-#define RUN
+// --- Only have one uncommented at a time --- //
+//#define RUN
 //#define CALIBRATE
 //#define TEST
+#define DIFF_READ
+
+UARTComms diff_comms(115200, Serial2);
+Differential_Controller diff_controller();
 
 Adafruit_TLC5947 l_driver(1, 3, 2, 4);
 Adafruit_TLC5947 r_driver(1, 12, 11, 10);
@@ -34,6 +39,8 @@ SpeedSensor engine_rpm_2 (1, 6, 255);
 SpeedSensor secondary_rpm(20, 23, 255);
 
 void setup(){
+    diff_comms.begin();
+    diff_comms.attach_input_sensor(diff_controller, GENERIC_DIFFPOSITION_READ);
     Serial.begin(2000000);
     l_dash.begin();
     r_dash.begin();
@@ -44,6 +51,14 @@ void setup(){
 }
 
 void loop(){
+    #ifdef DIFF_READ
+    diff_comms.update();
+    static uint32_t diff_update = 0;
+    if(abs(micros() - diff_update) > 100000){
+        h_seg.update();
+        h_seg.set_number(diff_controller.get_data());
+    }
+    #endif
     #ifdef RUN
     static uint32_t prev_change = 0;
     static uint32_t prev_update = 0;
