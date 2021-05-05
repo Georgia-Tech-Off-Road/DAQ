@@ -2,6 +2,8 @@
 #include <UARTComms.h>
 #include <Sensor.h>
 
+unsigned __exidx_start;
+unsigned __exidx_end;
 
 #define PIN_DIFF1 14
 #define PIN_DIFF2 15
@@ -54,5 +56,6 @@ void loop() {
         digitalWrite(13, led_on);
     }
     diff_controller.update();
+    Serial.println(diff_controller.get_currState());
     delay(10);
 }

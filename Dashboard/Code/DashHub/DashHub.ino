@@ -21,7 +21,7 @@ unsigned __exidx_end;
 //#define TEST
 #define DIFF_READ
 
-UARTComms diff_comms(115200, Serial2);
+UARTComms diff_comms(115200, Serial4);
 StateSensor diff_state;
 
 Adafruit_TLC5947 l_driver(1, 3, 2, 4);

@@ -109,8 +109,8 @@ void UARTComms::unpacketize() {
             _is_receiving_data = 0;
         }
     } else { // RECEIVING SETTINGS
-        //Serial.print("\nreceived settings of length: ");
-        //Serial.println(_packet_receive.size());
+        // Serial.print("\nreceived settings of length: ");
+        // Serial.println(_packet_receive.size());
 
         for(auto rs = _received_sensors.begin(); rs != _received_sensors.end(); rs++){
             bool match = 0;
