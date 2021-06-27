@@ -8,7 +8,8 @@
 unsigned __exidx_start;
 unsigned __exidx_end;
 
-SDWrite sd(BUILTIN_SDCARD);
+//SDWrite sd(BUILTIN_SDCARD);
+UARTComms uart(115200, Serial);
 
 //Load Cell
 #include <Wire.h>
@@ -37,11 +38,15 @@ byte avgWeightSpot = 0;
 
 
 void setup() {
-  sd.begin("dyno2.bin");
-  sd.attach_output_sensor(myScale, FORCE_ENGINEDYNO_LBS);
-  sd.attach_output_sensor(engine_speed, SPEED_ENGINE_RPM);
-  sd.attach_output_sensor(secondary_speed, SPEED_SECONDARY_RPM);
-  
+  //sd.begin("dyno2.bin");
+  //sd.attach_output_sensor(myScale, FORCE_ENGINEDYNO_LBS);
+  //sd.attach_output_sensor(engine_speed, SPEED_ENGINE_RPM);
+  //sd.attach_output_sensor(secondary_speed, SPEED_SECONDARY_RPM);
+
+  uart.begin();
+  uart.attach_output_sensor(myScale, FORCE_ENGINEDYNO_LBS);
+  uart.attach_output_sensor(engine_speed, SPEED_ENGINE_RPM);
+  uart.attach_output_sensor(secondary_speed, SPEED_SECONDARY_RPM);
   
   pinMode(safeLED, OUTPUT);
   pinMode(testingLED, OUTPUT);
@@ -75,8 +80,8 @@ void setup() {
 }
 
 void loop() {
-  sd.update();
-  
+  //sd.update();
+  uart.update();
   digitalWrite(testingLED, HIGH);
 
 

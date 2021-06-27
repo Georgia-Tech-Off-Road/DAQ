@@ -8,9 +8,25 @@
 /*
  * Constructor
  */
-UARTComms::UARTComms(uint32_t baud, HardwareSerial &port) : 
+UARTComms::UARTComms(uint32_t baud, HardwareSerial &hardware_port) : 
     _baud(baud), 
-    _port(&port),
+    _hardware_port(&hardware_port),
+    _port(&hardware_port),
+    _is_hardware_port(1),
+    _sending_period_us(10000),
+    _time_at_last_send(0),
+    _time_at_last_receive(0),
+    _is_sending_data(0),
+    _is_receiving_data(0) { }
+
+/*
+ * Constructor
+ */
+UARTComms::UARTComms(uint32_t baud, usb_serial_class &usb_port) : 
+    _baud(baud), 
+    _usb_port(&usb_port),
+    _port(&usb_port),
+    _is_hardware_port(0),
     _sending_period_us(10000),
     _time_at_last_send(0),
     _time_at_last_receive(0),
@@ -21,7 +37,11 @@ UARTComms::UARTComms(uint32_t baud, HardwareSerial &port) :
  * @brief Initializes the hardware for the Serial Port
  */
 void UARTComms::begin(){
-    _port->begin(_baud);
+    if(_is_hardware_port){
+        _hardware_port->begin(_baud);
+    } else {
+        _usb_port->begin(_baud);
+    }
 }
 
 /*
@@ -89,8 +109,8 @@ void UARTComms::unpacketize() {
             _is_receiving_data = 0;
         }
     } else { // RECEIVING SETTINGS
-        Serial.print("\nreceived settings of length: ");
-        Serial.println(_packet_receive.size());
+        // Serial.print("\nreceived settings of length: ");
+        // Serial.println(_packet_receive.size());
 
         for(auto rs = _received_sensors.begin(); rs != _received_sensors.end(); rs++){
             bool match = 0;
@@ -118,15 +138,15 @@ void UARTComms::unpacketize() {
             for (auto it = _input_sensors.begin(); it != _input_sensors.end(); it++){
                 if((*it)->get_id() == id) existing_input_sensor = *it;
             }
-            Serial.print(existing_input_sensor != 0);
+            //Serial.print(existing_input_sensor != 0);
             if(existing_input_sensor != 0) _received_sensors.push_back(existing_input_sensor);
             else _received_sensors.push_back(new GenericSensor((sensor_id_t) id, pack_bytes));
 
             packet_loc += 3;
         }
-        Serial.print("created ");
-        Serial.print(_received_sensors.size());
-        Serial.println(" _received_sensors");
+        //Serial.print("created ");
+        //Serial.print(_received_sensors.size());
+        //Serial.println(" _received_sensors");
         _is_receiving_data = 1;
     }
 
