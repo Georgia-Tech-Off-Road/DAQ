@@ -23,6 +23,7 @@ bool led_state = 0;
 NAU7802 myScale; //Create instance of the NAU7802 class
 SpeedSensor engine_speed(600, H1, 255);
 SpeedSensor secondary_speed(30, H2, 255);
+StateSensor tare_scale;
 
 //EEPROM locations to store 4-byte variables
 #define LOCATION_CALIBRATION_FACTOR 0 //Float, requires 4 bytes of EEPROM
@@ -36,10 +37,6 @@ float avgWeights[AVG_SIZE];
 byte avgWeightSpot = 0;
 
 
-
-//Teensy SD card
-
-
 void setup() {
   //sd.begin("dyno2.bin");
   //sd.attach_output_sensor(myScale, FORCE_ENGINEDYNO_LBS);
@@ -51,8 +48,6 @@ void setup() {
   pinMode(shutdownSig, OUTPUT);
   pinMode(killSwitch, INPUT_PULLUP);
 
-  //Load Cell
-  //Serial.begin(9600);
 
   Wire.begin();
   Wire.setClock(400000); //Qwiic Scale is capable of running at 400kHz if desired
@@ -61,25 +56,21 @@ void setup() {
   {
     digitalWrite(errorLED, HIGH);
     digitalWrite(testingLED, LOW);
-    //Serial.println("Scale not detected. Please check wiring. Freezing...");
     while (1);
   }
   
-  //Serial.println("Scale detected!");
-
   readSystemSettings(); //Load zeroOffset and calibrationFactor from EEPROM
 
   myScale.setSampleRate(NAU7802_SPS_320); //Increase to max sample rate
   myScale.calibrateAFE(); //Re-cal analog front end when we change gain, sample rate, or channel 
   myScale.setGain(NAU7802_GAIN_16);
-//  Serial.print("Zero offset: ");
-//  Serial.println(myScale.getZeroOffset());
-//  Serial.print("Calibration factor: ");
-//  Serial.println(myScale.getCalibrationFactor());
+
+
   uart.begin();
   uart.attach_output_sensor(myScale, FORCE_DYNO_LBS);
   uart.attach_output_sensor(engine_speed, SPEED_DYNOENGINE600_RPM);
   uart.attach_output_sensor(secondary_speed, SPEED_DYNOSECONDARY30_RPM);
+  uart.attach_input_sensor(tare_scale, COMMAND_TARE_LOAD_CELL);
   
 }
 
@@ -92,56 +83,13 @@ void loop() {
     digitalWrite(safeLED, led_state);
     prev_time = micros();
   }
-//
-//  //Load Cell
-//  if (myScale.available() == true)
-//  {
-//    float currentWeight = myScale.getWeight();
-//
-//
-//
-//    avgWeights[avgWeightSpot++] = currentWeight;
-//    if(avgWeightSpot == AVG_SIZE) avgWeightSpot = 0;
-//
-//    float avgWeight = 0;
-//    for (int x = 0 ; x < AVG_SIZE ; x++)
-//      avgWeight += avgWeights[x];
-//    avgWeight /= AVG_SIZE;
-///*
-//    Serial.print(avgWeight, 2); //Print 2 decimal places
-//    Serial.print("\tEngine Speed: \t");
-//    Serial.print(engine_speed.get_speed());
-//    Serial.print("\tSecondary Speed: \t");
-//    Serial.print(secondary_speed.get_speed());
-//    */
-////    if(  digitalRead(killSwitch)) {
-////       Serial.print("\t Not Killed");
-////    } else {
-////       killed();
-////    }
-//    if(settingsDetected == false)
-//    {
-//      //Serial.print("\tScale not calibrated. Press 'c'.");
-//    }
-//
-//   // Serial.println();
-//  }
-///*
-//  if (Serial.available())
-//  {
-//    byte incoming = Serial.read();
-//
-//    if (incoming == 't') //Tare the scale
-//      myScale.calculateZeroOffset();
-//    else if (incoming == 'c') //Calibrate
-//    {
-//      calibrateScale();
-//    }
-//  }
-//*/
 
-  //Teensy SD card
-    uart.update();
+
+  if (tare_scale.get_state()) //Tare the scale
+    myScale.calculateZeroOffset();
+
+
+  uart.update();
 }
 
 void killed(void) {
@@ -149,48 +97,12 @@ void killed(void) {
     digitalWrite(safeLED, LOW);
     digitalWrite(testingLED, LOW);
     digitalWrite(errorLED, HIGH);
-    Serial.println("ESTOP IS PRESSED");
   }
     digitalWrite(testingLED, HIGH);
     digitalWrite(errorLED, LOW);
   return;
 }
-//Gives user the ability to set a known weight on the scale and calculate a calibration factor
-void calibrateScale(void)
-{
-  Serial.println();
-  Serial.println();
-  Serial.println(F("Scale calibration"));
 
-  Serial.println(F("Setup scale with no weight on it. Press a key when ready."));
-  while (Serial.available()) Serial.read(); //Clear anything in RX buffer
-  while (Serial.available() == 0) delay(10); //Wait for user to press key
-
-  myScale.calculateZeroOffset(64); //Zero or Tare the scale. Average over 64 readings.
-  Serial.print(F("New zero offset: "));
-  Serial.println(myScale.getZeroOffset());
-
-  Serial.println(F("Place known weight on scale. Press a key when weight is in place and stable."));
-  while (Serial.available()) Serial.read(); //Clear anything in RX buffer
-  while (Serial.available() == 0) delay(10); //Wait for user to press key
-
-  Serial.print(F("Please enter the weight, without units, currently sitting on the scale (for example '4.25'): "));
-  while (Serial.available()) Serial.read(); //Clear anything in RX buffer
-  while (Serial.available() == 0) delay(10); //Wait for user to press key
-
-  //Read user input
-  float weightOnScale = Serial.parseFloat();
-  Serial.println();
-
-  myScale.calculateCalibrationFactor(weightOnScale, 64); //Tell the library how much weight is currently on it
-  Serial.print(F("New cal factor: "));
-  Serial.println(myScale.getCalibrationFactor(), 2);
-
-  Serial.print(F("New Scale Reading: "));
-  Serial.println(myScale.getWeight(), 2);
-
-  recordSystemSettings(); //Commit these values to EEPROM
-}
 
 //Record the current system settings to EEPROM
 void recordSystemSettings(void)
