@@ -10794,6 +10794,8 @@ Source: &lt;a href="http://www.ckswitches.com/media/1428/os.pdf"&gt; Datasheet &
 <part name="R5" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="86.6k"/>
 <part name="R6" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="86.6k"/>
 <part name="JP1" library="GTOR - Connectors" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
+<part name="JP2" library="GTOR - Connectors" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
+<part name="JP3" library="GTOR - Connectors" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -10868,6 +10870,14 @@ Source: &lt;a href="http://www.ckswitches.com/media/1428/os.pdf"&gt; Datasheet &
 <attribute name="NAME" x="146.05" y="10.795" size="1.778" layer="95"/>
 <attribute name="VALUE" x="146.05" y="-5.08" size="1.778" layer="96"/>
 </instance>
+<instance part="JP2" gate="A" x="30.48" y="10.16" smashed="yes">
+<attribute name="NAME" x="24.13" y="18.415" size="1.778" layer="95"/>
+<attribute name="VALUE" x="24.13" y="2.54" size="1.778" layer="96"/>
+</instance>
+<instance part="JP3" gate="A" x="238.76" y="0" smashed="yes">
+<attribute name="NAME" x="232.41" y="8.255" size="1.778" layer="95"/>
+<attribute name="VALUE" x="232.41" y="-7.62" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -10896,6 +10906,11 @@ Source: &lt;a href="http://www.ckswitches.com/media/1428/os.pdf"&gt; Datasheet &
 <pinref part="JP1" gate="A" pin="2"/>
 <wire x1="149.86" y1="5.08" x2="139.7" y2="5.08" width="0.1524" layer="91"/>
 <label x="139.7" y="5.08" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="2"/>
+<wire x1="27.94" y1="12.7" x2="17.78" y2="12.7" width="0.1524" layer="91"/>
+<label x="17.78" y="12.7" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="A-" class="0">
@@ -10932,6 +10947,11 @@ Source: &lt;a href="http://www.ckswitches.com/media/1428/os.pdf"&gt; Datasheet &
 <pinref part="JP1" gate="A" pin="4"/>
 <wire x1="149.86" y1="0" x2="139.7" y2="0" width="0.1524" layer="91"/>
 <label x="139.7" y="0" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="4"/>
+<wire x1="27.94" y1="7.62" x2="17.78" y2="7.62" width="0.1524" layer="91"/>
+<label x="17.78" y="7.62" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="5V" class="0">
@@ -10985,6 +11005,16 @@ Source: &lt;a href="http://www.ckswitches.com/media/1428/os.pdf"&gt; Datasheet &
 <pinref part="JP1" gate="A" pin="1"/>
 <wire x1="149.86" y1="7.62" x2="139.7" y2="7.62" width="0.1524" layer="91"/>
 <label x="139.7" y="7.62" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP2" gate="A" pin="1"/>
+<wire x1="27.94" y1="15.24" x2="17.78" y2="15.24" width="0.1524" layer="91"/>
+<label x="17.78" y="15.24" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP3" gate="A" pin="1"/>
+<wire x1="236.22" y1="5.08" x2="226.06" y2="5.08" width="0.1524" layer="91"/>
+<label x="226.06" y="5.08" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -11047,6 +11077,16 @@ Source: &lt;a href="http://www.ckswitches.com/media/1428/os.pdf"&gt; Datasheet &
 <wire x1="149.86" y1="2.54" x2="139.7" y2="2.54" width="0.1524" layer="91"/>
 <label x="139.7" y="2.54" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="JP2" gate="A" pin="3"/>
+<wire x1="27.94" y1="10.16" x2="17.78" y2="10.16" width="0.1524" layer="91"/>
+<label x="17.78" y="10.16" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP3" gate="A" pin="3"/>
+<wire x1="236.22" y1="0" x2="226.06" y2="0" width="0.1524" layer="91"/>
+<label x="226.06" y="0" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="N$2" class="0">
 <segment>
@@ -11091,6 +11131,11 @@ Source: &lt;a href="http://www.ckswitches.com/media/1428/os.pdf"&gt; Datasheet &
 <pinref part="IC1" gate="G$1" pin="VOUT"/>
 <wire x1="185.42" y1="20.32" x2="193.04" y2="20.32" width="0.1524" layer="91"/>
 <label x="187.96" y="20.32" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="JP3" gate="A" pin="2"/>
+<wire x1="236.22" y1="2.54" x2="226.06" y2="2.54" width="0.1524" layer="91"/>
+<label x="226.06" y="2.54" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$15" class="0">
