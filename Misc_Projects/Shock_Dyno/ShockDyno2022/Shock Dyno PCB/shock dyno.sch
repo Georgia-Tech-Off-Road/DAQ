@@ -216,6 +216,56 @@
 <rectangle x1="1.1684" y1="-2.921" x2="1.3716" y2="-2.0828" layer="51"/>
 <rectangle x1="1.8034" y1="-2.921" x2="2.0066" y2="-2.0828" layer="51"/>
 </package>
+<package name="T9GV5L145">
+<description>&lt;b&gt;T9GV5L14-5&lt;/b&gt;&lt;br&gt;
+</description>
+<pad name="1" x="0" y="-0.06" drill="2.19" diameter="3.29"/>
+<pad name="2" x="3.81" y="-12.76" drill="1.17" diameter="1.77"/>
+<pad name="3" x="13.97" y="-12.76" drill="1.17" diameter="1.77"/>
+<pad name="4" x="17.78" y="2.48" drill="2.19" diameter="3.29"/>
+<pad name="5" x="17.78" y="10.1" drill="2.19" diameter="3.29"/>
+<text x="8.47" y="-2.5" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="8.47" y="-2.5" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-1.86" y1="12" x2="19.64" y2="12" width="0.2" layer="51"/>
+<wire x1="19.64" y1="12" x2="19.64" y2="-17" width="0.2" layer="51"/>
+<wire x1="19.64" y1="-17" x2="-1.86" y2="-17" width="0.2" layer="51"/>
+<wire x1="-1.86" y1="-17" x2="-1.86" y2="12" width="0.2" layer="51"/>
+<wire x1="-3.7" y1="13" x2="20.64" y2="13" width="0.1" layer="51"/>
+<wire x1="20.64" y1="13" x2="20.64" y2="-18" width="0.1" layer="51"/>
+<wire x1="20.64" y1="-18" x2="-3.7" y2="-18" width="0.1" layer="51"/>
+<wire x1="-3.7" y1="-18" x2="-3.7" y2="13" width="0.1" layer="51"/>
+<wire x1="-1.86" y1="1.84" x2="-1.86" y2="12" width="0.1" layer="21"/>
+<wire x1="-1.86" y1="12" x2="16.51" y2="12" width="0.1" layer="21"/>
+<wire x1="-1.86" y1="-1.96" x2="-1.86" y2="-17" width="0.1" layer="21"/>
+<wire x1="-1.86" y1="-17" x2="19.64" y2="-17" width="0.1" layer="21"/>
+<wire x1="19.64" y1="-17" x2="19.64" y2="-0.06" width="0.1" layer="21"/>
+<wire x1="-2.6" y1="0.04" x2="-2.6" y2="0.04" width="0.2" layer="21"/>
+<wire x1="-2.6" y1="0.04" x2="-2.6" y2="-0.16" width="0.2" layer="21" curve="-180"/>
+<wire x1="-2.6" y1="-0.16" x2="-2.6" y2="-0.16" width="0.2" layer="21"/>
+<wire x1="-2.6" y1="-0.16" x2="-2.6" y2="0.04" width="0.2" layer="21" curve="-180"/>
+</package>
+<package name="TO220CS" urn="urn:adsk.eagle:footprint:8086190/1" locally_modified="yes">
+<description>&lt;b&gt;TO 220 C&lt;/b&gt; vertical (Cathode; Anode; Gate)</description>
+<wire x1="5.08" y1="-1.143" x2="5.08" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-4.318" x2="5.08" y2="-4.064" width="0.1524" layer="21"/>
+<wire x1="4.826" y1="-4.318" x2="-4.826" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="-4.064" x2="-4.826" y2="-4.318" width="0.1524" layer="21"/>
+<wire x1="-5.08" y1="-4.064" x2="-5.08" y2="-1.143" width="0.1524" layer="21"/>
+<circle x="-4.6228" y="-3.7084" radius="0.254" width="0" layer="21"/>
+<pad name="G" x="-2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<pad name="D" x="0" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<pad name="S" x="2.54" y="-2.54" drill="1.016" shape="long" rot="R90"/>
+<text x="-5.08" y="-6.0452" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-5.08" y="-7.62" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-5.334" y1="-0.635" x2="5.334" y2="0" layer="21"/>
+<rectangle x1="-5.334" y1="-1.27" x2="-3.429" y2="-0.635" layer="21"/>
+<rectangle x1="-1.651" y1="-1.27" x2="-0.889" y2="-0.635" layer="21"/>
+<rectangle x1="0.889" y1="-1.27" x2="1.651" y2="-0.635" layer="21"/>
+<rectangle x1="3.429" y1="-1.27" x2="5.334" y2="-0.635" layer="21"/>
+<rectangle x1="-3.429" y1="-1.27" x2="-1.651" y2="-0.635" layer="51"/>
+<rectangle x1="-0.889" y1="-1.27" x2="0.889" y2="-0.635" layer="51"/>
+<rectangle x1="1.651" y1="-1.27" x2="3.429" y2="-0.635" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="TS1874IPT">
@@ -238,6 +288,45 @@
 <pin name="IN3-" x="22.86" y="5.08" length="middle" rot="R180"/>
 <pin name="OUT3" x="22.86" y="2.54" length="middle" rot="R180"/>
 <text x="2.54" y="-2.54" size="1.778" layer="95">TS1874IPT</text>
+</symbol>
+<symbol name="T9GS1L14-5">
+<wire x1="5.08" y1="2.54" x2="22.86" y2="2.54" width="0.254" layer="94"/>
+<wire x1="22.86" y1="-7.62" x2="22.86" y2="2.54" width="0.254" layer="94"/>
+<wire x1="22.86" y1="-7.62" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="5.08" y1="2.54" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
+<text x="24.13" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="24.13" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="COM" x="0" y="0" length="middle"/>
+<pin name="COIL_1" x="0" y="-2.54" length="middle"/>
+<pin name="COIL_2" x="0" y="-5.08" length="middle"/>
+<pin name="NO" x="27.94" y="0" length="middle" rot="R180"/>
+<pin name="NC" x="27.94" y="-2.54" length="middle" direction="nc" rot="R180"/>
+</symbol>
+<symbol name="N-MOSFET-GDS">
+<wire x1="-2.54" y1="-2.54" x2="-1.2192" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="0.762" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="-0.762" width="0.254" layer="94"/>
+<wire x1="0" y1="3.683" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="0" y2="1.397" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="0" x2="2.54" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="-1.397" x2="0" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="-2.54" x2="0" y2="-3.683" width="0.254" layer="94"/>
+<wire x1="-1.143" y1="2.54" x2="-1.143" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="2.54" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="2.54" y2="5.08" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="0" y2="-2.54" width="0.1524" layer="94"/>
+<circle x="2.54" y="-2.54" radius="0.3592" width="0" layer="94"/>
+<text x="-11.43" y="0" size="1.778" layer="96">&gt;VALUE</text>
+<text x="-11.43" y="2.54" size="1.778" layer="95">&gt;NAME</text>
+<pin name="S" x="2.54" y="-7.62" visible="off" length="middle" direction="pas" rot="R90"/>
+<pin name="G" x="-5.08" y="-2.54" visible="off" length="short" direction="pas"/>
+<pin name="D" x="2.54" y="7.62" visible="off" length="short" direction="pas" rot="R270"/>
+<polygon width="0.1524" layer="94">
+<vertex x="0.254" y="0"/>
+<vertex x="1.27" y="0.762"/>
+<vertex x="1.27" y="-0.762"/>
+</polygon>
 </symbol>
 </symbols>
 <devicesets>
@@ -269,6 +358,53 @@
 </device>
 </devices>
 </deviceset>
+<deviceset name="T9GS1L14-5" prefix="K">
+<description>&lt;b&gt;TE CONNECTIVITY / POTTER &amp; BRUMFIELD - T9GS1L14-5. - POWER RELAY, SPST-NO, 30A, 250VAC, THT&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&amp;DocNm=T9G_1216&amp;DocType=DS&amp;DocLang=English"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="T9GS1L14-5" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="T9GV5L145">
+<connects>
+<connect gate="G$1" pin="COIL_1" pad="2"/>
+<connect gate="G$1" pin="COIL_2" pad="3"/>
+<connect gate="G$1" pin="COM" pad="1"/>
+<connect gate="G$1" pin="NC" pad="5"/>
+<connect gate="G$1" pin="NO" pad="4"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="ARROW_PART_NUMBER" value="" constant="no"/>
+<attribute name="ARROW_PRICE-STOCK" value="" constant="no"/>
+<attribute name="DESCRIPTION" value="TE CONNECTIVITY / POTTER &amp; BRUMFIELD - T9GS1L14-5. - POWER RELAY, SPST-NO, 30A, 250VAC, THT" constant="no"/>
+<attribute name="HEIGHT" value="15.7mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="TE Connectivity" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="T9GS1L14-5" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="655-T9GS1L14-5" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/TE-Connectivity-PB/T9GS1L14-5?qs=gt1LBUVyoHmKCzoNwQtXUg%3D%3D" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MOSFET_N-TYPE_30N06L(VERT)">
+<gates>
+<gate name="G$1" symbol="N-MOSFET-GDS" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TO220CS">
+<connects>
+<connect gate="G$1" pin="D" pad="D"/>
+<connect gate="G$1" pin="G" pad="G"/>
+<connect gate="G$1" pin="S" pad="S"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 <library name="GTOR - Documation Frame">
@@ -293,6 +429,12 @@
 <wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
 <text x="-2.54" y="-5.08" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
 <pin name="+3V3" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
+</symbol>
+<symbol name="VCC">
+<wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
+<text x="-2.54" y="-2.54" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<pin name="VCC" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -326,6 +468,19 @@
 <description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
 <gates>
 <gate name="G$1" symbol="+3V3" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="VCC" prefix="P+">
+<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
+<gates>
+<gate name="VCC" symbol="VCC" x="0" y="0"/>
 </gates>
 <devices>
 <device name="">
@@ -744,6 +899,32 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 <rectangle x1="-0.15" y1="0.05" x2="0.15" y2="0.1" layer="51"/>
 <rectangle x1="-0.15" y1="-0.1" x2="0.15" y2="-0.05" layer="51"/>
 </package>
+<package name="DIOAD1144W56L406D184">
+<description>&lt;b&gt;1N4151&lt;/b&gt;&lt;br&gt;
+</description>
+<pad name="1" x="0" y="0" drill="0.75" diameter="1.15" shape="square"/>
+<pad name="2" x="11.4" y="0" drill="0.75" diameter="1.15"/>
+<text x="0" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="0" y="0" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-0.825" y1="1.272" x2="12.225" y2="1.272" width="0.05" layer="51"/>
+<wire x1="12.225" y1="1.272" x2="12.225" y2="-1.273" width="0.05" layer="51"/>
+<wire x1="12.225" y1="-1.273" x2="-0.825" y2="-1.273" width="0.05" layer="51"/>
+<wire x1="-0.825" y1="-1.273" x2="-0.825" y2="1.272" width="0.05" layer="51"/>
+<wire x1="3.668" y1="0.922" x2="7.733" y2="0.922" width="0.1" layer="51"/>
+<wire x1="7.733" y1="0.922" x2="7.733" y2="-0.923" width="0.1" layer="51"/>
+<wire x1="7.733" y1="-0.923" x2="3.668" y2="-0.923" width="0.1" layer="51"/>
+<wire x1="3.668" y1="-0.923" x2="3.668" y2="0.922" width="0.1" layer="51"/>
+<wire x1="3.668" y1="0" x2="4.59" y2="0.922" width="0.1" layer="51"/>
+<wire x1="0" y1="0" x2="3.668" y2="0" width="0.1" layer="51"/>
+<wire x1="7.732" y1="0" x2="11.4" y2="0" width="0.1" layer="51"/>
+<wire x1="3.668" y1="0.922" x2="7.732" y2="0.922" width="0.2" layer="21"/>
+<wire x1="7.732" y1="0.922" x2="7.732" y2="-0.922" width="0.2" layer="21"/>
+<wire x1="7.732" y1="-0.922" x2="3.668" y2="-0.922" width="0.2" layer="21"/>
+<wire x1="3.668" y1="-0.922" x2="3.668" y2="0.922" width="0.2" layer="21"/>
+<wire x1="3.668" y1="0" x2="4.59" y2="0.922" width="0.2" layer="21"/>
+<wire x1="0.925" y1="0" x2="3.668" y2="0" width="0.2" layer="21"/>
+<wire x1="7.732" y1="0" x2="10.475" y2="0" width="0.2" layer="21"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="R0402" urn="urn:adsk.eagle:package:23547/3" type="model">
@@ -932,6 +1113,18 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 <text x="-3.81" y="-3.302" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
+</symbol>
+<symbol name="1N4151">
+<wire x1="5.08" y1="2.54" x2="5.08" y2="-2.54" width="0.254" layer="94"/>
+<text x="11.43" y="5.08" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="11.43" y="2.54" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="K" x="0" y="0" visible="pad" length="middle"/>
+<pin name="A" x="15.24" y="0" visible="pad" length="middle" rot="R180"/>
+<polygon width="0.254" layer="94">
+<vertex x="5.08" y="0"/>
+<vertex x="10.16" y="2.54"/>
+<vertex x="10.16" y="-2.54"/>
+</polygon>
 </symbol>
 </symbols>
 <devicesets>
@@ -1338,6 +1531,33 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 <pinmap gate="G$1" pin="2" pinorder="2"/>
 </pinmapping>
 </spice>
+</deviceset>
+<deviceset name="1N4151" prefix="D">
+<description>&lt;b&gt;Diode Switching 75V 0.2A 2-Pin DO-35 Bag&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="https://www.microsemi.com/document-portal/doc_download/11580-lds-0239-datasheet"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="1N4151" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="DIOAD1144W56L406D184">
+<connects>
+<connect gate="G$1" pin="A" pad="2"/>
+<connect gate="G$1" pin="K" pad="1"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="ARROW_PART_NUMBER" value="1N4151" constant="no"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/1n4151/microsemi" constant="no"/>
+<attribute name="DESCRIPTION" value="Diode Switching 75V 0.2A 2-Pin DO-35 Bag" constant="no"/>
+<attribute name="HEIGHT" value="mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="Microsemi Corporation" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="1N4151" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="494-1N4151" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.com/Search/Refine.aspx?Keyword=494-1N4151" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
 </deviceset>
 </devicesets>
 </library>
@@ -1824,6 +2044,71 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 </deviceset>
 </devicesets>
 </library>
+<library name="GTOR - Connectors">
+<packages>
+<package name="TB00576202BE">
+<description>&lt;b&gt;TB005-762-02BE-2&lt;/b&gt;&lt;br&gt;
+</description>
+<pad name="1" x="0" y="0" drill="1.6" diameter="2.4" shape="square"/>
+<pad name="2" x="7.62" y="0" drill="1.6" diameter="2.4"/>
+<text x="3.81" y="-1.6" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="3.81" y="-1.6" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-3.81" y1="-7.9" x2="11.43" y2="-7.9" width="0.2" layer="51"/>
+<wire x1="11.43" y1="-7.9" x2="11.43" y2="4.7" width="0.2" layer="51"/>
+<wire x1="11.43" y1="4.7" x2="-3.81" y2="4.7" width="0.2" layer="51"/>
+<wire x1="-3.81" y1="4.7" x2="-3.81" y2="-7.9" width="0.2" layer="51"/>
+<wire x1="-3.81" y1="4.7" x2="11.43" y2="4.7" width="0.1" layer="21"/>
+<wire x1="11.43" y1="4.7" x2="11.43" y2="-7.9" width="0.1" layer="21"/>
+<wire x1="11.43" y1="-7.9" x2="-3.81" y2="-7.9" width="0.1" layer="21"/>
+<wire x1="-3.81" y1="-7.9" x2="-3.81" y2="4.7" width="0.1" layer="21"/>
+<wire x1="-4.81" y1="5.7" x2="12.43" y2="5.7" width="0.1" layer="51"/>
+<wire x1="12.43" y1="5.7" x2="12.43" y2="-8.9" width="0.1" layer="51"/>
+<wire x1="12.43" y1="-8.9" x2="-4.81" y2="-8.9" width="0.1" layer="51"/>
+<wire x1="-4.81" y1="-8.9" x2="-4.81" y2="5.7" width="0.1" layer="51"/>
+</package>
+</packages>
+<symbols>
+<symbol name="TB005-762-02BE">
+<wire x1="5.08" y1="2.54" x2="15.24" y2="2.54" width="0.254" layer="94"/>
+<wire x1="15.24" y1="-5.08" x2="15.24" y2="2.54" width="0.254" layer="94"/>
+<wire x1="15.24" y1="-5.08" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="5.08" y1="2.54" x2="5.08" y2="-5.08" width="0.254" layer="94"/>
+<text x="16.51" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="16.51" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="1" x="0" y="0" length="middle"/>
+<pin name="2" x="0" y="-2.54" length="middle"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="TB005-762-02BE" prefix="J">
+<description>&lt;b&gt;Fixed Terminal Blocks screw type, 7.62 , horizontal, 2 poles, CUI Blue, slotted screw, PCB mount&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02BE.pdf"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="TB005-762-02BE" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TB00576202BE">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="ARROW_PART_NUMBER" value="TB005-762-02BE" constant="no"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/tb005-762-02be/cui-inc" constant="no"/>
+<attribute name="DESCRIPTION" value="Fixed Terminal Blocks screw type, 7.62 , horizontal, 2 poles, CUI Blue, slotted screw, PCB mount" constant="no"/>
+<attribute name="HEIGHT" value="21.7mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="CUI Inc." constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="TB005-762-02BE" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="490-TB005-762-02BE" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/CUI-Devices/TB005-762-02BE?qs=vLWxofP3U2zXv1H2wuShow%3D%3D" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1851,16 +2136,27 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 <part name="SUPPLY4" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="SUPPLY5" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="R7" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
-<part name="J1" library="1985205" deviceset="1985205" device=""/>
+<part name="LDS" library="1985205" deviceset="1985205" device=""/>
 <part name="P+3" library="GTOR - Documation Frame" deviceset="+5V" device=""/>
 <part name="SUPPLY6" library="GTOR - Documation Frame" deviceset="GND" device=""/>
-<part name="POWERSUPPLY48V" library="1985195" deviceset="1985195" device=""/>
 <part name="MOTORCONTROLLERB" library="1985195" deviceset="1985195" device=""/>
 <part name="MOTORCONTROLLER" library="1985221" deviceset="1985221" device=""/>
+<part name="SUPPLY7" library="GTOR - Documation Frame" deviceset="GND" device=""/>
+<part name="SUPPLY8" library="GTOR - Documation Frame" deviceset="GND" device=""/>
+<part name="48VPOWERSUPPLY" library="GTOR - Connectors" deviceset="TB005-762-02BE" device=""/>
+<part name="KILLSWITCH" library="GTOR - Connectors" deviceset="TB005-762-02BE" device=""/>
+<part name="K1" library="GTOR - Active Components" deviceset="T9GS1L14-5" device=""/>
+<part name="P+4" library="GTOR - Documation Frame" deviceset="VCC" device=""/>
+<part name="U$3" library="GTOR - Active Components" deviceset="MOSFET_N-TYPE_30N06L(VERT)" device=""/>
+<part name="R8" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="1k"/>
+<part name="R9" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
+<part name="D1" library="GTOR - Passive Components" deviceset="1N4151" device=""/>
+<part name="SUPPLY9" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
+<text x="10.16" y="81.28" size="1.778" layer="91">Via for fuse holder</text>
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="27.94" y="48.26" smashed="yes"/>
@@ -1917,7 +2213,7 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 <attribute name="NAME" x="72.39" y="31.9786" size="1.778" layer="95"/>
 <attribute name="VALUE" x="72.39" y="27.178" size="1.778" layer="96"/>
 </instance>
-<instance part="J1" gate="G$1" x="88.9" y="83.82" smashed="yes">
+<instance part="LDS" gate="G$1" x="88.9" y="83.82" smashed="yes">
 <attribute name="NAME" x="105.41" y="91.44" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="105.41" y="88.9" size="1.778" layer="96" align="center-left"/>
 </instance>
@@ -1927,10 +2223,6 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 <instance part="SUPPLY6" gate="GND" x="88.9" y="73.66" smashed="yes">
 <attribute name="VALUE" x="86.995" y="70.485" size="1.778" layer="96"/>
 </instance>
-<instance part="POWERSUPPLY48V" gate="G$1" x="-53.34" y="48.26" smashed="yes">
-<attribute name="NAME" x="-36.83" y="55.88" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="-36.83" y="53.34" size="1.778" layer="96" align="center-left"/>
-</instance>
 <instance part="MOTORCONTROLLERB" gate="G$1" x="-53.34" y="35.56" smashed="yes">
 <attribute name="NAME" x="-36.83" y="43.18" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="-36.83" y="40.64" size="1.778" layer="96" align="center-left"/>
@@ -1938,6 +2230,46 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 <instance part="MOTORCONTROLLER" gate="G$1" x="88.9" y="35.56" smashed="yes">
 <attribute name="NAME" x="105.41" y="43.18" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="105.41" y="40.64" size="1.778" layer="96" align="center-left"/>
+</instance>
+<instance part="SUPPLY7" gate="GND" x="-55.88" y="43.18" smashed="yes">
+<attribute name="VALUE" x="-57.785" y="40.005" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY8" gate="GND" x="-55.88" y="30.48" smashed="yes">
+<attribute name="VALUE" x="-57.785" y="27.305" size="1.778" layer="96"/>
+</instance>
+<instance part="48VPOWERSUPPLY" gate="G$1" x="-43.18" y="48.26" smashed="yes" rot="R90">
+<attribute name="NAME" x="-50.8" y="64.77" size="1.778" layer="95" rot="R90" align="center-left"/>
+<attribute name="VALUE" x="-48.26" y="64.77" size="1.778" layer="96" rot="R90" align="center-left"/>
+</instance>
+<instance part="KILLSWITCH" gate="G$1" x="-5.08" y="83.82" smashed="yes" rot="R90">
+<attribute name="NAME" x="-12.7" y="100.33" size="1.778" layer="95" rot="R90" align="center-left"/>
+<attribute name="VALUE" x="-10.16" y="100.33" size="1.778" layer="96" rot="R90" align="center-left"/>
+</instance>
+<instance part="K1" gate="G$1" x="38.1" y="83.82" smashed="yes">
+<attribute name="NAME" x="62.23" y="91.44" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="62.23" y="88.9" size="1.778" layer="96" align="center-left"/>
+</instance>
+<instance part="P+4" gate="VCC" x="104.14" y="12.7" smashed="yes">
+<attribute name="VALUE" x="101.6" y="10.16" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="U$3" gate="G$1" x="101.6" y="-17.78" smashed="yes">
+<attribute name="VALUE" x="90.17" y="-17.78" size="1.778" layer="96"/>
+<attribute name="NAME" x="90.17" y="-15.24" size="1.778" layer="95"/>
+</instance>
+<instance part="R8" gate="G$1" x="81.28" y="-20.32" smashed="yes">
+<attribute name="NAME" x="77.47" y="-18.8214" size="1.778" layer="95"/>
+<attribute name="VALUE" x="77.47" y="-23.622" size="1.778" layer="96"/>
+</instance>
+<instance part="R9" gate="G$1" x="91.44" y="-30.48" smashed="yes" rot="R90">
+<attribute name="NAME" x="89.9414" y="-34.29" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="94.742" y="-34.29" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="D1" gate="G$1" x="91.44" y="5.08" smashed="yes" rot="R270">
+<attribute name="NAME" x="96.52" y="-6.35" size="1.778" layer="95" rot="R270" align="center-left"/>
+<attribute name="VALUE" x="93.98" y="-6.35" size="1.778" layer="96" rot="R270" align="center-left"/>
+</instance>
+<instance part="SUPPLY9" gate="GND" x="104.14" y="-43.18" smashed="yes">
+<attribute name="VALUE" x="102.235" y="-46.355" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1957,7 +2289,7 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 <wire x1="48.26" y1="10.16" x2="38.1" y2="10.16" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="J1" gate="G$1" pin="1"/>
+<pinref part="LDS" gate="G$1" pin="1"/>
 <pinref part="P+3" gate="1" pin="+5V"/>
 <wire x1="88.9" y1="83.82" x2="88.9" y2="88.9" width="0.1524" layer="91"/>
 </segment>
@@ -1991,9 +2323,31 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 <pinref part="MOTORCONTROLLER" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="J1" gate="G$1" pin="3"/>
+<pinref part="LDS" gate="G$1" pin="3"/>
 <pinref part="SUPPLY6" gate="GND" pin="GND"/>
 <wire x1="88.9" y1="81.28" x2="88.9" y2="76.2" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="SUPPLY7" gate="GND" pin="GND"/>
+<wire x1="-55.88" y1="48.26" x2="-55.88" y2="45.72" width="0.1524" layer="91"/>
+<pinref part="48VPOWERSUPPLY" gate="G$1" pin="1"/>
+<wire x1="-55.88" y1="48.26" x2="-43.18" y2="48.26" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="MOTORCONTROLLERB" gate="G$1" pin="2"/>
+<wire x1="-53.34" y1="35.56" x2="-55.88" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="-55.88" y1="35.56" x2="-55.88" y2="33.02" width="0.1524" layer="91"/>
+<pinref part="SUPPLY8" gate="GND" pin="GND"/>
+</segment>
+<segment>
+<pinref part="R9" gate="G$1" pin="1"/>
+<wire x1="91.44" y1="-35.56" x2="91.44" y2="-38.1" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="-38.1" x2="96.52" y2="-38.1" width="0.1524" layer="91"/>
+<pinref part="U$3" gate="G$1" pin="S"/>
+<wire x1="104.14" y1="-38.1" x2="104.14" y2="-25.4" width="0.1524" layer="91"/>
+<wire x1="96.52" y1="-38.1" x2="104.14" y2="-38.1" width="0.1524" layer="91"/>
+<wire x1="104.14" y1="-38.1" x2="104.14" y2="-40.64" width="0.1524" layer="91"/>
+<pinref part="SUPPLY9" gate="GND" pin="GND"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -2093,17 +2447,106 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 <pinref part="U$2" gate="G$1" pin="3"/>
 <wire x1="-2.54" y1="0" x2="-20.32" y2="0" width="0.1524" layer="91"/>
 <label x="-20.32" y="0" size="1.778" layer="95"/>
+<label x="-20.32" y="0" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="J1" gate="G$1" pin="2"/>
+<pinref part="LDS" gate="G$1" pin="2"/>
 <wire x1="109.22" y1="83.82" x2="116.84" y2="83.82" width="0.1524" layer="91"/>
 <label x="109.22" y="81.28" size="1.778" layer="95"/>
+<label x="116.84" y="83.82" size="1.778" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="48VCC" class="0">
+<segment>
+<wire x1="-40.64" y1="48.26" x2="-17.78" y2="48.26" width="0.1524" layer="91"/>
+<label x="-20.32" y="45.72" size="1.778" layer="95"/>
+<pinref part="48VPOWERSUPPLY" gate="G$1" pin="2"/>
+</segment>
+<segment>
+<wire x1="-5.08" y1="83.82" x2="-27.94" y2="83.82" width="0.1524" layer="91"/>
+<label x="-27.94" y="83.82" size="1.778" layer="95"/>
+<pinref part="KILLSWITCH" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="B+" class="0">
+<segment>
+<pinref part="MOTORCONTROLLERB" gate="G$1" pin="1"/>
+<wire x1="-33.02" y1="35.56" x2="-17.78" y2="35.56" width="0.1524" layer="91"/>
+<label x="-20.32" y="33.02" size="1.778" layer="95"/>
+<label x="-17.78" y="35.56" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="K1" gate="G$1" pin="NO"/>
+<wire x1="66.04" y1="83.82" x2="73.66" y2="83.82" width="0.1524" layer="91"/>
+<label x="73.66" y="83.82" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="N$6" class="0">
 <segment>
-<pinref part="POWERSUPPLY48V" gate="G$1" pin="1"/>
-<wire x1="-33.02" y1="48.26" x2="-17.78" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="83.82" x2="7.62" y2="83.82" width="0.1524" layer="91"/>
+<pinref part="KILLSWITCH" gate="G$1" pin="2"/>
+<wire x1="7.62" y1="83.82" x2="12.7" y2="83.82" width="0.1524" layer="91"/>
+<wire x1="-2.54" y1="83.82" x2="5.08" y2="83.82" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$8" class="0">
+<segment>
+<wire x1="25.4" y1="83.82" x2="38.1" y2="83.82" width="0.1524" layer="91"/>
+<pinref part="K1" gate="G$1" pin="COM"/>
+</segment>
+</net>
+<net name="COIL1" class="0">
+<segment>
+<pinref part="P+4" gate="VCC" pin="VCC"/>
+<wire x1="104.14" y1="10.16" x2="104.14" y2="5.08" width="0.1524" layer="91"/>
+<pinref part="D1" gate="G$1" pin="K"/>
+<wire x1="104.14" y1="5.08" x2="104.14" y2="0" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="5.08" x2="104.14" y2="5.08" width="0.1524" layer="91"/>
+<junction x="104.14" y="5.08"/>
+<label x="104.14" y="0" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="K1" gate="G$1" pin="COIL_1"/>
+<wire x1="38.1" y1="81.28" x2="35.56" y2="81.28" width="0.1524" layer="91"/>
+<label x="35.56" y="81.28" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="COIL2" class="0">
+<segment>
+<wire x1="104.14" y1="-10.16" x2="104.14" y2="-5.08" width="0.1524" layer="91"/>
+<pinref part="U$3" gate="G$1" pin="D"/>
+<pinref part="D1" gate="G$1" pin="A"/>
+<wire x1="91.44" y1="-10.16" x2="104.14" y2="-10.16" width="0.1524" layer="91"/>
+<junction x="104.14" y="-10.16"/>
+<label x="104.14" y="-5.08" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="K1" gate="G$1" pin="COIL_2"/>
+<wire x1="38.1" y1="78.74" x2="35.56" y2="78.74" width="0.1524" layer="91"/>
+<label x="35.56" y="78.74" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="N$11" class="0">
+<segment>
+<pinref part="R9" gate="G$1" pin="2"/>
+<wire x1="91.44" y1="-25.4" x2="91.44" y2="-20.32" width="0.1524" layer="91"/>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="91.44" y1="-20.32" x2="86.36" y2="-20.32" width="0.1524" layer="91"/>
+<pinref part="U$3" gate="G$1" pin="G"/>
+<wire x1="96.52" y1="-20.32" x2="91.44" y2="-20.32" width="0.1524" layer="91"/>
+<junction x="91.44" y="-20.32"/>
+</segment>
+</net>
+<net name="DIGITALPIN#2" class="0">
+<segment>
+<pinref part="R8" gate="G$1" pin="1"/>
+<wire x1="76.2" y1="-20.32" x2="63.5" y2="-20.32" width="0.1524" layer="91"/>
+<label x="63.5" y="-20.32" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U$2" gate="G$1" pin="5"/>
+<wire x1="-2.54" y1="-5.08" x2="-20.32" y2="-5.08" width="0.1524" layer="91"/>
+<label x="-20.32" y="-5.08" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>
