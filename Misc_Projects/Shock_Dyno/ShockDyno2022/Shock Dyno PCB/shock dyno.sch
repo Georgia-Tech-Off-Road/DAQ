@@ -3016,150 +3016,6 @@ Source: &lt;a href="https://www.microsemi.com/document-portal/doc_download/11580
 </deviceset>
 </devicesets>
 </library>
-<library name="1985195">
-<description>&lt;PTSA 1,5/ 2-3,5-Z Phoenix Contact Non-Fused Terminal Block, 2 Way, Solder Terminals, 20  16 AWG Through Hole, Nylon, 250 V&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
-<packages>
-<package name="1985195">
-<description>&lt;b&gt;1985195&lt;/b&gt;&lt;br&gt;
-</description>
-<pad name="1" x="6.75" y="-5" drill="1" diameter="1.5"/>
-<pad name="2" x="3.25" y="0" drill="1" diameter="1.5"/>
-<text x="4.25" y="-3.7" size="1.27" layer="25" align="center">&gt;NAME</text>
-<text x="4.25" y="-3.7" size="1.27" layer="27" align="center">&gt;VALUE</text>
-<wire x1="0" y1="2.3" x2="8.5" y2="2.3" width="0.2" layer="51"/>
-<wire x1="8.5" y1="2.3" x2="8.5" y2="-9.7" width="0.2" layer="51"/>
-<wire x1="8.5" y1="-9.7" x2="0" y2="-9.7" width="0.2" layer="51"/>
-<wire x1="0" y1="-9.7" x2="0" y2="2.3" width="0.2" layer="51"/>
-<wire x1="-1" y1="3.3" x2="9.5" y2="3.3" width="0.1" layer="51"/>
-<wire x1="9.5" y1="3.3" x2="9.5" y2="-10.7" width="0.1" layer="51"/>
-<wire x1="9.5" y1="-10.7" x2="-1" y2="-10.7" width="0.1" layer="51"/>
-<wire x1="-1" y1="-10.7" x2="-1" y2="3.3" width="0.1" layer="51"/>
-<wire x1="0" y1="2.3" x2="8.5" y2="2.3" width="0.1" layer="21"/>
-<wire x1="8.5" y1="2.3" x2="8.5" y2="-9.7" width="0.1" layer="21"/>
-<wire x1="8.5" y1="-9.7" x2="0" y2="-9.7" width="0.1" layer="21"/>
-<wire x1="0" y1="-9.7" x2="0" y2="2.3" width="0.1" layer="21"/>
-<wire x1="0" y1="2.3" x2="0" y2="2.3" width="0.1" layer="21"/>
-</package>
-</packages>
-<symbols>
-<symbol name="1985195">
-<wire x1="5.08" y1="2.54" x2="15.24" y2="2.54" width="0.254" layer="94"/>
-<wire x1="15.24" y1="-2.54" x2="15.24" y2="2.54" width="0.254" layer="94"/>
-<wire x1="15.24" y1="-2.54" x2="5.08" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="5.08" y1="2.54" x2="5.08" y2="-2.54" width="0.254" layer="94"/>
-<text x="16.51" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
-<text x="16.51" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
-<pin name="1" x="20.32" y="0" length="middle" rot="R180"/>
-<pin name="2" x="0" y="0" length="middle"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="1985195" prefix="J">
-<description>&lt;b&gt;PTSA 1,5/ 2-3,5-Z Phoenix Contact Non-Fused Terminal Block, 2 Way, Solder Terminals, 20  16 AWG Through Hole, Nylon, 250 V&lt;/b&gt;&lt;p&gt;
-Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_detail_page/!ut/p/z1/5Vddc6IwFP0rvvjWmBBA4qOyLda21rV2K7wwCQQnLV_FVGp__Qa0s6071e447gvMnSEf95zk3OQyXOjBOfRSuhILKkWW0lj1Xa_rE3xlDx1Du0HO5Bz9ROTSuOmdT6YXGP6CHvSWPOaB5KFNJV9kxRq6_evrakJSBl2tauVB8ATdCd"&gt; Datasheet &lt;/a&gt;</description>
-<gates>
-<gate name="G$1" symbol="1985195" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="1985195">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="ARROW_PART_NUMBER" value="1985195" constant="no"/>
-<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/1985195/phoenix-contact?region=nac" constant="no"/>
-<attribute name="DESCRIPTION" value="PTSA 1,5/ 2-3,5-Z Phoenix Contact Non-Fused Terminal Block, 2 Way, Solder Terminals, 20  16 AWG Through Hole, Nylon, 250 V" constant="no"/>
-<attribute name="HEIGHT" value="13mm" constant="no"/>
-<attribute name="MANUFACTURER_NAME" value="Phoenix Contact" constant="no"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="1985195" constant="no"/>
-<attribute name="MOUSER_PART_NUMBER" value="651-1985195" constant="no"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Phoenix-Contact/1985195?qs=nq%2FEIFkB2fEpUV%252BqAaKYzQ%3D%3D" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
-<library name="1985221">
-<description>&lt;Phoenix Contact Non-Fused Terminal Block, 5 Way/Pole, Solder Terminals, 20  16 AWG Through Hole, Nylon, 250 V&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
-<packages>
-<package name="1985221">
-<description>&lt;b&gt;1985221-2&lt;/b&gt;&lt;br&gt;
-</description>
-<pad name="1" x="0" y="0" drill="1" diameter="1.5" shape="square"/>
-<pad name="2" x="3.5" y="5" drill="1" diameter="1.5"/>
-<pad name="3" x="7" y="0" drill="1" diameter="1.5"/>
-<pad name="4" x="10.5" y="5" drill="1" diameter="1.5"/>
-<pad name="5" x="14" y="0" drill="1" diameter="1.5"/>
-<text x="6.25" y="1.3" size="1.27" layer="25" align="center">&gt;NAME</text>
-<text x="6.25" y="1.3" size="1.27" layer="27" align="center">&gt;VALUE</text>
-<wire x1="15.75" y1="-4.7" x2="-3.25" y2="-4.7" width="0.2" layer="51"/>
-<wire x1="-3.25" y1="-4.7" x2="-3.25" y2="7.3" width="0.2" layer="51"/>
-<wire x1="-3.25" y1="7.3" x2="15.75" y2="7.3" width="0.2" layer="51"/>
-<wire x1="15.75" y1="7.3" x2="15.75" y2="-4.7" width="0.2" layer="51"/>
-<wire x1="15.75" y1="-4.7" x2="-3.25" y2="-4.7" width="0.1" layer="21"/>
-<wire x1="-3.25" y1="-4.7" x2="-3.25" y2="7.3" width="0.1" layer="21"/>
-<wire x1="-3.25" y1="7.3" x2="15.75" y2="7.3" width="0.1" layer="21"/>
-<wire x1="15.75" y1="7.3" x2="15.75" y2="-4.7" width="0.1" layer="21"/>
-<wire x1="-4.25" y1="8.3" x2="16.75" y2="8.3" width="0.1" layer="51"/>
-<wire x1="16.75" y1="8.3" x2="16.75" y2="-5.7" width="0.1" layer="51"/>
-<wire x1="16.75" y1="-5.7" x2="-4.25" y2="-5.7" width="0.1" layer="51"/>
-<wire x1="-4.25" y1="-5.7" x2="-4.25" y2="8.3" width="0.1" layer="51"/>
-</package>
-</packages>
-<symbols>
-<symbol name="1985221">
-<wire x1="5.08" y1="2.54" x2="15.24" y2="2.54" width="0.254" layer="94"/>
-<wire x1="15.24" y1="-7.62" x2="15.24" y2="2.54" width="0.254" layer="94"/>
-<wire x1="15.24" y1="-7.62" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
-<wire x1="5.08" y1="2.54" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
-<text x="16.51" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
-<text x="16.51" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
-<pin name="1" x="0" y="0" length="middle"/>
-<pin name="2" x="20.32" y="0" length="middle" rot="R180"/>
-<pin name="3" x="0" y="-2.54" length="middle"/>
-<pin name="4" x="20.32" y="-2.54" length="middle" rot="R180"/>
-<pin name="5" x="0" y="-5.08" length="middle"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="1985221" prefix="J">
-<description>&lt;b&gt;Phoenix Contact Non-Fused Terminal Block, 5 Way/Pole, Solder Terminals, 20  16 AWG Through Hole, Nylon, 250 V&lt;/b&gt;&lt;p&gt;
-Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-itemdetail:pid=1985221&amp;library=usen&amp;tab=1"&gt; Datasheet &lt;/a&gt;</description>
-<gates>
-<gate name="G$1" symbol="1985221" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="1985221">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-<connect gate="G$1" pin="3" pad="3"/>
-<connect gate="G$1" pin="4" pad="4"/>
-<connect gate="G$1" pin="5" pad="5"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="ARROW_PART_NUMBER" value="1985221" constant="no"/>
-<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/1985221/phoenix-contact" constant="no"/>
-<attribute name="DESCRIPTION" value="Phoenix Contact Non-Fused Terminal Block, 5 Way/Pole, Solder Terminals, 20  16 AWG Through Hole, Nylon, 250 V" constant="no"/>
-<attribute name="HEIGHT" value="13.1mm" constant="no"/>
-<attribute name="MANUFACTURER_NAME" value="Phoenix Contact" constant="no"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="1985221" constant="no"/>
-<attribute name="MOUSER_PART_NUMBER" value="651-1985221" constant="no"/>
-<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Phoenix-Contact/1985221?qs=A%2FKWGUWTCZhjhjKrroowDA%3D%3D" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="GTOR - Connectors">
 <packages>
 <package name="TB00576202BE">
@@ -3318,6 +3174,27 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 <rectangle x1="-0.381" y1="-2.921" x2="0.381" y2="-1.905" layer="21"/>
 <rectangle x1="2.159" y1="-2.921" x2="2.921" y2="-1.905" layer="21"/>
 </package>
+<package name="1985195">
+<description>&lt;b&gt;1985195&lt;/b&gt;&lt;br&gt;
+</description>
+<pad name="1" x="6.75" y="-5" drill="1" diameter="1.5"/>
+<pad name="2" x="3.25" y="0" drill="1" diameter="1.5"/>
+<text x="4.25" y="-3.7" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="4.25" y="-3.7" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="0" y1="2.3" x2="8.5" y2="2.3" width="0.2" layer="51"/>
+<wire x1="8.5" y1="2.3" x2="8.5" y2="-9.7" width="0.2" layer="51"/>
+<wire x1="8.5" y1="-9.7" x2="0" y2="-9.7" width="0.2" layer="51"/>
+<wire x1="0" y1="-9.7" x2="0" y2="2.3" width="0.2" layer="51"/>
+<wire x1="-1" y1="3.3" x2="9.5" y2="3.3" width="0.1" layer="51"/>
+<wire x1="9.5" y1="3.3" x2="9.5" y2="-10.7" width="0.1" layer="51"/>
+<wire x1="9.5" y1="-10.7" x2="-1" y2="-10.7" width="0.1" layer="51"/>
+<wire x1="-1" y1="-10.7" x2="-1" y2="3.3" width="0.1" layer="51"/>
+<wire x1="0" y1="2.3" x2="8.5" y2="2.3" width="0.1" layer="21"/>
+<wire x1="8.5" y1="2.3" x2="8.5" y2="-9.7" width="0.1" layer="21"/>
+<wire x1="8.5" y1="-9.7" x2="0" y2="-9.7" width="0.1" layer="21"/>
+<wire x1="0" y1="-9.7" x2="0" y2="2.3" width="0.1" layer="21"/>
+<wire x1="0" y1="2.3" x2="0" y2="2.3" width="0.1" layer="21"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="1X04" urn="urn:adsk.eagle:package:22407/2" type="model">
@@ -3378,6 +3255,16 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/us?uri=pxc-oc-i
 <pin name="1" x="-2.54" y="2.54" visible="pad" length="short" direction="pas" function="dot"/>
 <pin name="2" x="-2.54" y="0" visible="pad" length="short" direction="pas" function="dot"/>
 <pin name="3" x="-2.54" y="-2.54" visible="pad" length="short" direction="pas" function="dot"/>
+</symbol>
+<symbol name="1985195">
+<wire x1="5.08" y1="2.54" x2="15.24" y2="2.54" width="0.254" layer="94"/>
+<wire x1="15.24" y1="-2.54" x2="15.24" y2="2.54" width="0.254" layer="94"/>
+<wire x1="15.24" y1="-2.54" x2="5.08" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="5.08" y1="2.54" x2="5.08" y2="-2.54" width="0.254" layer="94"/>
+<text x="16.51" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="16.51" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="1" x="20.32" y="0" length="middle" rot="R180"/>
+<pin name="2" x="0" y="0" length="middle"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -3486,6 +3373,33 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 </device>
 </devices>
 </deviceset>
+<deviceset name="1985195" prefix="J">
+<description>&lt;b&gt;PTSA 1,5/ 2-3,5-Z Phoenix Contact Non-Fused Terminal Block, 2 Way, Solder Terminals, 20  16 AWG Through Hole, Nylon, 250 V&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_detail_page/!ut/p/z1/5Vddc6IwFP0rvvjWmBBA4qOyLda21rV2K7wwCQQnLV_FVGp__Qa0s6071e447gvMnSEf95zk3OQyXOjBOfRSuhILKkWW0lj1Xa_rE3xlDx1Du0HO5Bz9ROTSuOmdT6YXGP6CHvSWPOaB5KFNJV9kxRq6_evrakJSBl2tauVB8ATdCd"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="1985195" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="1985195">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="ARROW_PART_NUMBER" value="1985195" constant="no"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/1985195/phoenix-contact?region=nac" constant="no"/>
+<attribute name="DESCRIPTION" value="PTSA 1,5/ 2-3,5-Z Phoenix Contact Non-Fused Terminal Block, 2 Way, Solder Terminals, 20  16 AWG Through Hole, Nylon, 250 V" constant="no"/>
+<attribute name="HEIGHT" value="13mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="Phoenix Contact" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="1985195" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="651-1985195" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Phoenix-Contact/1985195?qs=nq%2FEIFkB2fEpUV%252BqAaKYzQ%3D%3D" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -3511,13 +3425,10 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 <part name="R5" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="2k"/>
 <part name="R6" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="2k"/>
 <part name="SUPPLY4" library="GTOR - Documation Frame" deviceset="GND" device=""/>
-<part name="SUPPLY5" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="R7" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
-<part name="MOTORCONTROLLERB" library="1985195" deviceset="1985195" device=""/>
-<part name="MOTORCONTROLLER" library="1985221" deviceset="1985221" device=""/>
 <part name="SUPPLY7" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="SUPPLY8" library="GTOR - Documation Frame" deviceset="GND" device=""/>
-<part name="48VPOWERSUPPLY" library="GTOR - Connectors" deviceset="TB005-762-02BE" device=""/>
+<part name="+48V" library="GTOR - Connectors" deviceset="TB005-762-02BE" device=""/>
 <part name="KILLSWITCH" library="GTOR - Connectors" deviceset="TB005-762-02BE" device=""/>
 <part name="K1" library="GTOR - Active Components" deviceset="T9GS1L14-5" device=""/>
 <part name="P+4" library="GTOR - Documation Frame" deviceset="VCC" device=""/>
@@ -3553,6 +3464,9 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 <part name="+3V3" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="+3V4" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="+3V5" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
+<part name="LOAD_CELL_NC" library="GTOR - Connectors" deviceset="PINHD-1X4" device="" package3d_urn="urn:adsk.eagle:package:22407/2"/>
+<part name="M_CONTROLLER_B" library="GTOR - Connectors" deviceset="TB005-762-02BE" device=""/>
+<part name="J1" library="GTOR - Connectors" deviceset="1985195" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3601,28 +3515,17 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 <instance part="SUPPLY4" gate="GND" x="12.7" y="38.1" smashed="yes">
 <attribute name="VALUE" x="10.795" y="34.925" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY5" gate="GND" x="83.82" y="22.86" smashed="yes">
-<attribute name="VALUE" x="81.915" y="19.685" size="1.778" layer="96"/>
-</instance>
-<instance part="R7" gate="G$1" x="76.2" y="30.48" smashed="yes">
-<attribute name="NAME" x="72.39" y="31.9786" size="1.778" layer="95"/>
-<attribute name="VALUE" x="72.39" y="27.178" size="1.778" layer="96"/>
-</instance>
-<instance part="MOTORCONTROLLERB" gate="G$1" x="-53.34" y="35.56" smashed="yes">
-<attribute name="NAME" x="-36.83" y="43.18" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="-36.83" y="40.64" size="1.778" layer="96" align="center-left"/>
-</instance>
-<instance part="MOTORCONTROLLER" gate="G$1" x="88.9" y="35.56" smashed="yes">
-<attribute name="NAME" x="105.41" y="43.18" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="105.41" y="40.64" size="1.778" layer="96" align="center-left"/>
+<instance part="R7" gate="G$1" x="76.2" y="27.94" smashed="yes">
+<attribute name="NAME" x="72.39" y="29.4386" size="1.778" layer="95"/>
+<attribute name="VALUE" x="72.39" y="24.638" size="1.778" layer="96"/>
 </instance>
 <instance part="SUPPLY7" gate="GND" x="-55.88" y="43.18" smashed="yes">
 <attribute name="VALUE" x="-57.785" y="40.005" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY8" gate="GND" x="-55.88" y="30.48" smashed="yes">
-<attribute name="VALUE" x="-57.785" y="27.305" size="1.778" layer="96"/>
+<instance part="SUPPLY8" gate="GND" x="-43.18" y="25.4" smashed="yes">
+<attribute name="VALUE" x="-45.085" y="22.225" size="1.778" layer="96"/>
 </instance>
-<instance part="48VPOWERSUPPLY" gate="G$1" x="-43.18" y="48.26" smashed="yes" rot="R90">
+<instance part="+48V" gate="G$1" x="-43.18" y="48.26" smashed="yes" rot="R90">
 <attribute name="NAME" x="-50.8" y="64.77" size="1.778" layer="95" rot="R90" align="center-left"/>
 <attribute name="VALUE" x="-48.26" y="64.77" size="1.778" layer="96" rot="R90" align="center-left"/>
 </instance>
@@ -3748,6 +3651,18 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 <instance part="+3V5" gate="G$1" x="15.24" y="78.74" smashed="yes">
 <attribute name="VALUE" x="12.7" y="73.66" size="1.778" layer="96" rot="R90"/>
 </instance>
+<instance part="LOAD_CELL_NC" gate="A" x="129.54" y="78.74" smashed="yes">
+<attribute name="NAME" x="123.19" y="86.995" size="1.778" layer="95"/>
+<attribute name="VALUE" x="123.19" y="71.12" size="1.778" layer="96"/>
+</instance>
+<instance part="M_CONTROLLER_B" gate="G$1" x="-43.18" y="30.48" smashed="yes" rot="R90">
+<attribute name="NAME" x="-50.8" y="24.13" size="1.778" layer="95" rot="R90" align="center-left"/>
+<attribute name="VALUE" x="-48.26" y="26.67" size="1.778" layer="96" rot="R90" align="center-left"/>
+</instance>
+<instance part="J1" gate="G$1" x="86.36" y="33.02" smashed="yes">
+<attribute name="NAME" x="102.87" y="40.64" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="102.87" y="38.1" size="1.778" layer="96" align="center-left"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -3775,22 +3690,10 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 <pinref part="SUPPLY4" gate="GND" pin="GND"/>
 </segment>
 <segment>
-<wire x1="88.9" y1="35.56" x2="83.82" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="83.82" y1="35.56" x2="83.82" y2="25.4" width="0.1524" layer="91"/>
-<pinref part="SUPPLY5" gate="GND" pin="GND"/>
-<pinref part="MOTORCONTROLLER" gate="G$1" pin="1"/>
-</segment>
-<segment>
 <pinref part="SUPPLY7" gate="GND" pin="GND"/>
 <wire x1="-55.88" y1="48.26" x2="-55.88" y2="45.72" width="0.1524" layer="91"/>
-<pinref part="48VPOWERSUPPLY" gate="G$1" pin="1"/>
+<pinref part="+48V" gate="G$1" pin="1"/>
 <wire x1="-55.88" y1="48.26" x2="-43.18" y2="48.26" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="MOTORCONTROLLERB" gate="G$1" pin="2"/>
-<wire x1="-53.34" y1="35.56" x2="-55.88" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="-55.88" y1="35.56" x2="-55.88" y2="33.02" width="0.1524" layer="91"/>
-<pinref part="SUPPLY8" gate="GND" pin="GND"/>
 </segment>
 <segment>
 <pinref part="R9" gate="G$1" pin="1"/>
@@ -3851,6 +3754,11 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 <wire x1="127" y1="25.4" x2="121.92" y2="25.4" width="0.1524" layer="91"/>
 <pinref part="SUPPLY16" gate="GND" pin="GND"/>
 <wire x1="121.92" y1="25.4" x2="121.92" y2="22.86" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="M_CONTROLLER_B" gate="G$1" pin="1"/>
+<pinref part="SUPPLY8" gate="GND" pin="GND"/>
+<wire x1="-43.18" y1="30.48" x2="-43.18" y2="27.94" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="0">
@@ -3935,33 +3843,12 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 <pinref part="U$1" gate="G$1" pin="OUT2"/>
 </segment>
 </net>
-<net name="N$5" class="0">
-<segment>
-<pinref part="R5" gate="G$1" pin="1"/>
-<pinref part="U$1" gate="G$1" pin="IN2-"/>
-<wire x1="12.7" y1="50.8" x2="12.7" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="53.34" x2="22.86" y2="53.34" width="0.1524" layer="91"/>
-<pinref part="R6" gate="G$1" pin="2"/>
-<junction x="12.7" y="50.8"/>
-<wire x1="12.7" y1="50.8" x2="7.62" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="7.62" y1="50.8" x2="7.62" y2="33.02" width="0.1524" layer="91"/>
-<wire x1="7.62" y1="33.02" x2="88.9" y2="33.02" width="0.1524" layer="91"/>
-<pinref part="MOTORCONTROLLER" gate="G$1" pin="3"/>
-</segment>
-</net>
-<net name="N$7" class="0">
-<segment>
-<pinref part="R7" gate="G$1" pin="2"/>
-<wire x1="88.9" y1="30.48" x2="81.28" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="MOTORCONTROLLER" gate="G$1" pin="5"/>
-</segment>
-</net>
 <net name="DIGITALPIN#1" class="0">
 <segment>
-<pinref part="R7" gate="G$1" pin="1"/>
-<wire x1="71.12" y1="30.48" x2="66.04" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="66.04" y1="30.48" x2="66.04" y2="22.86" width="0.1524" layer="91"/>
 <label x="58.42" y="20.32" size="1.778" layer="95"/>
+<pinref part="R7" gate="G$1" pin="1"/>
+<wire x1="66.04" y1="27.94" x2="66.04" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="71.12" y1="27.94" x2="66.04" y2="27.94" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$2" gate="G$1" pin="4"/>
@@ -3973,7 +3860,7 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 <segment>
 <wire x1="-40.64" y1="48.26" x2="-17.78" y2="48.26" width="0.1524" layer="91"/>
 <label x="-20.32" y="45.72" size="1.778" layer="95"/>
-<pinref part="48VPOWERSUPPLY" gate="G$1" pin="2"/>
+<pinref part="+48V" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <wire x1="-5.08" y1="83.82" x2="-27.94" y2="83.82" width="0.1524" layer="91"/>
@@ -3983,10 +3870,10 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 </net>
 <net name="B+" class="0">
 <segment>
-<pinref part="MOTORCONTROLLERB" gate="G$1" pin="1"/>
-<wire x1="-33.02" y1="35.56" x2="-17.78" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="-40.64" y1="30.48" x2="-40.64" y2="15.24" width="0.1524" layer="91"/>
 <label x="-20.32" y="33.02" size="1.778" layer="95"/>
-<label x="-17.78" y="35.56" size="1.778" layer="95" xref="yes"/>
+<label x="-40.64" y="15.24" size="1.778" layer="95" rot="R270" xref="yes"/>
+<pinref part="M_CONTROLLER_B" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <pinref part="K1" gate="G$1" pin="NO"/>
@@ -4252,6 +4139,31 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/TB005-762-02B
 <wire x1="53.34" y1="-58.42" x2="60.96" y2="-58.42" width="0.1524" layer="91"/>
 <junction x="53.34" y="-58.42"/>
 <label x="60.96" y="-58.42" size="1.27" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<wire x1="81.28" y1="27.94" x2="106.68" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="27.94" x2="106.68" y2="33.02" width="0.1524" layer="91"/>
+<pinref part="R7" gate="G$1" pin="2"/>
+<pinref part="J1" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="M_CONTROLLER_C" class="0">
+<segment>
+<wire x1="86.36" y1="33.02" x2="81.28" y2="33.02" width="0.1524" layer="91"/>
+<label x="81.28" y="33.02" size="1.27" layer="95" rot="R180" xref="yes"/>
+<pinref part="J1" gate="G$1" pin="2"/>
+</segment>
+<segment>
+<pinref part="R5" gate="G$1" pin="1"/>
+<pinref part="U$1" gate="G$1" pin="IN2-"/>
+<wire x1="12.7" y1="50.8" x2="12.7" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="53.34" x2="22.86" y2="53.34" width="0.1524" layer="91"/>
+<pinref part="R6" gate="G$1" pin="2"/>
+<junction x="12.7" y="50.8"/>
+<wire x1="12.7" y1="50.8" x2="7.62" y2="50.8" width="0.1524" layer="91"/>
+<label x="7.62" y="50.8" size="1.27" layer="95" rot="R270" xref="yes"/>
 </segment>
 </net>
 </nets>
