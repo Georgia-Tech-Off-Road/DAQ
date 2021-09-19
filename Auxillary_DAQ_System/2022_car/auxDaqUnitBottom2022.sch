@@ -4534,9 +4534,9 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <part name="+3V4" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="+3V5" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="+3V6" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
-<part name="R27" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3"/>
-<part name="R28" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3"/>
-<part name="R29" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3"/>
+<part name="R27" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
+<part name="R28" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
+<part name="R29" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
 <part name="+3V7" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="+3V8" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="+3V9" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
@@ -4888,6 +4888,11 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <wire x1="177.8" y1="99.06" x2="170.18" y2="99.06" width="0.1524" layer="91"/>
 <label x="170.18" y="99.06" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
+<segment>
+<pinref part="R1" gate="G$1" pin="1"/>
+<wire x1="162.56" y1="68.58" x2="160.02" y2="68.58" width="0.1524" layer="91"/>
+<label x="160.02" y="68.58" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
 </net>
 <net name="31" class="0">
 <segment>
@@ -4899,11 +4904,6 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <pinref part="JP1" gate="A" pin="23"/>
 <wire x1="177.8" y1="96.52" x2="170.18" y2="96.52" width="0.1524" layer="91"/>
 <label x="170.18" y="96.52" size="1.27" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
-<pinref part="R1" gate="G$1" pin="1"/>
-<wire x1="162.56" y1="68.58" x2="160.02" y2="68.58" width="0.1524" layer="91"/>
-<label x="160.02" y="68.58" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="PROGRAM" class="0">
@@ -5523,8 +5523,8 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <sheet>
 <plain>
 <text x="43.18" y="172.72" size="5.08" layer="97">XBee</text>
-<wire x1="91.44" y1="185.42" x2="91.44" y2="101.6" width="0.1524" layer="94"/>
-<wire x1="91.44" y1="101.6" x2="68.58" y2="101.6" width="0.1524" layer="94"/>
+<wire x1="81.28" y1="185.42" x2="81.28" y2="101.6" width="0.1524" layer="94"/>
+<wire x1="81.28" y1="101.6" x2="68.58" y2="101.6" width="0.1524" layer="94"/>
 <text x="22.86" y="83.82" size="5.08" layer="97">Headers</text>
 <wire x1="68.58" y1="101.6" x2="0" y2="101.6" width="0.1524" layer="94"/>
 <wire x1="68.58" y1="101.6" x2="68.58" y2="83.82" width="0.1524" layer="94"/>
