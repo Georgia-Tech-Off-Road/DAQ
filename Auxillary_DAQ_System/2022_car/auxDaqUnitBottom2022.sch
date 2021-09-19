@@ -4907,8 +4907,6 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <part name="SUPPLY3" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="JP1" library="GTOR - Connectors" deviceset="PINHD-1X24" device="" package3d_urn="urn:adsk.eagle:package:22448/2"/>
 <part name="JP2" library="GTOR - Connectors" deviceset="PINHD-1X24" device="" package3d_urn="urn:adsk.eagle:package:22448/2"/>
-<part name="JP3" library="GTOR - Connectors" deviceset="PINHD-1X3" device="" package3d_urn="urn:adsk.eagle:package:22458/2"/>
-<part name="P+4" library="GTOR - Documation Frame" deviceset="+5V" device=""/>
 <part name="+3V2" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="SUPPLY4" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="JP4" library="GTOR - Connectors" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2"/>
@@ -5027,6 +5025,7 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <part name="+3V10" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="SUPPLY17" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="JP9" library="GTOR - Connectors" deviceset="PINHD-1X22" device="" package3d_urn="urn:adsk.eagle:package:22442/3"/>
+<part name="JP3" library="GTOR - Connectors" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -5117,13 +5116,6 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <attribute name="NAME" x="123.19" y="90.805" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="123.19" y="157.48" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="JP3" gate="A" x="132.08" y="66.04" smashed="yes" rot="R180">
-<attribute name="NAME" x="138.43" y="60.325" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="138.43" y="73.66" size="1.778" layer="96" rot="R180"/>
-</instance>
-<instance part="P+4" gate="1" x="142.24" y="76.2" smashed="yes">
-<attribute name="VALUE" x="142.24" y="71.12" size="1.778" layer="96" rot="R180"/>
-</instance>
 <instance part="+3V2" gate="G$1" x="144.78" y="71.12" smashed="yes">
 <attribute name="VALUE" x="144.78" y="66.04" size="1.778" layer="96" rot="R180"/>
 </instance>
@@ -5184,6 +5176,10 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <instance part="JP9" gate="A" x="172.72" y="124.46" smashed="yes" rot="R180">
 <attribute name="NAME" x="179.07" y="95.885" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="179.07" y="157.48" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="JP3" gate="G$1" x="132.08" y="66.04" smashed="yes" rot="R180">
+<attribute name="NAME" x="138.43" y="60.325" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="138.43" y="71.12" size="1.778" layer="96" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -5649,16 +5645,6 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <label x="50.8" y="66.04" size="1.27" layer="95" rot="R270" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="GND4"/>
-<wire x1="53.34" y1="71.12" x2="53.34" y2="66.04" width="0.1524" layer="91"/>
-<label x="53.34" y="66.04" size="1.27" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
-<pinref part="U$1" gate="G$1" pin="GND5"/>
-<wire x1="55.88" y1="71.12" x2="55.88" y2="66.04" width="0.1524" layer="91"/>
-<label x="55.88" y="66.04" size="1.27" layer="95" rot="R270" xref="yes"/>
-</segment>
-<segment>
 <pinref part="U$1" gate="G$1" pin="GND6"/>
 <wire x1="58.42" y1="71.12" x2="58.42" y2="66.04" width="0.1524" layer="91"/>
 <label x="58.42" y="66.04" size="1.27" layer="95" rot="R270" xref="yes"/>
@@ -5669,10 +5655,10 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <label x="127" y="129.54" size="1.27" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="JP3" gate="A" pin="1"/>
 <pinref part="SUPPLY4" gate="GND" pin="GND"/>
 <wire x1="134.62" y1="63.5" x2="142.24" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="142.24" y1="63.5" x2="142.24" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="JP3" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="JP4" gate="G$1" pin="1"/>
@@ -5744,12 +5730,6 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <junction x="50.8" y="35.56"/>
 </segment>
 <segment>
-<pinref part="JP3" gate="A" pin="3"/>
-<pinref part="P+4" gate="1" pin="+5V"/>
-<wire x1="134.62" y1="68.58" x2="142.24" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="142.24" y1="68.58" x2="142.24" y2="73.66" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="U$1" gate="G$1" pin="VIN"/>
 <wire x1="55.88" y1="162.56" x2="55.88" y2="165.1" width="0.1524" layer="91"/>
 <pinref part="P+14" gate="1" pin="+5V"/>
@@ -5777,10 +5757,10 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
 </segment>
 <segment>
-<pinref part="JP3" gate="A" pin="2"/>
 <pinref part="+3V2" gate="G$1" pin="+3V3"/>
 <wire x1="134.62" y1="66.04" x2="144.78" y2="66.04" width="0.1524" layer="91"/>
 <wire x1="144.78" y1="66.04" x2="144.78" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="JP3" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <pinref part="+3V26" gate="G$1" pin="+3V3"/>

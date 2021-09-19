@@ -235,39 +235,6 @@ Designed by Peter Chu</text>
 <libraries>
 <library name="GTOR - Connectors">
 <packages>
-<package name="1X03" urn="urn:adsk.eagle:footprint:22340/1">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
-<wire x1="-3.175" y1="1.27" x2="-1.905" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-1.905" y1="1.27" x2="-1.27" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="0.635" x2="-1.27" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="-0.635" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="0.635" x2="-0.635" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-0.635" y1="1.27" x2="0.635" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="0.635" y1="1.27" x2="1.27" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="1.27" y1="0.635" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="1.27" y1="-0.635" x2="0.635" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="0.635" y1="-1.27" x2="-0.635" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-0.635" y1="-1.27" x2="-1.27" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-3.81" y1="0.635" x2="-3.81" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-3.175" y1="1.27" x2="-3.81" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="-3.81" y1="-0.635" x2="-3.175" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-1.905" y1="-1.27" x2="-3.175" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="1.27" y1="0.635" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="1.27" x2="3.175" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="3.175" y1="1.27" x2="3.81" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="3.81" y1="0.635" x2="3.81" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="3.81" y1="-0.635" x2="3.175" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="3.175" y1="-1.27" x2="1.905" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="-1.27" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
-<pad name="1" x="-2.54" y="0" drill="1.016" shape="long" rot="R90"/>
-<pad name="2" x="0" y="0" drill="1.016" shape="long" rot="R90"/>
-<pad name="3" x="2.54" y="0" drill="1.016" shape="long" rot="R90"/>
-<text x="-3.8862" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-3.81" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
-<rectangle x1="-2.794" y1="-0.254" x2="-2.286" y2="0.254" layer="51"/>
-<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
-</package>
 <package name="1X22" urn="urn:adsk.eagle:footprint:22318/1">
 <description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
 <wire x1="18.415" y1="1.27" x2="19.685" y2="1.27" width="0.1524" layer="21"/>
@@ -472,18 +439,42 @@ Designed by Peter Chu</text>
 <rectangle x1="23.876" y1="-0.254" x2="24.384" y2="0.254" layer="51"/>
 <rectangle x1="26.416" y1="-0.254" x2="26.924" y2="0.254" layer="51"/>
 </package>
+<package name="1X02" urn="urn:adsk.eagle:footprint:22309/1">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<wire x1="-1.905" y1="1.27" x2="-0.635" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="1.27" x2="0" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="0" y1="-0.635" x2="-0.635" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="0.635" x2="-2.54" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.27" x2="-2.54" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-2.54" y1="-0.635" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="-1.27" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="0" y1="0.635" x2="0.635" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="1.27" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="1.27" x2="2.54" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="0.635" x2="2.54" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-0.635" x2="1.905" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-1.27" x2="0.635" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="-1.27" x2="0" y2="-0.635" width="0.1524" layer="21"/>
+<pad name="1" x="-1.27" y="0" drill="1.016" shape="long" rot="R90"/>
+<pad name="2" x="1.27" y="0" drill="1.016" shape="long" rot="R90"/>
+<text x="-2.6162" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-2.54" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-1.524" y1="-0.254" x2="-1.016" y2="0.254" layer="51"/>
+<rectangle x1="1.016" y1="-0.254" x2="1.524" y2="0.254" layer="51"/>
+</package>
 </packages>
 <packages3d>
-<package3d name="1X03" urn="urn:adsk.eagle:package:22458/2" type="model">
-<description>PIN HEADER</description>
-<packageinstances>
-<packageinstance name="1X03"/>
-</packageinstances>
-</package3d>
 <package3d name="1X22" urn="urn:adsk.eagle:package:22442/3" type="model">
 <description>PIN HEADER</description>
 <packageinstances>
 <packageinstance name="1X22"/>
+</packageinstances>
+</package3d>
+<package3d name="1X02" urn="urn:adsk.eagle:package:22435/2" type="model">
+<description>PIN HEADER</description>
+<packageinstances>
+<packageinstance name="1X02"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -854,11 +845,6 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="JP3" library="GTOR - Connectors" package="1X03" package3d_urn="urn:adsk.eagle:package:22458/2" value="" x="102.87" y="49.53" smashed="yes" rot="R90">
-<attribute name="NAME" x="101.0412" y="45.6438" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="POPULARITY" value="92" x="102.87" y="49.53" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="106.045" y="45.72" size="1.27" layer="27" rot="R90"/>
-</element>
 <element name="CS=10" library="GTOR - Microfit Connector" package="43045-0600" value="" x="116.84" y="135.89" smashed="yes" rot="R90"/>
 <element name="D1" library="GTOR - Microfit Connector" package="43650-0300" value="" x="116.84" y="52.07" smashed="yes" rot="R90"/>
 <element name="I2C1" library="GTOR - Microfit Connector" package="43045-0400" value="" x="116.84" y="173.99" smashed="yes" rot="R90">
@@ -907,6 +893,11 @@ design rules under a new name.</description>
 <attribute name="NAME" x="101.0412" y="82.4738" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="POPULARITY" value="1" x="102.87" y="110.49" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="106.045" y="82.55" size="1.27" layer="27" rot="R90"/>
+</element>
+<element name="JP1" library="GTOR - Connectors" package="1X02" package3d_urn="urn:adsk.eagle:package:22435/2" value="" x="102.87" y="49.53" smashed="yes" rot="R90">
+<attribute name="NAME" x="101.0412" y="46.9138" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="POPULARITY" value="98" x="102.87" y="49.53" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="106.045" y="46.99" size="1.27" layer="27" rot="R90"/>
 </element>
 </elements>
 <signals>
@@ -959,7 +950,6 @@ design rules under a new name.</description>
 <wire x1="102.87" y1="83.82" x2="102.87" y2="60.54" width="0.508" layer="1"/>
 </signal>
 <signal name="GND">
-<contactref element="JP3" pad="1"/>
 <contactref element="D1" pad="P$3"/>
 <contactref element="I2C1" pad="P$4"/>
 <contactref element="CS=10" pad="P$6"/>
@@ -993,12 +983,9 @@ design rules under a new name.</description>
 <vertex x="125.73" y="204.47"/>
 <vertex x="74.93" y="204.47"/>
 </polygon>
-</signal>
-<signal name="+5V">
-<contactref element="JP3" pad="3"/>
+<contactref element="JP1" pad="1"/>
 </signal>
 <signal name="+3V3">
-<contactref element="JP3" pad="2"/>
 <contactref element="CS=10" pad="P$1"/>
 <contactref element="I2C1" pad="P$1"/>
 <contactref element="D1" pad="P$1"/>
@@ -1030,6 +1017,7 @@ design rules under a new name.</description>
 </polygon>
 <wire x1="102.02" y1="55.88" x2="100.33" y2="55.88" width="0.1524" layer="1"/>
 <via x="100.33" y="55.88" extent="1-16" drill="0.35"/>
+<contactref element="JP1" pad="2"/>
 </signal>
 <signal name="2">
 <contactref element="D1" pad="P$2"/>
