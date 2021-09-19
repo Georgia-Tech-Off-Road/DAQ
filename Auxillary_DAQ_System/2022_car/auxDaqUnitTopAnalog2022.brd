@@ -195,11 +195,11 @@
 <hole x="31.75" y="6.35" drill="4.1"/>
 <hole x="31.75" y="186.69" drill="4.1"/>
 <text x="24.13" y="144.78" size="1.778" layer="25" rot="SR90">CS = 33</text>
-<text x="11.43" y="181.61" size="1.27" layer="25" rot="SR0">auxDAQ Analog rev1
+<text x="19.05" y="182.88" size="1.27" layer="25" rot="SR0" align="center">auxDAQ Analog rev1
 Designed by Peter Chu</text>
-<wire x1="21.59" y1="179.07" x2="27.559" y2="178.943" width="0.254" layer="25"/>
-<wire x1="27.559" y1="178.943" x2="27.559" y2="68.453" width="0.254" layer="25"/>
-<wire x1="27.559" y1="68.453" x2="21.59" y2="68.58" width="0.254" layer="25"/>
+<wire x1="21.59" y1="179.07" x2="27.559" y2="179.07" width="0.254" layer="25"/>
+<wire x1="27.559" y1="179.07" x2="27.559" y2="68.58" width="0.254" layer="25"/>
+<wire x1="27.559" y1="68.58" x2="21.59" y2="68.58" width="0.254" layer="25"/>
 <wire x1="21.59" y1="68.58" x2="21.59" y2="179.07" width="0.254" layer="25"/>
 <wire x1="10.795" y1="179.07" x2="16.51" y2="179.07" width="0.254" layer="25"/>
 <wire x1="16.51" y1="179.07" x2="16.51" y2="68.58" width="0.254" layer="25"/>
@@ -222,10 +222,10 @@ Designed by Peter Chu</text>
 <text x="11.43" y="105.41" size="1.778" layer="25" rot="SR270">ADC6</text>
 <text x="11.43" y="91.44" size="1.778" layer="25" rot="SR270">ADC7</text>
 <text x="11.43" y="77.47" size="1.778" layer="25" rot="SR270">ADC8</text>
-<wire x1="11.43" y1="67.31" x2="11.43" y2="12.7" width="0.254" layer="25"/>
-<wire x1="11.43" y1="12.7" x2="26.67" y2="12.7" width="0.254" layer="25"/>
-<wire x1="26.67" y1="12.7" x2="26.67" y2="67.31" width="0.254" layer="25"/>
-<wire x1="26.67" y1="67.31" x2="11.43" y2="67.31" width="0.254" layer="25"/>
+<wire x1="10.795" y1="67.31" x2="10.795" y2="12.7" width="0.254" layer="25"/>
+<wire x1="10.795" y1="12.7" x2="27.432" y2="12.7" width="0.254" layer="25"/>
+<wire x1="27.432" y1="12.7" x2="27.432" y2="67.31" width="0.254" layer="25"/>
+<wire x1="27.432" y1="67.31" x2="10.795" y2="67.31" width="0.254" layer="25"/>
 <text x="22.86" y="22.86" size="1.778" layer="25" rot="SR90">CS = 35</text>
 <text x="26.67" y="57.15" size="1.778" layer="25" rot="SR90">ADC1</text>
 <text x="26.67" y="43.18" size="1.778" layer="25" rot="SR90">ADC2</text>

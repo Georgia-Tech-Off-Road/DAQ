@@ -205,6 +205,8 @@
 <wire x1="83.82" y1="36.83" x2="121.92" y2="36.83" width="0.127" layer="25"/>
 <text x="67.31" y="69.85" size="3.81" layer="25" rot="SR90">auxDAQ MainBoard rev1
 Designed by Peter Chu</text>
+<text x="5.08" y="135.89" size="5.08" layer="25" rot="SR270">Place Analog board here</text>
+<text x="113.03" y="135.89" size="5.08" layer="25" rot="R270">Place Digital board here</text>
 </plain>
 <libraries>
 <library name="GTOR - Microcontroller">
