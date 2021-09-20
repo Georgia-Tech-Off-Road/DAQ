@@ -3,12 +3,12 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="no"/>
+<setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
 <layer number="3" name="Route3" color="17" fill="1" visible="no" active="no"/>
 <layer number="4" name="Route4" color="18" fill="1" visible="no" active="no"/>
@@ -24,15 +24,15 @@
 <layer number="14" name="Route14" color="22" fill="1" visible="no" active="no"/>
 <layer number="15" name="Route15" color="23" fill="1" visible="no" active="no"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
-<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
-<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
-<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
-<layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="no" active="yes"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="no" active="yes"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="no" active="yes"/>
+<layer number="20" name="Dimension" color="24" fill="1" visible="no" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="yes"/>
 <layer number="22" name="bPlace" color="7" fill="1" visible="no" active="yes"/>
-<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="no" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="no" active="yes"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="no" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="no" active="yes"/>
@@ -46,13 +46,13 @@
 <layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
 <layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
-<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="yes"/>
 <layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
-<layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
+<layer number="41" name="tRestrict" color="4" fill="10" visible="no" active="yes"/>
 <layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
@@ -194,41 +194,20 @@
 <hole x="90.17" y="40.64" drill="4.1"/>
 <hole x="115.57" y="40.64" drill="4.1"/>
 <hole x="115.57" y="186.69" drill="4.1"/>
-<text x="96.52" y="58.42" size="1.016" layer="51">Debug
-Pin 30</text>
-<text x="97.79" y="55.88" size="1.016" layer="51">3.3v</text>
-<wire x1="98.679" y1="179.07" x2="107.569" y2="179.07" width="0.127" layer="51"/>
-<wire x1="107.569" y1="179.07" x2="107.569" y2="157.48" width="0.127" layer="51"/>
-<wire x1="107.569" y1="157.48" x2="98.679" y2="157.48" width="0.127" layer="51"/>
-<wire x1="98.679" y1="157.48" x2="98.679" y2="179.07" width="0.127" layer="51"/>
-<text x="105.156" y="164.338" size="3.81" layer="51" rot="R90">I2C</text>
-<wire x1="98.679" y1="156.21" x2="107.569" y2="156.21" width="0.127" layer="51"/>
-<wire x1="107.569" y1="156.21" x2="107.569" y2="129.54" width="0.127" layer="51"/>
-<wire x1="107.569" y1="129.54" x2="98.679" y2="129.54" width="0.127" layer="51"/>
-<wire x1="98.679" y1="129.54" x2="98.679" y2="156.21" width="0.127" layer="51"/>
-<text x="104.902" y="141.478" size="3.81" layer="51" rot="R90">SPI</text>
-<text x="99.568" y="153.162" size="1.27" layer="51" rot="SR270">CS=25</text>
-<text x="99.568" y="139.192" size="1.27" layer="51" rot="SR270">CS=9</text>
-<text x="105.918" y="139.192" size="1.27" layer="51" rot="R270">CS=8</text>
-<text x="105.918" y="153.162" size="1.27" layer="51" rot="R270">CS=24</text>
-<wire x1="94.869" y1="128.27" x2="110.871" y2="128.27" width="0.127" layer="51"/>
-<wire x1="110.871" y1="128.27" x2="110.871" y2="43.18" width="0.127" layer="51"/>
-<wire x1="110.871" y1="43.18" x2="94.869" y2="43.18" width="0.127" layer="51"/>
-<wire x1="94.869" y1="43.18" x2="94.869" y2="128.27" width="0.127" layer="51"/>
-<text x="104.902" y="113.538" size="3.81" layer="51" rot="R90">SPI</text>
-<text x="95.758" y="123.952" size="2.54" layer="51" rot="SR270">31</text>
-<text x="104.902" y="62.738" size="3.81" layer="51" rot="R90">DIGITAL</text>
-<text x="95.758" y="109.982" size="2.54" layer="51" rot="SR270">28</text>
-<text x="95.758" y="96.012" size="2.54" layer="51" rot="SR270">26</text>
-<text x="95.758" y="80.772" size="2.54" layer="51" rot="SR270">7</text>
-<text x="95.758" y="66.802" size="2.54" layer="51" rot="SR270">5</text>
-<text x="95.758" y="52.832" size="2.54" layer="51" rot="SR270">3</text>
-<text x="107.188" y="52.832" size="2.54" layer="51" rot="R270">2</text>
-<text x="107.188" y="66.802" size="2.54" layer="51" rot="R270">4</text>
-<text x="107.188" y="80.772" size="2.54" layer="51" rot="R270">6</text>
-<text x="107.188" y="96.012" size="2.54" layer="51" rot="R270">27</text>
-<text x="107.188" y="109.982" size="2.54" layer="51" rot="R270">29</text>
-<text x="107.188" y="123.952" size="2.54" layer="51" rot="R270">32</text>
+<wire x1="98.679" y1="179.07" x2="107.569" y2="179.07" width="0.127" layer="25"/>
+<wire x1="107.569" y1="179.07" x2="107.569" y2="157.48" width="0.127" layer="25"/>
+<wire x1="107.569" y1="157.48" x2="98.679" y2="157.48" width="0.127" layer="25"/>
+<wire x1="98.679" y1="157.48" x2="98.679" y2="179.07" width="0.127" layer="25"/>
+<text x="105.156" y="164.338" size="3.81" layer="25" rot="R90">I2C</text>
+<wire x1="98.679" y1="156.21" x2="107.569" y2="156.21" width="0.127" layer="25"/>
+<wire x1="107.569" y1="156.21" x2="107.569" y2="129.54" width="0.127" layer="25"/>
+<wire x1="107.569" y1="129.54" x2="98.679" y2="129.54" width="0.127" layer="25"/>
+<wire x1="98.679" y1="129.54" x2="98.679" y2="156.21" width="0.127" layer="25"/>
+<text x="104.902" y="141.478" size="3.81" layer="27" rot="R90">SPI</text>
+<wire x1="94.869" y1="128.27" x2="110.871" y2="128.27" width="0.127" layer="25"/>
+<wire x1="110.871" y1="128.27" x2="110.871" y2="43.18" width="0.127" layer="25"/>
+<wire x1="110.871" y1="43.18" x2="94.869" y2="43.18" width="0.127" layer="25"/>
+<wire x1="94.869" y1="43.18" x2="94.869" y2="128.27" width="0.127" layer="25"/>
 <text x="95.25" y="181.61" size="1.27" layer="25" rot="SR0">auxDAQ Digital rev1
 Designed by Peter Chu</text>
 </plain>
