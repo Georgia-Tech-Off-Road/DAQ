@@ -8534,23 +8534,11 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </library>
 <library name="GTOR - Connectors">
 <packages>
-<package name="366380003">
+<package name="48CKTRASCMCHEADER">
 <rectangle x1="-21.6" y1="-9.25" x2="21.6" y2="9.25" layer="21"/>
 <hole x="-18.9" y="3" drill="2.7"/>
 <hole x="19.2" y="3" drill="2.7"/>
-<hole x="2.5" y="-6" drill="1.1"/>
-<hole x="0" y="-6" drill="1.1"/>
 <dimension x1="-16.51" y1="2.62" x2="-16.51" y2="-0.08" x3="16.51" y3="1.27" textsize="1.27" layer="21" dtype="diameter"/>
-<hole x="7.5" y="-6" drill="1.1"/>
-<hole x="5" y="-6" drill="1.1"/>
-<hole x="10" y="-6" drill="1.1"/>
-<hole x="15" y="-6" drill="1.1"/>
-<hole x="12.5" y="-6" drill="1.1"/>
-<hole x="-2.5" y="-6" drill="1.1"/>
-<hole x="-5" y="-6" drill="1.1"/>
-<hole x="-7.5" y="-6" drill="1.1"/>
-<hole x="-11" y="-6" drill="1.1"/>
-<hole x="-14.7" y="-6" drill="1.1"/>
 <pad name="P$4L" x="-11" y="-6" drill="1.1"/>
 <pad name="P$4M" x="-14.7" y="-6" drill="1.1"/>
 <pad name="P$4K" x="-7.5" y="-6" drill="1.1"/>
@@ -8563,18 +8551,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pad name="P$4C" x="10" y="-6" drill="1.1"/>
 <pad name="P$4B" x="12.5" y="-6" drill="1.1"/>
 <pad name="P$4A" x="15" y="-6" drill="1.1"/>
-<hole x="2.5" y="6" drill="1.1"/>
-<hole x="0" y="6" drill="1.1"/>
-<hole x="7.5" y="6" drill="1.1"/>
-<hole x="5" y="6" drill="1.1"/>
-<hole x="10" y="6" drill="1.1"/>
-<hole x="15" y="6" drill="1.1"/>
-<hole x="12.5" y="6" drill="1.1"/>
-<hole x="-2.5" y="6" drill="1.1"/>
-<hole x="-5" y="6" drill="1.1"/>
-<hole x="-7.5" y="6" drill="1.1"/>
-<hole x="-11" y="6" drill="1.1"/>
-<hole x="-14.7" y="6" drill="1.1"/>
 <pad name="P$1L" x="-11" y="6" drill="1.1"/>
 <pad name="P$1M" x="-14.7" y="6" drill="1.1"/>
 <pad name="P$1K" x="-7.5" y="6" drill="1.1"/>
@@ -8587,19 +8563,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pad name="P$1C" x="10" y="6" drill="1.1"/>
 <pad name="P$1B" x="12.5" y="6" drill="1.1"/>
 <pad name="P$1A" x="15" y="6" drill="1.1"/>
-<hole x="2.5" y="2" drill="1.1"/>
-<hole x="0" y="2" drill="1.1"/>
 <dimension x1="-16.51" y1="2.62" x2="-16.51" y2="-0.08" x3="16.51" y3="1.27" textsize="1.27" layer="21" dtype="diameter"/>
-<hole x="7.52" y="2" drill="1.1"/>
-<hole x="5" y="2" drill="1.1"/>
-<hole x="10" y="2" drill="1.1"/>
-<hole x="15" y="2" drill="1.1"/>
-<hole x="12.5" y="2" drill="1.1"/>
-<hole x="-2.5" y="2" drill="1.1"/>
-<hole x="-5" y="2" drill="1.1"/>
-<hole x="-7.5" y="2" drill="1.1"/>
-<hole x="-11" y="2" drill="1.1"/>
-<hole x="-14.7" y="2" drill="1.1"/>
 <pad name="P$2L" x="-11" y="2" drill="1.1"/>
 <pad name="P$2M" x="-14.7" y="2" drill="1.1"/>
 <pad name="P$2K" x="-7.5" y="2" drill="1.1"/>
@@ -8612,18 +8576,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pad name="P$2C" x="10" y="2" drill="1.1"/>
 <pad name="P$2B" x="12.5" y="2" drill="1.1"/>
 <pad name="P$2A" x="15" y="2" drill="1.1"/>
-<hole x="2.5" y="-2" drill="1.1"/>
-<hole x="0" y="-2" drill="1.1"/>
-<hole x="7.52" y="-2" drill="1.1"/>
-<hole x="5" y="-2" drill="1.1"/>
-<hole x="10" y="-2" drill="1.1"/>
-<hole x="15" y="-2" drill="1.1"/>
-<hole x="12.5" y="-2" drill="1.1"/>
-<hole x="-2.5" y="-2" drill="1.1"/>
-<hole x="-5" y="-2" drill="1.1"/>
-<hole x="-7.5" y="-2" drill="1.1"/>
-<hole x="-11" y="-2" drill="1.1"/>
-<hole x="-14.7" y="-2" drill="1.1"/>
 <pad name="P$3L" x="-11" y="-2" drill="1.1"/>
 <pad name="P$3M" x="-14.7" y="-2" drill="1.1"/>
 <pad name="P$3K" x="-7.5" y="-2" drill="1.1"/>
@@ -8639,7 +8591,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </package>
 </packages>
 <symbols>
-<symbol name="PINHD48">
+<symbol name="48CKTRASCMCHEADER">
 <wire x1="-31.75" y1="-7.62" x2="34.29" y2="-7.62" width="0.4064" layer="94"/>
 <wire x1="34.29" y1="-7.62" x2="34.29" y2="5.08" width="0.4064" layer="94"/>
 <wire x1="34.29" y1="5.08" x2="-31.75" y2="5.08" width="0.4064" layer="94"/>
@@ -8699,10 +8651,10 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <devicesets>
 <deviceset name="48CKTRASCMCHEADER">
 <gates>
-<gate name="G$1" symbol="PINHD48" x="0" y="2.54"/>
+<gate name="G$1" symbol="48CKTRASCMCHEADER" x="0" y="2.54"/>
 </gates>
 <devices>
-<device name="" package="366380003">
+<device name="" package="48CKTRASCMCHEADER">
 <connects>
 <connect gate="G$1" pin="1A" pad="P$1A"/>
 <connect gate="G$1" pin="1B" pad="P$1B"/>
@@ -8940,9 +8892,9 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="60.96" y="81.28" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<wire x1="58.42" y1="30.48" x2="66.04" y2="33.02" width="0.1524" layer="91"/>
-<label x="66.04" y="33.02" size="1.778" layer="95" xref="yes"/>
-<pinref part="U$4" gate="G$1" pin="1A"/>
+<label x="66.04" y="27.94" size="1.778" layer="95" xref="yes"/>
+<wire x1="66.04" y1="27.94" x2="58.42" y2="27.94" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="2A"/>
 </segment>
 <segment>
 <pinref part="R12" gate="G$1" pin="1"/>
@@ -9005,16 +8957,31 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="60.96" y="-40.64" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<wire x1="53.34" y1="27.94" x2="63.5" y2="38.1" width="0.1524" layer="91"/>
-<label x="63.5" y="38.1" size="1.778" layer="95" xref="yes"/>
+<label x="51.562" y="38.1" size="1.778" layer="95" xref="yes"/>
 <pinref part="U$4" gate="G$1" pin="2B"/>
+<wire x1="53.34" y1="27.94" x2="51.562" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="51.562" y1="27.94" x2="51.562" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<wire x1="48.26" y1="27.94" x2="45.72" y2="43.18" width="0.1524" layer="91"/>
-<label x="45.72" y="43.18" size="1.778" layer="95" xref="yes"/>
-<pinref part="U$4" gate="G$1" pin="2C"/>
-<label x="35.56" y="43.18" size="1.778" layer="95" xref="yes"/>
+<label x="45.72" y="38.1" size="1.778" layer="95" rot="MR0" xref="yes"/>
+<label x="40.64" y="35.56" size="1.778" layer="95" rot="MR0" xref="yes"/>
 <label x="33.02" y="35.56" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U$4" gate="G$1" pin="2C"/>
+<wire x1="48.26" y1="27.94" x2="46.99" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="46.99" y1="27.94" x2="46.99" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="46.99" y1="38.1" x2="45.72" y2="38.1" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U$4" gate="G$1" pin="2D"/>
+<wire x1="43.18" y1="27.94" x2="41.402" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="41.402" y1="27.94" x2="41.402" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="35.56" x2="41.402" y2="35.56" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U$4" gate="G$1" pin="2E"/>
+<wire x1="38.1" y1="27.94" x2="36.576" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="36.576" y1="27.94" x2="36.576" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="36.576" y1="35.56" x2="33.02" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="LAT_L" class="0">
@@ -9223,8 +9190,8 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="60.96" y="76.2" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<wire x1="53.34" y1="30.48" x2="66.04" y2="43.18" width="0.1524" layer="91"/>
-<label x="66.04" y="43.18" size="1.778" layer="95" xref="yes"/>
+<wire x1="53.34" y1="30.48" x2="53.34" y2="43.18" width="0.1524" layer="91"/>
+<label x="53.34" y="43.18" size="1.778" layer="95" xref="yes"/>
 <pinref part="U$4" gate="G$1" pin="1B"/>
 </segment>
 <segment>
@@ -9241,11 +9208,21 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <label x="60.96" y="-17.78" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<wire x1="48.26" y1="30.48" x2="53.34" y2="38.1" width="0.1524" layer="91"/>
-<label x="53.34" y="38.1" size="1.778" layer="95" xref="yes"/>
-<pinref part="U$4" gate="G$1" pin="1C"/>
-<label x="40.64" y="35.56" size="1.778" layer="95" xref="yes"/>
+<wire x1="48.26" y1="30.48" x2="48.26" y2="45.72" width="0.1524" layer="91"/>
+<label x="48.26" y="45.72" size="1.778" layer="95" rot="MR0" xref="yes"/>
+<label x="43.18" y="43.18" size="1.778" layer="95" rot="MR0" xref="yes"/>
 <label x="35.56" y="40.64" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U$4" gate="G$1" pin="1C"/>
+</segment>
+<segment>
+<pinref part="U$4" gate="G$1" pin="1E"/>
+<wire x1="38.1" y1="30.48" x2="37.338" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="37.338" y1="30.48" x2="37.338" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="37.338" y1="40.64" x2="35.56" y2="40.64" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="U$4" gate="G$1" pin="1D"/>
+<wire x1="43.18" y1="30.48" x2="43.18" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="3.3V_BUCK" class="0">
@@ -9328,9 +9305,9 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <junction x="180.34" y="55.88"/>
 </segment>
 <segment>
-<wire x1="58.42" y1="25.4" x2="66.04" y2="22.86" width="0.1524" layer="91"/>
 <label x="66.04" y="22.86" size="1.778" layer="95" xref="yes"/>
-<pinref part="U$4" gate="G$1" pin="3A"/>
+<wire x1="66.04" y1="22.86" x2="58.42" y2="22.86" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="4A"/>
 </segment>
 </net>
 <net name="AUX_TX" class="0">
@@ -9343,9 +9320,9 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <junction x="180.34" y="58.42"/>
 </segment>
 <segment>
-<wire x1="58.42" y1="27.94" x2="66.04" y2="27.94" width="0.1524" layer="91"/>
-<label x="66.04" y="27.94" size="1.778" layer="95" xref="yes"/>
-<pinref part="U$4" gate="G$1" pin="2A"/>
+<label x="66.04" y="25.4" size="1.778" layer="95" xref="yes"/>
+<wire x1="66.04" y1="25.4" x2="58.42" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="3A"/>
 </segment>
 </net>
 <net name="SECONDARY_RPM" class="0">
@@ -9395,6 +9372,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <segment>
 <pinref part="J2" gate="G$1" pin="07"/>
 <wire x1="33.02" y1="53.34" x2="27.94" y2="53.34" width="0.1524" layer="91"/>
+<label x="27.94" y="53.34" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="LAT_R" class="0">
@@ -9447,17 +9425,19 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <net name="N$23" class="0">
 <segment>
 <pinref part="R10" gate="G$1" pin="2"/>
-<wire x1="50.8" y1="15.24" x2="73.66" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="52.578" y1="15.24" x2="73.66" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="25.4" x2="52.578" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="52.578" y1="25.4" x2="52.578" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="U$4" gate="G$1" pin="3B"/>
-<wire x1="50.8" y1="15.24" x2="53.34" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$24" class="0">
 <segment>
-<wire x1="45.72" y1="12.7" x2="73.66" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="47.244" y1="12.7" x2="73.66" y2="12.7" width="0.1524" layer="91"/>
 <pinref part="R11" gate="G$1" pin="2"/>
 <pinref part="U$4" gate="G$1" pin="3C"/>
-<wire x1="45.72" y1="12.7" x2="48.26" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="25.4" x2="47.244" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="47.244" y1="25.4" x2="47.244" y2="12.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="33" class="0">
@@ -9620,9 +9600,10 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </net>
 <net name="ANALOG1" class="0">
 <segment>
+<label x="42.418" y="17.78" size="1.778" layer="95" rot="R270" xref="yes"/>
 <pinref part="U$4" gate="G$1" pin="3D"/>
-<wire x1="43.18" y1="25.4" x2="40.64" y2="17.78" width="0.1524" layer="91"/>
-<label x="40.64" y="17.78" size="1.778" layer="95" rot="R270" xref="yes"/>
+<wire x1="43.18" y1="25.4" x2="42.418" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="42.418" y1="25.4" x2="42.418" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="21/A7/RX5"/>
@@ -9635,9 +9616,10 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </net>
 <net name="ANALOG2" class="0">
 <segment>
+<label x="37.084" y="17.78" size="1.778" layer="95" rot="R270" xref="yes"/>
 <pinref part="U$4" gate="G$1" pin="3E"/>
-<wire x1="38.1" y1="25.4" x2="35.56" y2="17.78" width="0.1524" layer="91"/>
-<label x="35.56" y="17.78" size="1.778" layer="95" rot="R270" xref="yes"/>
+<wire x1="38.1" y1="25.4" x2="37.084" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="37.084" y1="25.4" x2="37.084" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="20/A6/TX5"/>
@@ -9650,9 +9632,10 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 </net>
 <net name="ANALOG3" class="0">
 <segment>
+<label x="31.75" y="19.304" size="1.778" layer="95" rot="R270" xref="yes"/>
 <pinref part="U$4" gate="G$1" pin="3F"/>
-<wire x1="33.02" y1="25.4" x2="25.4" y2="15.24" width="0.1524" layer="91"/>
-<label x="25.4" y="15.24" size="1.778" layer="95" rot="R270" xref="yes"/>
+<wire x1="33.02" y1="25.4" x2="31.75" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="31.75" y1="25.4" x2="31.75" y2="19.304" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="19/A5/SCL"/>
@@ -9661,30 +9644,6 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="180.34" y1="63.5" x2="187.96" y2="63.5" width="0.1524" layer="91"/>
 <junction x="180.34" y="63.5"/>
 <label x="187.96" y="63.5" size="1.778" layer="95" xref="yes"/>
-</segment>
-</net>
-<net name="N$5" class="0">
-<segment>
-<pinref part="U$4" gate="G$1" pin="1D"/>
-<wire x1="40.64" y1="35.56" x2="43.18" y2="30.48" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$6" class="0">
-<segment>
-<pinref part="U$4" gate="G$1" pin="1E"/>
-<wire x1="35.56" y1="40.64" x2="38.1" y2="30.48" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$7" class="0">
-<segment>
-<pinref part="U$4" gate="G$1" pin="2D"/>
-<wire x1="35.56" y1="43.18" x2="43.18" y2="27.94" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$8" class="0">
-<segment>
-<pinref part="U$4" gate="G$1" pin="2E"/>
-<wire x1="33.02" y1="35.56" x2="38.1" y2="27.94" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
