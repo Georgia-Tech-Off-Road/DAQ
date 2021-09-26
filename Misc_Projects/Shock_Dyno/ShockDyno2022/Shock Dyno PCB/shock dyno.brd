@@ -1102,10 +1102,10 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="25.0825" y="78.74" size="1.27" layer="27"/>
 </element>
 <element name="C4" library="GTOR - Passive Components" package="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="10μF" x="42.545" y="61.2775" smashed="yes">
-<attribute name="NAME" x="41.91" y="61.9125" size="1.27" layer="25"/>
+<attribute name="NAME" x="42.545" y="62.865" size="1.27" layer="25"/>
 <attribute name="POPULARITY" value="73" x="95.885" y="-18.7325" size="1.778" layer="27" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="95.885" y="-18.7325" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="41.91" y="59.3725" size="1.27" layer="27"/>
+<attribute name="VALUE" x="37.1475" y="61.9125" size="1.27" layer="27"/>
 </element>
 <element name="D1" library="GTOR - Passive Components" package="DIOAD1144W56L406D184" value="1N4151" x="46.99" y="33.02" smashed="yes" rot="R270">
 <attribute name="ARROW_PART_NUMBER" value="1N4151" x="-46.99" y="7.62" size="1.778" layer="27" rot="R270" display="off"/>
@@ -1129,7 +1129,7 @@ design rules under a new name.</description>
 <attribute name="MOUSER_PART_NUMBER" value="595-ADS8332IBPWR" x="125.73" y="76.2" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/ADS8332IBPWR?qs=O1HRStiETCid%2FAX4psuRow%3D%3D" x="125.73" y="76.2" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="NAME" x="40.64" y="55.88" size="1.27" layer="25" rot="R90" align="center"/>
-<attribute name="VALUE" x="45.72" y="55.88" size="1.27" layer="27" rot="R90" align="center"/>
+<attribute name="VALUE" x="44.7675" y="55.5625" size="1.27" layer="27" rot="R90" align="center"/>
 </element>
 <element name="K1" library="GTOR - Active Components" package="T9GV5L145" value="T9GS1L14-5" x="71.12" y="36.83" smashed="yes" rot="R270">
 <attribute name="ARROW_PART_NUMBER" value="" x="52.07" y="2.54" size="1.778" layer="27" rot="R270" display="off"/>
@@ -1149,7 +1149,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="8.255" y="52.07" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="LOAD_CELL" library="GTOR - Connectors" package="1X04" package3d_urn="urn:adsk.eagle:package:22407/2" value="" x="5.08" y="69.85" smashed="yes" rot="R270">
-<attribute name="NAME" x="6.9088" y="75.0062" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="NAME" x="1.8288" y="75.0062" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="POPULARITY" value="91" x="-74.93" y="35.56" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="1.905" y="74.93" size="1.27" layer="27" rot="R270"/>
 </element>
@@ -1260,7 +1260,7 @@ design rules under a new name.</description>
 <attribute name="MOUSER_PART_NUMBER" value="651-1985195" x="1.27" y="11.43" size="1.778" layer="27" display="off"/>
 <attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Phoenix-Contact/1985195?qs=nq%2FEIFkB2fEpUV%252BqAaKYzQ%3D%3D" x="1.27" y="11.43" size="1.778" layer="27" display="off"/>
 <attribute name="NAME" x="5.52" y="7.73" size="1.27" layer="25" align="center"/>
-<attribute name="VALUE" x="5.52" y="7.73" size="1.27" layer="27" align="center"/>
+<attribute name="VALUE" x="5.52" y="9" size="1.27" layer="27" align="center"/>
 </element>
 <element name="JP1" library="GTOR - Connectors" package="1X14" package3d_urn="urn:adsk.eagle:package:22417/2" value="" x="77.47" y="80.01" smashed="yes">
 <attribute name="NAME" x="59.6138" y="81.8388" size="1.27" layer="25" ratio="10"/>
@@ -1271,6 +1271,12 @@ design rules under a new name.</description>
 <attribute name="NAME" x="95.3262" y="55.3212" size="1.27" layer="25" ratio="10" rot="R180"/>
 <attribute name="POPULARITY" value="12" x="77.47" y="57.15" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="VALUE" x="95.25" y="60.325" size="1.27" layer="27" rot="R180"/>
+</element>
+<element name="R13" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k" x="43.18" y="66.04" smashed="yes" rot="R180">
+<attribute name="NAME" x="43.815" y="65.405" size="1.27" layer="25" rot="R180"/>
+<attribute name="POPULARITY" value="77" x="43.18" y="66.04" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="43.18" y="66.04" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="43.815" y="67.945" size="1.27" layer="27" rot="R180"/>
 </element>
 </elements>
 <signals>
@@ -1339,7 +1345,12 @@ design rules under a new name.</description>
 <wire x1="46.105" y1="58.818" x2="46.0375" y2="58.8855" width="0.1524" layer="1"/>
 <wire x1="46.0375" y1="58.8855" x2="46.0375" y2="60.96" width="0.1524" layer="1"/>
 <wire x1="93.98" y1="80.01" x2="93.98" y2="76.2" width="0.3048" layer="1"/>
-<wire x1="21.805" y1="22.5425" x2="18.63" y2="20.32" width="0" layer="19" extent="1-1"/>
+<contactref element="IC1" pad="23"/>
+<contactref element="R13" pad="1"/>
+<wire x1="44.03" y1="66.04" x2="46.0375" y2="64.0325" width="0.1524" layer="1"/>
+<wire x1="46.0375" y1="64.0325" x2="46.0375" y2="60.96" width="0.1524" layer="1"/>
+<wire x1="42.205" y1="58.818" x2="40.255" y2="58.818" width="0" layer="19" extent="1-1"/>
+<wire x1="18.63" y1="20.32" x2="21.805" y2="22.5425" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+3V3">
 <contactref element="R1" pad="2"/>
@@ -2128,6 +2139,19 @@ design rules under a new name.</description>
 <contactref element="U$2" pad="14/A0"/>
 <contactref element="JP2" pad="13"/>
 <wire x1="63.5" y1="60.96" x2="63.5" y2="57.15" width="0.1524" layer="1"/>
+</signal>
+<signal name="N$28">
+<contactref element="IC1" pad="22"/>
+<contactref element="IC1" pad="21"/>
+<wire x1="41.555" y1="58.818" x2="40.905" y2="58.818" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$27">
+<contactref element="IC1" pad="15"/>
+<contactref element="R13" pad="2"/>
+<wire x1="45.4307" y1="60.70865" x2="45.455" y2="60.68435" width="0.1524" layer="1"/>
+<wire x1="45.455" y1="60.68435" x2="45.455" y2="58.818" width="0.1524" layer="1"/>
+<wire x1="42.33" y1="66.04" x2="45.4307" y2="62.9393" width="0.1524" layer="1"/>
+<wire x1="45.4307" y1="62.9393" x2="45.4307" y2="60.70865" width="0.1524" layer="1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
