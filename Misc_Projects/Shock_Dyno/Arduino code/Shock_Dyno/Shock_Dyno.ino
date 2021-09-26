@@ -1,9 +1,10 @@
-#include "Dyno.h"
+//#include "Dyno.h"
 
 //HE sensor
 #include <SpeedSensor.h>
 #include <SDWrite.h>
 #include <Sensor.h>
+#include <Porter4QD.h>
 
 unsigned __exidx_start;
 unsigned __exidx_end;
@@ -19,9 +20,10 @@ bool led_state = 0;
 
 #include "SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h" // Click here to get the library: http://librarymanager/All#SparkFun_NAU8702
 
-#define LDS_PIN //depends on PCB design
+//LDS_PIN AND MOTOR_PIN NEED NUMBERS
+#define LDS_PIN 14
 #define LED_PIN 13
-#define MOTOR_PIN //PCB design
+#define MOTOR_PIN 0
 
 //Output Shock Dyno
 NAU7802 shock_dyno_force;
@@ -32,19 +34,22 @@ StateSensor motor_speed;
 //Output LDS
 LDS lds(LDS_PIN, 200);
 //Motor Controller
-Porter4QD motor_control(MOTOR_PIN);
+Porter4QD motor_control(MOTOR_PIN, 92 , 1.64);
 
 void setup() {
-  Wire.begin();
+  //Serial.begin(9600);
+  //while(!Serial);
+  
+  Wire.begin(); 
   Wire.setClock(400000); //Qwiic Scale is capable of running at 400kHz if desired
 
   pinMode(LED_PIN, OUTPUT);
 
-  if (shock_dyno_force.begin() == false)
+  if(shock_dyno_force.begin() == false)
   {
+    //Serial.println("Scale not detected. Please check wiring. Freezing...");
     digitalWrite(LED_PIN, HIGH);    
-    while(true);
-  } 
+  }
 
   shock_dyno_force.setSampleRate(NAU7802_SPS_320); //Increase to max sample rate
   shock_dyno_force.calibrateAFE(); //Re-cal analog front end when we change gain, sample rate, or channel 
@@ -60,15 +65,21 @@ void setup() {
 }
 
 void loop() {
+  
   if(abs(micros() - prev_time) > 250000){
     led_state = !led_state;
     digitalWrite(LED_PIN, led_state);
     prev_time = micros();
   }
 
-  if (tare_scale.get_state()) //Tare the scale
-    myScale.calculateZeroOffset();
+  if (tare_scale.get_state()){ //Tare the scale
+    //Serial.println("Taring the scale");
+    shock_dyno_force.calculateZeroOffset();
+  }
 
+  if (motor_speed.get_state() == 0){
+    motor_control.kill();
+  }
   motor_control.setSpeed(motor_speed.get_state());
   
   uart.update();
