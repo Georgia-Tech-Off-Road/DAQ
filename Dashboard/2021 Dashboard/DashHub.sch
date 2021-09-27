@@ -8965,7 +8965,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <segment>
 <label x="45.72" y="38.1" size="1.778" layer="95" rot="MR0" xref="yes"/>
 <label x="40.64" y="35.56" size="1.778" layer="95" rot="MR0" xref="yes"/>
-<label x="33.02" y="35.56" size="1.778" layer="95" rot="R180" xref="yes"/>
+<label x="30.48" y="35.56" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="U$4" gate="G$1" pin="2C"/>
 <wire x1="48.26" y1="27.94" x2="46.99" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="46.99" y1="27.94" x2="46.99" y2="38.1" width="0.1524" layer="91"/>
@@ -8981,7 +8981,7 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pinref part="U$4" gate="G$1" pin="2E"/>
 <wire x1="38.1" y1="27.94" x2="36.576" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="36.576" y1="27.94" x2="36.576" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="36.576" y1="35.56" x2="33.02" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="36.576" y1="35.56" x2="30.48" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="LAT_L" class="0">
@@ -9211,14 +9211,14 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="48.26" y1="30.48" x2="48.26" y2="45.72" width="0.1524" layer="91"/>
 <label x="48.26" y="45.72" size="1.778" layer="95" rot="MR0" xref="yes"/>
 <label x="43.18" y="43.18" size="1.778" layer="95" rot="MR0" xref="yes"/>
-<label x="35.56" y="40.64" size="1.778" layer="95" rot="R180" xref="yes"/>
+<label x="30.48" y="40.64" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="U$4" gate="G$1" pin="1C"/>
 </segment>
 <segment>
 <pinref part="U$4" gate="G$1" pin="1E"/>
 <wire x1="38.1" y1="30.48" x2="37.338" y2="30.48" width="0.1524" layer="91"/>
 <wire x1="37.338" y1="30.48" x2="37.338" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="37.338" y1="40.64" x2="35.56" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="37.338" y1="40.64" x2="30.48" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U$4" gate="G$1" pin="1D"/>

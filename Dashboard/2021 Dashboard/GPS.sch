@@ -292,20 +292,6 @@
 <busses>
 </busses>
 <nets>
-<net name="RX" class="0">
-<segment>
-<pinref part="JP1" gate="A" pin="3"/>
-<wire x1="33.02" y1="45.72" x2="38.1" y2="45.72" width="0.1524" layer="91"/>
-<label x="38.1" y="45.72" size="1.27" layer="95" xref="yes"/>
-</segment>
-</net>
-<net name="TX" class="0">
-<segment>
-<pinref part="JP1" gate="A" pin="2"/>
-<wire x1="33.02" y1="43.18" x2="38.1" y2="43.18" width="0.1524" layer="91"/>
-<label x="38.1" y="43.18" size="1.27" layer="95" xref="yes"/>
-</segment>
-</net>
 <net name="GND" class="0">
 <segment>
 <pinref part="JP1" gate="A" pin="1"/>
@@ -320,6 +306,20 @@
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
 <wire x1="33.02" y1="48.26" x2="43.18" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="48.26" x2="43.18" y2="50.8" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="TX" class="0">
+<segment>
+<pinref part="JP1" gate="A" pin="3"/>
+<wire x1="33.02" y1="45.72" x2="38.1" y2="45.72" width="0.1524" layer="91"/>
+<label x="38.1" y="45.72" size="1.778" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="RX" class="0">
+<segment>
+<pinref part="JP1" gate="A" pin="2"/>
+<wire x1="38.1" y1="43.18" x2="33.02" y2="43.18" width="0.1524" layer="91"/>
+<label x="38.1" y="43.18" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 </nets>
