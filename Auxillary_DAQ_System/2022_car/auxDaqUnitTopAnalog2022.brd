@@ -190,8 +190,8 @@
 <wire x1="36.83" y1="0" x2="36.83" y2="193.04" width="0" layer="20"/>
 <wire x1="36.83" y1="193.04" x2="11.43" y2="193.04" width="0" layer="20"/>
 <wire x1="11.43" y1="193.04" x2="11.43" y2="0" width="0" layer="20"/>
-<hole x="16.51" y="187.96" drill="4.1"/>
-<hole x="16.51" y="5.08" drill="4.1"/>
+<hole x="16.51" y="187.96" drill="3.3"/>
+<hole x="16.51" y="5.08" drill="3.3"/>
 <text x="25.4" y="181.61" size="1.27" layer="25" rot="SR0" align="center">auxDAQ Analog rev1
 Designed by Peter Chu</text>
 <wire x1="22.225" y1="179.07" x2="27.94" y2="179.07" width="0.254" layer="25"/>
