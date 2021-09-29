@@ -3796,8 +3796,8 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 <part name="JP1" library="GTOR - Connectors" deviceset="PINHD-1X14" device="" package3d_urn="urn:adsk.eagle:package:22417/2"/>
 <part name="JP2" library="GTOR - Connectors" deviceset="PINHD-1X14" device="" package3d_urn="urn:adsk.eagle:package:22417/2"/>
 <part name="R13" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
-<part name="C5" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
-<part name="C6" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
+<part name="C5" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="0.1μF"/>
+<part name="C6" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="0.1μF"/>
 <part name="SUPPLY5" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="SUPPLY6" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="SUPPLY7" library="GTOR - Documation Frame" deviceset="GND" device=""/>
@@ -3996,7 +3996,7 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 </instance>
 <instance part="C5" gate="G$1" x="50.8" y="-88.9" smashed="yes">
 <attribute name="NAME" x="52.324" y="-88.519" size="1.778" layer="95"/>
-<attribute name="VALUE" x="52.324" y="-93.599" size="1.778" layer="96"/>
+<attribute name="VALUE" x="42.164" y="-93.599" size="1.778" layer="96"/>
 </instance>
 <instance part="C6" gate="G$1" x="55.88" y="-88.9" smashed="yes">
 <attribute name="NAME" x="57.404" y="-88.519" size="1.778" layer="95"/>
