@@ -3796,6 +3796,11 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 <part name="JP1" library="GTOR - Connectors" deviceset="PINHD-1X14" device="" package3d_urn="urn:adsk.eagle:package:22417/2"/>
 <part name="JP2" library="GTOR - Connectors" deviceset="PINHD-1X14" device="" package3d_urn="urn:adsk.eagle:package:22417/2"/>
 <part name="R13" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
+<part name="C5" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
+<part name="C6" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
+<part name="SUPPLY5" library="GTOR - Documation Frame" deviceset="GND" device=""/>
+<part name="SUPPLY6" library="GTOR - Documation Frame" deviceset="GND" device=""/>
+<part name="SUPPLY7" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3989,6 +3994,23 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 <attribute name="NAME" x="62.0014" y="-77.47" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="66.802" y="-77.47" size="1.778" layer="96" rot="R90"/>
 </instance>
+<instance part="C5" gate="G$1" x="50.8" y="-88.9" smashed="yes">
+<attribute name="NAME" x="52.324" y="-88.519" size="1.778" layer="95"/>
+<attribute name="VALUE" x="52.324" y="-93.599" size="1.778" layer="96"/>
+</instance>
+<instance part="C6" gate="G$1" x="55.88" y="-88.9" smashed="yes">
+<attribute name="NAME" x="57.404" y="-88.519" size="1.778" layer="95"/>
+<attribute name="VALUE" x="57.404" y="-93.599" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY5" gate="GND" x="58.42" y="-81.28" smashed="yes">
+<attribute name="VALUE" x="56.515" y="-84.455" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY6" gate="GND" x="50.8" y="-96.52" smashed="yes">
+<attribute name="VALUE" x="48.895" y="-99.695" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY7" gate="GND" x="55.88" y="-96.52" smashed="yes">
+<attribute name="VALUE" x="53.975" y="-99.695" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -4045,19 +4067,14 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 <junction x="116.84" y="-81.28"/>
 </segment>
 <segment>
+<pinref part="SUPPLY13" gate="GND" pin="GND"/>
 <pinref part="IC1" gate="G$1" pin="DGND"/>
+<wire x1="40.64" y1="-68.58" x2="45.72" y2="-68.58" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="-68.58" x2="45.72" y2="-78.74" width="0.1524" layer="91"/>
+<junction x="45.72" y="-68.58"/>
 <pinref part="IC1" gate="G$1" pin="AGND"/>
 <wire x1="40.64" y1="-53.34" x2="45.72" y2="-53.34" width="0.1524" layer="91"/>
 <wire x1="45.72" y1="-53.34" x2="45.72" y2="-68.58" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="-68.58" x2="45.72" y2="-68.58" width="0.1524" layer="91"/>
-<pinref part="SUPPLY13" gate="GND" pin="GND"/>
-<wire x1="45.72" y1="-68.58" x2="45.72" y2="-78.74" width="0.1524" layer="91"/>
-<junction x="45.72" y="-68.58"/>
-<pinref part="IC1" gate="G$1" pin="COM"/>
-<wire x1="40.64" y1="-45.72" x2="58.42" y2="-45.72" width="0.1524" layer="91"/>
-<wire x1="58.42" y1="-45.72" x2="58.42" y2="-78.74" width="0.1524" layer="91"/>
-<wire x1="58.42" y1="-78.74" x2="45.72" y2="-78.74" width="0.1524" layer="91"/>
-<junction x="45.72" y="-78.74"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="REF-"/>
@@ -4085,6 +4102,20 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 <pinref part="SUPPLY16" gate="GND" pin="GND"/>
 <wire x1="121.92" y1="25.4" x2="121.92" y2="22.86" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="COM"/>
+<wire x1="40.64" y1="-45.72" x2="58.42" y2="-45.72" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="-45.72" x2="58.42" y2="-78.74" width="0.1524" layer="91"/>
+<pinref part="SUPPLY5" gate="GND" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C5" gate="G$1" pin="2"/>
+<pinref part="SUPPLY6" gate="GND" pin="GND"/>
+</segment>
+<segment>
+<pinref part="C6" gate="G$1" pin="2"/>
+<pinref part="SUPPLY7" gate="GND" pin="GND"/>
+</segment>
 </net>
 <net name="+3V3" class="0">
 <segment>
@@ -4108,9 +4139,13 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="VBD"/>
-<wire x1="40.64" y1="-63.5" x2="76.2" y2="-63.5" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="-63.5" x2="55.88" y2="-63.5" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-63.5" x2="76.2" y2="-63.5" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="-63.5" x2="76.2" y2="-43.18" width="0.1524" layer="91"/>
 <pinref part="+3V4" gate="G$1" pin="+3V3"/>
+<wire x1="55.88" y1="-63.5" x2="55.88" y2="-86.36" width="0.1524" layer="91"/>
+<junction x="55.88" y="-63.5"/>
+<pinref part="C6" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="VCC+"/>
@@ -4185,22 +4220,6 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 <label x="-20.32" y="-2.54" size="1.778" layer="95"/>
 <pinref part="JP1" gate="A" pin="9"/>
 <junction x="-2.54" y="-2.54"/>
-</segment>
-</net>
-<net name="COIL1" class="0">
-<segment>
-<pinref part="P+4" gate="VCC" pin="VCC"/>
-<wire x1="104.14" y1="10.16" x2="104.14" y2="5.08" width="0.1524" layer="91"/>
-<pinref part="D1" gate="G$1" pin="K"/>
-<wire x1="104.14" y1="5.08" x2="104.14" y2="0" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="5.08" x2="104.14" y2="5.08" width="0.1524" layer="91"/>
-<junction x="104.14" y="5.08"/>
-<label x="104.14" y="0" size="1.778" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="K1" gate="G$1" pin="COIL_1"/>
-<wire x1="38.1" y1="81.28" x2="35.56" y2="81.28" width="0.1524" layer="91"/>
-<label x="35.56" y="81.28" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="COIL2" class="0">
@@ -4354,6 +4373,10 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 <wire x1="40.64" y1="-60.96" x2="48.26" y2="-60.96" width="0.1524" layer="91"/>
 <wire x1="48.26" y1="-60.96" x2="48.26" y2="-50.8" width="0.1524" layer="91"/>
 <pinref part="P+6" gate="VCC" pin="VCC"/>
+<wire x1="48.26" y1="-60.96" x2="50.8" y2="-60.96" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="-60.96" x2="50.8" y2="-86.36" width="0.1524" layer="91"/>
+<junction x="48.26" y="-60.96"/>
+<pinref part="C5" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="LOAD_CELL" gate="A" pin="4"/>
@@ -4374,6 +4397,20 @@ Source: &lt;a href="https://www.phoenixcontact.com/online/portal/gb/pxc/product_
 <pinref part="P+2" gate="VCC" pin="VCC"/>
 <pinref part="JP2" gate="A" pin="1"/>
 <junction x="38.1" y="10.16"/>
+</segment>
+<segment>
+<pinref part="P+4" gate="VCC" pin="VCC"/>
+<wire x1="104.14" y1="10.16" x2="104.14" y2="5.08" width="0.1524" layer="91"/>
+<pinref part="D1" gate="G$1" pin="K"/>
+<wire x1="104.14" y1="5.08" x2="104.14" y2="0" width="0.1524" layer="91"/>
+<wire x1="91.44" y1="5.08" x2="104.14" y2="5.08" width="0.1524" layer="91"/>
+<junction x="104.14" y="5.08"/>
+<label x="104.14" y="0" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="K1" gate="G$1" pin="COIL_1"/>
+<wire x1="38.1" y1="81.28" x2="35.56" y2="81.28" width="0.1524" layer="91"/>
+<label x="35.56" y="81.28" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="MISO" class="0">
