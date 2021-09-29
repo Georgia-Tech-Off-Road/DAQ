@@ -194,14 +194,30 @@
 <hole x="16.51" y="5.08" drill="3.3"/>
 <text x="25.4" y="181.61" size="1.27" layer="25" rot="SR0" align="center">auxDAQ Analog rev1
 Designed by Peter Chu</text>
-<wire x1="22.225" y1="179.07" x2="27.94" y2="179.07" width="0.254" layer="25"/>
-<wire x1="27.94" y1="179.07" x2="27.94" y2="124.46" width="0.254" layer="25"/>
-<wire x1="27.94" y1="124.46" x2="22.225" y2="124.46" width="0.254" layer="25"/>
-<wire x1="22.225" y1="124.46" x2="22.225" y2="179.07" width="0.254" layer="25"/>
-<wire x1="22.225" y1="123.19" x2="22.225" y2="12.7" width="0.254" layer="25"/>
-<wire x1="22.225" y1="12.7" x2="27.94" y2="12.7" width="0.254" layer="25"/>
-<wire x1="27.94" y1="12.7" x2="27.94" y2="123.19" width="0.254" layer="25"/>
-<wire x1="27.94" y1="123.19" x2="22.225" y2="123.19" width="0.254" layer="25"/>
+<text x="22.86" y="135.89" size="2.1844" layer="25" rot="SR270">CS 34
+ADC 5</text>
+<text x="22.86" y="148.59" size="2.1844" layer="25" rot="SR270">CS 34
+ADC 6</text>
+<text x="22.86" y="161.29" size="2.1844" layer="25" rot="SR270">CS 34
+ADC 7</text>
+<text x="22.86" y="175.26" size="2.1844" layer="25" rot="SR270">CS 34
+ADC 8</text>
+<text x="22.86" y="120.65" size="2.1844" layer="25" rot="SR270">CS 35
+ADC 8</text>
+<text x="22.86" y="107.95" size="2.1844" layer="25" rot="SR270">CS 35
+ADC 7</text>
+<text x="22.86" y="93.98" size="2.1844" layer="25" rot="SR270">CS 35
+ADC 6</text>
+<text x="22.86" y="80.01" size="2.1844" layer="25" rot="SR270">CS 35
+ADC 5</text>
+<text x="22.86" y="64.77" size="2.1844" layer="25" rot="SR270">CS 35
+ADC 4</text>
+<text x="22.86" y="50.8" size="2.1844" layer="25" rot="SR270">CS 35
+ADC 3</text>
+<text x="22.86" y="38.1" size="2.1844" layer="25" rot="SR270">CS 35
+ADC 2</text>
+<text x="22.86" y="24.13" size="2.1844" layer="25" rot="SR270">CS 35
+ADC 1</text>
 </plain>
 <libraries>
 <library name="GTOR - Connectors">

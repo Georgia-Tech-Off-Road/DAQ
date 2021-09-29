@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="no"/>
+<setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
@@ -193,7 +193,23 @@
 <hole x="101.6" y="5.08" drill="3.3"/>
 <hole x="101.6" y="187.96" drill="3.3"/>
 <text x="104.902" y="141.478" size="3.81" layer="27" rot="R90">SPI</text>
-<text x="87.63" y="181.61" size="1.27" layer="25" rot="SR0">auxDAQ Digital rev1
+<text x="86.36" y="181.61" size="1.27" layer="25" rot="SR0">auxDAQ Digital rev1
+Designed by Peter Chu</text>
+<text x="86.36" y="176.53" size="2.1844" layer="25" rot="R270">I2C</text>
+<text x="86.36" y="165.1" size="2.1844" layer="25" rot="R270">I2C</text>
+<text x="86.36" y="153.67" size="2.1844" layer="25" rot="R270">SPI
+CS=26</text>
+<text x="86.36" y="140.97" size="2.1844" layer="25" rot="R270">SPI
+CS=25</text>
+<text x="86.36" y="124.46" size="2.1844" layer="25" rot="R270">D24</text>
+<text x="86.36" y="110.49" size="2.1844" layer="25" rot="R270">D23</text>
+<text x="86.36" y="97.79" size="2.1844" layer="25" rot="R270">D22</text>
+<text x="90.17" y="81.28" size="2.1844" layer="25" rot="R270">D21</text>
+<text x="93.472" y="67.691" size="2.1844" layer="25" rot="R270">D20</text>
+<text x="93.472" y="54.864" size="2.1844" layer="25" rot="R270">D17</text>
+<text x="93.472" y="40.513" size="2.1844" layer="25" rot="R270">D16</text>
+<text x="93.472" y="26.543" size="2.1844" layer="25" rot="R270">D15</text>
+<text x="86.36" y="81.28" size="2.54" layer="26" rot="SMR90">auxDAQ Digital rev1
 Designed by Peter Chu</text>
 </plain>
 <libraries>

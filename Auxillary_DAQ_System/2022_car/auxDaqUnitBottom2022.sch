@@ -9463,7 +9463,7 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 </instance>
 <instance part="R27" gate="G$1" x="104.14" y="152.4" smashed="yes">
 <attribute name="NAME" x="100.33" y="153.8986" size="1.778" layer="95"/>
-<attribute name="VALUE" x="100.33" y="149.098" size="1.778" layer="96"/>
+<attribute name="VALUE" x="100.33" y="151.638" size="1.778" layer="96"/>
 </instance>
 <instance part="R28" gate="G$1" x="104.14" y="104.14" smashed="yes">
 <attribute name="NAME" x="100.33" y="105.6386" size="1.778" layer="95"/>
@@ -9492,11 +9492,11 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 </instance>
 <instance part="R31" gate="G$1" x="160.02" y="147.32" smashed="yes">
 <attribute name="NAME" x="163.83" y="146.2786" size="1.778" layer="95"/>
-<attribute name="VALUE" x="156.21" y="144.018" size="1.778" layer="96"/>
+<attribute name="VALUE" x="156.21" y="146.558" size="1.778" layer="96"/>
 </instance>
 <instance part="R32" gate="G$1" x="236.22" y="147.32" smashed="yes">
 <attribute name="NAME" x="242.57" y="146.2786" size="1.778" layer="95"/>
-<attribute name="VALUE" x="232.41" y="144.018" size="1.778" layer="96"/>
+<attribute name="VALUE" x="229.87" y="149.098" size="1.778" layer="96"/>
 </instance>
 <instance part="SUPPLY44" gate="GND" x="170.18" y="96.52" smashed="yes">
 <attribute name="VALUE" x="168.275" y="93.345" size="1.778" layer="96"/>
