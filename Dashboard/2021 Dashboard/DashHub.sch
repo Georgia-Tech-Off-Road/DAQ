@@ -8232,6 +8232,51 @@ Source: www.kingbright.com</description>
 <hole x="27.9" y="20.5" drill="3"/>
 <hole x="26.7" y="8.75" drill="4.5"/>
 </package>
+<package name="OLED_SSD1306" urn="urn:adsk.eagle:footprint:22258/1" locally_modified="yes">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<wire x1="-0.635" y1="0" x2="-1.27" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="0.635" x2="-1.27" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="1.905" x2="-0.635" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="2.54" x2="0.635" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="2.54" x2="1.27" y2="1.905" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="1.905" x2="1.27" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="0.635" x2="0.635" y2="0" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-4.445" x2="-1.27" y2="-3.175" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-3.175" x2="-0.635" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="-2.54" x2="0.635" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="-2.54" x2="1.27" y2="-3.175" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="-2.54" x2="-1.27" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-1.905" x2="-1.27" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-0.635" x2="-0.635" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="0" x2="0.635" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="0" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-0.635" x2="1.27" y2="-1.905" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-1.905" x2="0.635" y2="-2.54" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="-5.08" x2="0.635" y2="-5.08" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-4.445" x2="-0.635" y2="-5.08" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="-5.08" x2="1.27" y2="-4.445" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-3.175" x2="1.27" y2="-4.445" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="3.175" x2="-1.27" y2="4.445" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="4.445" x2="-0.635" y2="5.08" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="5.08" x2="0.635" y2="5.08" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="5.08" x2="1.27" y2="4.445" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="3.175" x2="-0.635" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="2.54" x2="1.27" y2="3.175" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="4.445" x2="1.27" y2="3.175" width="0.1524" layer="21"/>
+<pad name="GND" x="0" y="-3.81" drill="1.016" shape="long" rot="R180"/>
+<pad name="VCC" x="0" y="-1.27" drill="1.016" shape="long" rot="R180"/>
+<pad name="SCL" x="0" y="1.27" drill="1.016" shape="long" rot="R180"/>
+<pad name="SDA" x="0" y="3.81" drill="1.016" shape="long" rot="R180"/>
+<text x="3.9662" y="12.9112" size="1.27" layer="25" ratio="10" rot="R180">&gt;NAME</text>
+<rectangle x1="-0.254" y1="1.016" x2="0.254" y2="1.524" layer="51" rot="R90"/>
+<rectangle x1="-0.254" y1="-1.524" x2="0.254" y2="-1.016" layer="51" rot="R90"/>
+<rectangle x1="-0.254" y1="-4.064" x2="0.254" y2="-3.556" layer="51" rot="R90"/>
+<rectangle x1="-0.254" y1="3.556" x2="0.254" y2="4.064" layer="51" rot="R90"/>
+<wire x1="-2.6" y1="13.8" x2="25.4" y2="13.8" width="0.127" layer="21"/>
+<wire x1="25.4" y1="13.8" x2="25.4" y2="-13.8" width="0.127" layer="21"/>
+<wire x1="25.4" y1="-13.8" x2="-2.6" y2="-13.8" width="0.127" layer="21"/>
+<wire x1="-2.6" y1="-13.8" x2="-2.6" y2="13.8" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="PINHD4">
@@ -8246,6 +8291,17 @@ Source: www.kingbright.com</description>
 <pin name="RX" x="-2.54" y="0" visible="pad" length="short" direction="pas" function="dot"/>
 <pin name="GND" x="-2.54" y="-2.54" visible="pad" length="short" direction="pas" function="dot"/>
 </symbol>
+<symbol name="OLED_SSD1306">
+<wire x1="-2.54" y1="7.62" x2="-2.54" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="-7.62" x2="17.78" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="17.78" y1="-7.62" x2="17.78" y2="7.62" width="0.254" layer="94"/>
+<wire x1="17.78" y1="7.62" x2="-2.54" y2="7.62" width="0.254" layer="94"/>
+<pin name="SDA" x="-7.62" y="5.08" length="middle"/>
+<pin name="SCL" x="-7.62" y="2.54" length="middle"/>
+<pin name="VCC" x="-7.62" y="-2.54" length="middle"/>
+<pin name="GND" x="-7.62" y="-5.08" length="middle"/>
+<text x="7.62" y="0" size="1.778" layer="95">OLED</text>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="DIYMALL_6M_GPS_BREAKOUT">
@@ -8258,6 +8314,24 @@ Source: www.kingbright.com</description>
 <connect gate="G$1" pin="GND" pad="GND"/>
 <connect gate="G$1" pin="RX" pad="RX"/>
 <connect gate="G$1" pin="TX" pad="TX"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="OLED_SSD1306">
+<gates>
+<gate name="G$1" symbol="OLED_SSD1306" x="2.54" y="0"/>
+</gates>
+<devices>
+<device name="" package="OLED_SSD1306">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="SCL" pad="SCL"/>
+<connect gate="G$1" pin="SDA" pad="SDA"/>
 <connect gate="G$1" pin="VCC" pad="VCC"/>
 </connects>
 <technologies>
@@ -9584,6 +9658,7 @@ Source: AVX .. aphvc.pdf</description>
 <part name="C2" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="4.7uF"/>
 <part name="C4" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="1uF"/>
 <part name="U2" library="GTOR - Microcontroller" deviceset="XBEE_PRO_S3B" device=""/>
+<part name="U$2" library="GTOR - Breakout Boards" deviceset="OLED_SSD1306" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -9715,6 +9790,7 @@ Source: AVX .. aphvc.pdf</description>
 <attribute name="NAME" x="134.5994" y="10.1829" size="1.271140625" layer="95"/>
 <attribute name="VALUE" x="134.5709" y="-40.6946" size="1.27271875" layer="96"/>
 </instance>
+<instance part="U$2" gate="G$1" x="177.8" y="116.84" smashed="yes"/>
 </instances>
 <busses>
 </busses>
@@ -9832,6 +9908,11 @@ Source: AVX .. aphvc.pdf</description>
 <wire x1="187.96" y1="-35.56" x2="185.42" y2="-35.56" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="GND"/>
 <label x="187.96" y="-35.56" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<wire x1="170.18" y1="111.76" x2="167.64" y2="111.76" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="GND"/>
+<label x="167.64" y="111.76" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="LAT_L" class="0">
@@ -10072,6 +10153,11 @@ Source: AVX .. aphvc.pdf</description>
 <wire x1="50.8" y1="-5.08" x2="50.8" y2="-7.62" width="0.1524" layer="91"/>
 <pinref part="C2" gate="G$1" pin="1"/>
 <label x="50.8" y="-5.08" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<wire x1="167.64" y1="114.3" x2="170.18" y2="114.3" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="VCC"/>
+<label x="167.64" y="114.3" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="3.3V_REG" class="0">
