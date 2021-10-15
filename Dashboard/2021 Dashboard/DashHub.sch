@@ -10185,34 +10185,41 @@ Source: AVX .. aphvc.pdf</description>
 <pinref part="C6" gate="G$1" pin="1"/>
 </segment>
 </net>
-<net name="LAT_D" class="0">
+<net name="SCL" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="15/A1/RX3"/>
 <wire x1="175.26" y1="53.34" x2="180.34" y2="53.34" width="0.1524" layer="91"/>
-<label x="187.96" y="53.34" size="1.778" layer="95" xref="yes"/>
 <pinref part="JP3" gate="A" pin="12"/>
 <wire x1="180.34" y1="53.34" x2="187.96" y2="53.34" width="0.1524" layer="91"/>
 <junction x="180.34" y="53.34"/>
+<label x="187.96" y="53.34" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<wire x1="170.18" y1="119.38" x2="162.56" y2="119.38" width="0.1524" layer="91"/>
+<label x="162.56" y="119.38" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U$2" gate="G$1" pin="SCL"/>
 </segment>
 </net>
 <net name="SCLK_D" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="13/SCK"/>
 <wire x1="175.26" y1="48.26" x2="180.34" y2="48.26" width="0.1524" layer="91"/>
-<label x="187.96" y="48.26" size="1.778" layer="95" xref="yes"/>
 <pinref part="JP3" gate="A" pin="14"/>
-<wire x1="180.34" y1="48.26" x2="187.96" y2="48.26" width="0.1524" layer="91"/>
-<junction x="180.34" y="48.26"/>
 </segment>
 </net>
-<net name="SIN_D" class="0">
+<net name="SDA" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="14/A0/TX3"/>
 <wire x1="175.26" y1="50.8" x2="180.34" y2="50.8" width="0.1524" layer="91"/>
-<label x="187.96" y="50.8" size="1.778" layer="95" xref="yes"/>
 <pinref part="JP3" gate="A" pin="13"/>
 <wire x1="180.34" y1="50.8" x2="187.96" y2="50.8" width="0.1524" layer="91"/>
 <junction x="180.34" y="50.8"/>
+<label x="187.96" y="50.8" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<wire x1="170.18" y1="121.92" x2="162.56" y2="121.92" width="0.1524" layer="91"/>
+<label x="162.56" y="121.92" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="U$2" gate="G$1" pin="SDA"/>
 </segment>
 </net>
 <net name="ENGINE_RPM" class="0">

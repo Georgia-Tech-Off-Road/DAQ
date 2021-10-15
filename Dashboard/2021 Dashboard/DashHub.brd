@@ -3026,20 +3026,24 @@ design rules under a new name.</description>
 <wire x1="-18.2626" y1="-3.5306" x2="-7.2456" y2="-3.5306" width="0.1524" layer="16"/>
 <wire x1="-17.4498" y1="-7.6962" x2="-7.692275" y2="-1.5748" width="0" layer="19" extent="16-16"/>
 </signal>
-<signal name="LAT_D">
+<signal name="SCL">
 <contactref element="U$1" pad="15/A1"/>
 <contactref element="JP3" pad="12"/>
 <wire x1="-11.43" y1="-22.86" x2="-7.62" y2="-22.86" width="0.1524" layer="1"/>
+<contactref element="U$2" pad="SCL"/>
+<wire x1="1.27" y1="30.353" x2="-7.62" y2="-22.86" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SCLK_D">
 <contactref element="U$1" pad="13/SCK"/>
 <contactref element="JP3" pad="14"/>
 <wire x1="-11.43" y1="-27.94" x2="-7.62" y2="-27.94" width="0.1524" layer="1"/>
 </signal>
-<signal name="SIN_D">
+<signal name="SDA">
 <contactref element="U$1" pad="14/A0"/>
 <contactref element="JP3" pad="13"/>
 <wire x1="-11.43" y1="-25.4" x2="-7.62" y2="-25.4" width="0.1524" layer="1"/>
+<contactref element="U$2" pad="SDA"/>
+<wire x1="3.81" y1="30.353" x2="-7.62" y2="-25.4" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="ENGINE_RPM">
 <contactref element="R10" pad="P$1"/>
