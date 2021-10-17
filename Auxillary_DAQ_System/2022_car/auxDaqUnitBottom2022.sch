@@ -8013,12 +8013,12 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <part name="SUPPLY44" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="SUPPLY45" library="GTOR - Documation Frame" deviceset="GND" device=""/>
 <part name="SUPPLY46" library="GTOR - Documation Frame" deviceset="GND" device=""/>
-<part name="C33" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
-<part name="C34" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
-<part name="C35" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
-<part name="C36" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
-<part name="C37" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
-<part name="C38" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2"/>
+<part name="C33" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value=".1uf"/>
+<part name="C34" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value=".1uf"/>
+<part name="C35" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value=".1uf"/>
+<part name="C36" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value=".1uf"/>
+<part name="C37" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value=".1uf"/>
+<part name="C38" library="GTOR - Passive Components" deviceset="CAP_SMD" device="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value=".1uf"/>
 </parts>
 <sheets>
 <sheet>
