@@ -925,33 +925,6 @@ Source: &lt;a href="http://www.ti.com/lit/gpn/tlc5952"&gt; Datasheet &lt;/a&gt;<
 </deviceset>
 </devicesets>
 </library>
-<library name="GTOR - Documation Frame">
-<packages>
-</packages>
-<symbols>
-<symbol name="+3V3">
-<wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
-<text x="-2.54" y="-5.08" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
-<pin name="+3V3" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="+3V3" prefix="+3V3">
-<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
-<gates>
-<gate name="G$1" symbol="+3V3" x="0" y="0"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="GTOR - Microfit Connector">
 <packages>
 <package name="43650-0315">
@@ -2484,10 +2457,9 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 <part name="J1" library="ESW-104-23-L-D" deviceset="ESW-104-23-L-D" device=""/>
 <part name="J2" library="ESW-104-23-L-D" deviceset="ESW-104-23-L-D" device=""/>
 <part name="IC2" library="GTOR - Active Components" deviceset="TLC5952DAP" device=""/>
-<part name="+3V5" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
-<part name="SERVO" library="GTOR - Microfit Connector" deviceset="HEADER_POS3_?" device="43650-0315"/>
+<part name="SERVO" library="GTOR - Microfit Connector" deviceset="HEADER_POS3_?" device="43650-0300"/>
 <part name="R1" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3"/>
-<part name="SERVO1" library="GTOR - Microfit Connector" deviceset="HEADER_POS3_?" device="43650-0315"/>
+<part name="SERVO1" library="GTOR - Microfit Connector" deviceset="HEADER_POS3_?" device="43650-0300"/>
 </parts>
 <sheets>
 <sheet>
@@ -2618,9 +2590,6 @@ Designer: Param Pithadia</text>
 <instance part="IC2" gate="G$1" x="-30.48" y="73.66" smashed="yes">
 <attribute name="NAME" x="-3.81" y="81.28" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="-3.81" y="78.74" size="1.778" layer="96" align="center-left"/>
-</instance>
-<instance part="+3V5" gate="G$1" x="5.08" y="43.18" smashed="yes">
-<attribute name="VALUE" x="2.54" y="38.1" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="SERVO" gate="G$1" x="45.72" y="111.76" smashed="yes">
 <attribute name="VALUE" x="44.45" y="104.14" size="1.778" layer="96"/>
@@ -2769,6 +2738,11 @@ Designer: Param Pithadia</text>
 <wire x1="-33.02" y1="114.3" x2="-35.56" y2="114.3" width="0.1524" layer="91"/>
 <label x="-35.56" y="114.3" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
+<segment>
+<wire x1="0" y1="40.64" x2="5.08" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="VCC"/>
+<label x="5.08" y="40.64" size="1.778" layer="95" xref="yes"/>
+</segment>
 </net>
 <net name="GND" class="0">
 <segment>
@@ -2780,10 +2754,6 @@ Designer: Param Pithadia</text>
 <pinref part="J2" gate="G$1" pin="01"/>
 <wire x1="-33.02" y1="121.92" x2="-35.56" y2="121.92" width="0.1524" layer="91"/>
 <label x="-35.56" y="121.92" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
-<label x="-33.02" y="73.66" size="1.778" layer="95" rot="R180" xref="yes"/>
-<label x="-33.02" y="73.66" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <wire x1="22.86" y1="38.1" x2="25.4" y2="38.1" width="0.1524" layer="91"/>
@@ -2809,6 +2779,11 @@ Designer: Param Pithadia</text>
 <wire x1="73.66" y1="109.22" x2="71.12" y2="109.22" width="0.1524" layer="91"/>
 <label x="71.12" y="109.22" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="SERVO1" gate="G$1" pin="3"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="G$1" pin="GND"/>
+<wire x1="-30.48" y1="73.66" x2="-33.02" y2="73.66" width="0.1524" layer="91"/>
+<label x="-33.02" y="73.66" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="7.4V" class="0">
@@ -2899,6 +2874,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTR0"/>
 <wire x1="-33.02" y1="63.5" x2="-30.48" y2="63.5" width="0.1524" layer="91"/>
+<label x="-33.02" y="63.5" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT1" class="0">
@@ -2910,6 +2886,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTG0"/>
 <wire x1="-30.48" y1="60.96" x2="-33.02" y2="60.96" width="0.1524" layer="91"/>
+<label x="-33.02" y="60.96" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT2" class="0">
@@ -2921,6 +2898,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTB0"/>
 <wire x1="-30.48" y1="58.42" x2="-33.02" y2="58.42" width="0.1524" layer="91"/>
+<label x="-33.02" y="58.42" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT3" class="0">
@@ -2932,6 +2910,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTR1"/>
 <wire x1="-33.02" y1="55.88" x2="-30.48" y2="55.88" width="0.1524" layer="91"/>
+<label x="-33.02" y="55.88" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT4" class="0">
@@ -2943,6 +2922,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTG1"/>
 <wire x1="-33.02" y1="53.34" x2="-30.48" y2="53.34" width="0.1524" layer="91"/>
+<label x="-33.02" y="53.34" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT5" class="0">
@@ -2954,6 +2934,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTB1"/>
 <wire x1="-30.48" y1="50.8" x2="-33.02" y2="50.8" width="0.1524" layer="91"/>
+<label x="-33.02" y="50.8" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT6" class="0">
@@ -2965,6 +2946,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTR2"/>
 <wire x1="-33.02" y1="48.26" x2="-30.48" y2="48.26" width="0.1524" layer="91"/>
+<label x="-33.02" y="48.26" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT7" class="0">
@@ -2976,6 +2958,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTG2"/>
 <wire x1="-33.02" y1="45.72" x2="-30.48" y2="45.72" width="0.1524" layer="91"/>
+<label x="-33.02" y="45.72" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT8" class="0">
@@ -2987,6 +2970,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTB2"/>
 <wire x1="-33.02" y1="43.18" x2="-30.48" y2="43.18" width="0.1524" layer="91"/>
+<label x="-33.02" y="43.18" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT9" class="0">
@@ -2998,6 +2982,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTR3"/>
 <wire x1="-30.48" y1="40.64" x2="-33.02" y2="40.64" width="0.1524" layer="91"/>
+<label x="-33.02" y="40.64" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT10" class="0">
@@ -3009,6 +2994,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTG3"/>
 <wire x1="-33.02" y1="38.1" x2="-30.48" y2="38.1" width="0.1524" layer="91"/>
+<label x="-33.02" y="38.1" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT11" class="0">
@@ -3020,6 +3006,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTB3"/>
 <wire x1="-33.02" y1="35.56" x2="-30.48" y2="35.56" width="0.1524" layer="91"/>
+<label x="-33.02" y="35.56" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT12" class="0">
@@ -3031,6 +3018,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTR4"/>
 <wire x1="-33.02" y1="33.02" x2="-30.48" y2="33.02" width="0.1524" layer="91"/>
+<label x="-33.02" y="33.02" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="OUT13" class="0">
@@ -3042,6 +3030,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTG4"/>
 <wire x1="2.54" y1="73.66" x2="0" y2="73.66" width="0.1524" layer="91"/>
+<label x="2.54" y="73.66" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT14" class="0">
@@ -3053,6 +3042,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTB4"/>
 <wire x1="0" y1="71.12" x2="2.54" y2="71.12" width="0.1524" layer="91"/>
+<label x="2.54" y="71.12" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT15" class="0">
@@ -3064,6 +3054,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTR5"/>
 <wire x1="2.54" y1="68.58" x2="0" y2="68.58" width="0.1524" layer="91"/>
+<label x="2.54" y="68.58" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT16" class="0">
@@ -3075,6 +3066,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTG5"/>
 <wire x1="2.54" y1="66.04" x2="0" y2="66.04" width="0.1524" layer="91"/>
+<label x="2.54" y="66.04" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT17" class="0">
@@ -3086,6 +3078,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTB5"/>
 <wire x1="2.54" y1="63.5" x2="0" y2="63.5" width="0.1524" layer="91"/>
+<label x="2.54" y="63.5" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT18" class="0">
@@ -3097,6 +3090,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTR6"/>
 <wire x1="0" y1="60.96" x2="2.54" y2="60.96" width="0.1524" layer="91"/>
+<label x="2.54" y="60.96" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT19" class="0">
@@ -3108,6 +3102,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTG6"/>
 <wire x1="2.54" y1="58.42" x2="0" y2="58.42" width="0.1524" layer="91"/>
+<label x="2.54" y="58.42" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT20" class="0">
@@ -3119,6 +3114,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTB6"/>
 <wire x1="2.54" y1="55.88" x2="0" y2="55.88" width="0.1524" layer="91"/>
+<label x="2.54" y="55.88" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT21" class="0">
@@ -3130,6 +3126,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTR7"/>
 <wire x1="0" y1="53.34" x2="2.54" y2="53.34" width="0.1524" layer="91"/>
+<label x="2.54" y="53.34" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT22" class="0">
@@ -3141,6 +3138,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTG7"/>
 <wire x1="2.54" y1="50.8" x2="0" y2="50.8" width="0.1524" layer="91"/>
+<label x="2.54" y="50.8" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="OUT23" class="0">
@@ -3152,6 +3150,7 @@ Designer: Param Pithadia</text>
 <segment>
 <pinref part="IC2" gate="G$1" pin="OUTB7"/>
 <wire x1="2.54" y1="48.26" x2="0" y2="48.26" width="0.1524" layer="91"/>
+<label x="2.54" y="48.26" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="SERVO_CTRL" class="0">
@@ -3174,19 +3173,6 @@ Designer: Param Pithadia</text>
 <wire x1="73.66" y1="111.76" x2="71.12" y2="111.76" width="0.1524" layer="91"/>
 <label x="71.12" y="111.76" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="SERVO1" gate="G$1" pin="2"/>
-</segment>
-</net>
-<net name="+3V3" class="0">
-<segment>
-<wire x1="0" y1="40.64" x2="5.08" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="G$1" pin="VCC"/>
-<pinref part="+3V5" gate="G$1" pin="+3V3"/>
-</segment>
-</net>
-<net name="N$30" class="0">
-<segment>
-<wire x1="-30.48" y1="73.66" x2="-33.02" y2="73.66" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="G$1" pin="GND"/>
 </segment>
 </net>
 <net name="N$31" class="0">
