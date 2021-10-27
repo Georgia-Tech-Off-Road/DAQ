@@ -201,20 +201,19 @@
 <text x="-13.208" y="-23.368" size="0.762" layer="22" rot="MR0">SIN_L</text>
 <text x="-13.208" y="-20.828" size="0.762" layer="22" rot="MR0">SCLK_L</text>
 <text x="-13.208" y="-18.288" size="0.762" layer="22" rot="MR0">LAT_L</text>
-<text x="-13.208" y="-15.748" size="0.762" layer="22" rot="MR0">SERVO_L</text>
-<text x="-13.208" y="-13.208" size="0.762" layer="22" rot="MR0">FREE</text>
-<text x="-13.208" y="-10.668" size="0.762" layer="22" rot="MR0">GPS_TX</text>
-<text x="-13.208" y="-8.128" size="0.762" layer="22" rot="MR0">GPS_RX</text>
+<text x="-13.335" y="-14.224" size="0.762" layer="22" rot="MR0">SERVO_L</text>
+<text x="-13.208" y="-12.573" size="0.762" layer="22" rot="MR0">FREE</text>
+<text x="-12.319" y="-11.049" size="0.762" layer="22" rot="MR0">GPS_TX</text>
+<text x="-12.192" y="-8.636" size="0.762" layer="22" rot="MR0">GPS_RX</text>
 <text x="-13.208" y="-5.588" size="0.762" layer="22" rot="MR0">SERVO_R</text>
-<text x="-13.208" y="-3.048" size="0.762" layer="22" rot="MR0">LAT_R</text>
-<text x="-13.208" y="-0.508" size="0.762" layer="22" rot="MR0">SIN_R</text>
-<text x="-13.208" y="2.032" size="0.762" layer="22" rot="MR0">SCLK_R</text>
-<text x="-15.24" y="4.572" size="0.762" layer="22" rot="MR0">5V</text>
+<text x="-13.462" y="-2.413" size="0.762" layer="22" rot="MR0">LAT_R</text>
+<text x="-13.843" y="0.889" size="0.762" layer="22" rot="MR0">SIN_R</text>
+<text x="-13.843" y="3.048" size="0.762" layer="22" rot="MR0">SCLK_R</text>
 <text x="15.748" y="4.572" size="0.762" layer="22" rot="MR0">GND</text>
 <text x="-41.656" y="-32.004" size="1.27" layer="21">GND</text>
 <text x="-36.068" y="-32.004" size="1.27" layer="21">7V4</text>
-<text x="22.352" y="-31.496" size="1.016" layer="21">DashHub V4
-Designer: Akash Harapanahalli</text>
+<text x="22.352" y="-31.496" size="1.016" layer="21">DashHub V5
+Designer: Param Pithadia</text>
 </plain>
 <libraries>
 <library name="con-wago-500" urn="urn:adsk.eagle:library:195">
@@ -2413,7 +2412,7 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <element name="LIPO" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="LIPO" x="-37.084" y="-26.543" smashed="yes" rot="MR0">
 <attribute name="MF" value="" x="-54.864" y="-54.483" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MPN" value="237-102" x="-54.864" y="-54.483" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="NAME" x="-33.2378" y="-31.5468" size="1.27" layer="26" ratio="10" rot="MR0"/>
+<attribute name="NAME" x="-34.5078" y="-22.4028" size="1.27" layer="26" ratio="10" rot="MR0"/>
 <attribute name="OC_FARNELL" value="unknown" x="-54.864" y="-54.483" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="OC_NEWARK" value="70K9898" x="-54.864" y="-54.483" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="POPULARITY" value="32" x="-54.864" y="-54.483" size="1.778" layer="28" rot="MR0" display="off"/>
@@ -2435,7 +2434,7 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <attribute name="MF" value="Allegro MicroSystems" x="-29.083" y="-27.813" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MOUNTING_TECHNOLOGY" value="Surface Mount" x="-29.083" y="-27.813" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="MPN" value="ACS722LLCTR-05AB-T" x="-29.083" y="-27.813" size="1.778" layer="28" rot="MR180" display="off"/>
-<attribute name="NAME" x="-32.988" y="-31.588" size="1" layer="26" rot="MR180"/>
+<attribute name="NAME" x="-28.416" y="-26.762" size="1" layer="26" rot="MR180"/>
 <attribute name="PACKAGE_DESCRIPTION" value="8-Pin Small Outline Integrated Package, Body 4.9 x 3.9 mm, Pitch 1.27 mm" x="-29.083" y="-27.813" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="PACKING" value="Tape and Reel" x="-29.083" y="-27.813" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="PREFIX" value="U" x="-29.083" y="-27.813" size="1.778" layer="28" rot="MR180" display="off"/>
@@ -2457,11 +2456,11 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <attribute name="MANUFACTURER_PART_NUMBER" value="RB521S30T1G" x="-14.351" y="7.239" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MOUSER_PART_NUMBER" value="863-RB521S30T1G" x="-14.351" y="7.239" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/ON-Semiconductor/RB521S30T1G?qs=xZq1yRCsb1eKFKS8TVH%2Fqg%3D%3D" x="-14.351" y="7.239" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="NAME" x="-14.351" y="9.525" size="1.27" layer="26" rot="MR0" align="center"/>
+<attribute name="NAME" x="-14.986" y="8.763" size="1.27" layer="26" rot="MR0" align="center"/>
 <attribute name="VALUE" x="-13.843" y="0.381" size="1.27" layer="28" rot="MR270" align="center"/>
 </element>
 <element name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0402" package3d_urn="urn:adsk.eagle:package:23626/2" value="0.1uF" x="-25.527" y="-30.48" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-27.686" y="-32.385" size="1.27" layer="26" rot="MR90"/>
+<attribute name="NAME" x="-24.511" y="-30.226" size="1.27" layer="26" rot="MR90"/>
 <attribute name="POPULARITY" value="18" x="-25.527" y="-30.48" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="-25.527" y="-30.48" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="-23.622" y="-29.845" size="1.27" layer="28" rot="MR270"/>
@@ -2475,13 +2474,13 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 </element>
 <element name="J2" library="ESW-104-23-L-D" package="SAMTEC_ESW-104-23-L-D" value="RIGHT" x="17.4498" y="-15.3162" smashed="yes" rot="R270">
 <attribute name="MANUFACTURER" value="Samtec Inc." x="17.4498" y="-15.3162" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="NAME" x="22.4448" y="-5.1712" size="1.27" layer="25" rot="R270"/>
+<attribute name="NAME" x="19.1412" y="-5.7492" size="1.27" layer="25"/>
 <attribute name="PARTREV" value="R" x="17.4498" y="-15.3162" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="STANDARD" value="Manufacturer Recommendations" x="17.4498" y="-15.3162" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="13.7448" y="-5.1712" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="1X14" package3d_urn="urn:adsk.eagle:package:22417/2" value="" x="-11.43" y="-13.462" smashed="yes" rot="MR270">
-<attribute name="NAME" x="-13.2588" y="4.3942" size="1.27" layer="26" ratio="10" rot="MR270"/>
+<attribute name="NAME" x="-9.5758" y="5.2578" size="1.27" layer="26" ratio="10" rot="MR0"/>
 <attribute name="POPULARITY" value="12" x="-11.43" y="-13.462" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="-8.255" y="4.318" size="1.27" layer="28" rot="MR270"/>
 </element>
@@ -2520,17 +2519,17 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <attribute name="POPULARITY" value="28" x="0" y="-29.972" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="-1.27" y="-32.512" size="1.27" layer="27"/>
 </element>
-<element name="R14" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" package="AXIAL-0.3" package3d_urn="urn:adsk.eagle:package:39658/1" value=" " x="0" y="-29.972" smashed="yes">
-<attribute name="NAME" x="0" y="-28.956" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
+<element name="R14" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" package="AXIAL-0.3" package3d_urn="urn:adsk.eagle:package:39658/1" value="100" x="0" y="-29.972" smashed="yes">
+<attribute name="NAME" x="0" y="-31.623" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
 <attribute name="PROD_ID" value=" " x="0" y="-29.972" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="0" y="-30.988" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
-<element name="R15" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" package="AXIAL-0.3" package3d_urn="urn:adsk.eagle:package:39658/1" value=" " x="0" y="-27.559" smashed="yes">
-<attribute name="NAME" x="0" y="-26.543" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
+<element name="R15" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" package="AXIAL-0.3" package3d_urn="urn:adsk.eagle:package:39658/1" value="100" x="0" y="-27.559" smashed="yes">
+<attribute name="NAME" x="4.826" y="-27.559" size="0.6096" layer="25" font="vector" ratio="20" rot="R270" align="bottom-center"/>
 <attribute name="PROD_ID" value=" " x="0" y="-27.559" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="0" y="-28.575" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
-<element name="R16" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" package="AXIAL-0.3" package3d_urn="urn:adsk.eagle:package:39658/1" value=" " x="0" y="-25.146" smashed="yes">
+<element name="R16" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" package="AXIAL-0.3" package3d_urn="urn:adsk.eagle:package:39658/1" value="100" x="0" y="-25.146" smashed="yes">
 <attribute name="NAME" x="0" y="-24.13" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
 <attribute name="PROD_ID" value=" " x="0" y="-25.146" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="0" y="-26.162" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
@@ -2541,14 +2540,14 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <attribute name="VALUE" x="-1.27" y="-30.099" size="1.27" layer="27"/>
 </element>
 <element name="LED3" library="led" library_urn="urn:adsk.eagle:library:259" package="CHIPLED_1206" package3d_urn="urn:adsk.eagle:package:15823/2" value="" x="0" y="-25.146" smashed="yes" rot="R270">
-<attribute name="NAME" x="-1.27" y="-23.876" size="1.27" layer="25"/>
+<attribute name="NAME" x="-2.667" y="-22.86" size="1.27" layer="25"/>
 <attribute name="POPULARITY" value="28" x="6.35" y="-18.796" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="-1.27" y="-27.686" size="1.27" layer="27"/>
 </element>
 <element name="U$4" library="GTOR - Connectors" package="48CKTRASCMCHEADER" value="48CKTRASCMCHEADER" x="-1.27" y="19.304" smashed="yes" rot="MR0"/>
 <element name="U$5" library="GTOR - Breakout Boards" package="DIYMALL_6M_GPS_BREAKOUT" value="DIYMALL_6M_GPS_BREAKOUT" x="-19.558" y="8.89" smashed="yes" rot="MR269.9"/>
 <element name="U$6" library="GTOR - Active Components" package="TPSM84205EAB" value="TPSM84205EAB" x="-30.734" y="12.192" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-31.75" y="14.986" size="1.27" layer="26" rot="MR180"/>
+<attribute name="NAME" x="-29.083" y="14.478" size="1.27" layer="26" rot="MR180"/>
 <attribute name="VALUE" x="-35.814" y="17.907" size="1.27" layer="28" rot="MR180"/>
 </element>
 <element name="C3" library="GTOR - Passive Components" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="10uF" x="-28.956" y="29.591" smashed="yes" rot="MR180">
@@ -2558,19 +2557,19 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <attribute name="VALUE" x="-30.226" y="32.131" size="1.27" layer="28" rot="MR180"/>
 </element>
 <element name="C5" library="GTOR - Passive Components" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="47uF" x="-33.274" y="17.526" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-33.528" y="16.256" size="1.27" layer="26" rot="MR180"/>
+<attribute name="NAME" x="-35.433" y="15.875" size="1.27" layer="26" rot="MR180"/>
 <attribute name="POPULARITY" value="54" x="-33.274" y="17.526" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="-33.274" y="17.526" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="VALUE" x="-34.544" y="20.066" size="1.27" layer="28" rot="MR180"/>
 </element>
 <element name="C6" library="GTOR - Passive Components" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="47uF" x="-33.274" y="19.812" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-30.48" y="18.034" size="1.27" layer="26" rot="MR90"/>
+<attribute name="NAME" x="-31.623" y="21.082" size="1.27" layer="26" rot="MR90"/>
 <attribute name="POPULARITY" value="54" x="-33.274" y="19.812" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="-33.274" y="19.812" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="VALUE" x="-34.544" y="22.352" size="1.27" layer="28" rot="MR180"/>
 </element>
 <element name="U$3" library="GTOR - Active Components" package="SOT230P700X180-4N" value="REG_5V_LDL1117S50R" x="-26.797" y="23.368" smashed="yes" rot="MR0">
-<attribute name="NAME" x="-22.5855" y="28.6891" size="1.27" layer="26" rot="MR0"/>
+<attribute name="NAME" x="-23.2205" y="17.5131" size="1.27" layer="26" rot="MR0"/>
 <attribute name="VALUE" x="-12.2717" y="-3.0624" size="3.80976875" layer="28" rot="MR0" align="top-left"/>
 </element>
 <element name="C2" library="GTOR - Passive Components" package="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="4.7uF" x="-17.78" y="7.747" smashed="yes" rot="MR180">
@@ -2580,7 +2579,7 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <attribute name="VALUE" x="-19.05" y="10.287" size="1.27" layer="28" rot="MR180"/>
 </element>
 <element name="C4" library="GTOR - Passive Components" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="1uF" x="-24.13" y="7.112" smashed="yes" rot="MR180">
-<attribute name="NAME" x="-25.4" y="5.842" size="1.27" layer="26" rot="MR180"/>
+<attribute name="NAME" x="-26.543" y="5.461" size="1.27" layer="26" rot="MR180"/>
 <attribute name="POPULARITY" value="54" x="-24.13" y="7.112" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="-24.13" y="7.112" size="1.778" layer="28" rot="MR180" display="off"/>
 <attribute name="VALUE" x="-25.4" y="9.652" size="1.27" layer="28" rot="MR180"/>
@@ -2590,21 +2589,21 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <attribute name="DIGI-KEY_PART_NUMBER" value="602-1293-ND" x="25.6794" y="-6.604" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MF" value="Digi International" x="25.6794" y="-6.604" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="MP" value="XBP9B-XCST-001" x="25.6794" y="-6.604" size="1.778" layer="28" rot="MR0" display="off"/>
-<attribute name="NAME" x="38.7205" y="-19.1435" size="1.274009375" layer="26" rot="MR90"/>
+<attribute name="NAME" x="37.3045" y="6.3355" size="1.274009375" layer="26" rot="MR0"/>
 <attribute name="PACKAGE" value="Module Digi International" x="25.6794" y="-6.604" size="1.778" layer="28" rot="MR0" display="off"/>
 <attribute name="VALUE" x="11.4114" y="-19.6205" size="1.271609375" layer="28" rot="MR90"/>
 </element>
 <element name="U$2" library="GTOR - Breakout Boards" package="OLED_SSD1306" value="OLED_SSD1306" x="0" y="30.353" smashed="yes" rot="R270">
-<attribute name="NAME" x="12.9112" y="26.3868" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="NAME" x="-5.3768" y="29.3078" size="1.27" layer="25" ratio="10" rot="R90"/>
 </element>
 <element name="R1" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k" x="22.098" y="-21.336" smashed="yes" rot="R270">
-<attribute name="NAME" x="22.733" y="-20.701" size="1.27" layer="25" rot="R270"/>
+<attribute name="NAME" x="19.812" y="-20.32" size="1.27" layer="25" rot="R270"/>
 <attribute name="POPULARITY" value="77" x="22.098" y="-21.336" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="22.098" y="-21.336" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="20.193" y="-20.701" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="R2" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k" x="24.638" y="-21.336" smashed="yes" rot="R270">
-<attribute name="NAME" x="25.273" y="-20.701" size="1.27" layer="25" rot="R270"/>
+<attribute name="NAME" x="25.781" y="-20.193" size="1.27" layer="25" rot="R270"/>
 <attribute name="POPULARITY" value="77" x="24.638" y="-21.336" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="24.638" y="-21.336" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="22.733" y="-20.701" size="1.27" layer="27" rot="R270"/>
@@ -2866,13 +2865,12 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <wire x1="8.709" y1="-27.88308125" x2="7.70908125" y2="-28.883" width="0.3048" layer="16"/>
 <wire x1="7.70908125" y1="-28.883" x2="6.8552375" y2="-28.883" width="0.3048" layer="16"/>
 <wire x1="6.8552375" y1="-28.883" x2="4.3946375" y2="-31.3436" width="0.3048" layer="16"/>
-<wire x1="-26.728075" y1="-31.7896" x2="-26.561475" y2="-31.623" width="0.2032" layer="16"/>
 <wire x1="-28.448" y1="-30.613" x2="-27.8046" y2="-31.2564" width="0.2032" layer="16"/>
 <wire x1="-27.8046" y1="-31.2564" x2="-27.8046" y2="-31.612925" width="0.2032" layer="16"/>
 <wire x1="-27.8046" y1="-31.612925" x2="-27.627925" y2="-31.7896" width="0.2032" layer="16"/>
 <wire x1="-27.627925" y1="-31.7896" x2="-26.728075" y2="-31.7896" width="0.2032" layer="16"/>
 <wire x1="-26.251475" y1="-31.313" x2="-25.344" y2="-31.313" width="0.2032" layer="16"/>
-<wire x1="-26.561475" y1="-31.623" x2="-26.251475" y2="-31.313" width="0.2032" layer="16"/>
+<wire x1="-26.728075" y1="-31.7896" x2="-26.251475" y2="-31.313" width="0.2032" layer="16"/>
 </signal>
 <signal name="XBEE_TX">
 <contactref element="U$1" pad="0/RX"/>
@@ -3193,9 +3191,7 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <contactref element="U$4" pad="P$3B"/>
 <wire x1="-31.877" y1="30.607" x2="-32.766" y2="30.607" width="0.2032" layer="1"/>
 <wire x1="-31.877" y1="30.607" x2="-20.0025" y2="18.7325" width="0.2032" layer="1"/>
-<wire x1="-20.0025" y1="18.7325" x2="-16.891" y2="18.7325" width="0.2032" layer="1"/>
-<wire x1="-16.891" y1="18.7325" x2="-15.5575" y2="18.7325" width="0.2032" layer="1"/>
-<wire x1="-15.5575" y1="18.7325" x2="-15.1985" y2="18.7325" width="0.2032" layer="1"/>
+<wire x1="-20.0025" y1="18.7325" x2="-15.1985" y2="18.7325" width="0.2032" layer="1"/>
 <wire x1="-15.1985" y1="18.7325" x2="-13.77" y2="17.304" width="0.2032" layer="1"/>
 </signal>
 <signal name="N$24">
@@ -3208,9 +3204,8 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <wire x1="-34.0074" y1="24.88579375" x2="-34.0074" y2="31.12120625" width="0.2032" layer="1"/>
 <wire x1="-22.1216" y1="21.71820625" x2="-22.1216" y2="21.61988125" width="0.2032" layer="1"/>
 <wire x1="-22.1216" y1="21.61988125" x2="-19.67871875" y2="19.177" width="0.2032" layer="1"/>
-<wire x1="-19.67871875" y1="19.177" x2="-14.986" y2="19.177" width="0.2032" layer="1"/>
+<wire x1="-19.67871875" y1="19.177" x2="-13.143" y2="19.177" width="0.2032" layer="1"/>
 <wire x1="-32.25179375" y1="31.8484" x2="-22.1216" y2="21.71820625" width="0.2032" layer="1"/>
-<wire x1="-14.986" y1="19.177" x2="-13.143" y2="19.177" width="0.2032" layer="1"/>
 <wire x1="-13.143" y1="19.177" x2="-11.27" y2="17.304" width="0.2032" layer="1"/>
 </signal>
 <signal name="33">

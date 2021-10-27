@@ -2458,7 +2458,7 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 <part name="J2" library="ESW-104-23-L-D" deviceset="ESW-104-23-L-D" device=""/>
 <part name="IC2" library="GTOR - Active Components" deviceset="TLC5952DAP" device=""/>
 <part name="SERVO" library="GTOR - Microfit Connector" deviceset="HEADER_POS3_?" device="43650-0300"/>
-<part name="R1" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3"/>
+<part name="R_IREF" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="2.4k"/>
 <part name="SERVO1" library="GTOR - Microfit Connector" deviceset="HEADER_POS3_?" device="43650-0300"/>
 </parts>
 <sheets>
@@ -2595,7 +2595,7 @@ Designer: Param Pithadia</text>
 <attribute name="VALUE" x="44.45" y="104.14" size="1.778" layer="96"/>
 <attribute name="NAME" x="44.45" y="117.602" size="1.778" layer="95"/>
 </instance>
-<instance part="R1" gate="G$1" x="17.78" y="38.1" smashed="yes">
+<instance part="R_IREF" gate="G$1" x="17.78" y="38.1" smashed="yes">
 <attribute name="NAME" x="13.97" y="39.5986" size="1.778" layer="95"/>
 <attribute name="VALUE" x="13.97" y="34.798" size="1.778" layer="96"/>
 </instance>
@@ -2758,7 +2758,7 @@ Designer: Param Pithadia</text>
 <segment>
 <wire x1="22.86" y1="38.1" x2="25.4" y2="38.1" width="0.1524" layer="91"/>
 <label x="25.4" y="38.1" size="1.778" layer="95" xref="yes"/>
-<pinref part="R1" gate="G$1" pin="2"/>
+<pinref part="R_IREF" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <label x="5.08" y="45.72" size="1.778" layer="95" xref="yes"/>
@@ -3179,7 +3179,7 @@ Designer: Param Pithadia</text>
 <segment>
 <wire x1="0" y1="38.1" x2="12.7" y2="38.1" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="IREF"/>
-<pinref part="R1" gate="G$1" pin="1"/>
+<pinref part="R_IREF" gate="G$1" pin="1"/>
 </segment>
 </net>
 </nets>

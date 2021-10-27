@@ -229,6 +229,8 @@ Designer: Param Pithadia</text>
 <text x="-41.021" y="-2.921" size="1.27" layer="26" rot="MR0">+</text>
 <text x="-40.005" y="-10.414" size="1.27" layer="26" rot="MR0">+</text>
 <text x="-38.608" y="-18.542" size="1.27" layer="26" rot="MR0">+</text>
+<text x="19.304" y="9.779" size="0.381" layer="25">SERVO_CTRL</text>
+<text x="-22.352" y="9.271" size="0.381" layer="25">SERVO_CTRL</text>
 </plain>
 <libraries>
 <library name="SparkFun-LED">
@@ -752,7 +754,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </element>
 <element name="J1" library="ESW-104-23-L-D" package="SAMTEC_ESW-104-23-L-D" value="ESW-104-23-L-D" x="36.83" y="-4.191" smashed="yes" rot="MR270">
 <attribute name="MANUFACTURER" value="Samtec Inc." x="36.83" y="-4.191" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="NAME" x="31.835" y="5.954" size="1.27" layer="26" rot="MR270"/>
+<attribute name="NAME" x="34.248" y="-7.254" size="1.27" layer="26" rot="MR270"/>
 <attribute name="PARTREV" value="R" x="36.83" y="-4.191" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="STANDARD" value="Manufacturer Recommendations" x="36.83" y="-4.191" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="VALUE" x="40.535" y="5.954" size="1.27" layer="28" rot="MR270"/>
@@ -762,7 +764,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="NAME" x="-39.285" y="5.954" size="1.27" layer="26" rot="MR270"/>
 <attribute name="PARTREV" value="R" x="-34.29" y="-4.191" size="1.778" layer="28" rot="MR270" display="off"/>
 <attribute name="STANDARD" value="Manufacturer Recommendations" x="-34.29" y="-4.191" size="1.778" layer="28" rot="MR270" display="off"/>
-<attribute name="VALUE" x="-30.585" y="5.954" size="1.27" layer="28" rot="MR270"/>
+<attribute name="VALUE" x="-31.22" y="5.954" size="1.27" layer="28" rot="MR270"/>
 </element>
 <element name="IC2" library="GTOR - Active Components" package="SOP65P810X120-33N" value="TLC5952DAP" x="-19.05" y="17.653" smashed="yes" rot="R180">
 <attribute name="ARROW_PART_NUMBER" value="TLC5952DAP" x="-19.05" y="17.653" size="1.778" layer="27" rot="R180" display="off"/>
@@ -774,10 +776,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="MOUSER_PART_NUMBER" value="595-TLC5952DAP" x="-19.05" y="17.653" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TLC5952DAP?qs=IK5e5L0zOXhuADcxoTQ%252BEg%3D%3D" x="-19.05" y="17.653" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="NAME" x="-15.5956" y="11.938" size="1.27" layer="25" rot="R180" align="center"/>
-<attribute name="VALUE" x="-15.5956" y="26.543" size="1.27" layer="27" rot="R180" align="center"/>
+<attribute name="VALUE" x="-18.8976" y="24.384" size="1.27" layer="27" rot="R180" align="center"/>
 </element>
 <element name="SERVO" library="GTOR - Microfit Connector" package="43650-0300" value="" x="20.828" y="3.429" smashed="yes"/>
-<element name="R1" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="" x="-25.781" y="10.795" smashed="yes" rot="R180">
+<element name="R_IREF" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="2.4k" x="-25.781" y="10.795" smashed="yes" rot="R180">
 <attribute name="NAME" x="-25.146" y="10.16" size="1.27" layer="25" rot="R180"/>
 <attribute name="POPULARITY" value="77" x="-25.781" y="10.795" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-25.781" y="10.795" size="1.778" layer="27" rot="R180" display="off"/>
@@ -889,7 +891,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <contactref element="IC2" pad="29"/>
 <contactref element="IC2" pad="33"/>
 <contactref element="SERVO" pad="P$3"/>
-<contactref element="R1" pad="2"/>
+<contactref element="R_IREF" pad="2"/>
 <wire x1="32.639" y1="-19.177" x2="36.83" y2="-14.986" width="0.8128" layer="16"/>
 <wire x1="-24.511" y1="14.732" x2="-22.8346" y2="14.732" width="0.1524" layer="1"/>
 <wire x1="-24.511" y1="14.732" x2="-26.631" y2="12.612" width="0.1524" layer="1"/>
@@ -1304,7 +1306,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </signal>
 <signal name="N$31">
 <contactref element="IC2" pad="32"/>
-<contactref element="R1" pad="1"/>
+<contactref element="R_IREF" pad="1"/>
 <wire x1="-22.8346" y1="12.7762" x2="-24.8158" y2="10.795" width="0.1524" layer="1"/>
 <wire x1="-24.8158" y1="10.795" x2="-24.931" y2="10.795" width="0.1524" layer="1"/>
 </signal>
