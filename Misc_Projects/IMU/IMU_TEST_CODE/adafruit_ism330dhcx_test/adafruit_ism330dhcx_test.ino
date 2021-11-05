@@ -3,7 +3,7 @@
 #include <Adafruit_ISM330DHCX.h>
 
 // For SPI mode, we need a CS pin
-#define LSM_CS 14
+#define LSM_CS 10
 
 Adafruit_ISM330DHCX ism330dhcx;
 void setup(void) {
