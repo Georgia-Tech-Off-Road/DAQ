@@ -8536,12 +8536,12 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <attribute name="DRAWING_NAME" x="165.1" y="19.05" size="2.54" layer="94"/>
 </instance>
 <instance part="IC7" gate="G$1" x="78.74" y="170.18" smashed="yes">
-<attribute name="NAME" x="113.03" y="177.8" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="113.03" y="175.26" size="1.778" layer="96" align="center-left"/>
+<attribute name="NAME" x="85.09" y="177.8" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="85.09" y="175.26" size="1.778" layer="96" align="center-left"/>
 </instance>
-<instance part="R3" gate="G$1" x="129.54" y="170.18" smashed="yes">
-<attribute name="NAME" x="125.73" y="171.6786" size="1.778" layer="95"/>
-<attribute name="VALUE" x="125.73" y="166.878" size="1.778" layer="96"/>
+<instance part="R3" gate="G$1" x="124.46" y="175.26" smashed="yes" rot="R90">
+<attribute name="NAME" x="122.9614" y="171.45" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="127.762" y="171.45" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C6" gate="G$1" x="68.58" y="152.4" smashed="yes" rot="R270">
 <attribute name="NAME" x="67.564" y="152.781" size="1.778" layer="95"/>
@@ -8568,12 +8568,12 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <attribute name="VALUE" x="44.704" y="150.241" size="1.778" layer="96"/>
 </instance>
 <instance part="IC8" gate="G$1" x="182.88" y="170.18" smashed="yes">
-<attribute name="NAME" x="217.17" y="177.8" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="217.17" y="175.26" size="1.778" layer="96" align="center-left"/>
+<attribute name="NAME" x="189.23" y="177.8" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="189.23" y="175.26" size="1.778" layer="96" align="center-left"/>
 </instance>
-<instance part="R4" gate="G$1" x="233.68" y="170.18" smashed="yes">
-<attribute name="NAME" x="229.87" y="171.6786" size="1.778" layer="95"/>
-<attribute name="VALUE" x="229.87" y="166.878" size="1.778" layer="96"/>
+<instance part="R4" gate="G$1" x="228.6" y="175.26" smashed="yes" rot="R90">
+<attribute name="NAME" x="227.1014" y="171.45" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="231.902" y="171.45" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C5" gate="G$1" x="172.72" y="152.4" smashed="yes" rot="R270">
 <attribute name="NAME" x="171.704" y="152.781" size="1.778" layer="95"/>
@@ -8600,12 +8600,12 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <attribute name="VALUE" x="148.844" y="150.241" size="1.778" layer="96"/>
 </instance>
 <instance part="IC9" gate="G$1" x="182.88" y="109.22" smashed="yes">
-<attribute name="NAME" x="217.17" y="116.84" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="217.17" y="114.3" size="1.778" layer="96" align="center-left"/>
+<attribute name="NAME" x="189.23" y="116.84" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="189.23" y="114.3" size="1.778" layer="96" align="center-left"/>
 </instance>
-<instance part="R5" gate="G$1" x="233.68" y="109.22" smashed="yes">
-<attribute name="NAME" x="229.87" y="110.7186" size="1.778" layer="95"/>
-<attribute name="VALUE" x="229.87" y="105.918" size="1.778" layer="96"/>
+<instance part="R5" gate="G$1" x="228.6" y="114.3" smashed="yes" rot="R90">
+<attribute name="NAME" x="227.1014" y="110.49" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="231.902" y="110.49" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="C44" gate="G$1" x="172.72" y="91.44" smashed="yes" rot="R270">
 <attribute name="NAME" x="171.704" y="91.821" size="1.778" layer="95"/>
@@ -8650,8 +8650,8 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 </segment>
 <segment>
 <pinref part="R3" gate="G$1" pin="2"/>
-<wire x1="134.62" y1="170.18" x2="139.7" y2="170.18" width="0.1524" layer="91"/>
-<label x="134.62" y="170.18" size="1.778" layer="95"/>
+<wire x1="124.46" y1="180.34" x2="129.54" y2="180.34" width="0.1524" layer="91"/>
+<label x="129.54" y="182.88" size="1.778" layer="95" rot="R180"/>
 </segment>
 <segment>
 <pinref part="IC7" gate="G$1" pin="!RST!/!PD"/>
@@ -8668,8 +8668,8 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 </segment>
 <segment>
 <pinref part="R4" gate="G$1" pin="2"/>
-<wire x1="238.76" y1="170.18" x2="243.84" y2="170.18" width="0.1524" layer="91"/>
-<label x="238.76" y="170.18" size="1.778" layer="95"/>
+<wire x1="228.6" y1="180.34" x2="233.68" y2="180.34" width="0.1524" layer="91"/>
+<label x="228.6" y="180.34" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="IC8" gate="G$1" pin="!RST!/!PD"/>
@@ -8686,8 +8686,8 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 </segment>
 <segment>
 <pinref part="R5" gate="G$1" pin="2"/>
-<wire x1="238.76" y1="109.22" x2="243.84" y2="109.22" width="0.1524" layer="91"/>
-<label x="238.76" y="109.22" size="1.778" layer="95"/>
+<wire x1="228.6" y1="119.38" x2="233.68" y2="119.38" width="0.1524" layer="91"/>
+<label x="228.6" y="119.38" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="IC9" gate="G$1" pin="!RST!/!PD"/>

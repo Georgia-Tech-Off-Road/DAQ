@@ -1485,7 +1485,7 @@ design rules under a new name.</description>
 <attribute name="DIGI-KEY_PART_NUMBER" value="602-1293-ND" x="50.8" y="115.57" size="1.778" layer="27" display="off"/>
 <attribute name="MF" value="Digi International" x="50.8" y="115.57" size="1.778" layer="27" display="off"/>
 <attribute name="MP" value="XBP9B-XCST-001" x="50.8" y="115.57" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="37.7589" y="103.0305" size="1.274009375" layer="25" rot="R90"/>
+<attribute name="NAME" x="37.7589" y="99.2205" size="1.274009375" layer="25" rot="R90"/>
 <attribute name="PACKAGE" value="Module Digi International" x="50.8" y="115.57" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="65.068" y="102.5535" size="1.271609375" layer="27" rot="R90"/>
 </element>
