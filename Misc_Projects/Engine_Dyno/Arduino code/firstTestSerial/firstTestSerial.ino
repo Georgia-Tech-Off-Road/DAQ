@@ -2,13 +2,15 @@
 
 //HE sensor
 #include <SpeedSensor.h>
-#include <SDWrite.h>
 #include <Sensor.h>
 
 unsigned __exidx_start;
 unsigned __exidx_end;
 
-SDWrite sd(BUILTIN_SDCARD);
+//SDWrite sd(BUILTIN_SDCARD);
+
+uint32_t prev_time = micros();
+bool led_state = 0;
 
 //Load Cell
 #include <Wire.h>
@@ -37,19 +39,12 @@ byte avgWeightSpot = 0;
 
 
 void setup() {
-  sd.begin("dyno2.bin");
-  sd.attach_output_sensor(myScale, FORCE_ENGINEDYNO_LBS);
-  sd.attach_output_sensor(engine_speed, SPEED_ENGINE_RPM);
-  sd.attach_output_sensor(secondary_speed, SPEED_SECONDARY_RPM);
-  
-  
   pinMode(safeLED, OUTPUT);
   pinMode(testingLED, OUTPUT);
   pinMode(errorLED, OUTPUT);
   pinMode(shutdownSig, OUTPUT);
   pinMode(killSwitch, INPUT_PULLUP);
 
-  //Load Cell
   Serial.begin(9600);
 
   Wire.begin();
@@ -57,9 +52,12 @@ void setup() {
 
   if (myScale.begin() == false)
   {
+    digitalWrite(errorLED, HIGH);
+  digitalWrite(testingLED, LOW);
     Serial.println("Scale not detected. Please check wiring. Freezing...");
     while (1);
   }
+  
   Serial.println("Scale detected!");
 
   readSystemSettings(); //Load zeroOffset and calibrationFactor from EEPROM
@@ -67,23 +65,26 @@ void setup() {
   myScale.setSampleRate(NAU7802_SPS_320); //Increase to max sample rate
   myScale.calibrateAFE(); //Re-cal analog front end when we change gain, sample rate, or channel 
   myScale.setGain(NAU7802_GAIN_16);
-  
   Serial.print("Zero offset: ");
   Serial.println(myScale.getZeroOffset());
   Serial.print("Calibration factor: ");
   Serial.println(myScale.getCalibrationFactor());
+
 }
 
 void loop() {
-  sd.update();
-  
   digitalWrite(testingLED, HIGH);
-
+  
+  if(abs(micros() - prev_time) > 250000){
+    led_state = !led_state;
+    digitalWrite(safeLED, led_state);
+    prev_time = micros();
+  }
 
   //Load Cell
   if (myScale.available() == true)
   {
-    float currentWeight = myScale.getWeight();
+    float currentWeight = myScale.getWeight(true);
 
 
 
@@ -100,6 +101,7 @@ void loop() {
     Serial.print(engine_speed.get_speed());
     Serial.print("\tSecondary Speed: \t");
     Serial.print(secondary_speed.get_speed());
+    
 //    if(  digitalRead(killSwitch)) {
 //       Serial.print("\t Not Killed");
 //    } else {
@@ -126,8 +128,6 @@ void loop() {
   }
 
 
-  //Teensy SD card
-  
 }
 
 void killed(void) {
