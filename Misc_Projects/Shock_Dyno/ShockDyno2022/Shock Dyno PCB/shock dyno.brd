@@ -176,11 +176,18 @@
 <wire x1="100" y1="0" x2="100" y2="83.81" width="0" layer="20"/>
 <wire x1="100" y1="83.81" x2="0" y2="83.81" width="0" layer="20"/>
 <wire x1="0" y1="83.81" x2="0" y2="0" width="0" layer="20"/>
-<text x="12.7" y="2.54" size="1.778" layer="21">Designer: Caden Farley</text>
-<text x="68.58" y="13.97" size="1.016" layer="21">hehe 25 amps go brrrrr</text>
+<text x="11.43" y="2.54" size="2.54" layer="21">Designer: Caden Farley</text>
+<text x="63.5" y="12.7" size="1.778" layer="21">hehe 25 amps go brrrrr</text>
 <hole x="2.54" y="81.28" drill="3.3"/>
 <hole x="97.79" y="81.28" drill="3.3"/>
 <hole x="50.8" y="2.54" drill="3.3"/>
+<text x="6.985" y="72.7075" size="1.778" layer="21">VCC</text>
+<text x="6.985" y="70.1675" size="1.778" layer="21">LOAD_CELL</text>
+<text x="6.985" y="67.6275" size="1.778" layer="21">GND</text>
+<text x="6.985" y="57.4675" size="1.778" layer="21">GND</text>
+<text x="6.985" y="54.9275" size="1.778" layer="21">LDS_IN</text>
+<text x="6.985" y="52.3875" size="1.778" layer="21">VCC</text>
+<text x="0" y="16.51" size="1.016" layer="21">M_CONTROLLER_C</text>
 </plain>
 <libraries>
 <library name="GTOR - Connectors">
