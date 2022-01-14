@@ -1,15 +1,17 @@
 #include "Dyno.h"
 
 //HE sensor
-//#include <SpeedSensor.h>
-#include <Comms.h>
+#include <SpeedSensor.h>
+#include <SerialComms.h>
 #include <Block.h>
+#include <BlockId.h>
+
 
 unsigned __exidx_start;
 unsigned __exidx_end;
 
 //SDWrite sd(BUILTIN_SDCARD);
-UARTComms uart(115200, Serial);
+SerialComms serial(Serial);
 
 uint32_t prev_time = micros();
 bool led_state = 0;
@@ -23,7 +25,7 @@ bool led_state = 0;
 NAU7802 myScale; //Create instance of the NAU7802 class
 SpeedSensor engine_speed(600, H1, 255);
 SpeedSensor secondary_speed(30, H2, 255);
-StateSensor tare_scale;
+Block<uint8_t> tare_scale;
 
 //EEPROM locations to store 4-byte variables
 #define LOCATION_CALIBRATION_FACTOR 0 //Float, requires 4 bytes of EEPROM
@@ -66,11 +68,11 @@ void setup() {
   myScale.setGain(NAU7802_GAIN_16);
 
 
-  uart.begin();
-  uart.attach_output_sensor(myScale, FORCE_ENGINEDYNO_LBS);
-  uart.attach_output_sensor(engine_speed, SPEED_DYNOENGINE600_RPM);
-  uart.attach_output_sensor(secondary_speed, SPEED_DYNOSECONDARY30_RPM);
-  uart.attach_input_sensor(tare_scale, COMMAND_TARE_LOAD_CELL);
+  serial.begin(115200);
+  serial.attach_output_block(myScale, FORCE_ENGINEDYNO_LBS);
+  serial.attach_output_block(engine_speed, SPEED_DYNOENGINE600_RPM);
+  serial.attach_output_block(secondary_speed, SPEED_DYNOSECONDARY30_RPM);
+  serial.attach_input_block(tare_scale, COMMAND_TARE_LOAD_CELL);
   
 }
 
@@ -85,11 +87,11 @@ void loop() {
   }
 
 
-  if (tare_scale.get_state()) //Tare the scale
+  if (tare_scale.get_data()) //Tare the scale
     myScale.calculateZeroOffset();
 
 
-  uart.update();
+  serial.update();
 }
 
 void killed(void) {
