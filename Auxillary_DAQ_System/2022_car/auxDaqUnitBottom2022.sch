@@ -673,6 +673,29 @@
 <smd name="3" x="2.3" y="-3.15" dx="1.5" dy="2" layer="1" rot="R180"/>
 <smd name="4" x="0" y="3.15" dx="3.8" dy="2" layer="1" rot="R180"/>
 </package>
+<package name="BSS64AHZGT116">
+<description>&lt;b&gt;SOT-23 (SST3)&lt;/b&gt;&lt;br&gt;
+</description>
+<smd name="1" x="-1.15" y="-0.95" dx="1" dy="0.6" layer="1"/>
+<smd name="2" x="-1.15" y="0.95" dx="1" dy="0.6" layer="1"/>
+<smd name="3" x="1.15" y="0" dx="1" dy="0.6" layer="1"/>
+<text x="0" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="0" y="0" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-1.9" y1="-1.8" x2="1.9" y2="-1.8" width="0.05" layer="51"/>
+<wire x1="1.9" y1="-1.8" x2="1.9" y2="1.8" width="0.05" layer="51"/>
+<wire x1="1.9" y1="1.8" x2="-1.9" y2="1.8" width="0.05" layer="51"/>
+<wire x1="-1.9" y1="1.8" x2="-1.9" y2="-1.8" width="0.05" layer="51"/>
+<wire x1="-0.675" y1="-1.45" x2="0.675" y2="-1.45" width="0.1" layer="51"/>
+<wire x1="0.675" y1="-1.45" x2="0.675" y2="1.45" width="0.1" layer="51"/>
+<wire x1="0.675" y1="1.45" x2="-0.675" y2="1.45" width="0.1" layer="51"/>
+<wire x1="-0.675" y1="1.45" x2="-0.675" y2="-1.45" width="0.1" layer="51"/>
+<wire x1="-0.3" y1="-1.45" x2="0.3" y2="-1.45" width="0.2" layer="21"/>
+<wire x1="0.3" y1="-1.45" x2="0.3" y2="1.45" width="0.2" layer="21"/>
+<wire x1="0.3" y1="1.45" x2="-0.3" y2="1.45" width="0.2" layer="21"/>
+<wire x1="-0.3" y1="1.45" x2="-0.3" y2="-1.45" width="0.2" layer="21"/>
+<wire x1="-0.675" y1="-0.5" x2="0.275" y2="-1.45" width="0.1" layer="51"/>
+<wire x1="-1.65" y1="-1.5" x2="-0.65" y2="-1.5" width="0.2" layer="21"/>
+</package>
 </packages>
 <packages3d>
 <package3d name="SOT223" urn="urn:adsk.eagle:package:28541/2" type="model">
@@ -742,6 +765,29 @@
 <pin name="AIN_3GND" x="38.1" y="-40.64" length="middle" rot="R180"/>
 <pin name="AIN_2P" x="38.1" y="-43.18" length="middle" rot="R180"/>
 <pin name="AIN2_GND" x="38.1" y="-45.72" length="middle" rot="R180"/>
+</symbol>
+<symbol name="RK7002BMT116">
+<wire x1="7.62" y1="2.54" x2="7.62" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="7.62" y1="5.08" x2="7.62" y2="7.62" width="0.254" layer="94"/>
+<wire x1="2.54" y1="0" x2="5.08" y2="0" width="0.254" layer="94"/>
+<wire x1="5.08" y1="5.08" x2="5.08" y2="0" width="0.254" layer="94"/>
+<wire x1="7.62" y1="2.54" x2="5.842" y2="2.54" width="0.254" layer="94"/>
+<wire x1="7.62" y1="5.08" x2="5.842" y2="5.08" width="0.254" layer="94"/>
+<wire x1="5.842" y1="0" x2="7.62" y2="0" width="0.254" layer="94"/>
+<wire x1="5.842" y1="5.588" x2="5.842" y2="4.572" width="0.254" layer="94"/>
+<wire x1="5.842" y1="-0.508" x2="5.842" y2="0.508" width="0.254" layer="94"/>
+<wire x1="5.842" y1="2.032" x2="5.842" y2="3.048" width="0.254" layer="94"/>
+<circle x="6.35" y="2.54" radius="3.81" width="0.254" layer="94"/>
+<text x="11.43" y="3.81" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="11.43" y="1.27" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="G" x="0" y="0" visible="pad" length="short"/>
+<pin name="D" x="7.62" y="10.16" visible="pad" length="short" rot="R270"/>
+<pin name="S" x="7.62" y="-5.08" visible="pad" length="short" rot="R90"/>
+<polygon width="0.254" layer="94">
+<vertex x="5.842" y="2.54"/>
+<vertex x="6.858" y="3.048"/>
+<vertex x="6.858" y="2.032"/>
+</polygon>
 </symbol>
 </symbols>
 <devicesets>
@@ -856,6 +902,34 @@ Use with 0.47µF input capacitor and 33µF output capacitor.</description>
 </connects>
 <technologies>
 <technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MOSFET_N-TYPE_RK7002BMT116" prefix="Q">
+<description>&lt;b&gt;2.5V Drive Nch MOSFET: MOSFETs are made as ultra-low ON-resistance by the micro-processing technologies suitable for mobilr equipment for low current consumption. In wide lineup including compact type, high-power type and complex type to meet in  the market.&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="https://datasheet.datasheetarchive.com/originals/distributors/DKDS-18/356920.pdf"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="RK7002BMT116" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="BSS64AHZGT116">
+<connects>
+<connect gate="G$1" pin="D" pad="3"/>
+<connect gate="G$1" pin="G" pad="2"/>
+<connect gate="G$1" pin="S" pad="1"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="ARROW_PART_NUMBER" value="" constant="no"/>
+<attribute name="ARROW_PRICE-STOCK" value="" constant="no"/>
+<attribute name="DESCRIPTION" value="2.5V Drive Nch MOSFET: MOSFETs are made as ultra-low ON-resistance by the micro-processing technologies suitable for mobilr equipment for low current consumption. In wide lineup including compact type, high-power type and complex type to meet in  the market." constant="no"/>
+<attribute name="HEIGHT" value="1.2mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="ROHM Semiconductor" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="RK7002BMT116" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="755-RK7002BMT116" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/ROHM-Semiconductor/RK7002BMT116?qs=npTsUczJOtO4aXz%2Fx%2FNVUw%3D%3D" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -7308,15 +7382,23 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <part name="U1" library="GTOR - Microcontroller" deviceset="XBEE_PRO_S3B" device=""/>
 <part name="U$3" library="GTOR - Active Components" deviceset="REG_3V3_LMS8117A" device="" package3d_urn="urn:adsk.eagle:package:28541/2"/>
 <part name="U$4" library="GTOR - Active Components" deviceset="REG_5V_LDL1117S50R" device=""/>
+<part name="JP3" library="GTOR - Connectors" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2"/>
+<part name="JP5" library="GTOR - Connectors" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2"/>
+<part name="JP6" library="GTOR - Connectors" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2"/>
+<part name="R6" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k"/>
+<part name="Q1" library="GTOR - Active Components" deviceset="MOSFET_N-TYPE_RK7002BMT116" device=""/>
+<part name="Q2" library="GTOR - Active Components" deviceset="MOSFET_N-TYPE_RK7002BMT116" device=""/>
+<part name="R7" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3"/>
+<part name="R8" library="GTOR - Passive Components" deviceset="RES_SMD" device="R0603" package3d_urn="urn:adsk.eagle:package:23555/3"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <wire x1="147.32" y1="35.56" x2="147.32" y2="50.8" width="0.1524" layer="94"/>
-<wire x1="200.66" y1="35.56" x2="208.28" y2="35.56" width="0.1524" layer="94"/>
-<wire x1="208.28" y1="35.56" x2="208.28" y2="88.9" width="0.1524" layer="94"/>
-<wire x1="208.28" y1="88.9" x2="208.28" y2="109.22" width="0.1524" layer="94"/>
-<wire x1="208.28" y1="109.22" x2="208.28" y2="185.42" width="0.1524" layer="94"/>
+<wire x1="200.66" y1="35.56" x2="218.44" y2="35.56" width="0.1524" layer="94"/>
+<wire x1="218.44" y1="35.56" x2="218.44" y2="88.9" width="0.1524" layer="94"/>
+<wire x1="218.44" y1="88.9" x2="218.44" y2="109.22" width="0.1524" layer="94"/>
+<wire x1="218.44" y1="109.22" x2="218.44" y2="185.42" width="0.1524" layer="94"/>
 <wire x1="147.32" y1="50.8" x2="109.22" y2="50.8" width="0.1524" layer="94"/>
 <wire x1="109.22" y1="50.8" x2="71.12" y2="50.8" width="0.1524" layer="94"/>
 <wire x1="71.12" y1="50.8" x2="0" y2="50.8" width="0.1524" layer="94"/>
@@ -7325,13 +7407,15 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <text x="20.32" y="7.62" size="5.08" layer="97">5v Regulator</text>
 <text x="91.44" y="5.08" size="5.08" layer="97">3v Regulator</text>
 <text x="40.64" y="175.26" size="5.08" layer="97">Teensy 4.1</text>
-<wire x1="208.28" y1="109.22" x2="248.92" y2="109.22" width="0.1524" layer="94"/>
+<wire x1="218.44" y1="109.22" x2="248.92" y2="109.22" width="0.1524" layer="94"/>
 <text x="139.7" y="172.72" size="5.08" layer="97">Headers</text>
-<text x="213.36" y="172.72" size="5.08" layer="97">COIN Cell</text>
-<text x="213.36" y="96.52" size="5.08" layer="97">LiPo (3S)</text>
+<text x="223.52" y="170.18" size="5.08" layer="97">COIN
+Cell</text>
+<text x="223.52" y="88.9" size="5.08" layer="97">LiPo
+(3S)</text>
 <text x="154.94" y="78.74" size="5.08" layer="97">Debug</text>
 <wire x1="147.32" y1="50.8" x2="147.32" y2="88.9" width="0.1524" layer="94"/>
-<wire x1="147.32" y1="88.9" x2="208.28" y2="88.9" width="0.1524" layer="94"/>
+<wire x1="147.32" y1="88.9" x2="218.44" y2="88.9" width="0.1524" layer="94"/>
 </plain>
 <instances>
 <instance part="U$1" gate="G$1" x="53.34" y="114.3" smashed="yes"/>
@@ -7400,30 +7484,30 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <instance part="SUPPLY5" gate="GND" x="233.68" y="63.5" smashed="yes">
 <attribute name="VALUE" x="231.775" y="60.325" size="1.778" layer="96"/>
 </instance>
-<instance part="LED1" gate="LED" x="177.8" y="68.58" smashed="yes" rot="R90">
-<attribute name="NAME" x="182.372" y="72.136" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="182.372" y="74.295" size="1.778" layer="96" rot="R180"/>
+<instance part="LED1" gate="LED" x="175.26" y="50.8" smashed="yes">
+<attribute name="NAME" x="178.816" y="46.228" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="180.975" y="46.228" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R1" gate="G$1" x="167.64" y="68.58" smashed="yes">
-<attribute name="NAME" x="163.83" y="70.0786" size="1.778" layer="95"/>
-<attribute name="VALUE" x="163.83" y="65.278" size="1.778" layer="96"/>
+<instance part="R1" gate="G$1" x="175.26" y="60.96" smashed="yes" rot="R270">
+<attribute name="NAME" x="176.7586" y="64.77" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="171.958" y="64.77" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="SUPPLY27" gate="GND" x="187.96" y="66.04" smashed="yes">
-<attribute name="VALUE" x="186.055" y="62.865" size="1.778" layer="96"/>
+<instance part="SUPPLY27" gate="GND" x="172.72" y="40.64" smashed="yes" rot="R270">
+<attribute name="VALUE" x="169.545" y="42.545" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="LED2" gate="LED" x="177.8" y="53.34" smashed="yes" rot="R90">
-<attribute name="NAME" x="182.372" y="56.896" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="182.372" y="59.055" size="1.778" layer="96" rot="R180"/>
+<instance part="LED2" gate="LED" x="160.02" y="50.8" smashed="yes">
+<attribute name="NAME" x="163.576" y="46.228" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="165.735" y="46.228" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="R2" gate="G$1" x="167.64" y="53.34" smashed="yes">
-<attribute name="NAME" x="163.83" y="54.8386" size="1.778" layer="95"/>
-<attribute name="VALUE" x="163.83" y="50.038" size="1.778" layer="96"/>
+<instance part="R2" gate="G$1" x="160.02" y="60.96" smashed="yes" rot="R270">
+<attribute name="NAME" x="161.5186" y="64.77" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="156.718" y="64.77" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="SUPPLY28" gate="GND" x="187.96" y="50.8" smashed="yes">
-<attribute name="VALUE" x="186.055" y="47.625" size="1.778" layer="96"/>
+<instance part="SUPPLY28" gate="GND" x="157.48" y="40.64" smashed="yes" rot="R270">
+<attribute name="VALUE" x="154.305" y="42.545" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="+3V26" gate="G$1" x="157.48" y="58.42" smashed="yes">
-<attribute name="VALUE" x="154.94" y="58.42" size="1.778" layer="96" rot="R180"/>
+<instance part="+3V26" gate="G$1" x="165.1" y="71.12" smashed="yes" rot="R270">
+<attribute name="VALUE" x="165.1" y="73.66" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="P+14" gate="1" x="55.88" y="167.64" smashed="yes">
 <attribute name="VALUE" x="53.34" y="162.56" size="1.778" layer="96" rot="R90"/>
@@ -7443,6 +7527,36 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <instance part="U$4" gate="G$1" x="38.1" y="35.56" smashed="yes">
 <attribute name="NAME" x="40.64" y="27.94" size="1.778" layer="95"/>
 <attribute name="VALUE" x="30.48" y="43.18" size="1.778" layer="96"/>
+</instance>
+<instance part="JP3" gate="G$1" x="213.36" y="81.28" smashed="yes">
+<attribute name="NAME" x="207.01" y="86.995" size="1.778" layer="95"/>
+<attribute name="VALUE" x="207.01" y="76.2" size="1.778" layer="96"/>
+</instance>
+<instance part="JP5" gate="G$1" x="213.36" y="58.42" smashed="yes">
+<attribute name="NAME" x="207.01" y="64.135" size="1.778" layer="95"/>
+<attribute name="VALUE" x="207.01" y="53.34" size="1.778" layer="96"/>
+</instance>
+<instance part="JP6" gate="G$1" x="213.36" y="38.1" smashed="yes">
+<attribute name="NAME" x="207.01" y="43.815" size="1.778" layer="95"/>
+<attribute name="VALUE" x="207.01" y="33.02" size="1.778" layer="96"/>
+</instance>
+<instance part="R6" gate="G$1" x="205.74" y="48.26" smashed="yes" rot="R90">
+<attribute name="NAME" x="204.2414" y="44.45" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="209.042" y="46.99" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="Q1" gate="G$1" x="187.96" y="48.26" smashed="yes">
+<attribute name="NAME" x="199.39" y="52.07" size="1.778" layer="95" align="center-left"/>
+</instance>
+<instance part="Q2" gate="G$1" x="187.96" y="71.12" smashed="yes">
+<attribute name="NAME" x="199.39" y="74.93" size="1.778" layer="95" align="center-left"/>
+</instance>
+<instance part="R7" gate="G$1" x="187.96" y="83.82" smashed="yes" rot="R180">
+<attribute name="NAME" x="191.77" y="82.3214" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="191.77" y="87.122" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="R8" gate="G$1" x="187.96" y="60.96" smashed="yes" rot="R180">
+<attribute name="NAME" x="191.77" y="59.4614" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="191.77" y="64.262" size="1.778" layer="96" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -7699,13 +7813,18 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 </segment>
 <segment>
 <pinref part="R1" gate="G$1" pin="1"/>
-<wire x1="162.56" y1="68.58" x2="160.02" y2="68.58" width="0.1524" layer="91"/>
-<label x="160.02" y="68.58" size="1.27" layer="95" rot="R180" xref="yes"/>
+<wire x1="175.26" y1="66.04" x2="175.26" y2="68.58" width="0.1524" layer="91"/>
+<label x="175.26" y="68.58" size="1.27" layer="95" rot="R90" xref="yes"/>
 </segment>
 <segment>
 <pinref part="JP7" gate="A" pin="22"/>
 <wire x1="203.2" y1="99.06" x2="195.58" y2="99.06" width="0.1524" layer="91"/>
 <label x="195.58" y="99.06" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="Q2" gate="G$1" pin="G"/>
+<wire x1="187.96" y1="71.12" x2="182.88" y2="71.12" width="0.1524" layer="91"/>
+<label x="182.88" y="71.12" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="31" class="0">
@@ -7723,6 +7842,11 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <pinref part="JP7" gate="A" pin="23"/>
 <wire x1="203.2" y1="96.52" x2="195.58" y2="96.52" width="0.1524" layer="91"/>
 <label x="195.58" y="96.52" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="Q1" gate="G$1" pin="G"/>
+<wire x1="187.96" y1="48.26" x2="182.88" y2="48.26" width="0.1524" layer="91"/>
+<label x="182.88" y="48.26" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PROGRAM" class="0">
@@ -7887,6 +8011,15 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <wire x1="203.2" y1="93.98" x2="195.58" y2="93.98" width="0.1524" layer="91"/>
 <label x="195.58" y="93.98" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
+<segment>
+<pinref part="JP6" gate="G$1" pin="1"/>
+<wire x1="210.82" y1="40.64" x2="205.74" y2="40.64" width="0.1524" layer="91"/>
+<label x="200.66" y="40.64" size="1.778" layer="95"/>
+<pinref part="R6" gate="G$1" pin="1"/>
+<wire x1="205.74" y1="40.64" x2="200.66" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="205.74" y1="43.18" x2="205.74" y2="40.64" width="0.1524" layer="91"/>
+<junction x="205.74" y="40.64"/>
+</segment>
 </net>
 <net name="33" class="0">
 <segment>
@@ -8001,12 +8134,12 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <segment>
 <pinref part="LED1" gate="LED" pin="C"/>
 <pinref part="SUPPLY27" gate="GND" pin="GND"/>
-<wire x1="187.96" y1="68.58" x2="182.88" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="40.64" x2="175.26" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="LED2" gate="LED" pin="C"/>
 <pinref part="SUPPLY28" gate="GND" pin="GND"/>
-<wire x1="187.96" y1="53.34" x2="182.88" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="40.64" x2="160.02" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="JP2" gate="A" pin="2"/>
@@ -8027,6 +8160,21 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <pinref part="JP7" gate="A" pin="1"/>
 <wire x1="203.2" y1="152.4" x2="195.58" y2="152.4" width="0.1524" layer="91"/>
 <label x="195.58" y="152.4" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="JP6" gate="G$1" pin="2"/>
+<wire x1="210.82" y1="38.1" x2="200.66" y2="38.1" width="0.1524" layer="91"/>
+<label x="200.66" y="38.1" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="Q2" gate="G$1" pin="S"/>
+<wire x1="195.58" y1="66.04" x2="200.66" y2="66.04" width="0.1524" layer="91"/>
+<label x="195.58" y="66.04" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="Q1" gate="G$1" pin="S"/>
+<wire x1="195.58" y1="43.18" x2="200.66" y2="43.18" width="0.1524" layer="91"/>
+<label x="195.58" y="43.18" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="+12V" class="0">
@@ -8094,8 +8242,8 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <segment>
 <pinref part="+3V26" gate="G$1" pin="+3V3"/>
 <pinref part="R2" gate="G$1" pin="1"/>
-<wire x1="157.48" y1="55.88" x2="157.48" y2="53.34" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="53.34" x2="162.56" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="162.56" y1="71.12" x2="160.02" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="71.12" x2="160.02" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="JP10" gate="A" pin="3"/>
@@ -8326,14 +8474,14 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <segment>
 <pinref part="LED1" gate="LED" pin="A"/>
 <pinref part="R1" gate="G$1" pin="2"/>
-<wire x1="172.72" y1="68.58" x2="175.26" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="55.88" x2="175.26" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$2" class="0">
 <segment>
 <pinref part="LED2" gate="LED" pin="A"/>
 <pinref part="R2" gate="G$1" pin="2"/>
-<wire x1="172.72" y1="53.34" x2="175.26" y2="53.34" width="0.1524" layer="91"/>
+<wire x1="160.02" y1="55.88" x2="160.02" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="XBEE_DIN" class="0">
@@ -8517,6 +8665,55 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 <pinref part="JP1" gate="A" pin="1"/>
 <wire x1="154.94" y1="152.4" x2="142.24" y2="152.4" width="0.1524" layer="91"/>
 <label x="142.24" y="152.4" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="3V3" class="0">
+<segment>
+<pinref part="R6" gate="G$1" pin="2"/>
+<wire x1="205.74" y1="53.34" x2="210.82" y2="53.34" width="0.1524" layer="91"/>
+<label x="205.74" y="53.34" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R7" gate="G$1" pin="2"/>
+<wire x1="182.88" y1="83.82" x2="182.88" y2="86.36" width="0.1524" layer="91"/>
+<wire x1="182.88" y1="86.36" x2="187.96" y2="86.36" width="0.1524" layer="91"/>
+<label x="185.42" y="86.36" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="182.88" y1="60.96" x2="182.88" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="182.88" y1="63.5" x2="187.96" y2="63.5" width="0.1524" layer="91"/>
+<label x="185.42" y="63.5" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="R7" gate="G$1" pin="1"/>
+<pinref part="JP3" gate="G$1" pin="1"/>
+<wire x1="193.04" y1="83.82" x2="210.82" y2="83.82" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="R8" gate="G$1" pin="1"/>
+<pinref part="JP5" gate="G$1" pin="1"/>
+<wire x1="193.04" y1="60.96" x2="210.82" y2="60.96" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="LED1_GND" class="0">
+<segment>
+<pinref part="JP3" gate="G$1" pin="2"/>
+<wire x1="210.82" y1="81.28" x2="195.58" y2="81.28" width="0.1524" layer="91"/>
+<label x="195.58" y="81.28" size="1.778" layer="95"/>
+<pinref part="Q2" gate="G$1" pin="D"/>
+</segment>
+</net>
+<net name="LED2_GND" class="0">
+<segment>
+<pinref part="JP5" gate="G$1" pin="2"/>
+<wire x1="210.82" y1="58.42" x2="195.58" y2="58.42" width="0.1524" layer="91"/>
+<label x="195.58" y="58.42" size="1.778" layer="95"/>
+<pinref part="Q1" gate="G$1" pin="D"/>
 </segment>
 </net>
 </nets>
@@ -10195,6 +10392,10 @@ Works with 2016, 2020, 2025, 2032 coin cell batterys.
 </schematic>
 </drawing>
 <compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
 <note version="8.3" severity="warning">
 Since Version 8.3, EAGLE supports URNs for individual library
 assets (packages, symbols, and devices). The URNs of those assets
