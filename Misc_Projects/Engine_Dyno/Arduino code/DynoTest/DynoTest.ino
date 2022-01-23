@@ -90,7 +90,12 @@ void loop() {
   if (tare_scale.get_data()) //Tare the scale
     myScale.calculateZeroOffset();
 
-
+  //Updating each output sensor
+  myScale.update();
+  engine_speed.update();
+  secondary_speed.update();
+  tare_scale.update();
+  
   serial.update();
 }
 
