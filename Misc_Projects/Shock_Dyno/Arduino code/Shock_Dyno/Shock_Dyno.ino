@@ -1,86 +1,85 @@
-//#include "Dyno.h"
-
-//HE sensor
-#include <SpeedSensor.h>
-#include <SDWrite.h>
-#include <Sensor.h>
 #include <Porter4QD.h>
+#include <LoadCell.h>
+#include <SerialComms.h>
+#include <Block.h>
+#include <BlockId.h>
+#include <ADS8332.h>
 
-unsigned __exidx_start;
-unsigned __exidx_end;
+#define LDS_PIN 1
+#define LOAD_CELL_PIN 2
+#define LED_PIN 13
+#define MOTOR_PIN 2
+#define MOTOR_ENABLE_PIN 4
+#define MOTOR_KILL_RELAY_PIN 5
 
-//SDWrite sd(BUILTIN_SDCARD);
-UARTComms uart(115200, Serial);
+#define MOTOR_CONTROL_SCALE 2.32
+#define MOTOR_CONTROL_OFFSET 7.73
+
+SerialComms serial_comms(Serial);
 
 uint32_t prev_time = micros();
 bool led_state = 0;
 
-//Load Cell
-#include <Wire.h>
+ADS8332 ads(10, 7, 8);
+Porter4QD motor_control(MOTOR_PIN, MOTOR_ENABLE_PIN, MOTOR_CONTROL_SCALE, MOTOR_CONTROL_OFFSET);
 
-#include "SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h" // Click here to get the library: http://librarymanager/All#SparkFun_NAU8702
+//input blocks
+Block<bool> tare_scale;
+Block<uint8_t> motor_speed;
+Block<bool> motor_enable;
+Block<float> load_cell_scale;
 
-//LDS_PIN AND MOTOR_PIN NEED NUMBERS
-#define LDS_PIN 14
-#define LED_PIN 13
-#define MOTOR_PIN 0
-
-//Output Shock Dyno
-NAU7802 shock_dyno_force;
-//Input Shock Dyno
-StateSensor tare_scale;
-//Input motor speed
-StateSensor motor_speed;
-//Output LDS
-LDS lds(LDS_PIN, 200);
-//Motor Controller
-Porter4QD motor_control(MOTOR_PIN, 92 , 1.64);
+//output blocks
+LoadCell load_cell;
+LDS lds<uint16_t>(150);
 
 void setup() {
-  //Serial.begin(9600);
-  //while(!Serial);
-  
-  Wire.begin(); 
-  Wire.setClock(400000); //Qwiic Scale is capable of running at 400kHz if desired
-
   pinMode(LED_PIN, OUTPUT);
+  pinMode(MOTOR_KILL_RELAY_PIN, OUTPUT);
 
-  if(shock_dyno_force.begin() == false)
-  {
-    //Serial.println("Scale not detected. Please check wiring. Freezing...");
-    digitalWrite(LED_PIN, HIGH);    
-  }
+  SPI.begin();
+  ads.begin();
+  serial_comms.begin(115200);
 
-  shock_dyno_force.setSampleRate(NAU7802_SPS_320); //Increase to max sample rate
-  shock_dyno_force.calibrateAFE(); //Re-cal analog front end when we change gain, sample rate, or channel 
-  shock_dyno_force.setGain(NAU7802_GAIN_16);
+  serial_comms.attach_input_block(tare_scale, COMMAND_TARE_LOAD_CELL);
+  serial_comms.attach_input_block(motor_speed, COMMAND_MOTOR_SPEED);
+  serial_comms.attach_input_block(motor_enable, COMMAND_MOTOR_ENABLE);
+  serial_comms.attach_input_block(load_cell_scale, COMMAND_SCALE_LOAD_CELL);
+  serial_comms.attach_output_block(load_cell, FORCE_SHOCKDYNO_LBS);
+  serial_comms.attach_output_block(lds, LDS_SHOCKDYNO_MM);
 
+  ads.attach_sensor(lds, LDS_PIN);
+  ads.attach_sensor(load_cell, LOAD_CELL_PIN);
 
-  uart.begin();
-  uart.attach_output_sensor(shock_dyno_force, FORCE_SHOCKDYNO_LBS);
-  uart.attach_input_sensor(tare_scale, COMMAND_TARE_LOAD_CELL);
-  uart.attach_input_sensor(motor_speed, COMMAND_MOTOR_SPEED);
-  uart.attach_output_sensor(lds, LDS_SHOCKDYNO_MM);
-  
+  digitalWrite(MOTOR_KILL_RELAY_PIN, HIGH);
 }
 
 void loop() {
-  
   if(abs(micros() - prev_time) > 250000){
     led_state = !led_state;
     digitalWrite(LED_PIN, led_state);
     prev_time = micros();
   }
 
-  if (tare_scale.get_state()){ //Tare the scale
+  //Tare the scale
+  if (tare_scale.get_data()){
     //Serial.println("Taring the scale");
-    shock_dyno_force.calculateZeroOffset();
+    load_cell.tare();
   }
 
-  if (motor_speed.get_state() == 0){
+  if (motor_speed.get_data() == 0){
     motor_control.kill();
   }
-  motor_control.setSpeed(motor_speed.get_state());
-  
-  uart.update();
+
+  if (motor_enable.get_data() == 0) {
+    motor_control.setSpeed(0);
+    digitalWrite(MOTOR_KILL_RELAY_PIN, LOW);
+    while (motor_enable.get_data() == 0);
+  }
+
+  motor_control.setSpeed(motor_speed.get_data());
+
+  ads.update_sensors();
+  load_cell.set_scale(load_cell_scale.get_data());
+  serial_comms.update();
 }
