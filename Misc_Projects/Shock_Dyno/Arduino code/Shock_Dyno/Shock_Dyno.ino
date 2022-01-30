@@ -1,5 +1,6 @@
 #include <Porter4QD.h>
 #include <LoadCell.h>
+#include <LDS.h>
 #include <SerialComms.h>
 #include <Block.h>
 #include <BlockId.h>
@@ -31,7 +32,7 @@ Block<float> load_cell_scale;
 
 //output blocks
 LoadCell load_cell;
-LDS lds<uint16_t>(150);
+LDS<uint16_t> lds(150);
 
 void setup() {
   pinMode(LED_PIN, OUTPUT);
