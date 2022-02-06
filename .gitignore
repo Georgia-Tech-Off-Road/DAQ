@@ -308,3 +308,5 @@ dmypy.json
 ### Microsoft Office ###
 # Ignores all temporary files made for word document, excel sheet, etc. 
 ~$*
+
+Misc_Projects/Engine_Dyno/.DS_Store
