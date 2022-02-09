@@ -5,6 +5,7 @@
 #include <Block.h>
 #include <BlockId.h>
 #include <ADS8332.h>
+#include <ClockTimer.h>
 
 #define LDS_PIN 1
 #define LOAD_CELL_PIN 2
@@ -18,9 +19,6 @@
 
 SerialComms serial_comms(Serial);
 
-uint32_t prev_time = micros();
-bool led_state = 0;
-
 ADS8332 ads(10, 7, 8);
 Porter4QD motor_control(MOTOR_PIN, MOTOR_ENABLE_PIN, MOTOR_CONTROL_SCALE, MOTOR_CONTROL_OFFSET);
 
@@ -32,7 +30,7 @@ Block<float> load_cell_scale;
 
 //output blocks
 LoadCell load_cell;
-LDS<uint16_t> lds(150);
+LDS<uint8_t> lds(150);
 
 void setup() {
   pinMode(LED_PIN, OUTPUT);
@@ -55,16 +53,9 @@ void setup() {
   digitalWrite(MOTOR_KILL_RELAY_PIN, HIGH);
 }
 
-void loop() {
-  if(abs(micros() - prev_time) > 250000){
-    led_state = !led_state;
-    digitalWrite(LED_PIN, led_state);
-    prev_time = micros();
-  }
-
+void loop() {  
   //Tare the scale
-  if (tare_scale.get_data()){
-    //Serial.println("Taring the scale");
+  if (tare_scale.get_data()) {
     load_cell.tare();
   }
 
@@ -75,12 +66,21 @@ void loop() {
   if (motor_enable.get_data() == 0) {
     motor_control.setSpeed(0);
     digitalWrite(MOTOR_KILL_RELAY_PIN, LOW);
-    while (motor_enable.get_data() == 0);
+    //while (motor_enable.get_data() == 0);
   }
 
   motor_control.setSpeed(motor_speed.get_data());
 
   ads.update_sensors();
+
+  tare_scale.update();
+  motor_speed.update();
+  motor_enable.update();
+  load_cell_scale.update();
+
+//  load_cell.update();
+//  lds.update();
+  
   load_cell.set_scale(load_cell_scale.get_data());
   serial_comms.update();
 }
