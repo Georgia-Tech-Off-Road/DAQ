@@ -4,7 +4,7 @@
 #include <SerialComms.h>
 #include <Block.h>
 #include <BlockId.h>
-#include <ADS8332.h>
+#include <ADS8688.h>
 #include <ClockTimer.h>
 
 #define LDS_PIN 1
@@ -19,7 +19,7 @@
 
 SerialComms serial_comms(Serial);
 
-ADS8332 ads(10, 7, 8);
+ADS8688 ads(10);
 Porter4QD motor_control(MOTOR_PIN, MOTOR_ENABLE_PIN, MOTOR_CONTROL_SCALE, MOTOR_CONTROL_OFFSET);
 
 //input blocks
@@ -37,7 +37,6 @@ void setup() {
   pinMode(MOTOR_KILL_RELAY_PIN, OUTPUT);
 
   SPI.begin();
-  ads.begin();
   serial_comms.begin(115200);
 
   serial_comms.attach_input_block(tare_scale, COMMAND_TARE_LOAD_CELL);
