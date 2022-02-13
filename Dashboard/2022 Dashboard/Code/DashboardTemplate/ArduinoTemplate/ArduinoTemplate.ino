@@ -25,7 +25,6 @@
 #include <TLC5952.h>
 #include <ServoControl.h>
 #include "DashDial.h"
-#include "SevenSegment.h"
 #include <UARTComms.h>
 #include <Block.h>
 #include <SpeedSensor.h>
@@ -140,6 +139,10 @@ void setup() {
   pinMode(33, OUTPUT);
   pinMode(31, OUTPUT);
   pinMode(29, OUTPUT);
+
+  display.setTextSize(2);      // Normal 1:1 pixel scale
+  display.setTextColor(SSD1306_WHITE); // Draw white text
+  display.cp437(true);         // Use full 256 char 'Code Page 437' font
   
   delay(100); // Good to delay for a bit just to allow hardware to initialize
 }
@@ -160,8 +163,8 @@ void setup() {
 uint32_t timer = micros();
  
 void loop() {
-  Serial.println(micros() - timer);
-  timer = micros();
+//  Serial.println(micros() - timer);
+//  timer = micros();
     #ifdef RUN
     // Read speed sensors and update dials
     static uint32_t prev_change = 0;
@@ -219,7 +222,9 @@ void loop() {
       if (delay_state <= 400){
         l_dash.set(delay_state);
         r_dash.set(delay_state*10);
+        timer = micros();
         displaySpeed(delay_state);
+        Serial.println(micros() - timer);
         delay_state++;
       }
       delay_update = micros();
@@ -258,10 +263,10 @@ void loop() {
 void displaySpeed(uint32_t displayText) {
   display.clearDisplay();
 
-  display.setTextSize(2);      // Normal 1:1 pixel scale
-  display.setTextColor(SSD1306_WHITE); // Draw white text
-  display.setCursor(0, 32);     // Top-left corner is (0, 0)
-  display.cp437(true);         // Use full 256 char 'Code Page 437' font
+//  display.setTextSize(2);      // Normal 1:1 pixel scale
+//  display.setTextColor(SSD1306_WHITE); // Draw white text
+  display.setCursor(0, 0);     // Top-left corner is (0, 0)
+//  display.cp437(true);         // Use full 256 char 'Code Page 437' font
   
   display.println("Speed: " + String(displayText));
 
