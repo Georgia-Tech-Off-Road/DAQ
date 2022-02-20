@@ -52,7 +52,8 @@ void setup() {
   digitalWrite(MOTOR_KILL_RELAY_PIN, HIGH);
 }
 
-void loop() {  
+void loop() {
+
   //Tare the scale
   if (tare_scale.get_data()) {
     load_cell.tare();
@@ -63,12 +64,15 @@ void loop() {
   }
 
   if (motor_enable.get_data() == 0) {
-    motor_control.setSpeed(0);
+    motor_control.kill();
+    //motor_control.setSpeed(0);
     digitalWrite(MOTOR_KILL_RELAY_PIN, LOW);
-    //while (motor_enable.get_data() == 0);
+    //Serial.println("bruh");
   }
 
-  motor_control.setSpeed(motor_speed.get_data());
+  if (motor_enable.get_data()) {
+    motor_control.setSpeed(motor_speed.get_data());
+  }
 
   ads.update_sensors();
 
