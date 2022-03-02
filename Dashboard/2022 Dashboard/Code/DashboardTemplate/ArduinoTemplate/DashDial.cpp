@@ -13,7 +13,8 @@ DashDial::DashDial(TLC5952 &driver, ServoControl &servo, const int16_t min, cons
 
 void DashDial::begin() {
     _driver.begin();
-    _driver.set_control_data(1, 1, 1);
+//    _driver.set_control_data(127, 127, 127);
+   _driver.set_control_data(1, 1, 1);
     _servo.begin();
 }
 
