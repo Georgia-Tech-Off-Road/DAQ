@@ -4,7 +4,8 @@
 #include <SerialComms.h>
 #include <Block.h>
 #include <BlockId.h>
-#include <ADS8332.h>
+#include <ADS8688.h>
+#include <ClockTimer.h>
 
 #define LDS_PIN 1
 #define LOAD_CELL_PIN 2
@@ -18,10 +19,7 @@
 
 SerialComms serial_comms(Serial);
 
-uint32_t prev_time = micros();
-bool led_state = 0;
-
-ADS8332 ads(10, 7, 8);
+ADS8688 ads(10);
 Porter4QD motor_control(MOTOR_PIN, MOTOR_ENABLE_PIN, MOTOR_CONTROL_SCALE, MOTOR_CONTROL_OFFSET);
 
 //input blocks
@@ -32,14 +30,13 @@ Block<float> load_cell_scale;
 
 //output blocks
 LoadCell load_cell;
-LDS<uint16_t> lds(150);
+LDS<uint8_t> lds(150);
 
 void setup() {
   pinMode(LED_PIN, OUTPUT);
   pinMode(MOTOR_KILL_RELAY_PIN, OUTPUT);
 
   SPI.begin();
-  ads.begin();
   serial_comms.begin(115200);
 
   serial_comms.attach_input_block(tare_scale, COMMAND_TARE_LOAD_CELL);
@@ -56,15 +53,9 @@ void setup() {
 }
 
 void loop() {
-  if(abs(micros() - prev_time) > 250000){
-    led_state = !led_state;
-    digitalWrite(LED_PIN, led_state);
-    prev_time = micros();
-  }
 
   //Tare the scale
-  if (tare_scale.get_data()){
-    //Serial.println("Taring the scale");
+  if (tare_scale.get_data()) {
     load_cell.tare();
   }
 
@@ -73,14 +64,26 @@ void loop() {
   }
 
   if (motor_enable.get_data() == 0) {
-    motor_control.setSpeed(0);
+    motor_control.kill();
+    //motor_control.setSpeed(0);
     digitalWrite(MOTOR_KILL_RELAY_PIN, LOW);
-    while (motor_enable.get_data() == 0);
+    //Serial.println("bruh");
   }
 
-  motor_control.setSpeed(motor_speed.get_data());
+  if (motor_enable.get_data()) {
+    motor_control.setSpeed(motor_speed.get_data());
+  }
 
   ads.update_sensors();
+
+  tare_scale.update();
+  motor_speed.update();
+  motor_enable.update();
+  load_cell_scale.update();
+
+//  load_cell.update();
+//  lds.update();
+  
   load_cell.set_scale(load_cell_scale.get_data());
   serial_comms.update();
 }
