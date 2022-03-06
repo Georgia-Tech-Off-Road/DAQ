@@ -186,16 +186,17 @@
 </layers>
 <board>
 <plain>
-<wire x1="0" y1="0" x2="0" y2="49.53" width="0.1524" layer="20"/>
-<wire x1="0" y1="49.53" x2="57.15" y2="49.53" width="0.1524" layer="20"/>
-<wire x1="57.15" y1="49.53" x2="57.15" y2="0" width="0.1524" layer="20"/>
-<wire x1="57.15" y1="0" x2="0" y2="0" width="0.1524" layer="20"/>
+<wire x1="0" y1="0" x2="0" y2="50.8" width="0" layer="20"/>
+<wire x1="0" y1="50.8" x2="57.15" y2="50.8" width="0" layer="20"/>
+<wire x1="57.15" y1="50.8" x2="57.15" y2="0" width="0" layer="20"/>
+<wire x1="57.15" y1="0" x2="0" y2="0" width="0" layer="20"/>
 <text x="4.572" y="33.655" size="1.016" layer="21" rot="R90">End Light Gate V3 
 Designed by:
 Param Pithadia</text>
-<hole x="2.54" y="46.736" drill="3.3"/>
-<hole x="42.418" y="29.083" drill="3.3"/>
-<hole x="54.864" y="2.159" drill="3.3"/>
+<hole x="3.175" y="44.45" drill="3.3"/>
+<hole x="53.975" y="6.35" drill="3.3"/>
+<hole x="3.175" y="6.35" drill="3.3"/>
+<hole x="53.975" y="44.45" drill="3.3"/>
 </plain>
 <libraries>
 <library name="GTOR - Microcontroller">
@@ -896,8 +897,10 @@ type 0207, grid 10 mm</description>
 <wire x1="45.26" y1="23.67" x2="48.26" y2="26.67" width="0.1524" layer="1"/>
 <wire x1="44.4722" y1="22.8822" x2="45.26" y2="23.67" width="0.1524" layer="1"/>
 <wire x1="44.4722" y1="20.0169625" x2="44.4722" y2="22.8822" width="0.1524" layer="1"/>
-<wire x1="42.418" y1="13.589" x2="42.418" y2="17.9627625" width="0.1524" layer="1"/>
-<wire x1="42.418" y1="17.9627625" x2="44.4722" y2="20.0169625" width="0.1524" layer="1"/>
+<wire x1="43.7090375" y1="19.2538" x2="43.97761875" y2="19.52238125" width="0.1524" layer="1"/>
+<wire x1="43.97761875" y1="19.52238125" x2="44.4722" y2="20.0169625" width="0.1524" layer="1"/>
+<wire x1="43.7090375" y1="19.2538" x2="42.418" y2="17.9627625" width="0.1524" layer="1"/>
+<wire x1="42.418" y1="17.9627625" x2="42.418" y2="13.589" width="0.1524" layer="1"/>
 </signal>
 <signal name="GND">
 <contactref element="J1" pad="2"/>
