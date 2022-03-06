@@ -1996,8 +1996,8 @@ type 0309, grid 2.5 mm</description>
 <part name="P+1" library="GTOR - Documation Frame" deviceset="+5V" device=""/>
 <part name="+3V1" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="P+2" library="GTOR - Documation Frame" deviceset="VCC" device=""/>
-<part name="R1" library="GTOR - Passive Components" deviceset="RES_AXIAL" device="1/4W-0.4" package3d_urn="urn:adsk.eagle:package:23491/2"/>
-<part name="R2" library="GTOR - Passive Components" deviceset="RES_AXIAL" device="1/4W-0.4" package3d_urn="urn:adsk.eagle:package:23491/2"/>
+<part name="R1" library="GTOR - Passive Components" deviceset="RES_AXIAL" device="1/4W-0.4" package3d_urn="urn:adsk.eagle:package:23491/2" value="10k"/>
+<part name="R2" library="GTOR - Passive Components" deviceset="RES_AXIAL" device="1/4W-0.4" package3d_urn="urn:adsk.eagle:package:23491/2" value="10k"/>
 <part name="+3V3" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="+3V4" library="GTOR - Documation Frame" deviceset="+3V3" device=""/>
 <part name="IC2" library="GTOR - Active Components" deviceset="REG_5V_L7805" device="_HOR"/>
