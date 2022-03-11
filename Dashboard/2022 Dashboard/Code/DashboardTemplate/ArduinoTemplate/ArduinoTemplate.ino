@@ -53,7 +53,7 @@
 #include <TLC5952.h>
 #include "DashDial.h"
 #include <Adafruit_SSD1306.h>
-#include <TinyGPSPlus.h>
+#include "GPSSensor.h"
 
 #include <Block.h>
 #include <SPI.h>
@@ -93,8 +93,7 @@ SpeedSensor engine_rpm_1(1, 6, 255);
 SpeedSensor engine_rpm_2(22, 22, 255);
   //SpeedSensor secondary_rpm(20, 23, 255);
 SpeedSensor secondary_rpm(20, 23, 255);
-uint32_t GPSBaud = 9600;
-TinyGPSPlus gps;
+GPSSensor gps;
 
 // Utility Libraries
 ClockTimerf debug(2); // Print debug messages at 2 Hz
@@ -130,10 +129,13 @@ void setup() {
 
   wireless.begin(115200);
   wireless.attach_output_block(secondary_rpm, SPEED_SECONDARY30_RPM);
+  wireless.attach_output_block(gps, GPS_SENSOR);
 
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
     Serial.println(F("SSD1306 allocation failed"));
     for(;;); // Don't proceed, loop forever
+
+   gps.begin(Serial2);
   }
   // Clear the buffer
   display.clearDisplay();
@@ -149,8 +151,6 @@ void setup() {
   display.setTextSize(2);      // Normal 1:1 pixel scale
   display.setTextColor(SSD1306_WHITE); // Draw white text
   display.cp437(true);         // Use full 256 char 'Code Page 437' font
-
-  Serial2.begin(GPSBaud);
   
   delay(100); // Good to delay for a bit just to allow hardware to initialize
 }
@@ -221,9 +221,9 @@ void loop() {
     static uint32_t delay_update = 0;
     static uint16_t delay_state = 0;
 //    timer = micros();
- //   printFloat(gps.location.lat(), gps.location.isValid(), 11, 6);
- //   printFloat(gps.location.lng(), gps.location.isValid(), 12, 6);
- //   printFloat(gps.speed.kmph(), gps.speed.isValid(), 6, 2);
+      gps.update();
+      Serial.println(gps.get_data().latitude);
+      Serial.println(gps.get_data().longitude);  
  //   Serial.print(" \n");
  //   Serial.println(micros() - timer);
  //   timer = micros();
@@ -251,22 +251,6 @@ void loop() {
       }
       delay_update = micros();
     }
-
-//    printInt(gps.satellites.value(), gps.satellites.isValid(), 5);
-//    printFloat(gps.hdop.hdop(), gps.hdop.isValid(), 6, 1);
-//    printFloat(gps.location.lat(), gps.location.isValid(), 11, 6);
-//    printFloat(gps.location.lng(), gps.location.isValid(), 12, 6);
-//    printInt(gps.location.age(), gps.location.isValid(), 5);
-//    printDateTime(gps.date, gps.time);
-//    printFloat(gps.altitude.meters(), gps.altitude.isValid(), 7, 2);
-//    printFloat(gps.course.deg(), gps.course.isValid(), 7, 2);
-//    printFloat(gps.speed.kmph(), gps.speed.isValid(), 6, 2);
-//    printStr(gps.course.isValid() ? TinyGPSPlus::cardinal(gps.course.deg()) : "*** ", 6);
-//
-//    printInt(gps.charsProcessed(), true, 6);
-//    printInt(gps.sentencesWithFix(), true, 10);
-//    printInt(gps.failedChecksum(), true, 9);
-//  Serial.println();
     
     #endif
     #ifdef CALIBRATE
@@ -314,99 +298,3 @@ void displaySpeed(uint32_t displayText) {
   display.display();
   //delay(2000);
 }
-
-static void smartDelay(unsigned long ms)
-{
-  unsigned long start = millis();
-  do 
-  {
-    while(Serial2.available())
-      gps.encode(Serial2.read());
-  } while (millis() - start < ms);
-}
-
-static void printFloat(float val, bool valid, int len, int prec)
-{
-  if (!valid)
-  {
-    while (len-- > 1)
-      Serial.print('*');
-    Serial.print(' ');
-  }
-  else
-  {
-    Serial.print(val, prec);
-    int vi = abs((int)val);
-    int flen = prec + (val < 0.0 ? 2 : 1); // . and -
-    flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
-    for (int i=flen; i<len; ++i)
-      Serial.print(' ');
-  }
-  smartDelay(0);
-}
-
-//static void printFloat(float val, bool valid, int len, int prec)
-//{
-//  if (!valid)
-//  {
-//    while (len-- > 1)
-//      Serial.print('*');
-//    Serial.print(' ');
-//  }
-//  else
-//  {
-//    Serial.print(val, prec);
-//    int vi = abs((int)val);
-//    int flen = prec + (val < 0.0 ? 2 : 1); // . and -
-//    flen += vi >= 1000 ? 4 : vi >= 100 ? 3 : vi >= 10 ? 2 : 1;
-//    for (int i=flen; i<len; ++i)
-//      Serial.print(' ');
-//  }
-//}
-//
-//static void printInt(unsigned long val, bool valid, int len)
-//{
-//  char sz[32] = "*****************";
-//  if (valid)
-//    sprintf(sz, "%ld", val);
-//  sz[len] = 0;
-//  for (int i=strlen(sz); i<len; ++i)
-//    sz[i] = ' ';
-//  if (len > 0) 
-//    sz[len-1] = ' ';
-//  Serial.print(sz);
-//}
-//
-//static void printDateTime(TinyGPSDate &d, TinyGPSTime &t)
-//{
-//  if (!d.isValid())
-//  {
-//    Serial.print(F("********** "));
-//  }
-//  else
-//  {
-//    char sz[32];
-//    sprintf(sz, "%02d/%02d/%02d ", d.month(), d.day(), d.year());
-//    Serial.print(sz);
-//  }
-//  
-//  if (!t.isValid())
-//  {
-//    Serial.print(F("******** "));
-//  }
-//  else
-//  {
-//    char sz[32];
-//    sprintf(sz, "%02d:%02d:%02d ", t.hour(), t.minute(), t.second());
-//    Serial.print(sz);
-//  }
-//
-//  printInt(d.age(), d.isValid(), 5);
-//}
-//
-//static void printStr(const char *str, int len)
-//{
-//  int slen = strlen(str);
-//  for (int i=0; i<len; ++i)
-//    Serial.print(i<slen ? str[i] : ' ');
-//}
