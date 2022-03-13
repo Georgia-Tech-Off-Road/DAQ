@@ -27,9 +27,9 @@
 #define GEARBOX_RATIO 1
 
 // --- Only have one uncommented at a time --- //
-#define RUN
+//#define RUN
 //#define CALIBRATE
-//#define TEST
+#define TEST
 
 /* -- Library Inclusions -- */
 // Communication Libraries (all libraries in GTORHardwareLibaries>Comms)
@@ -93,14 +93,14 @@ SpeedSensor engine_rpm_1(1, 6, 255);
 SpeedSensor engine_rpm_2(22, 22, 255);
   //SpeedSensor secondary_rpm(20, 23, 255);
 SpeedSensor secondary_rpm(20, 23, 255);
-GPSSensor gps;
+GPSSensor gps(Serial2);
 
 // Utility Libraries
 ClockTimerf debug(2); // Print debug messages at 2 Hz
 
 // Control Libraries
 LEDControl teensy_led(TEENSY_LED_PIN, 1); // Blink Teensy LED at 1 Hz
-WirelessComms wireless(Serial2);
+WirelessComms wireless(Serial1);
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 TLC5952 r_driver(12, 11, 10);
 TLC5952 l_driver(3, 2, 4);
@@ -135,7 +135,7 @@ void setup() {
     Serial.println(F("SSD1306 allocation failed"));
     for(;;); // Don't proceed, loop forever
 
-   gps.begin(Serial2);
+  gps.begin();
   }
   // Clear the buffer
   display.clearDisplay();
@@ -228,29 +228,29 @@ void loop() {
  //   Serial.println(micros() - timer);
  //   timer = micros();
 //    Serial.println(engine_rpm_2.get_data().speed);
-    if(abs(micros() - prev_update) >= 10000){
-      l_dash.update();
-      r_dash.update();
-      prev_update = micros();
-    }
-    if(abs(micros() - delay_update) >= 20000){
-      if(delay_state > 400){
-        delayMicroseconds(2000000);
-        delay_state = 0;
-      }
-      else if (delay_state == 1){
-        delayMicroseconds(2000000);
-      }
-      if (delay_state <= 400){
-        l_dash.set(delay_state);
-        r_dash.set(delay_state*10);
-      //  timer = micros();
-        displaySpeed(delay_state);
-      //  Serial.println(micros() - timer);
-        delay_state++;
-      }
-      delay_update = micros();
-    }
+//    if(abs(micros() - prev_update) >= 10000){
+//      l_dash.update();
+//      r_dash.update();
+//      prev_update = micros();
+//    }
+//    if(abs(micros() - delay_update) >= 20000){
+//      if(delay_state > 400){
+//        delayMicroseconds(2000000);
+//        delay_state = 0;
+//      }
+//      else if (delay_state == 1){
+//        delayMicroseconds(2000000);
+//      }
+//      if (delay_state <= 400){
+//        l_dash.set(delay_state);
+//        r_dash.set(delay_state*10);
+//      //  timer = micros();
+//        displaySpeed(delay_state);
+//      //  Serial.println(micros() - timer);
+//        delay_state++;
+//      }
+//      delay_update = micros();
+//    }
     
     #endif
     #ifdef CALIBRATE
