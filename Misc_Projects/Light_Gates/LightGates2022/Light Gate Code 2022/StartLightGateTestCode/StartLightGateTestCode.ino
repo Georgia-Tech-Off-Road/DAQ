@@ -1,7 +1,7 @@
 #include <Wire.h>
 #include <VL53L1X.h>
 
-VL53L1X sensor;
+VL53L1X Distance_Sensor;
 
 uint8_t pin_output = 3;
 
@@ -11,17 +11,16 @@ void setup()
   Wire.begin();
   Wire.setClock(400000); // use 400 kHz I2C
 
-  sensor.setTimeout(500);
-  if (!sensor.init())
+  Distance_Sensor.setTimeout(500);
+  if (!Distance_Sensor.init())
   {
     Serial.println("Failed to detect and initialize sensor!");
     while (1);
   }
 
-  sensor.setDistanceMode(VL53L1X::Long);
-  sensor.setMeasurementTimingBudget(15000);
-  sensor.startContinuous(15);
-  Serial.println("new program");
+  Distance_Sensor.setDistanceMode(VL53L1X::Long);
+  Distance_Sensor.setMeasurementTimingBudget(33000);
+  Distance_Sensor.startContinuous(33);
 
   pinMode(pin_output, OUTPUT);
   digitalWrite(pin_output, LOW);
@@ -29,11 +28,8 @@ void setup()
 
 void loop()
 {
-  Serial.println(String(millis())+","+String(sensor.read()));
-  if (sensor.read() < 2)
-  {
-    digitalWrite(pin_output, HIGH);
-  }
-  delay(1000);
-  digitalWrite(pin_output, LOW);
+  Distance_Sensor.read();
+ // Serial.println(Distance_Sensor.ranging_data.range_mm);
+ // Serial.println(digitalRead(pin_output));
+  digitalWrite(pin_output, Distance_Sensor.ranging_data.range_mm < 1000 ? HIGH : LOW);
 }
