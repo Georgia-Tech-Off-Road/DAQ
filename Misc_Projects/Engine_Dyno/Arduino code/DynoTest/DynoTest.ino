@@ -23,8 +23,8 @@ bool led_state = 0;
 #include "SparkFun_Qwiic_Scale_NAU7802_Arduino_Library.h" // Click here to get the library: http://librarymanager/All#SparkFun_NAU8702
 
 NAU7802 myScale; //Create instance of the NAU7802 class
-SpeedSensor engine_speed(600, H1, 255);
-SpeedSensor secondary_speed(30, H2, 255);
+SpeedSensor engine_speed(600, H1, 255, 10000, 2);
+SpeedSensor secondary_speed(30, H2, 255, 100000, 2);
 Block<uint8_t> tare_scale;
 
 //EEPROM locations to store 4-byte variables
@@ -49,6 +49,9 @@ void setup() {
   pinMode(errorLED, OUTPUT);
   pinMode(shutdownSig, OUTPUT);
   pinMode(killSwitch, INPUT_PULLUP);
+
+  engine_speed.begin();
+  secondary_speed.begin();
 
 
   Wire.begin();
