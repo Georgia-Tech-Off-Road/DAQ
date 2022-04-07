@@ -1,121 +1,124 @@
-// Communication Libraries
-#include "SerialComms.h"
-#include "WirelessComms.h"
-#include "SDComms.h"
-#include "BlockId.h"
+#include "TestingDayMar29.h"
 
-// Sensor Libraries
-#include "TeensyADC.h"
-#include "ADS8688.h"
-#include "SpeedSensor.h"
-#include "LDS.h"
-#include "IMUSensor.h"
-#include "TimeSensor.h"
-#include "VoltageSensor.h"
-#include "DigitalSensor.h"
+#define DEBUG_PRINTING 1
+#define USE_SERIAL 0
 
-// Control Libraries
-#include "DigitalOutput.h"
-
-// Utility
-#include "ClockTimer.h"
-
-// Pins and Constants
-#define LDS_FL 0
-#define LDS_FR 1
-#define LDS_BL 2
-#define LDS_BR 3
-#define LDS_FL_STROKE 200
-#define LDS_FR_STROKE 200
-#define LDS_BL_STROKE 225
-#define LDS_BR_STROKE 225
-
-#define LED_ONBOARD       30
-#define LED_PANEL_WHITE   9
-#define LED_PANEL_RED     8
-#define BTN_PANEL         7
-
+// Communications
 WirelessComms wireless(Serial1);
 SerialComms serial(Serial);
+SDComms sdcomms;
 
+// Sensors
 TeensyADC tadc;
-ADS8688 ads(35);
+ADS8688 adc(ADC3);
+LDS<float> lds_pedal(LDS_PEDAL_STROKE);
+BrakePressureSensor brake_front;
+BrakePressureSensor brake_rear;
 
-LDS<float> lds_fl(LDS_FL_STROKE);
-LDS<float> lds_fr(LDS_FR_STROKE);
-LDS<float> lds_bl(LDS_BL_STROKE);
-LDS<float> lds_br(LDS_BR_STROKE);
-SpeedSensor speed_engine(10, 15);
+SpeedSensor speed_engine(SPEED_ENGINE_PPR);
+SpeedSensor speed_secondary(SPEED_SECONDARY_PPR);
+IMUSensor imu;
+TimeSensor ts;
 
+// Control IO
 DigitalSensor btn_panel;
 DigitalOutput led_onboard;
 DigitalOutput led_panel_white;
-ClockTimer led_ct(1);
+ClockTimerf led_panel_white_ct(1);
 DigitalOutput led_panel_red;
 
-Block<bool> sd_writecommand;
+EdgeDetector edge_detect;
+Block<bool> wireless_writecommand;
+DigitalOutput sd_writecommand;
 
-ClockTimerf serial_timer(200);
+ClockTimerf serial_timer(50);
 
 void setup() {
-  // put your setup code here, to run once:
-  SPI.begin();
+  // Comms
   serial.begin(230400);
   wireless.begin(230400);
-  
-  ads.begin();
-  ads.attach_sensor(lds_fl, LDS_FL);
-  ads.attach_sensor(lds_fr, LDS_FR);
-  ads.attach_sensor(lds_bl, LDS_BL);
-  ads.attach_sensor(lds_br, LDS_BR);
+  sdcomms.set_sending_period(1000);
 
-  wireless.attach_input_block(sd_writecommand, COMMAND_AUXDAQ_SDWRITE);
-  wireless.attach_output_block(lds_fl, LDS_FRONTLEFTSHOCK_MM);
-  wireless.attach_output_block(lds_fr, LDS_FRONTRIGHTSHOCK_MM);
-  wireless.attach_output_block(lds_bl, LDS_BACKLEFTSHOCK_MM);
-  wireless.attach_output_block(lds_br, LDS_BACKRIGHTSHOCK_MM);
+  // Sensors
+  SPI.begin();
+  adc.begin();
+  pinMode(ADC1, OUTPUT); digitalWrite(ADC1, HIGH);
+  pinMode(ADC2, OUTPUT); digitalWrite(ADC2, HIGH);
+  adc.attach_sensor(lds_pedal, LDS_PEDAL);
+  adc.attach_sensor(brake_front, BRAKE_FRONT);
+  adc.attach_sensor(brake_rear , BRAKE_REAR );
 
-  serial.attach_output_block(lds_fl, LDS_FRONTLEFTSHOCK_MM);
-  serial.attach_output_block(lds_fr, LDS_FRONTRIGHTSHOCK_MM);
-  serial.attach_output_block(lds_bl, LDS_BACKLEFTSHOCK_MM);
-  serial.attach_output_block(lds_br, LDS_BACKRIGHTSHOCK_MM);
+  speed_engine.begin(SPEED_ENGINE);
+  speed_secondary.begin(SPEED_SECONDARY);
+  imu.begin(IMU);
 
+  // Control IO
   btn_panel.begin(BTN_PANEL, INPUT_PULLUP);
-  led_onboard.begin(LED_ONBOARD, [](){ return sd_writecommand.get_data(); });
-  led_panel_white.begin(LED_PANEL_WHITE, [](){ static bool state_ = 0; if(led_ct.ready(micros())){state_ = !state_;} return state_; });
-  led_panel_red.begin(LED_PANEL_RED, [](){ return sd_writecommand.get_data(); });
+   led_onboard.begin(LED_ONBOARD);
+  led_onboard.set_setcb(MAKE_CB(sd_writecommand.get_data()));
+  led_panel_white.begin(LED_PANEL_WHITE);
+  led_panel_white.set_flipcb(MAKE_CB(led_panel_white_ct.ready()));
+  led_panel_red.begin(LED_PANEL_RED);
+  led_panel_red.set_setcb(MAKE_CB(sd_writecommand.get_data()));
 
-  sd_writecommand.set_data(0);
+  // Communications
+  std::vector<Comms*> all_comms = { &wireless, &serial, &sdcomms };
   
-  speed_engine.begin();
+  wireless.attach_input_block(wireless_writecommand, COMMAND_AUXDAQ_SDWRITE);
+  
+  Comms::multiple_attach_output_block(lds_pedal, LDS_PEDAL_MM, all_comms);
+  Comms::multiple_attach_output_block(brake_front, PRESSURE_FRONTBRAKE_PSI, all_comms);
+  Comms::multiple_attach_output_block(brake_rear,  PRESSURE_REARBRAKE_PSI , all_comms);
+  Comms::multiple_attach_output_block(speed_engine, SPEED_2021CAR_ENGINE600_RPM, all_comms);
+  Comms::multiple_attach_output_block(speed_secondary, SPEED_2021CAR_SECONDARY30_RPM, all_comms);
+  Comms::multiple_attach_output_block(imu,  IMU_SENSOR, all_comms);
+  Comms::multiple_attach_output_block(ts, TIME_AUXDAQ_US, all_comms);
+  Comms::multiple_attach_output_block(sd_writecommand, FLAG_AUXDAQ_SDWRITE, all_comms);
+  
+  edge_detect.attach_input_block(wireless_writecommand, EDGE_RISING);
+  edge_detect.attach_input_block(btn_panel, EDGE_FALLING);
+  edge_detect.set_cb([](){
+    sd_writecommand.flip();
+    sdcomms.begin();
+  });
+  sdcomms.attach_writecommand_block(sd_writecommand);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  uint32_t curr_time = micros();
-
-  ads.update_sensors();
+  lds_pedal.update();
+  brake_front.update();
+  brake_rear.update();
   speed_engine.update();
+  speed_secondary.update();
+  imu.update();
+  ts.update(); 
 
-  btn_panel.update();
   led_onboard.update();
   led_panel_white.update();
   led_panel_red.update();
 
-  serial.update();
-  wireless.update();
+  edge_detect.update();
 
-  if(serial_timer.ready(curr_time) && 0){
-//    Serial.print("TIME:   "); Serial.println(curr_time);
-    Serial.print("FL LDS: "); Serial.println(lds_fl.get_data());
-    Serial.print("FR LDS: "); Serial.println(lds_fr.get_data());
-    Serial.print("BL LDS: "); Serial.println(lds_bl.get_data());
-    Serial.print("BR LDS: "); Serial.println(lds_br.get_data());
-//    Serial.print("ENGINE: "); Serial.println(speed_engine.get_data().speed);
-//    Serial.print("VOLT:   "); Serial.println(vs.get_data());
-//    Serial.print("DIGIT:  "); Serial.println(ds.get_data());
-    Serial.print("BUTTON: "); Serial.println(btn_panel.get_data());
-    Serial.print("WRITE:  "); Serial.println(sd_writecommand.get_data());
-    Serial.println();
+  wireless.update();
+  sdcomms.update();
+  
+  if(serial_timer.ready(ts.get_data())){
+    btn_panel.update();
+    if(DEBUG_PRINTING && USE_SERIAL){
+      Serial.print("TIME:   "); Serial.println(ts.get_data());
+      Serial.print("PEDAL:  "); Serial.println(lds_pedal.get_data());
+      Serial.print("FBRAKE: "); Serial.println(brake_front.get_data());
+      Serial.print("RBRAKE: "); Serial.println(brake_rear.get_data());
+      Serial.print("ENGINE: "); Serial.println(speed_engine.get_data().speed);
+      Serial.print("SECOND: "); Serial.print(speed_secondary.get_data().speed); Serial.print(", "); Serial.println(speed_secondary.get_data().position);
+      Serial.print("IMU:    "); imu.printall(); Serial.println();
+      Serial.print("BUTTON: "); Serial.println(btn_panel.get_data());
+      Serial.print("WRITE:  "); Serial.println(sd_writecommand.get_data());
+      Serial.println();
+    }
+  } 
+  if(!DEBUG_PRINTING && USE_SERIAL) {
+    serial.update();
   }
 }
