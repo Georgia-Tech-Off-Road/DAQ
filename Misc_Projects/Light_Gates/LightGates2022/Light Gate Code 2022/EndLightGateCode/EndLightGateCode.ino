@@ -59,6 +59,8 @@ void setup()
   // inter-measurement period). This period should be at least as long as the
   // timing budget.
   Distance_Sensor.startContinuous(50);
+
+  displaySpeed(69);
   
   delay(100);
 }
@@ -70,11 +72,10 @@ void loop()
   Distance_Sensor.read();
   while(x == 0)
   {
-  //  displaySpeed(0);
     if(digitalRead(pin_input))
     {
       start_time = millis();
-      display.clearDisplay();
+      displaySpeed(420);
       x = 1;
     }  
   }
@@ -89,6 +90,7 @@ void loop()
     Serial.println("Final time: " + String(final_time/1000.0));
     delay(5000);
     x = 0;
+    displaySpeed(x);
   }
 }
 
@@ -99,7 +101,15 @@ void displaySpeed(uint32_t displayText) {
 
   if (displayText == 0)
   {
-    display.println("Ready!");
+    display.println("Ready for next time!");
+  }
+  else if(displayText == 69)
+  {
+    display.print("Waiting to start!");    
+  }
+  else if(displayText == 420)
+  {
+    display.print("In progress...");
   }
   else
   {
