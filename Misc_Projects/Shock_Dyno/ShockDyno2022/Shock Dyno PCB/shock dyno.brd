@@ -1122,37 +1122,31 @@ design rules under a new name.</description>
 <attribute name="NAME" x="18.7325" y="52.3875" size="1.27" layer="25" rot="R90"/>
 <attribute name="POPULARITY" value="77" x="100.0125" y="111.76" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="100.0125" y="111.76" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="21.9075" y="52.705" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R2" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="1.8k" x="25.7175" y="44.1325" smashed="yes" rot="R90">
 <attribute name="NAME" x="24.765" y="43.18" size="1.27" layer="25" rot="R90"/>
 <attribute name="POPULARITY" value="77" x="105.7275" y="107.6325" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="105.7275" y="107.6325" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="27.6225" y="43.4975" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="R3" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="2k" x="24.765" y="48.26" smashed="yes" rot="R180">
 <attribute name="NAME" x="25.7175" y="47.3075" size="1.27" layer="25" rot="R180"/>
 <attribute name="POPULARITY" value="77" x="-20.955" y="138.43" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-20.955" y="138.43" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="25.4" y="50.165" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R4" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="2k" x="28.575" y="48.26" smashed="yes" rot="R180">
 <attribute name="NAME" x="29.5275" y="47.3075" size="1.27" layer="25" rot="R180"/>
 <attribute name="POPULARITY" value="77" x="-20.955" y="138.43" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-20.955" y="138.43" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="29.21" y="50.165" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R5" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="2k" x="30.1625" y="52.07" smashed="yes" rot="R270">
 <attribute name="NAME" x="31.4325" y="53.34" size="1.27" layer="25" rot="R270"/>
 <attribute name="POPULARITY" value="77" x="-60.0075" y="-1.27" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-60.0075" y="-1.27" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="28.2575" y="52.705" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="R6" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="2k" x="29.5275" y="44.1325" smashed="yes" rot="R180">
 <attribute name="NAME" x="30.7975" y="43.18" size="1.27" layer="25" rot="R180"/>
 <attribute name="POPULARITY" value="77" x="-27.6225" y="134.3025" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="-27.6225" y="134.3025" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="30.1625" y="46.0375" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="R7" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k" x="51.1175" y="70.485" smashed="yes" rot="R270">
 <attribute name="NAME" x="48.895" y="71.4375" size="1.27" layer="25" rot="R270"/>
@@ -1160,10 +1154,7 @@ design rules under a new name.</description>
 <attribute name="SPICEPREFIX" value="R" x="-39.0525" y="33.655" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="49.2125" y="71.12" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="U$1" library="GTOR - Active Components" package="TSSOP14" value="TS1874IPT" x="25.0825" y="53.34" smashed="yes">
-<attribute name="NAME" x="22.1869" y="52.5272" size="1.016" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="28.9687" y="51.2572" size="1.016" layer="27" ratio="10" rot="R90"/>
-</element>
+<element name="U$1" library="GTOR - Active Components" package="TSSOP14" value="TS1874IPT" x="25.0825" y="53.34" smashed="yes"/>
 <element name="U$2" library="GTOR - Microcontroller" package="TEENSY_4.0_SIMPLE" value="TEENSY_4.0_SIMPLE" x="50.4825" y="68.58" smashed="yes" rot="R180"/>
 <element name="LOAD_CELL_NC" library="GTOR - Connectors" package="1X04" package3d_urn="urn:adsk.eagle:package:22407/2" value="" x="17.4625" y="80.01" smashed="yes" rot="R180">
 <attribute name="NAME" x="12.3063" y="81.5213" size="1.778" layer="25" ratio="10"/>
@@ -1189,50 +1180,42 @@ design rules under a new name.</description>
 <attribute name="MANUFACTURER_PART_NUMBER" value="ADS8688IDBTR" x="26.9875" y="81.28" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="MOUSER_PART_NUMBER" value="595-ADS8688IDBTR" x="26.9875" y="81.28" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/ADS8688IDBTR?qs=bZA2O%252B%252B1GJuPFEagMJIgMw%3D%3D" x="26.9875" y="81.28" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="NAME" x="15.5575" y="66.04" size="1.27" layer="25" rot="R270" align="center"/>
-<attribute name="VALUE" x="15.5575" y="66.04" size="1.27" layer="27" rot="R270" align="center"/>
+<attribute name="NAME" x="19.05" y="66.04" size="1.27" layer="25" align="center"/>
 </element>
 <element name="R14" library="GTOR - Passive Components" package="R0603" package3d_urn="urn:adsk.eagle:package:23555/3" value="10k" x="19.685" y="60.325" smashed="yes" rot="R270">
-<attribute name="NAME" x="20.32" y="60.96" size="1.27" layer="25" rot="R270"/>
+<attribute name="NAME" x="20.32" y="61.595" size="1.016" layer="25" rot="R270"/>
 <attribute name="POPULARITY" value="77" x="38.735" y="85.725" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="R" x="38.735" y="85.725" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="17.78" y="60.96" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="C7" library="GTOR - Passive Components" package="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="1uF" x="13.97" y="71.12" smashed="yes" rot="R180">
-<attribute name="NAME" x="14.605" y="70.485" size="1.27" layer="25" rot="R180"/>
+<attribute name="NAME" x="14.9225" y="72.7075" size="1.016" layer="25" rot="R180"/>
 <attribute name="POPULARITY" value="73" x="44.45" y="57.15" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="44.45" y="57.15" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="14.605" y="73.025" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="C16" library="GTOR - Passive Components" package="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="1uF" x="15.24" y="60.325" smashed="yes" rot="R270">
-<attribute name="NAME" x="15.875" y="60.96" size="1.27" layer="25" rot="R270"/>
+<attribute name="NAME" x="15.875" y="61.595" size="1.016" layer="25" rot="R270"/>
 <attribute name="POPULARITY" value="73" x="24.13" y="75.565" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="24.13" y="75.565" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="13.335" y="60.96" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="C17" library="GTOR - Passive Components" package="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="10uF" x="17.4625" y="60.325" smashed="yes" rot="R270">
-<attribute name="NAME" x="18.0975" y="60.96" size="1.27" layer="25" rot="R270"/>
+<attribute name="NAME" x="18.0975" y="61.595" size="1.016" layer="25" rot="R270"/>
 <attribute name="POPULARITY" value="73" x="13.6525" y="85.725" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="13.6525" y="85.725" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="15.5575" y="60.96" size="1.27" layer="27" rot="R270"/>
 </element>
 <element name="C18" library="GTOR - Passive Components" package="C0603" package3d_urn="urn:adsk.eagle:package:23616/2" value="1uF" x="17.145" y="71.12" smashed="yes" rot="R180">
-<attribute name="NAME" x="17.78" y="70.485" size="1.27" layer="25" rot="R180"/>
+<attribute name="NAME" x="18.415" y="72.7075" size="1.016" layer="25" rot="R180"/>
 <attribute name="POPULARITY" value="73" x="37.465" y="72.39" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="37.465" y="72.39" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="17.78" y="73.025" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="C20" library="GTOR - Passive Components" package="C0805" package3d_urn="urn:adsk.eagle:package:23617/2" value="10uF" x="20.0025" y="72.0725" smashed="yes" rot="R90">
-<attribute name="NAME" x="18.7325" y="70.8025" size="1.27" layer="25" rot="R90"/>
+<attribute name="NAME" x="21.59" y="75.2475" size="1.016" layer="25" rot="R180"/>
 <attribute name="POPULARITY" value="88" x="33.9725" y="53.0225" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="SPICEPREFIX" value="C" x="33.9725" y="53.0225" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="22.5425" y="70.8025" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="C21" library="GTOR - Passive Components" package="C1210" package3d_urn="urn:adsk.eagle:package:23619/2" value="22uF" x="16.1925" y="73.9775" smashed="yes" rot="R180">
-<attribute name="NAME" x="18.0975" y="72.0725" size="1.27" layer="25" rot="R180"/>
-<attribute name="POPULARITY" value="0" x="30.1625" y="95.5675" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="SPICEPREFIX" value="C" x="30.1625" y="95.5675" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="18.0975" y="77.1525" size="1.27" layer="27" rot="R180"/>
+<element name="C21" library="GTOR - Passive Components" package="C1210" package3d_urn="urn:adsk.eagle:package:23619/2" value="22uF" x="16.1925" y="75.565" smashed="yes" rot="R180">
+<attribute name="NAME" x="15.875" y="78.105" size="1.016" layer="25" rot="R180"/>
+<attribute name="POPULARITY" value="0" x="30.1625" y="97.155" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SPICEPREFIX" value="C" x="30.1625" y="97.155" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="Q1" library="GTOR - Active Components" package="BSS64AHZGT116" value="MOSFET_N-TYPE_RK7002BMT116" x="53.975" y="72.39" smashed="yes" rot="R270">
 <attribute name="ARROW_PART_NUMBER" value="" x="53.975" y="72.39" size="1.778" layer="27" rot="R270" display="off"/>
@@ -1323,8 +1306,8 @@ design rules under a new name.</description>
 <via x="15.24" y="65.405" extent="1-16" drill="0.35"/>
 <via x="16.51" y="64.4525" extent="1-16" drill="0.35"/>
 <via x="16.51" y="65.405" extent="1-16" drill="0.35"/>
-<via x="16.1925" y="75.565" extent="1-16" drill="0.35"/>
-<via x="13.0175" y="72.7075" extent="1-16" drill="0.35"/>
+<via x="16.1925" y="77.1525" extent="1-16" drill="0.35"/>
+<via x="13.0175" y="73.9775" extent="1-16" drill="0.35"/>
 <via x="19.05" y="67.6275" extent="1-16" drill="0.35"/>
 <via x="16.1925" y="58.42" extent="1-16" drill="0.35"/>
 <via x="18.415" y="58.42" extent="1-16" drill="0.35"/>
@@ -1379,8 +1362,8 @@ design rules under a new name.</description>
 <wire x1="17.5575" y1="68.978" x2="17.5575" y2="68.04" width="0.1524" layer="1"/>
 <wire x1="16.8275" y1="67.31" x2="16.51" y2="67.31" width="0.1524" layer="1"/>
 <wire x1="17.5575" y1="68.04" x2="16.8275" y2="67.31" width="0.1524" layer="1"/>
-<wire x1="14.82" y1="71.12" x2="13.2325" y2="72.7075" width="0.1524" layer="1"/>
-<wire x1="13.2325" y1="72.7075" x2="13.0175" y2="72.7075" width="0.1524" layer="1"/>
+<wire x1="14.82" y1="71.12" x2="13.0175" y2="72.9225" width="0.1524" layer="1"/>
+<wire x1="13.0175" y1="72.9225" x2="13.0175" y2="73.9775" width="0.1524" layer="1"/>
 <wire x1="16.5575" y1="68.978" x2="16.51" y2="69.0255" width="0.1524" layer="1"/>
 <wire x1="16.51" y1="69.0255" x2="16.51" y2="69.85" width="0.1524" layer="1"/>
 <wire x1="16.51" y1="69.85" x2="15.9686" y2="70.3914" width="0.1524" layer="1"/>
@@ -1411,8 +1394,8 @@ design rules under a new name.</description>
 <wire x1="30.3775" y1="44.1325" x2="49.8975" y2="44.1325" width="0.1524" layer="1"/>
 <wire x1="49.8975" y1="44.1325" x2="51.61" y2="42.42" width="0.1524" layer="1"/>
 <contactref element="LED1" pad="K"/>
-<wire x1="16.1925" y1="75.565" x2="17.5925" y2="74.165" width="0.1524" layer="1"/>
-<wire x1="17.5925" y1="74.165" x2="17.5925" y2="73.9775" width="0.1524" layer="1"/>
+<wire x1="16.1925" y1="77.1525" x2="17.5925" y2="75.7525" width="0.1524" layer="1"/>
+<wire x1="17.5925" y1="75.7525" x2="17.5925" y2="75.565" width="0.1524" layer="1"/>
 <wire x1="18.5575" y1="68.978" x2="19.0575" y2="68.978" width="0.1524" layer="1"/>
 </signal>
 <signal name="+3V3">
@@ -1776,7 +1759,7 @@ design rules under a new name.</description>
 <wire x1="17.0575" y1="68.978" x2="17.0575" y2="70.3575" width="0.1524" layer="1"/>
 <wire x1="17.0575" y1="70.3575" x2="16.295" y2="71.12" width="0.1524" layer="1"/>
 <wire x1="16.295" y1="71.12" x2="14.7925" y2="72.6225" width="0.1524" layer="1"/>
-<wire x1="14.7925" y1="72.6225" x2="14.7925" y2="73.9775" width="0.1524" layer="1"/>
+<wire x1="14.7925" y1="72.6225" x2="14.7925" y2="75.565" width="0.1524" layer="1"/>
 </signal>
 <signal name="N$30">
 <contactref element="IC7" pad="10"/>
