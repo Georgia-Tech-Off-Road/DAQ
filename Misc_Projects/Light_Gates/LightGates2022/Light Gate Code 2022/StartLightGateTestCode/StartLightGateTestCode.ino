@@ -23,13 +23,15 @@ void setup()
   Distance_Sensor.startContinuous(33);
 
   pinMode(pin_output, OUTPUT);
-  digitalWrite(pin_output, LOW);
+  digitalWrite(pin_output, HIGH);
 }
 
 void loop()
 {
   Distance_Sensor.read();
- // Serial.println(Distance_Sensor.ranging_data.range_mm);
- // Serial.println(digitalRead(pin_output));
-  digitalWrite(pin_output, Distance_Sensor.ranging_data.range_mm < 1000 ? HIGH : LOW);
+  Serial.print("Distance in MM: ");
+  Serial.println(Distance_Sensor.ranging_data.range_mm);
+  Serial.print("Pin state: ");
+  Serial.println(digitalRead(pin_output));
+  digitalWrite(pin_output, Distance_Sensor.ranging_data.range_mm < 1000 ? LOW : HIGH);
 }
