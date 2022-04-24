@@ -5482,6 +5482,22 @@ Source: AVX .. aphvc.pdf</description>
 <wire x1="15.24" y1="58.42" x2="20.32" y2="58.42" width="0.1524" layer="91"/>
 <label x="15.24" y="58.42" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="IC7" gate="G$1" pin="AVDD_2"/>
+<label x="132.08" y="-2.54" size="1.778" layer="95"/>
+<pinref part="C16" gate="G$1" pin="1"/>
+<wire x1="149.86" y1="0" x2="152.4" y2="0" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="0" x2="152.4" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="-2.54" x2="132.08" y2="-2.54" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="IC7" gate="G$1" pin="AVDD_1"/>
+<label x="88.9" y="-2.54" size="1.778" layer="95"/>
+<pinref part="C7" gate="G$1" pin="2"/>
+<wire x1="78.74" y1="0" x2="76.2" y2="0" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="0" x2="76.2" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="-2.54" x2="93.98" y2="-2.54" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="MISO" class="0">
 <segment>
@@ -5654,24 +5670,6 @@ Source: AVX .. aphvc.pdf</description>
 <segment>
 <pinref part="U$2" gate="G$1" pin="14/A0/TX3"/>
 <pinref part="JP2" gate="A" pin="13"/>
-</segment>
-</net>
-<net name="+5V" class="0">
-<segment>
-<pinref part="IC7" gate="G$1" pin="AVDD_2"/>
-<label x="132.08" y="-2.54" size="1.778" layer="95"/>
-<pinref part="C16" gate="G$1" pin="1"/>
-<wire x1="149.86" y1="0" x2="152.4" y2="0" width="0.1524" layer="91"/>
-<wire x1="152.4" y1="0" x2="152.4" y2="-2.54" width="0.1524" layer="91"/>
-<wire x1="152.4" y1="-2.54" x2="132.08" y2="-2.54" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="IC7" gate="G$1" pin="AVDD_1"/>
-<label x="88.9" y="-2.54" size="1.778" layer="95"/>
-<pinref part="C7" gate="G$1" pin="2"/>
-<wire x1="78.74" y1="0" x2="76.2" y2="0" width="0.1524" layer="91"/>
-<wire x1="76.2" y1="0" x2="76.2" y2="-2.54" width="0.1524" layer="91"/>
-<wire x1="76.2" y1="-2.54" x2="93.98" y2="-2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$29" class="0">
