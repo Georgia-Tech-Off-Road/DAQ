@@ -38,7 +38,7 @@ void setup()
   display.setTextColor(SSD1306_WHITE); // Draw white text
   display.cp437(true);         // Use full 256 char 'Code Page 437' font
 
-  pinMode(pin_input, INPUT);
+  pinMode(pin_input, INPUT_PULLUP);
   x = 0;
 //  x = 1;
 
@@ -72,7 +72,7 @@ void loop()
   Distance_Sensor.read();
   while(x == 0)
   {
-    if(digitalRead(pin_input))
+    if(digitalRead(pin_input) == LOW)
     {
       start_time = millis();
       displaySpeed(420);
