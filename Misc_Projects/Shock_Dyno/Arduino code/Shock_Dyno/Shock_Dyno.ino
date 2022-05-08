@@ -89,8 +89,6 @@ void loop() {
   motor_speed.update();
   motor_enable.update();
   load_cell_scale.update();
-
-  Serial.println(lds.get_data());
   
   //load_cell.set_scale(load_cell_scale.get_data());
   serial_comms.update();
