@@ -24,7 +24,7 @@
 
 // TIRE RADIUS IN INCHES
 #define TIRE_RADIUS 22
-#define GEARBOX_RATIO 1
+#define GEARBOX_RATIO 1 //8.5
 
 // --- Only have one uncommented at a time --- //
 #define RUN
@@ -89,10 +89,9 @@ SDComms sdcomm(BUILTIN_SDCARD);
 // Sensor Objects
 TimeSensor time_sensor;
   //PPR, pin1, pin2 = 255, flag
-SpeedSensor engine_rpm_1(1, 6, 255);
-SpeedSensor engine_rpm_2(22, 22, 255);
+SpeedSensor engine_rpm_1(20);
   //SpeedSensor secondary_rpm(20, 23, 255);
-SpeedSensor secondary_rpm(20, 23, 255);
+SpeedSensor secondary_rpm(600);
 GPSSensor gps(Serial2);
 
 // Utility Libraries
@@ -148,6 +147,9 @@ void setup() {
   pinMode(31, OUTPUT);
   pinMode(29, OUTPUT);
 
+  secondary_rpm.begin(23);
+  engine_rpm_1.begin(22);
+  
   display.setTextSize(2);      // Normal 1:1 pixel scale
   display.setTextColor(SSD1306_WHITE); // Draw white text
   display.cp437(true);         // Use full 256 char 'Code Page 437' font
@@ -177,11 +179,13 @@ void loop() {
 //    l_dash.set(secondary_rpm.get_data().speed);
 //    displaySpeed(secondary_rpm.get_data().speed);
 //    r_dash.set(secondary_rpm.get_data().speed);
-//    secondary_rpm.update();
+      secondary_rpm.update();
 //    Serial.print(secondary_rpm.get_data().speed);
 //    Serial.print("\n");
 //    l_dash.update();
 //    r_dash.update();
+//   Serial.println(digitalRead(23));
+    
     // Read speed sensors and update dials
     static uint32_t prev_change = 0;
     static uint32_t prev_update = 0;
@@ -193,9 +197,9 @@ void loop() {
         uint16_t mph_10 = (uint16_t) (mph * 10);
         
    // Serial.println(mph);
-        r_dash.set(engine_rpm_2.get_data().speed);
+        r_dash.set(engine_rpm_1.get_data().speed);
         l_dash.set(mph_10);
-        displaySpeed(mph_10);
+        displaySpeed(mph);
         prev_change = t;
     }
     if(abs(t - prev_update) >= 10000){
@@ -204,14 +208,10 @@ void loop() {
         prev_update = t;
         Serial.print("\nEngine Speed 1  (RPM): ");
         Serial.println(engine_rpm_1.get_data().speed);
-        Serial.print("Engine Speed 2  (RPM): ");
-        Serial.println(engine_rpm_2.get_data().speed);
         Serial.print("Secondary Speed (RPM): ");
         Serial.println(secondary_rpm.get_data().speed);
         Serial.print("\nEngine Position 1: ");
         Serial.println(engine_rpm_1.get_data().position);
-        Serial.print("Engine Position 2: ");
-        Serial.println(engine_rpm_2.get_data().position);
         Serial.print("Secondary Position: ");
         Serial.println(secondary_rpm.get_data().position);
     }
