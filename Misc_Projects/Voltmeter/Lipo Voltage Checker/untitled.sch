@@ -10317,7 +10317,7 @@ high speed (Philips)</description>
 <busses>
 </busses>
 <nets>
-<net name="N$1" class="0">
+<net name="VBAT" class="0">
 <segment>
 <wire x1="5.08" y1="127" x2="111.76" y2="127" width="0.1524" layer="91"/>
 <wire x1="111.76" y1="127" x2="111.76" y2="114.3" width="0.1524" layer="91"/>
@@ -10327,6 +10327,7 @@ high speed (Philips)</description>
 <wire x1="5.08" y1="106.68" x2="7.62" y2="106.68" width="0.1524" layer="91"/>
 <wire x1="5.08" y1="127" x2="5.08" y2="106.68" width="0.1524" layer="91"/>
 <junction x="5.08" y="106.68"/>
+<label x="2.54" y="114.3" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="5V+" class="0">
