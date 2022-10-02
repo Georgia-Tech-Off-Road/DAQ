@@ -1,4 +1,4 @@
-/* -------- GTOR Data Collection Template .ino File -------- *
+/* -------- GTOR Dashboard Collection Template .ino File -------- *
  *
  * This file gives an outline for creating an .ino for
  * a Teensy microcontroller that will work with the
@@ -46,6 +46,7 @@
 
 // Utility Libraries (all libraries in GTORHardwareLibaries>Utility)
 #include "ClockTimer.h"
+#include "EdgeDetector.h"
 
 // Control Libraries (all libraries in GTORHardwareLibraries>ControlLibraries)
 #include "LEDControl.h"
@@ -78,6 +79,10 @@
 #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 
+#define REAL 0
+#define FAKE 1
+#define SWEEP 2
+uint8_t state = FAKE;
 
 /* -- Object Creation -- */
 // Communication Objects
@@ -95,6 +100,8 @@ GPSSensor gps(Serial2);
 
 // Utility Libraries
 ClockTimerf debug(2); // Print debug messages at 2 Hz
+EdgeDetector edge_detect;
+DigitalSensor btn;
 
 // Control Libraries
 LEDControl teensy_led(TEENSY_LED_PIN, 1); // Blink Teensy LED at 1 Hz
@@ -155,6 +162,10 @@ void setup() {
   display.setTextSize(2);      // Normal 1:1 pixel scale
   display.setTextColor(SSD1306_WHITE); // Draw white text
   display.cp437(true);         // Use full 256 char 'Code Page 437' font
+
+  btn.begin(6, INPUT_PULLUP);
+  edge_detect.attach_input_block(btn, EDGE_FALLING);
+  edge_detect.set_cb([](){ state = (state + 1)%3; });
   
   delay(100); // Good to delay for a bit just to allow hardware to initialize
 }
@@ -176,6 +187,7 @@ uint32_t timer = micros();
  
 void loop() {
     #ifdef RUN
+    btn.update();
     // Read speed sensors and update dials
     static uint32_t prev_change = 0;
     static uint32_t prev_update = 0;
