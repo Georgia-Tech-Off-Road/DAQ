@@ -19,8 +19,8 @@ void setup()
   }
 
   Distance_Sensor.setDistanceMode(VL53L1X::Long);
-  Distance_Sensor.setMeasurementTimingBudget(33000);
-  Distance_Sensor.startContinuous(33);
+  Distance_Sensor.setMeasurementTimingBudget(50000);
+  Distance_Sensor.startContinuous(50);
 
   pinMode(pin_output, OUTPUT);
   digitalWrite(pin_output, HIGH);

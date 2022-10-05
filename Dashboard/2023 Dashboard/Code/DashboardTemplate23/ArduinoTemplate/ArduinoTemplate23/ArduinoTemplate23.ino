@@ -42,6 +42,7 @@
 // Sensor Libraries (most valid options in GTORHardwareLibraries>Sensors,
 // some are also in GTORHardwareLibraries>ExternalLibraries)
 #include "TimeSensor.h"
+#include "DigitalSensor.h"
 #include <SpeedSensor.h>
 
 // Utility Libraries (all libraries in GTORHardwareLibaries>Utility)

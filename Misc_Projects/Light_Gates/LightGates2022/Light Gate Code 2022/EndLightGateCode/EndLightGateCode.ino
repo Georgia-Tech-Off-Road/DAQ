@@ -18,6 +18,7 @@ uint8_t x = 0;
 uint32_t start_time = 0;
 uint32_t end_time = 0;
 uint32_t final_time = 0;
+uint8_t filter_num;
 
 void setup()
 {
@@ -67,16 +68,22 @@ void setup()
 
 void loop()
 {
-//  Serial.println(digitalRead(pin_input));
-//  delay(25);
   Distance_Sensor.read();
   while(x == 0)
   {
-    if(digitalRead(pin_input) == LOW)
+    Serial.println("Input Pin: ");
+    Serial.println(digitalRead(pin_input));    
+    if(digitalRead(pin_input) == LOW) {
+      filter_num ++;
+    } else {
+      filter_num = 0;
+    }
+    if (filter_num >= 2)
     {
       start_time = millis();
       displaySpeed(420);
       x = 1;
+      filter_num = 0;
     }  
   }
   if (Distance_Sensor.ranging_data.range_mm < 1000)
@@ -117,5 +124,5 @@ void displaySpeed(uint32_t displayText) {
   }
 
   display.display();
-  delay(2000);
+ // delay(2000);
 }
