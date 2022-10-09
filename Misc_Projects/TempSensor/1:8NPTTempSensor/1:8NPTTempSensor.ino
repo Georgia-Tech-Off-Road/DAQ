@@ -1,61 +1,42 @@
 #define TEENSY_PORT A0
-enum TEMP_UNIT  {CELSIUS, FAHRENHEIT, KELVIN, RAW};
 
 // Select tempurature unit here
-TEMP_UNIT temp_unit = CELSIUS;
+// 'C', 'F', 'K', 'R' (Debug)
+char temp_unit = 'C';
 
-float temp, temp_c, raw;
-char temp_char;
+float temp, temp_c;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   pinMode(TEENSY_PORT, INPUT_PULLUP);
-  switch(temp_unit) {
-    case CELSIUS:
-      temp_char = 'C';
-      break;
-    case FAHRENHEIT:
-      temp_char = 'F';
-      break;
-    case KELVIN:
-      temp_char = 'K';
-      break;
-    case RAW:
-      temp_char = 'R';
-      break;
-    default:
-      temp_char = 'C';
-      break;
-  }
   delay(100);
 }
 
 void loop() {
-  raw = analogRead(TEENSY_PORT);
-  temp_c = exp(.003 * ((raw - 1024) * -1)) * 7 - 30;
-  
-
-  Serial.print("Temperature is: ");
+  temp_c = exp(.003 * ((analogRead(TEENSY_PORT) - 1024) * -1)) * 7 - 26;
   
   switch(temp_unit) {
-    case CELSIUS:
+    case 'C':
       temp = temp_c;
       break;
-    case FAHRENHEIT:
+    case 'F':
       temp = temp_c * 2 + 32;
       break;
-    case KELVIN:
+    case 'K':
       temp = temp_c + 273;
       break;
-    case RAW:
-      temp = raw;
+    case 'R':
+      temp = analogRead(TEENSY_PORT);
       break;
     default:
-      temp_unit = CELSIUS;
+      // If no temp_unit is set or an invalid value is set, it will default to 'C'
+      temp_unit = 'C';
       break;
   }
+  
+  Serial.print("Temperature is: ");
   Serial.print(temp);
-  Serial.println(temp_char);
+  Serial.println(temp_unit);
   delay(10);
 }
