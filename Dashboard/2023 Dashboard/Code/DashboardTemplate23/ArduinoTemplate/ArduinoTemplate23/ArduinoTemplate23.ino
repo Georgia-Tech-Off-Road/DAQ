@@ -95,7 +95,9 @@ SDComms sdcomm(BUILTIN_SDCARD);
 // Sensor Objects
 TimeSensor time_sensor;
 //PPR, pin1, pin2 = 255, flag
+//? PPR, Hall Effect Sensor
 SpeedSensor engine_rpm(22);
+//600 PPR, Rotary Encoder
 SpeedSensor secondary_rpm(600);
 GPSSensor gps(Serial2);
 
