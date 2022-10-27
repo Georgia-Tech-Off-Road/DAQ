@@ -145,6 +145,7 @@ void setup() {
 
   gps.begin();
   }
+  
   // Clear the buffer
   display.clearDisplay();
 
@@ -159,6 +160,7 @@ void setup() {
   pinMode(22, INPUT);
   pinMode(23, INPUT);
 
+// Pins on teensy
   secondary_rpm.begin(23);
   engine_rpm.begin(22);
   
