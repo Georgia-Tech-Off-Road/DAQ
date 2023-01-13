@@ -300,6 +300,6 @@ void loop() {
 void displaySpeed(uint32_t displayText) {
   display.clearDisplay();
   display.setCursor(0, 0);     // Top-left corner is (0, 0)
-  display.println("Wheel Speed: " + String(displayText));
+  display.println("Speed: " + String(displayText));
   display.display();
 }
