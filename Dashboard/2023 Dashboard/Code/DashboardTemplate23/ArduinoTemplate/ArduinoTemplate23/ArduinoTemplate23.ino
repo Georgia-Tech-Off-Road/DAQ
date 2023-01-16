@@ -205,12 +205,12 @@ void loop() {
         // Calculate wheel speed in inches per minute
         float inches_per_min = engine_rpm.get_data().speed * 2 * 3.1415 * TIRE_RADIUS / GEARBOX_RATIO;
         // Convert inches per minute to miles per hour
-        float mph = (inches_per_min * 60.0) / (12.0 * 5280.0);
+        float mph_s = (inches_per_min * 60.0) / (12.0 * 5280.0);
         // CVT Ratio, should be between 0.9 and 3.9
         r_dash.set(secondary_rpm.get_data().speed / engine_rpm.get_data().speed);
         // Engine rpm should be between 0 and 4500
         l_dash.set(engine_rpm.get_data().speed); 
-        displaySpeed(mph);
+        displaySpeed(mph_s);
         prev_change = t;
     }
     if(abs(t - prev_update) >= 10000){

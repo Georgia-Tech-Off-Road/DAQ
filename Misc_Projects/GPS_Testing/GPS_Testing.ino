@@ -8,6 +8,10 @@ Neo6M gps(Serial2);
 void setup() {    
   
   serial.begin(230400);
+
+  std::vector<Comms*> all_comms = { &wireless, &serial };
+  Comms::multiple_attach_output_block(gps, DASHBOARD_GPS_SENSOR, all_comms); // Check on this since no wireless, just serial comms
+  
   gps.begin(57600);
   
 }
