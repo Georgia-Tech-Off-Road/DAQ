@@ -107,4 +107,5 @@ void startup_status() {
   delay(100);
   digitalWrite(LED_PIN, LOW);
   delay(100);
+  Serial.println(load_cell_scale.get_data());
 }
