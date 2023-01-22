@@ -237,6 +237,24 @@ Source: transistor-fet.lbr</description>
 <circle x="0" y="11.176" radius="4.191" width="0" layer="43"/>
 <hole x="0" y="11.176" drill="3.302"/>
 </package>
+<package name="OS102011MA1QN1">
+<description>&lt;b&gt;OS102011MA1QN1&lt;/b&gt;&lt;br&gt;
+</description>
+<pad name="1" x="-2" y="0" drill="0.8" diameter="1.3"/>
+<pad name="2" x="0" y="0" drill="0.8" diameter="1.3"/>
+<pad name="3" x="2" y="0" drill="0.8" diameter="1.3"/>
+<pad name="4" x="-4.1" y="0" drill="1.5" diameter="2.25"/>
+<pad name="5" x="4.1" y="0" drill="1.5" diameter="2.25"/>
+<text x="-0.822" y="-0.137" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="-0.822" y="-0.137" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-4.3" y1="2.2" x2="4.3" y2="2.2" width="0.2" layer="51"/>
+<wire x1="4.3" y1="2.2" x2="4.3" y2="-2.2" width="0.2" layer="51"/>
+<wire x1="4.3" y1="-2.2" x2="-4.3" y2="-2.2" width="0.2" layer="51"/>
+<wire x1="-4.3" y1="-2.2" x2="-4.3" y2="2.2" width="0.2" layer="51"/>
+<wire x1="-4.3" y1="2.2" x2="4.3" y2="2.2" width="0.2" layer="21"/>
+<wire x1="-4.3" y1="-2.2" x2="4.3" y2="-2.2" width="0.2" layer="21"/>
+<circle x="-2.583" y="2.781" radius="0.09928125" width="0.2" layer="25"/>
+</package>
 </packages>
 </library>
 <library name="GTOR - Connectors">
@@ -265,60 +283,12 @@ Source: transistor-fet.lbr</description>
 <rectangle x1="-1.524" y1="-0.254" x2="-1.016" y2="0.254" layer="51"/>
 <rectangle x1="1.016" y1="-0.254" x2="1.524" y2="0.254" layer="51"/>
 </package>
-<package name="1X04" urn="urn:adsk.eagle:footprint:22258/1">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
-<wire x1="0" y1="0.635" x2="0.635" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="0.635" y1="1.27" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="1.27" x2="2.54" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="2.54" y1="0.635" x2="2.54" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="2.54" y1="-0.635" x2="1.905" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="-1.27" x2="0.635" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="0.635" y1="-1.27" x2="0" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-4.445" y1="1.27" x2="-3.175" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-3.175" y1="1.27" x2="-2.54" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="-2.54" y1="0.635" x2="-2.54" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-2.54" y1="-0.635" x2="-3.175" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-2.54" y1="0.635" x2="-1.905" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-1.905" y1="1.27" x2="-0.635" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-0.635" y1="1.27" x2="0" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="0" y1="0.635" x2="0" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="0" y1="-0.635" x2="-0.635" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-0.635" y1="-1.27" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-1.905" y1="-1.27" x2="-2.54" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-5.08" y1="0.635" x2="-5.08" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-4.445" y1="1.27" x2="-5.08" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="-5.08" y1="-0.635" x2="-4.445" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-3.175" y1="-1.27" x2="-4.445" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="3.175" y1="1.27" x2="4.445" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="4.445" y1="1.27" x2="5.08" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="5.08" y1="0.635" x2="5.08" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="5.08" y1="-0.635" x2="4.445" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="3.175" y1="1.27" x2="2.54" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="2.54" y1="-0.635" x2="3.175" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="4.445" y1="-1.27" x2="3.175" y2="-1.27" width="0.1524" layer="21"/>
-<pad name="1" x="-3.81" y="0" drill="1.016" shape="long" rot="R90"/>
-<pad name="2" x="-1.27" y="0" drill="1.016" shape="long" rot="R90"/>
-<pad name="3" x="1.27" y="0" drill="1.016" shape="long" rot="R90"/>
-<pad name="4" x="3.81" y="0" drill="1.016" shape="long" rot="R90"/>
-<text x="-5.1562" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-5.08" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="1.016" y1="-0.254" x2="1.524" y2="0.254" layer="51"/>
-<rectangle x1="-1.524" y1="-0.254" x2="-1.016" y2="0.254" layer="51"/>
-<rectangle x1="-4.064" y1="-0.254" x2="-3.556" y2="0.254" layer="51"/>
-<rectangle x1="3.556" y1="-0.254" x2="4.064" y2="0.254" layer="51"/>
-</package>
 </packages>
 <packages3d>
 <package3d name="1X02" urn="urn:adsk.eagle:package:22435/2" type="model">
 <description>PIN HEADER</description>
 <packageinstances>
 <packageinstance name="1X02"/>
-</packageinstances>
-</package3d>
-<package3d name="1X04" urn="urn:adsk.eagle:package:22407/2" type="model">
-<description>PIN HEADER</description>
-<packageinstances>
-<packageinstance name="1X04"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -547,6 +517,28 @@ Source: transistor-fet.lbr</description>
 </package>
 </packages>
 </library>
+<library name="GTOR - Passive Components">
+<packages>
+<package name="LED-5MM">
+<description>5mm LED
+&lt;br&gt;
+&lt;a href="https://github.com/DangerousPrototypes/Eagle_Part_Library"&gt;Source: Dangerous Prototypes Eagle Library&lt;/a&gt;</description>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.2032" layer="21"/>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.254" layer="21" curve="-286.260205"/>
+<wire x1="-1.143" y1="0" x2="0" y2="1.143" width="0.1524" layer="51" curve="-90"/>
+<wire x1="0" y1="-1.143" x2="1.143" y2="0" width="0.1524" layer="51" curve="90"/>
+<wire x1="-1.651" y1="0" x2="0" y2="1.651" width="0.1524" layer="51" curve="-90"/>
+<wire x1="0" y1="-1.651" x2="1.651" y2="0" width="0.1524" layer="51" curve="90"/>
+<wire x1="-2.159" y1="0" x2="0" y2="2.159" width="0.1524" layer="51" curve="-90"/>
+<wire x1="0" y1="-2.159" x2="2.159" y2="0" width="0.1524" layer="51" curve="90"/>
+<circle x="0" y="0" radius="2.54" width="0.1524" layer="21"/>
+<pad name="A" x="-1.27" y="0" drill="0.8128" shape="octagon"/>
+<pad name="K" x="1.27" y="0" drill="0.8128" shape="octagon"/>
+<text x="3.175" y="0.5334" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="3.2004" y="-1.8034" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -749,11 +741,6 @@ design rules under a new name.</description>
 <attribute name="POPULARITY" value="98" x="38.1" y="-53.34" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="7.62" y="-0.635" size="1.27" layer="27"/>
 </element>
-<element name="JP2" library="GTOR - Connectors" package="1X04" package3d_urn="urn:adsk.eagle:package:22407/2" value="" x="2.54" y="6.35" smashed="yes" rot="R90">
-<attribute name="NAME" x="0.7112" y="1.1938" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="POPULARITY" value="91" x="58.42" y="25.4" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="5.715" y="1.27" size="1.27" layer="27" rot="R90"/>
-</element>
 <element name="U$1" library="GTOR - Microcontroller" package="TEENSY_4.0_SIMPLE" value="TEENSY_4.0_SIMPLE" x="20.32" y="45.72" smashed="yes"/>
 <element name="U1" library="GTOR - Microcontroller" package="XBEE_PRO_S3B" value="XBEE_PRO_S3B" x="30.48" y="17.78" smashed="yes">
 <attribute name="DESCRIPTION" value=" General ISM &lt; 1GHz Transceiver Module 900MHz Antenna Not Included, RP-SMA Through Hole " x="58.42" y="0" size="1.778" layer="27" display="off"/>
@@ -763,6 +750,86 @@ design rules under a new name.</description>
 <attribute name="NAME" x="17.4389" y="5.2405" size="1.274009375" layer="25" rot="R90"/>
 <attribute name="PACKAGE" value="Module Digi International" x="58.42" y="0" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="44.748" y="4.7635" size="1.271609375" layer="27" rot="R90"/>
+</element>
+<element name="S1" library="GTOR - Active Components" package="OS102011MA1QN1" value="SWITCH_SLIDE_OS102011MS2QN1" x="6.35" y="-3.81" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="OS102011MS2QN1" x="6.35" y="-3.81" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/os102011ms2qn1/ck" x="6.35" y="-3.81" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Switch Slide Miniature SPDT 0.1A 12VDC Through Hole Slide Switch SPDT On-On 0.1 A@ 12 V dc Slide" x="6.35" y="-3.81" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="mm" x="6.35" y="-3.81" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="C &amp; K COMPONENTS" x="6.35" y="-3.81" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="OS102011MS2QN1" x="6.35" y="-3.81" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="611-OS102011MS2QN1" x="6.35" y="-3.81" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/CK/OS102011MS2QN1?qs=WtljUlYws5RvQ1hEv876nQ%3D%3D" x="6.35" y="-3.81" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="5.528" y="-3.947" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="5.528" y="-3.947" size="1.27" layer="27" align="center"/>
+</element>
+<element name="LED1" library="GTOR - Passive Components" package="LED-5MM" value="" x="-6.35" y="-10.16" smashed="yes">
+<attribute name="NAME" x="-3.175" y="-9.6266" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="-3.1496" y="-11.9634" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="S2" library="GTOR - Active Components" package="OS102011MA1QN1" value="SWITCH_SLIDE_OS102011MS2QN1" x="6.35" y="-24.13" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="OS102011MS2QN1" x="-3.81" y="-16.51" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/os102011ms2qn1/ck" x="-3.81" y="-16.51" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Switch Slide Miniature SPDT 0.1A 12VDC Through Hole Slide Switch SPDT On-On 0.1 A@ 12 V dc Slide" x="-3.81" y="-16.51" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="mm" x="-3.81" y="-16.51" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="C &amp; K COMPONENTS" x="-3.81" y="-16.51" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="OS102011MS2QN1" x="-3.81" y="-16.51" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="611-OS102011MS2QN1" x="-3.81" y="-16.51" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/CK/OS102011MS2QN1?qs=WtljUlYws5RvQ1hEv876nQ%3D%3D" x="-3.81" y="-16.51" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="5.528" y="-24.267" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="5.528" y="-24.267" size="1.27" layer="27" align="center"/>
+</element>
+<element name="LED2" library="GTOR - Passive Components" package="LED-5MM" value="" x="-6.35" y="-17.78" smashed="yes">
+<attribute name="NAME" x="-3.175" y="-17.2466" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="-3.1496" y="-19.5834" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="LED3" library="GTOR - Passive Components" package="LED-5MM" value="" x="-6.35" y="-30.48" smashed="yes">
+<attribute name="NAME" x="-3.175" y="-29.9466" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="-3.1496" y="-32.2834" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="LED4" library="GTOR - Passive Components" package="LED-5MM" value="" x="-6.35" y="-38.1" smashed="yes">
+<attribute name="NAME" x="-3.175" y="-37.5666" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="-3.1496" y="-39.9034" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="LED5" library="GTOR - Passive Components" package="LED-5MM" value="" x="-6.35" y="-45.72" smashed="yes">
+<attribute name="NAME" x="-3.175" y="-45.1866" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="-3.1496" y="-47.5234" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="S3" library="GTOR - Active Components" package="OS102011MA1QN1" value="SWITCH_SLIDE_OS102011MS2QN1" x="-3.81" y="-52.07" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="OS102011MS2QN1" x="-3.81" y="-52.07" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/os102011ms2qn1/ck" x="-3.81" y="-52.07" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Switch Slide Miniature SPDT 0.1A 12VDC Through Hole Slide Switch SPDT On-On 0.1 A@ 12 V dc Slide" x="-3.81" y="-52.07" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="mm" x="-3.81" y="-52.07" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="C &amp; K COMPONENTS" x="-3.81" y="-52.07" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="OS102011MS2QN1" x="-3.81" y="-52.07" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="611-OS102011MS2QN1" x="-3.81" y="-52.07" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/CK/OS102011MS2QN1?qs=WtljUlYws5RvQ1hEv876nQ%3D%3D" x="-3.81" y="-52.07" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-4.632" y="-52.207" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="-4.632" y="-52.207" size="1.27" layer="27" align="center"/>
+</element>
+<element name="S4" library="GTOR - Active Components" package="OS102011MA1QN1" value="SWITCH_SLIDE_OS102011MS2QN1" x="-13.97" y="-58.42" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="OS102011MS2QN1" x="-13.97" y="-58.42" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/os102011ms2qn1/ck" x="-13.97" y="-58.42" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Switch Slide Miniature SPDT 0.1A 12VDC Through Hole Slide Switch SPDT On-On 0.1 A@ 12 V dc Slide" x="-13.97" y="-58.42" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="mm" x="-13.97" y="-58.42" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="C &amp; K COMPONENTS" x="-13.97" y="-58.42" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="OS102011MS2QN1" x="-13.97" y="-58.42" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="611-OS102011MS2QN1" x="-13.97" y="-58.42" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/CK/OS102011MS2QN1?qs=WtljUlYws5RvQ1hEv876nQ%3D%3D" x="-13.97" y="-58.42" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-14.792" y="-58.557" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="-14.792" y="-58.557" size="1.27" layer="27" align="center"/>
+</element>
+<element name="S5" library="GTOR - Active Components" package="OS102011MA1QN1" value="SWITCH_SLIDE_OS102011MS2QN1" x="-24.13" y="-64.77" smashed="yes">
+<attribute name="ARROW_PART_NUMBER" value="OS102011MS2QN1" x="-24.13" y="-64.77" size="1.778" layer="27" display="off"/>
+<attribute name="ARROW_PRICE-STOCK" value="https://www.arrow.com/en/products/os102011ms2qn1/ck" x="-24.13" y="-64.77" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="Switch Slide Miniature SPDT 0.1A 12VDC Through Hole Slide Switch SPDT On-On 0.1 A@ 12 V dc Slide" x="-24.13" y="-64.77" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="mm" x="-24.13" y="-64.77" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="C &amp; K COMPONENTS" x="-24.13" y="-64.77" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="OS102011MS2QN1" x="-24.13" y="-64.77" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="611-OS102011MS2QN1" x="-24.13" y="-64.77" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/CK/OS102011MS2QN1?qs=WtljUlYws5RvQ1hEv876nQ%3D%3D" x="-24.13" y="-64.77" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-24.952" y="-64.907" size="1.27" layer="25" align="center"/>
+<attribute name="VALUE" x="-24.952" y="-64.907" size="1.27" layer="27" align="center"/>
 </element>
 </elements>
 <signals>
@@ -776,7 +843,6 @@ design rules under a new name.</description>
 <contactref element="IC1" pad="2"/>
 <contactref element="U1" pad="10"/>
 <contactref element="U$1" pad="GND"/>
-<contactref element="JP2" pad="4"/>
 <polygon width="0.3048" layer="1">
 <vertex x="0" y="57.15"/>
 <vertex x="43.18" y="57.15"/>
@@ -784,14 +850,35 @@ design rules under a new name.</description>
 <vertex x="45.72" y="0"/>
 <vertex x="0" y="0"/>
 </polygon>
+<contactref element="S1" pad="3"/>
+<contactref element="LED1" pad="A"/>
+<contactref element="S2" pad="3"/>
+<contactref element="LED2" pad="A"/>
+<contactref element="S3" pad="3"/>
+<contactref element="S4" pad="3"/>
+<contactref element="S5" pad="3"/>
+<contactref element="LED3" pad="A"/>
+<contactref element="LED4" pad="A"/>
+<contactref element="LED5" pad="A"/>
+<wire x1="-11.97" y1="-58.42" x2="-22.13" y2="-64.77" width="0" layer="19" extent="1-1"/>
+<wire x1="-1.81" y1="-52.07" x2="-11.97" y2="-58.42" width="0" layer="19" extent="1-1"/>
+<wire x1="-7.62" y1="-45.72" x2="-1.81" y2="-52.07" width="0" layer="19" extent="1-1"/>
+<wire x1="-7.62" y1="-38.1" x2="-7.62" y2="-45.72" width="0" layer="19" extent="1-1"/>
+<wire x1="-7.62" y1="-30.48" x2="-7.62" y2="-38.1" width="0" layer="19" extent="1-1"/>
+<wire x1="-7.62" y1="-17.78" x2="-7.62" y2="-30.48" width="0" layer="19" extent="1-1"/>
+<wire x1="-7.62" y1="-10.16" x2="-7.62" y2="-17.78" width="0" layer="19" extent="1-1"/>
+<wire x1="8.35" y1="-24.13" x2="-7.62" y2="-30.48" width="0" layer="19" extent="1-1"/>
+<wire x1="8.35" y1="-3.81" x2="-7.62" y2="-10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="11.43" y1="2.54" x2="8.35" y2="-3.81" width="0" layer="19" extent="1-1"/>
+<wire x1="19.48" y1="8.53" x2="11.43" y2="2.54" width="0" layer="19" extent="1-1"/>
+<wire x1="11.43" y1="12.7" x2="19.48" y2="8.53" width="0" layer="19" extent="1-1"/>
+<wire x1="3.81" y1="38.1" x2="11.43" y2="12.7" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+5V">
 <contactref element="IC1" pad="3"/>
 <contactref element="U$1" pad="VIN"/>
-<contactref element="JP2" pad="1"/>
 <wire x1="1.27" y1="50.8" x2="1.27" y2="38.1" width="0.3048" layer="16"/>
 <wire x1="1.27" y1="50.8" x2="3.81" y2="53.34" width="0.3048" layer="16"/>
-<wire x1="2.54" y1="2.54" x2="3.81" y2="2.54" width="0.3048" layer="16"/>
 <wire x1="3.81" y1="2.54" x2="5.08" y2="3.81" width="0.3048" layer="16"/>
 <wire x1="5.08" y1="3.81" x2="5.08" y2="13.97" width="0.3048" layer="16"/>
 <wire x1="5.08" y1="13.97" x2="6.35" y2="15.24" width="0.3048" layer="16"/>
@@ -830,11 +917,51 @@ design rules under a new name.</description>
 <wire x1="17.78" y1="44.45" x2="8.89" y2="53.34" width="0.3048" layer="16"/>
 <wire x1="17.78" y1="28.23" x2="17.78" y2="44.45" width="0.3048" layer="16"/>
 </signal>
-<signal name="SDA">
-<contactref element="JP2" pad="2"/>
+<signal name="A0">
+<contactref element="U$1" pad="14/A0"/>
+<contactref element="S1" pad="2"/>
+<contactref element="LED1" pad="K"/>
+<wire x1="6.35" y1="-3.81" x2="34.29" y2="53.34" width="0" layer="19" extent="1-1"/>
+<wire x1="-5.08" y1="-10.16" x2="6.35" y2="-3.81" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="SCL">
-<contactref element="JP2" pad="3"/>
+<signal name="+3V3">
+<contactref element="S1" pad="1"/>
+<contactref element="S2" pad="1"/>
+<contactref element="S3" pad="1"/>
+<contactref element="S5" pad="1"/>
+<contactref element="S4" pad="1"/>
+<wire x1="-15.97" y1="-58.42" x2="-26.13" y2="-64.77" width="0" layer="19" extent="1-1"/>
+<wire x1="-5.81" y1="-52.07" x2="-15.97" y2="-58.42" width="0" layer="19" extent="1-1"/>
+<wire x1="4.35" y1="-24.13" x2="-5.81" y2="-52.07" width="0" layer="19" extent="1-1"/>
+<wire x1="4.35" y1="-3.81" x2="4.35" y2="-24.13" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="A1">
+<contactref element="U$1" pad="15/A1"/>
+<contactref element="S2" pad="2"/>
+<contactref element="LED2" pad="K"/>
+<wire x1="-5.08" y1="-17.78" x2="31.75" y2="53.34" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="-24.13" x2="-5.08" y2="-17.78" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="A2">
+<contactref element="U$1" pad="16/A2"/>
+<contactref element="S3" pad="2"/>
+<contactref element="LED3" pad="K"/>
+<wire x1="-5.08" y1="-30.48" x2="29.21" y2="53.34" width="0" layer="19" extent="1-1"/>
+<wire x1="-3.81" y1="-52.07" x2="-5.08" y2="-30.48" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="A3">
+<contactref element="U$1" pad="17/A3"/>
+<contactref element="S4" pad="2"/>
+<contactref element="LED4" pad="K"/>
+<wire x1="-5.08" y1="-38.1" x2="26.67" y2="53.34" width="0" layer="19" extent="1-1"/>
+<wire x1="-13.97" y1="-58.42" x2="-5.08" y2="-38.1" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="A4">
+<contactref element="U$1" pad="18/A4/SDA"/>
+<contactref element="S5" pad="2"/>
+<contactref element="LED5" pad="K"/>
+<wire x1="-5.08" y1="-45.72" x2="-24.13" y2="-64.77" width="0" layer="19" extent="1-1"/>
+<wire x1="24.13" y1="53.34" x2="-5.08" y2="-45.72" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
