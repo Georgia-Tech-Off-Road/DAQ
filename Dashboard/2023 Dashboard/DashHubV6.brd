@@ -2790,7 +2790,6 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <contactref element="JP3" pad="3"/>
 <contactref element="U1" pad="6"/>
 <contactref element="U2" pad="1"/>
-<contactref element="U$5" pad="VCC"/>
 <contactref element="U$2" pad="VCC"/>
 <contactref element="U$4" pad="P$1M"/>
 <contactref element="U$4" pad="P$1L"/>
@@ -2798,7 +2797,6 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <contactref element="U$4" pad="P$1G"/>
 <contactref element="U$4" pad="P$1K"/>
 <contactref element="U$4" pad="P$1J"/>
-<wire x1="-40.865346875" y1="7.35280625" x2="-40.86535" y2="-14.93495625" width="0.3048" layer="16"/>
 <wire x1="-1.27" y1="25.304" x2="1.23" y2="25.304" width="0.4064" layer="1"/>
 <wire x1="1.23" y1="25.304" x2="3.73" y2="25.304" width="0.4064" layer="1"/>
 <wire x1="3.73" y1="25.304" x2="6.23" y2="25.304" width="0.4064" layer="1"/>
@@ -2824,13 +2822,6 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <wire x1="-28.448" y1="-30.613" x2="-28.3516" y2="-30.5166" width="0.3048" layer="16"/>
 <wire x1="-30.988" y1="-30.16086875" x2="-30.988" y2="-30.613" width="0.3048" layer="16"/>
 <wire x1="-29.90473125" y1="-29.0776" x2="-30.988" y2="-30.16086875" width="0.3048" layer="16"/>
-<wire x1="-30.988" y1="-30.613" x2="-32.258" y2="-31.883" width="0.3048" layer="16"/>
-<wire x1="-32.258" y1="-31.883" x2="-38.3247" y2="-31.883" width="0.3048" layer="16"/>
-<wire x1="-38.3247" y1="-31.883" x2="-41.402" y2="-28.8057" width="0.3048" layer="16"/>
-<wire x1="-41.402" y1="-28.8057" x2="-41.402" y2="-23.56615625" width="0.3048" layer="16"/>
-<wire x1="-37.77586875" y1="-19.940025" x2="-37.77586875" y2="-18.0244375" width="0.3048" layer="16"/>
-<wire x1="-41.402" y1="-23.56615625" x2="-37.77586875" y2="-19.940025" width="0.3048" layer="16"/>
-<wire x1="-37.77586875" y1="-18.0244375" x2="-40.86535" y2="-14.93495625" width="0.3048" layer="16"/>
 <wire x1="24.638" y1="-22.186" x2="37.25" y2="-22.186" width="0.3048" layer="1"/>
 <wire x1="37.25" y1="-22.186" x2="39.116" y2="-20.32" width="0.3048" layer="1"/>
 <wire x1="39.116" y1="-20.32" x2="39.116" y2="-18.796" width="0.3048" layer="1"/>
@@ -2916,6 +2907,15 @@ Source: http://www.osram.convergy.de/ ... LG_LY N971.pdf</description>
 <wire x1="-16.2129875" y1="6.8438" x2="-15.9447875" y2="7.112" width="0.4064" layer="16"/>
 <wire x1="-18.63" y1="7.747" x2="-17.7268" y2="6.8438" width="0.4064" layer="16"/>
 <wire x1="-17.7268" y1="6.8438" x2="-16.2129875" y2="6.8438" width="0.4064" layer="16"/>
+<contactref element="U$5" pad="VCC"/>
+<wire x1="-29.5012" y1="12.70264375" x2="-30.22335625" y2="13.4248" width="0.3556" layer="16"/>
+<wire x1="-34.8012375" y1="13.424346875" x2="-40.865346875" y2="7.35280625" width="0.3556" layer="16"/>
+<wire x1="-28.38804375" y1="10.6426" x2="-29.5012" y2="11.75575625" width="0.3556" layer="16"/>
+<wire x1="-29.5012" y1="11.75575625" x2="-29.5012" y2="12.70264375" width="0.3556" layer="16"/>
+<wire x1="-18.63" y1="7.747" x2="-18.63" y2="7.7862875" width="0.3556" layer="16"/>
+<wire x1="-18.63" y1="7.7862875" x2="-21.4863125" y2="10.6426" width="0.3556" layer="16"/>
+<wire x1="-21.4863125" y1="10.6426" x2="-28.38804375" y2="10.6426" width="0.3556" layer="16"/>
+<wire x1="-30.22335625" y1="13.4248" x2="-34.8012375" y2="13.424346875" width="0.3556" layer="16"/>
 </signal>
 <signal name="3.3V_REG">
 <contactref element="J1" pad="08"/>

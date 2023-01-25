@@ -11039,11 +11039,6 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 <label x="170.18" y="12.7" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U$5" gate="G$1" pin="VCC"/>
-<wire x1="104.14" y1="121.92" x2="96.52" y2="121.92" width="0.1524" layer="91"/>
-<label x="96.52" y="121.92" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-<segment>
 <wire x1="88.9" y1="93.98" x2="91.44" y2="93.98" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="VCC"/>
 <label x="88.9" y="93.98" size="1.778" layer="95" rot="R180" xref="yes"/>
@@ -11142,6 +11137,11 @@ Source: http://www.vishay.com .. dcrcw.pdf</description>
 <label x="83.82" y="45.72" size="1.778" layer="95" xref="yes"/>
 <wire x1="71.12" y1="45.72" x2="76.2" y2="45.72" width="0.1524" layer="91"/>
 <junction x="76.2" y="45.72"/>
+</segment>
+<segment>
+<pinref part="U$5" gate="G$1" pin="VCC"/>
+<wire x1="104.14" y1="121.92" x2="96.52" y2="121.92" width="0.1524" layer="91"/>
+<label x="96.52" y="121.92" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="3.3V_REG" class="0">

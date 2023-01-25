@@ -34,6 +34,7 @@
 
 /* -- Library Inclusions -- */
 // Communication Libraries (all libraries in GTORHardwareLibaries>Comms)
+#include <SoftwareSerial.h>
 #include "SerialComms.h"   // Teensy <-> PC
 #include "WirelessComms.h" // Teensy<->XBEE <-......-> XBEE<->Teensy
 #include "UARTComms.h"     // Teensy <-> Teensy
@@ -56,7 +57,8 @@
 #include <TLC5952.h>
 #include "DashDial.h"
 #include <Adafruit_SSD1306.h>
-#include "GPSSensor.h"
+#include <TinyGPSPlus.h>
+// #include "GPSSensor.h"
 
 #include <Block.h>
 #include <SPI.h>
@@ -100,7 +102,8 @@ TimeSensor time_sensor;
 SpeedSensor engine_rpm(22);
 //600 PPR, Rotary Encoder
 SpeedSensor secondary_rpm(600);
-GPSSensor gps(Serial2);
+TinyGPSPlus gps;
+//GPSSensor gps(Serial2);
 
 // Utility Libraries
 ClockTimerf debug(2); // Print debug messages at 2 Hz
@@ -117,6 +120,7 @@ ServoControl r_servo(9, 270);
 ServoControl l_servo(5, 270);
 DashDial l_dash(l_driver, l_servo, 0, 4500, 0, 100, 10, 265);
 DashDial r_dash(r_driver, r_servo, 0, 4, 0, 100, 10, 265);
+SoftwareSerial ss(7,8); // GPS pins (rx,tx)
 
 /* -------- SETUP --------
  *  
@@ -138,17 +142,19 @@ void setup() {
 
   wireless.begin(115200);
   wireless.attach_output_block(secondary_rpm, SPEED_SECONDARY30_RPM);
-  wireless.attach_output_block(gps, GPS_SENSOR);
+//  wireless.attach_output_block(gps, GPS_SENSOR);
 
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
     Serial.println(F("SSD1306 allocation failed"));
     for(;;); // Don't proceed, loop forever
 
-  gps.begin();
   }
   
   // Clear the buffer
   display.clearDisplay();
+
+  ss.begin(9600);
+  //gps.begin();
 
   l_dash.begin();
   r_dash.begin();
@@ -194,6 +200,8 @@ uint32_t timer = micros();
 void loop() {
     #ifdef RUN
     btn.update();
+    Serial.print("GPS Speed:");
+    Serial.print(gps.speed.kmph());
     // Read speed sensors and update dials
     static uint32_t prev_change = 0;
     static uint32_t prev_update = 0;
@@ -205,12 +213,12 @@ void loop() {
         // Calculate wheel speed in inches per minute
         float inches_per_min = engine_rpm.get_data().speed * 2 * 3.1415 * TIRE_RADIUS / GEARBOX_RATIO;
         // Convert inches per minute to miles per hour
-        float mph = (inches_per_min * 60.0) / (12.0 * 5280.0);
+        float mph_s = (inches_per_min * 60.0) / (12.0 * 5280.0);
         // CVT Ratio, should be between 0.9 and 3.9
         r_dash.set(secondary_rpm.get_data().speed / engine_rpm.get_data().speed);
         // Engine rpm should be between 0 and 4500
         l_dash.set(engine_rpm.get_data().speed); 
-        displaySpeed(mph);
+        displaySpeed(mph_s);
         prev_change = t;
     }
     if(abs(t - prev_update) >= 10000){
