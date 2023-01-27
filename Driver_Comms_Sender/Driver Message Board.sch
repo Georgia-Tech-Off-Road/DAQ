@@ -1308,7 +1308,7 @@ LETTER landscape</description>
 <sheets>
 <sheet>
 <plain>
-<text x="81.28" y="40.64" size="1.778" layer="91">VCC will be 7.4V</text>
+<text x="86.36" y="35.56" size="1.778" layer="91">VCC is 11.1 V</text>
 </plain>
 <instances>
 <instance part="U1" gate="G$1" x="162.56" y="68.58" smashed="yes">
@@ -1661,6 +1661,7 @@ LETTER landscape</description>
 <segment>
 <pinref part="U$1" gate="G$1" pin="18/A4/SDA"/>
 <wire x1="58.42" y1="66.04" x2="73.66" y2="66.04" width="0.1524" layer="91"/>
+<label x="73.66" y="66.04" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
 <pinref part="S5" gate="G$1" pin="2"/>
