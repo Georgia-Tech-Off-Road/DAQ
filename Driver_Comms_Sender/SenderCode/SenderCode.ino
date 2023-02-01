@@ -27,8 +27,9 @@
 #include "SerialComms.h"   // Teensy <-> PC
 #include "WirelessComms.h" // Teensy<->XBEE <-......-> XBEE<->Teensy
 #include "UARTComms.h"     // Teensy <-> Teensy
-//#include "SDComms.h"       // Teensy -> SD Card
 #include "BlockId.h"       // Block Ids that are available for sensors
+#include "DigitalOutput.h" // These two are needed for the teensy to teensy communication using xbee
+#include "ClockTimer.h"
 
 // Sensor Libraries (most valid options in GTORHardwareLibraries>Sensors,
 // some are also in GTORHardwareLibraries>ExternalLibraries)
@@ -49,12 +50,11 @@
 // 16 = Connected to Go Switch
 // 17 = Connected to Pit Switch
 // 18 = Connected to Stop Switch
-//#define OPERATION_MODE 1 // Send data over serial to DAATA application
 
 #define SD_CONNECTED false // Change this to true if you want to use an SD Card
 
 // If using aux daq then use the aux daq pin definition file
-// #define TEENSY_LED_PIN 13 // Don't use if using SPI sensors
+#define TEENSY_LED_PIN 13 // Don't use if using SPI sensors
 
 
 /* -- Object Creation -- */
@@ -65,7 +65,7 @@ SerialComms serial(Serial);
 //#endif
 
 // Sensor Objects
-// TimeSensor time_sensor;
+ TimeSensor time_sensor;
 
 // Utility Libraries
 // ClockTimerf debug(2); // Print debug messages at 2 Hz
@@ -73,7 +73,14 @@ SerialComms serial(Serial);
 // Control Libraries
 LEDControl teensy_led(TEENSY_LED_PIN, 1); // Blink Teensy LED at 1 Hz
 
+// Setup for Xbee Comms
+#define BAUD 230400
+#define S1 Serial
+#define S2 Serial1
+ClockTimerf ct(1);
+DigitalOutput led;
 
+uint16_t sw;
 
 /* -------- SETUP --------
  *  
@@ -94,10 +101,10 @@ void setup() {
   pinMode(17, INPUT);
   pinMode(18, INPUT);
 
-//  #if SD_CONNECTED
-//  sdcomm.begin(NULL);
-//  sdcomm.attach_output_block(time_sensor, TIME_GENERIC);
-//  #endif
+  S1.begin(BAUD);
+  S2.begin(BAUD);
+  led.begin(13);
+  led.set_flipcb(MAKE_CB(ct.ready()));
   
   delay(100); // Good to delay for a bit just to allow hardware to initialize
 }
@@ -117,28 +124,41 @@ void setup() {
  
 void loop() {
   uint32_t current_time = micros(); // Measure time for clock timer object update cycles
-
-  #if 
-  
   // Update Sensors
   time_sensor.update();
-
   // Update Control Objects
   teensy_led.update();
-
   // Update Communication Utilities
   #if SD_CONNECTED
   sdcomm.update();
   #endif
-  #if OPERATION_MODE == 1
-  serial.update();
 
-//  // Debug
-//  #elif OPERATION_MODE == 2
-//  serial.update_monitor();
-//  #elif OPERATION_MODE == 3
-//  if(debug.ready(current_time)){
-//    Serial.println("Debug message...");
-//  }
-//  #endif
+   if (digitalRead(14) == HIGH) {
+    //send data for Extra2
+    sw = 5;
+   } else if (digitalRead(15) == HIGH ) {
+    //send data for Extra1
+    sw = 4;
+   } else if (digitalRead(16) == HIGH) {
+    //send data for GO to xbee
+    sw = 3;
+   } else if (digitalRead(17) == HIGH) {
+    //send data for PIT to xbee
+    sw = 2;
+   } else if (digitalRead(18) == HIGH) {
+    //send data for STOP to xbee
+    sw = 1;
+   } else {
+    //make all of the LEDs turn off
+   }
+
+   while(S1.available()) {
+    S2.write(sw);
+   }
+  while(S2.available()) {
+    S1.write(S2.read());
+   }
+  led.update();
+  
+  serial.update();
 }
