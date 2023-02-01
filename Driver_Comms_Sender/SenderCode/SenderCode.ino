@@ -150,6 +150,7 @@ void loop() {
     sw = 1;
    } else {
     //make all of the LEDs turn off
+    sw = 0;
    }
 
    while(S1.available()) {
