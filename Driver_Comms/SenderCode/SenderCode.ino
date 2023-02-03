@@ -101,6 +101,7 @@ void setup() {
   pinMode(17, INPUT);
   pinMode(18, INPUT);
 
+  //setup code for Xbee
   S1.begin(BAUD);
   S2.begin(BAUD);
   led.begin(13);
