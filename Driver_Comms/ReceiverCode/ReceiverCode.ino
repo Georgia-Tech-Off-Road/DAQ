@@ -21,6 +21,12 @@
  *  - Create all of the objects you want to use in your code
  *  - Create any global variables needed throughout the code
  */
+//These are pin definitions for driver comms:
+// 24 = Connected to Ex2 Switch
+// 25 = Connected to Ex1 Switch
+// 26 = Connected to Go Switch
+// 27 = Connected to Pit Switch
+// 28 = Connected to Stop Switch
 
 // Tire RADIUS in inches
 #define TIRE_RADIUS 11
@@ -40,6 +46,7 @@
 #include "UARTComms.h"     // Teensy <-> Teensy
 #include "SDComms.h"       // Teensy -> SD Card
 #include "BlockId.h"       // Block Ids that are available for sensors
+#include "DigitalOutput.h" // This is needed for the teensy to teensy communication using xbee
 
 // Sensor Libraries (most valid options in GTORHardwareLibraries>Sensors,
 // some are also in GTORHardwareLibraries>ExternalLibraries)
@@ -122,6 +129,15 @@ DashDial l_dash(l_driver, l_servo, 0, 4500, 0, 100, 10, 265);
 DashDial r_dash(r_driver, r_servo, 0, 4, 0, 100, 10, 265);
 SoftwareSerial ss(7,8); // GPS pins (rx,tx)
 
+// Setup for Xbee Comms
+#define BAUD 230400
+#define S1 Serial
+#define S2 Serial1
+ClockTimerf ct(1);
+DigitalOutput led;
+
+uint16_t light;
+
 /* -------- SETUP --------
  *  
  * This section of the code occurs once
@@ -166,6 +182,19 @@ void setup() {
 
   pinMode(22, INPUT);
   pinMode(23, INPUT);
+
+ //The following pins are for the driver comms:
+  pinMode(24, INPUT); //port for Extra2
+  pinMode(25, INPUT); //port for Extra1
+  pinMode(26, INPUT); //port for Go
+  pinMode(27, INPUT); //port for Pit
+  pinMode(28, INPUT); //port for Stop
+
+//This is setup for the Xbee:
+  S1.begin(BAUD);
+  S2.begin(BAUD);
+  led.begin(13);
+  led.set_flipcb(MAKE_CB(ct.ready()));
 
 // Pins on teensy
   secondary_rpm.begin(23);
@@ -301,6 +330,60 @@ void loop() {
     Serial.println("Debug message...");
   }
   #endif
+
+  //This code receives data from the Xbee
+  while(S1.available()) {
+    S2.write(S1.read());
+  }
+  while(S2.available()) {
+    S1.write(light);
+  }
+  led.update();
+
+  //This code controls the lights for sending driver messages
+  if (light == 5) {
+    //turn Extra2 light on and all others off
+    digitalWrite(24, HIGH);
+    digitalWrite(25, LOW);
+    digitalWrite(26, LOW);
+    digitalWrite(27, LOW);
+    digitalWrite(28, LOW);
+  } else if (light == 4) {
+    //turn Extra1 light on and all others off
+    digitalWrite(24, LOW);
+    digitalWrite(25, HIGH);
+    digitalWrite(26, LOW);
+    digitalWrite(27, LOW);
+    digitalWrite(28, LOW);
+  } else if (light == 3) {
+    //turn Go light on and all others off
+    digitalWrite(24, LOW);
+    digitalWrite(25, LOW);
+    digitalWrite(26, HIGH);
+    digitalWrite(27, LOW);
+    digitalWrite(28, LOW);
+  } else if (light == 2) {
+    //turn Pit light on and all others off
+    digitalWrite(24, LOW);
+    digitalWrite(25, LOW);
+    digitalWrite(26, LOW);
+    digitalWrite(27, HIGH);
+    digitalWrite(28, LOW);
+  } else if (light == 1) {
+    //turn Stop light on and all others off
+    digitalWrite(24, LOW);
+    digitalWrite(25, LOW);
+    digitalWrite(26, LOW);
+    digitalWrite(27, LOW);
+    digitalWrite(28, HIGH);
+  } else {
+    //turns all lights off if no switches are on
+    digitalWrite(24, LOW);
+    digitalWrite(25, LOW);
+    digitalWrite(26, LOW);
+    digitalWrite(27, LOW);
+    digitalWrite(28, LOW);
+  }
 
   wireless.update();
 }
