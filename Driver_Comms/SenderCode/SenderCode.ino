@@ -3,7 +3,7 @@
  * This programs the board used to send messages
  * to the driver using a series of switches.
  * 
- * Last updated: 1/26/2023
+ * Last updated: 2/9/2023
  * By: Nikola Rogers
  */
 
@@ -51,28 +51,6 @@
 // 17 = Connected to Pit Switch
 // 18 = Connected to Stop Switch
 
-#define SD_CONNECTED false // Change this to true if you want to use an SD Card
-
-// If using aux daq then use the aux daq pin definition file
-#define TEENSY_LED_PIN 13 // Don't use if using SPI sensors
-
-
-/* -- Object Creation -- */
-// Communication Objects
-SerialComms serial(Serial);
-//#if SD_CONNECTED
-//SDComms sdcomm(BUILTIN_SDCARD);
-//#endif
-
-// Sensor Objects
- TimeSensor time_sensor;
-
-// Utility Libraries
-// ClockTimerf debug(2); // Print debug messages at 2 Hz
-
-// Control Libraries
-LEDControl teensy_led(TEENSY_LED_PIN, 1); // Blink Teensy LED at 1 Hz
-
 // Setup for Xbee Comms
 #define BAUD 230400
 #define S1 Serial
@@ -80,7 +58,7 @@ LEDControl teensy_led(TEENSY_LED_PIN, 1); // Blink Teensy LED at 1 Hz
 ClockTimerf ct(1);
 DigitalOutput led;
 
-uint16_t sw;
+char sw;
 
 /* -------- SETUP --------
  *  
@@ -91,15 +69,20 @@ uint16_t sw;
  *  - Initialize any communication protocols being used
  */
 
-void setup() {    
-  serial.begin();
-  serial.attach_output_block(time_sensor, TIME_GENERIC);
+void setup() {
 
   pinMode(14, INPUT); //setup for pins connected to switches
   pinMode(15, INPUT);
   pinMode(16, INPUT);
   pinMode(17, INPUT);
   pinMode(18, INPUT);
+
+  //FOR TESTING:
+  //digitalWrite(14, HIGH);
+  //digitalWrite(15, HIGH);
+  //digitalWrite(16, HIGH);
+  //digitalWrite(17, HIGH);
+  //digitalWrite(18, HIGH);
 
   //setup code for Xbee
   S1.begin(BAUD);
@@ -124,43 +107,35 @@ void setup() {
  */
  
 void loop() {
-  uint32_t current_time = micros(); // Measure time for clock timer object update cycles
-  // Update Sensors
-  time_sensor.update();
-  // Update Control Objects
-  teensy_led.update();
-  // Update Communication Utilities
-  #if SD_CONNECTED
-  sdcomm.update();
-  #endif
 
-   if (digitalRead(14) == HIGH) {
-    //send data for Extra2
-    sw = 5;
-   } else if (digitalRead(15) == HIGH ) {
-    //send data for Extra1
-    sw = 4;
+   //The following sets the swtich value that will be sent to the dashboard
+   if (digitalRead(18) == HIGH) {
+    //send data for STOP
+    sw = '1';
+   } else if (digitalRead(17) == HIGH ) {
+    //send data for PIT
+    sw = '2';
    } else if (digitalRead(16) == HIGH) {
     //send data for GO to xbee
-    sw = 3;
-   } else if (digitalRead(17) == HIGH) {
-    //send data for PIT to xbee
-    sw = 2;
-   } else if (digitalRead(18) == HIGH) {
-    //send data for STOP to xbee
-    sw = 1;
+    sw = '3';
+   } else if (digitalRead(15) == HIGH) {
+    //send data for EXTRA1 to xbee
+    sw = '4';
+   } else if (digitalRead(14) == HIGH) {
+    //send data for EXTRA2 to xbee
+    sw = '5';
    } else {
     //make all of the LEDs turn off
-    sw = 0;
+    sw = '0';
    }
 
-   while(S1.available()) {
-    S2.write(sw);
-   }
-  while(S2.available()) {
-    S1.write(S2.read());
-   }
+    S2.write(sw); // sends the data on which switch is on to the dashboard
+
+// The following code would be used to receive data from the dashboard, but we aren't using that here
+// We can't send and receive data from the same xbee at the same time
+//  if (S2.available()) {
+//    S1.write(S2.read());
+//  }
+
   led.update();
-  
-  serial.update();
 }
