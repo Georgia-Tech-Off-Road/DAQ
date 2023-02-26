@@ -59,6 +59,7 @@ ClockTimerf ct(1);
 DigitalOutput led;
 
 char sw;
+char prev = '0';
 
 /* -------- SETUP --------
  *  
@@ -128,8 +129,10 @@ void loop() {
     //make all of the LEDs turn off
     sw = '0';
    }
-
-    S2.write(sw); // sends the data on which switch is on to the dashboard
+   
+   if (sw != prev){ 
+    S2.write(sw); // sends the data on which switch is on to the dashboard if its changed
+   }
 
 // The following code would be used to receive data from the dashboard, but we aren't using that here
 // We can't send and receive data from the same xbee at the same time

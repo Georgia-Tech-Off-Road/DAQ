@@ -331,13 +331,13 @@ void loop() {
   }
   #endif
 
+//This code probably isn't needed, but I'm leaving it here in case
+//  while(S1.available()) {
+//    S2.write(S1.read());
+//  }
+
   //This code receives data from the Xbee
-  while(S1.available()) {
-    S2.write(S1.read());
-  }
-  while(S2.available()) {
-    S1.write(light);
-  }
+  S1.write(light);
   led.update();
 
   //This code controls the lights for sending driver messages
