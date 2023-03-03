@@ -195,6 +195,8 @@
 <text x="17.78" y="85.09" size="1.778" layer="25">Go</text>
 <text x="24.13" y="85.09" size="1.778" layer="25">Ex1</text>
 <text x="31.75" y="85.09" size="1.778" layer="25">Ex2</text>
+<text x="15.24" y="22.86" size="1.016" layer="25">Driver Comms Sender Board v1
+Designed by Nikola Rogers</text>
 </plain>
 <libraries>
 <library name="GTOR - Active Components">
