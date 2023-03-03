@@ -80,7 +80,7 @@ void setup() {
 
   //FOR TESTING:
   //digitalWrite(14, HIGH);
-  digitalWrite(15, HIGH);
+  //digitalWrite(15, HIGH);
   //digitalWrite(16, HIGH);
   //digitalWrite(17, HIGH);
   //digitalWrite(18, HIGH);
@@ -91,6 +91,8 @@ void setup() {
   led.begin(13);
   led.set_flipcb(MAKE_CB(ct.ready()));
   
+  randomSeed(24);
+
   delay(100); // Good to delay for a bit just to allow hardware to initialize
 }
 
@@ -108,6 +110,10 @@ void setup() {
  */
  
 void loop() {
+
+    // These two comments are for testing:
+   //delay(1000);
+   //digitalWrite(random(14, 19), HIGH);
 
    //The following sets the swtich value that will be sent to the dashboard
    if (digitalRead(18) == HIGH) {
