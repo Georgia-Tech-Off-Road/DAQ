@@ -136,7 +136,7 @@ SoftwareSerial ss(7,8); // GPS pins (rx,tx)
 ClockTimerf ct(1);
 DigitalOutput led;
 
-uint16_t light;
+char light;
 
 /* -------- SETUP --------
  *  
@@ -263,6 +263,58 @@ void loop() {
         Serial.print("Secondary Position: ");
         Serial.println(secondary_rpm.get_data().position);
     }
+
+    //This code receives data from the Xbee
+    if(S2.available()) {
+      light = S2.read();
+      //this line prints the value sent, used for testing
+      //Serial.println(light);
+    }
+
+    //This code controls the lights for sending driver messages
+    if (light == '5') {
+      //turn Extra2 light on and all others off
+      digitalWrite(24, HIGH);
+      digitalWrite(25, LOW);
+      digitalWrite(26, LOW);
+      digitalWrite(27, LOW);
+      digitalWrite(28, LOW);
+    } else if (light == '4') {
+      //turn Extra1 light on and all others off
+      digitalWrite(24, LOW);
+      digitalWrite(25, HIGH);
+      digitalWrite(26, LOW);
+      digitalWrite(27, LOW);
+      digitalWrite(28, LOW);
+    } else if (light == '3') {
+      //turn Go light on and all others off
+      digitalWrite(24, LOW);
+      digitalWrite(25, LOW);
+      digitalWrite(26, HIGH);
+      digitalWrite(27, LOW);
+      digitalWrite(28, LOW);
+    } else if (light == '2') {
+      //turn Pit light on and all others off
+      digitalWrite(24, LOW);
+      digitalWrite(25, LOW);
+      digitalWrite(26, LOW);
+      digitalWrite(27, HIGH);
+      digitalWrite(28, LOW);
+    } else if (light == '1') {
+      //turn Stop light on and all others off
+     digitalWrite(24, LOW);
+      digitalWrite(25, LOW);
+      digitalWrite(26, LOW);
+      digitalWrite(27, LOW);
+      digitalWrite(28, HIGH);
+    } else {
+      //turns all lights off if no switches are on
+      digitalWrite(24, LOW);
+      digitalWrite(25, LOW);
+      digitalWrite(26, LOW);
+      digitalWrite(27, LOW);
+      digitalWrite(28, LOW);
+    }
     #endif
     
     #ifdef TEST
@@ -330,63 +382,6 @@ void loop() {
     Serial.println("Debug message...");
   }
   #endif
-
-//This code probably isn't needed, but I'm leaving it here in case
-//  while(S1.available()) {
-//    S2.write(S1.read());
-//  }
-
-  //This code receives data from the Xbee
-  S1.write(light);
-  led.update();
-
-  //this line prints the value sent, used for testing
-  Serial.println(light);
-
-  //This code controls the lights for sending driver messages
-  if (light == 5) {
-    //turn Extra2 light on and all others off
-    digitalWrite(24, HIGH);
-    digitalWrite(25, LOW);
-    digitalWrite(26, LOW);
-    digitalWrite(27, LOW);
-    digitalWrite(28, LOW);
-  } else if (light == 4) {
-    //turn Extra1 light on and all others off
-    digitalWrite(24, LOW);
-    digitalWrite(25, HIGH);
-    digitalWrite(26, LOW);
-    digitalWrite(27, LOW);
-    digitalWrite(28, LOW);
-  } else if (light == 3) {
-    //turn Go light on and all others off
-    digitalWrite(24, LOW);
-    digitalWrite(25, LOW);
-    digitalWrite(26, HIGH);
-    digitalWrite(27, LOW);
-    digitalWrite(28, LOW);
-  } else if (light == 2) {
-    //turn Pit light on and all others off
-    digitalWrite(24, LOW);
-    digitalWrite(25, LOW);
-    digitalWrite(26, LOW);
-    digitalWrite(27, HIGH);
-    digitalWrite(28, LOW);
-  } else if (light == 1) {
-    //turn Stop light on and all others off
-    digitalWrite(24, LOW);
-    digitalWrite(25, LOW);
-    digitalWrite(26, LOW);
-    digitalWrite(27, LOW);
-    digitalWrite(28, HIGH);
-  } else {
-    //turns all lights off if no switches are on
-    digitalWrite(24, LOW);
-    digitalWrite(25, LOW);
-    digitalWrite(26, LOW);
-    digitalWrite(27, LOW);
-    digitalWrite(28, LOW);
-  }
 
   wireless.update();
 }
