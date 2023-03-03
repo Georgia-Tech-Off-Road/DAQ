@@ -80,7 +80,7 @@ void setup() {
 
   //FOR TESTING:
   //digitalWrite(14, HIGH);
-  //digitalWrite(15, HIGH);
+  digitalWrite(15, HIGH);
   //digitalWrite(16, HIGH);
   //digitalWrite(17, HIGH);
   //digitalWrite(18, HIGH);
@@ -133,6 +133,8 @@ void loop() {
    if (sw != prev){ 
     S2.write(sw); // sends the data on which switch is on to the dashboard if its changed
    }
+
+  prev = sw;
 
 // The following code would be used to receive data from the dashboard, but we aren't using that here
 // We can't send and receive data from the same xbee at the same time

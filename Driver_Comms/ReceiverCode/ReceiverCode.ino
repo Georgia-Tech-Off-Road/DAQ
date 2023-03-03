@@ -229,8 +229,8 @@ uint32_t timer = micros();
 void loop() {
     #ifdef RUN
     btn.update();
-    Serial.print("GPS Speed:");
-    Serial.print(gps.speed.kmph());
+    // Serial.print("GPS Speed:");
+    // Serial.print(gps.speed.kmph());
     // Read speed sensors and update dials
     static uint32_t prev_change = 0;
     static uint32_t prev_update = 0;
@@ -339,6 +339,9 @@ void loop() {
   //This code receives data from the Xbee
   S1.write(light);
   led.update();
+
+  //this line prints the value sent, used for testing
+  Serial.println(light);
 
   //This code controls the lights for sending driver messages
   if (light == 5) {
