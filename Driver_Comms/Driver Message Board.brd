@@ -264,42 +264,6 @@ Source: transistor-fet.lbr</description>
 </package>
 </packages>
 </library>
-<library name="GTOR - Connectors">
-<packages>
-<package name="1X02" urn="urn:adsk.eagle:footprint:22309/1">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
-<wire x1="-1.905" y1="1.27" x2="-0.635" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-0.635" y1="1.27" x2="0" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="0" y1="0.635" x2="0" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="0" y1="-0.635" x2="-0.635" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-2.54" y1="0.635" x2="-2.54" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-1.905" y1="1.27" x2="-2.54" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="-2.54" y1="-0.635" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-0.635" y1="-1.27" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="0" y1="0.635" x2="0.635" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="0.635" y1="1.27" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="1.27" x2="2.54" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="2.54" y1="0.635" x2="2.54" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="2.54" y1="-0.635" x2="1.905" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="-1.27" x2="0.635" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="0.635" y1="-1.27" x2="0" y2="-0.635" width="0.1524" layer="21"/>
-<pad name="1" x="-1.27" y="0" drill="1.016" shape="long" rot="R90"/>
-<pad name="2" x="1.27" y="0" drill="1.016" shape="long" rot="R90"/>
-<text x="-2.6162" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-2.54" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-1.524" y1="-0.254" x2="-1.016" y2="0.254" layer="51"/>
-<rectangle x1="1.016" y1="-0.254" x2="1.524" y2="0.254" layer="51"/>
-</package>
-</packages>
-<packages3d>
-<package3d name="1X02" urn="urn:adsk.eagle:package:22435/2" type="model">
-<description>PIN HEADER</description>
-<packageinstances>
-<packageinstance name="1X02"/>
-</packageinstances>
-</package3d>
-</packages3d>
-</library>
 <library name="GTOR - Passive Components">
 <packages>
 <package name="LED-5MM">
@@ -546,6 +510,50 @@ Source: transistor-fet.lbr</description>
 </package>
 </packages>
 </library>
+<library name="con-wago-500" urn="urn:adsk.eagle:library:195">
+<description>&lt;b&gt;Wago Screw Clamps&lt;/b&gt;&lt;p&gt;
+Grid 5.00 mm&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="W237-102" urn="urn:adsk.eagle:footprint:10676/1" library_version="2">
+<description>&lt;b&gt;WAGO SCREW CLAMP&lt;/b&gt;</description>
+<wire x1="-3.491" y1="-2.286" x2="-1.484" y2="-0.279" width="0.254" layer="51"/>
+<wire x1="1.488" y1="-2.261" x2="3.469" y2="-0.254" width="0.254" layer="51"/>
+<wire x1="-4.989" y1="-5.461" x2="4.993" y2="-5.461" width="0.1524" layer="21"/>
+<wire x1="4.993" y1="3.734" x2="4.993" y2="3.531" width="0.1524" layer="21"/>
+<wire x1="4.993" y1="3.734" x2="-4.989" y2="3.734" width="0.1524" layer="21"/>
+<wire x1="-4.989" y1="-5.461" x2="-4.989" y2="-3.073" width="0.1524" layer="21"/>
+<wire x1="-4.989" y1="-3.073" x2="-3.389" y2="-3.073" width="0.1524" layer="21"/>
+<wire x1="-3.389" y1="-3.073" x2="-1.611" y2="-3.073" width="0.1524" layer="51"/>
+<wire x1="-1.611" y1="-3.073" x2="1.615" y2="-3.073" width="0.1524" layer="21"/>
+<wire x1="3.393" y1="-3.073" x2="4.993" y2="-3.073" width="0.1524" layer="21"/>
+<wire x1="-4.989" y1="-3.073" x2="-4.989" y2="3.531" width="0.1524" layer="21"/>
+<wire x1="4.993" y1="-3.073" x2="4.993" y2="-5.461" width="0.1524" layer="21"/>
+<wire x1="-4.989" y1="3.531" x2="4.993" y2="3.531" width="0.1524" layer="21"/>
+<wire x1="-4.989" y1="3.531" x2="-4.989" y2="3.734" width="0.1524" layer="21"/>
+<wire x1="4.993" y1="3.531" x2="4.993" y2="-3.073" width="0.1524" layer="21"/>
+<wire x1="1.615" y1="-3.073" x2="3.393" y2="-3.073" width="0.1524" layer="51"/>
+<circle x="-2.5" y="-1.27" radius="1.4986" width="0.1524" layer="51"/>
+<circle x="-2.5" y="2.2098" radius="0.508" width="0.1524" layer="21"/>
+<circle x="2.5038" y="-1.27" radius="1.4986" width="0.1524" layer="51"/>
+<circle x="2.5038" y="2.2098" radius="0.508" width="0.1524" layer="21"/>
+<pad name="1" x="-2.5" y="-1.27" drill="1.1938" shape="long" rot="R90"/>
+<pad name="2" x="2.5" y="-1.27" drill="1.1938" shape="long" rot="R90"/>
+<text x="-5.04" y="-7.62" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-3.8462" y="-5.0038" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-4.532" y="0.635" size="1.27" layer="21" ratio="10">1</text>
+<text x="0.421" y="0.635" size="1.27" layer="21" ratio="10">2</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="W237-102" urn="urn:adsk.eagle:package:10688/1" type="box" library_version="2">
+<description>WAGO SCREW CLAMP</description>
+<packageinstances>
+<packageinstance name="W237-102"/>
+</packageinstances>
+</package3d>
+</packages3d>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -743,11 +751,6 @@ design rules under a new name.</description>
 <attribute name="NAME" x="2.54" y="44.577" size="1.778" layer="25" ratio="10"/>
 <attribute name="VALUE" x="2.413" y="41.91" size="1.778" layer="27" ratio="10"/>
 </element>
-<element name="JP1" library="GTOR - Connectors" package="1X02" package3d_urn="urn:adsk.eagle:package:22435/2" value="" x="6.35" y="25.4" smashed="yes">
-<attribute name="NAME" x="3.7338" y="27.2288" size="1.27" layer="25" ratio="10"/>
-<attribute name="POPULARITY" value="98" x="72.39" y="-30.48" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="3.81" y="22.225" size="1.27" layer="27"/>
-</element>
 <element name="LED1" library="GTOR - Passive Components" package="LED-5MM" value="" x="34.29" y="81.28" smashed="yes">
 <attribute name="VALUE" x="37.4904" y="79.4766" size="1.27" layer="27" ratio="10"/>
 </element>
@@ -814,25 +817,33 @@ design rules under a new name.</description>
 <attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/CK/OS102011MS2QN1?qs=WtljUlYws5RvQ1hEv876nQ%3D%3D" x="-85.09" y="64.77" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="U$1" library="GTOR - Microcontroller" package="TEENSY_4.0_SIMPLE" value="TEENSY_4.0_SIMPLE" x="19.05" y="64.77" smashed="yes"/>
-<element name="U1" library="GTOR - Microcontroller" package="XBEE_PRO_S3B" value="XBEE_PRO_S3B" x="25.4" y="38.1" smashed="yes">
-<attribute name="DESCRIPTION" value=" General ISM &lt; 1GHz Transceiver Module 900MHz Antenna Not Included, RP-SMA Through Hole " x="53.34" y="20.32" size="1.778" layer="27" display="off"/>
-<attribute name="DIGI-KEY_PART_NUMBER" value="602-1293-ND" x="53.34" y="20.32" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Digi International" x="53.34" y="20.32" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="XBP9B-XCST-001" x="53.34" y="20.32" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="12.3589" y="25.5605" size="1.274009375" layer="25" rot="R90"/>
-<attribute name="PACKAGE" value="Module Digi International" x="53.34" y="20.32" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="34.588" y="28.8935" size="1.271609375" layer="27" rot="R90"/>
+<element name="U1" library="GTOR - Microcontroller" package="XBEE_PRO_S3B" value="XBEE_PRO_S3B" x="25.4" y="38.1" smashed="yes" rot="R180">
+<attribute name="DESCRIPTION" value=" General ISM &lt; 1GHz Transceiver Module 900MHz Antenna Not Included, RP-SMA Through Hole " x="-2.54" y="55.88" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DIGI-KEY_PART_NUMBER" value="602-1293-ND" x="-2.54" y="55.88" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="Digi International" x="-2.54" y="55.88" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MP" value="XBP9B-XCST-001" x="-2.54" y="55.88" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="38.4411" y="50.6395" size="1.274009375" layer="25" rot="R270"/>
+<attribute name="PACKAGE" value="Module Digi International" x="-2.54" y="55.88" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="16.212" y="47.3065" size="1.271609375" layer="27" rot="R270"/>
+</element>
+<element name="X1" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" package="W237-102" package3d_urn="urn:adsk.eagle:package:10688/1" value="" x="6.35" y="26.67" smashed="yes">
+<attribute name="MF" value="" x="6.35" y="26.67" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="237-102" x="6.35" y="26.67" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="2.5038" y="21.6662" size="1.27" layer="25" ratio="10"/>
+<attribute name="OC_FARNELL" value="unknown" x="6.35" y="26.67" size="1.778" layer="27" display="off"/>
+<attribute name="OC_NEWARK" value="70K9898" x="6.35" y="26.67" size="1.778" layer="27" display="off"/>
+<attribute name="POPULARITY" value="32" x="6.35" y="26.67" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="1.31" y="19.05" size="1.27" layer="27" ratio="10"/>
 </element>
 </elements>
 <signals>
 <signal name="VCC">
-<contactref element="JP1" pad="1"/>
 <contactref element="IC1" pad="1"/>
-<wire x1="3.81" y1="33.02" x2="5.08" y2="31.75" width="0.254" layer="1"/>
-<wire x1="5.08" y1="31.75" x2="5.08" y2="25.4" width="0.254" layer="1"/>
+<contactref element="X1" pad="1"/>
+<wire x1="3.85" y1="25.4" x2="3.81" y2="25.44" width="0.1524" layer="1"/>
+<wire x1="3.81" y1="25.44" x2="3.81" y2="33.02" width="0.1524" layer="1"/>
 </signal>
 <signal name="GND">
-<contactref element="JP1" pad="2"/>
 <contactref element="IC1" pad="2"/>
 <contactref element="U1" pad="10"/>
 <contactref element="U$1" pad="GND"/>
@@ -854,6 +865,7 @@ design rules under a new name.</description>
 <vertex x="36.83" y="20.32"/>
 <vertex x="0" y="20.32"/>
 </polygon>
+<contactref element="X1" pad="2"/>
 </signal>
 <signal name="+5V">
 <contactref element="IC1" pad="3"/>
@@ -865,22 +877,17 @@ design rules under a new name.</description>
 <signal name="XBEE_TX">
 <contactref element="U1" pad="2"/>
 <contactref element="U$1" pad="0/RX"/>
-<wire x1="11.43" y1="51.90315625" x2="6.18315625" y2="57.15" width="0.254" layer="1"/>
-<wire x1="6.18315625" y1="57.15" x2="5.08" y2="57.15" width="0.254" layer="1"/>
-<wire x1="13.13" y1="44.85" x2="14.4" y2="44.85" width="0.254" layer="1"/>
-<wire x1="13.13" y1="44.85" x2="11.43" y2="46.55" width="0.254" layer="1"/>
-<wire x1="11.43" y1="46.55" x2="11.43" y2="51.90315625" width="0.254" layer="1"/>
+<wire x1="36.4" y1="31.35" x2="32.15" y2="31.35" width="0.1524" layer="1"/>
+<wire x1="7.62" y1="55.88" x2="6.35" y2="55.88" width="0.1524" layer="1"/>
+<wire x1="6.35" y1="55.88" x2="5.08" y2="57.15" width="0.1524" layer="1"/>
+<wire x1="32.15" y1="31.35" x2="7.62" y2="55.88" width="0.1524" layer="1"/>
 </signal>
 <signal name="XBEE_RX">
 <contactref element="U1" pad="3"/>
 <contactref element="U$1" pad="1/TX"/>
-<wire x1="12.1506" y1="52.6194" x2="12.1506" y2="47.30426875" width="0.254" layer="1"/>
-<wire x1="7.62" y1="57.15" x2="12.1506" y2="52.6194" width="0.254" layer="1"/>
-<wire x1="15.3794" y1="45.25568125" x2="14.80568125" y2="45.8294" width="0.254" layer="1"/>
-<wire x1="13.62546875" y1="45.8294" x2="14.80568125" y2="45.8294" width="0.254" layer="1"/>
-<wire x1="12.1506" y1="47.30426875" x2="13.62546875" y2="45.8294" width="0.254" layer="1"/>
-<wire x1="14.4" y1="42.85" x2="15.3794" y2="43.8294" width="0.254" layer="1"/>
-<wire x1="15.3794" y1="43.8294" x2="15.3794" y2="45.25568125" width="0.254" layer="1"/>
+<wire x1="36.4" y1="33.35" x2="15.14" y2="54.61" width="0.1524" layer="1"/>
+<wire x1="10.16" y1="54.61" x2="7.62" y2="57.15" width="0.1524" layer="1"/>
+<wire x1="15.14" y1="54.61" x2="10.16" y2="54.61" width="0.1524" layer="1"/>
 </signal>
 <signal name="3V_TEENSY">
 <contactref element="U$1" pad="3V3_LO"/>
@@ -890,16 +897,18 @@ design rules under a new name.</description>
 <contactref element="S3" pad="1"/>
 <contactref element="S4" pad="1"/>
 <contactref element="S5" pad="1"/>
-<wire x1="7.62" y1="72.39" x2="13.97" y2="66.04" width="0.254" layer="1"/>
-<wire x1="13.97" y1="47.28" x2="14.4" y2="46.85" width="0.254" layer="1"/>
-<wire x1="13.97" y1="66.04" x2="13.97" y2="47.28" width="0.254" layer="1"/>
 <wire x1="1.27" y1="92.17" x2="1.27" y2="78.74" width="0.254" layer="1"/>
-<wire x1="1.27" y1="78.74" x2="7.62" y2="72.39" width="0.254" layer="1"/>
 <wire x1="1.27" y1="92.17" x2="3.81" y2="94.71" width="0.254" layer="1"/>
 <wire x1="3.81" y1="94.71" x2="11.43" y2="94.71" width="0.254" layer="1"/>
 <wire x1="11.43" y1="94.71" x2="19.05" y2="94.71" width="0.254" layer="1"/>
 <wire x1="19.05" y1="94.71" x2="26.67" y2="94.71" width="0.254" layer="1"/>
 <wire x1="26.67" y1="94.71" x2="34.29" y2="94.71" width="0.254" layer="1"/>
+<wire x1="36.4" y1="29.35" x2="38.1" y2="31.05" width="0.1524" layer="1"/>
+<wire x1="38.1" y1="31.05" x2="38.1" y2="59.69" width="0.1524" layer="1"/>
+<wire x1="38.1" y1="59.69" x2="27.94" y2="69.85" width="0.1524" layer="1"/>
+<wire x1="27.94" y1="69.85" x2="10.16" y2="69.85" width="0.1524" layer="1"/>
+<wire x1="10.16" y1="69.85" x2="7.62" y2="72.39" width="0.1524" layer="1"/>
+<wire x1="1.27" y1="78.74" x2="7.62" y2="72.39" width="0.1524" layer="1"/>
 </signal>
 <signal name="A0">
 <contactref element="U$1" pad="14/A0"/>
@@ -969,6 +978,11 @@ design rules under a new name.</description>
 <note version="6.3" minversion="6.2.2" severity="warning">
 Since Version 6.2.2 text objects can contain more than one line,
 which will not be processed correctly with this version.
+</note>
+<note version="8.2" severity="warning">
+Since Version 8.2, EAGLE supports online libraries. The ids
+of those online libraries will not be understood (or retained)
+with this version.
 </note>
 <note version="8.3" severity="warning">
 Since Version 8.3, EAGLE supports URNs for individual library
