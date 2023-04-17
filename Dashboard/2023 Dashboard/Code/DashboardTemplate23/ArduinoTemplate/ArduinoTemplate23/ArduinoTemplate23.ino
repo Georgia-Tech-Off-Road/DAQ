@@ -160,9 +160,13 @@ void setup() {
   r_dash.begin();
 
   pinMode(17, INPUT);
+
   pinMode(33, OUTPUT);
   pinMode(31, OUTPUT);
   pinMode(29, OUTPUT);
+  digitalWrite(33, LOW);
+  digitalWrite(31, LOW);
+  digitalWrite(29, LOW);
 
   pinMode(22, INPUT);
   pinMode(23, INPUT);
@@ -179,6 +183,17 @@ void setup() {
   edge_detect.attach_input_block(btn, EDGE_FALLING);
   edge_detect.set_cb([](){ state = (state + 1)%3; });
   
+  // Turn on the three LED's as a fun startup
+  digitalWrite(33, HIGH);
+  delay(500);
+  digitalWrite(31, HIGH);
+  delay(500);
+  digitalWrite(29, HIGH);
+  delay(500);
+  digitalWrite(33, LOW);
+  digitalWrite(31, LOW);
+  digitalWrite(29, LOW);
+
   delay(100); // Good to delay for a bit just to allow hardware to initialize
 }
 
@@ -199,6 +214,7 @@ uint32_t timer = micros();
  
 void loop() {
     #ifdef RUN
+    digitalWrite(33, HIGH);
     btn.update();
     Serial.print("GPS Speed:");
     Serial.print(gps.speed.kmph());
@@ -237,6 +253,7 @@ void loop() {
     #endif
     
     #ifdef TEST
+    digitalWrite(29, HIGH);
     static uint32_t prev_update = 0;
     static uint32_t delay_update = 0;
     static uint16_t delay_state = 0;
@@ -274,6 +291,7 @@ void loop() {
     #endif
     
     #ifdef CALIBRATE
+    digitalWrite(31, HIGH);
     l_dash.calibrate_servo(3);
     r_dash.calibrate_servo(3);
     #endif
