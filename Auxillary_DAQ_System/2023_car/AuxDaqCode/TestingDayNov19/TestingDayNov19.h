@@ -17,6 +17,7 @@
 #include "VoltageSensor.h"
 #include "DigitalSensor.h"
 #include "BrakePressureSensor.h"
+#include "TempSensor.h"
 
 // Control Libraries
 #include "DigitalOutput.h"
@@ -36,13 +37,15 @@
 #define LDS_PEDAL4        4
 #define LDS_PEDAL_STROKE 200
 
+#define TEMP_DIFF 5
+
 // #define BRAKE_FRONT 0 // ADC3
 // #define BRAKE_REAR  1 // ADC3
 
-#define SPEED_ENGINE        23
-#define SPEED_ENGINE_PPR    600
-#define SPEED_SECONDARY     22
-#define SPEED_SECONDARY_PPR 30
+#define SPEED_ENGINE        22
+#define SPEED_ENGINE_PPR    30
+#define SPEED_SECONDARY     15
+#define SPEED_SECONDARY_PPR 600
 
 #define IMU 26
 

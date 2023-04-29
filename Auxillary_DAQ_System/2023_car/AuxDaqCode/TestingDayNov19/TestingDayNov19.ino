@@ -23,6 +23,8 @@ SpeedSensor speed_secondary(SPEED_SECONDARY_PPR);
 IMUSensor imu;
 TimeSensor ts;
 
+TempSensor temp;
+
 // Control IO
 DigitalSensor btn_panel;
 DigitalOutput led_onboard;
@@ -51,6 +53,7 @@ void setup() {
   adc.attach_sensor(lds_pedal2, LDS_PEDAL2);
   adc.attach_sensor(lds_pedal3, LDS_PEDAL3);
   adc.attach_sensor(lds_pedal4, LDS_PEDAL4);
+  adc.attach_sensor(temp, TEMP_DIFF);
   //adc.attach_sensor(brake_front, BRAKE_FRONT);
   //adc.attach_sensor(brake_rear , BRAKE_REAR );
 
@@ -60,7 +63,7 @@ void setup() {
 
   // Control IO
   btn_panel.begin(BTN_PANEL, INPUT_PULLUP);
-   led_onboard.begin(LED_ONBOARD);
+  led_onboard.begin(LED_ONBOARD);
   led_onboard.set_setcb(MAKE_CB(sd_writecommand.get_data()));
   led_panel_white.begin(LED_PANEL_WHITE);
   led_panel_white.set_flipcb(MAKE_CB(led_panel_white_ct.ready()));
@@ -83,6 +86,7 @@ void setup() {
   Comms::multiple_attach_output_block(imu,  IMU_SENSOR, all_comms);
   Comms::multiple_attach_output_block(ts, TIME_AUXDAQ_US, all_comms);
   Comms::multiple_attach_output_block(sd_writecommand, FLAG_AUXDAQ_SDWRITE, all_comms);
+  Comms::multiple_attach_output_block(temp, TEMP_DIFF_SENSOR, all_comms);
   
   edge_detect.attach_input_block(wireless_writecommand, EDGE_RISING);
   edge_detect.attach_input_block(btn_panel, EDGE_FALLING);
@@ -104,7 +108,8 @@ void loop() {
   speed_engine.update();
   speed_secondary.update();
   imu.update();
-  ts.update(); 
+  ts.update();
+  temp.update();
 
   led_onboard.update();
   led_panel_white.update();
@@ -128,6 +133,7 @@ void loop() {
       Serial.print("ENGINE: "); Serial.println(speed_engine.get_data().speed);
       Serial.print("SECOND: "); Serial.print(speed_secondary.get_data().speed); Serial.print(", "); Serial.println(speed_secondary.get_data().position);
       Serial.print("IMU:    "); imu.printall(); Serial.println();
+      Serial.print("TEMP:   "); Serial.print(temp.get_raw()); Serial.print(", "); Serial.println(temp.get_data());
       Serial.print("BUTTON: "); Serial.println(btn_panel.get_data());
       Serial.print("WRITE:  "); Serial.println(sd_writecommand.get_data());
       Serial.println();

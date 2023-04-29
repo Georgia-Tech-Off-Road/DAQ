@@ -1,9 +1,5 @@
 {
-    "files.associations": {
-        "cstddef": "cpp",
-        "*.tcc": "cpp",
-        "thread": "cpp",
-        "chrono": "cpp",
-        "cmath": "cpp"
-    }
+  "files.associations": {
+    "type_traits": "cpp"
+  }
 }
