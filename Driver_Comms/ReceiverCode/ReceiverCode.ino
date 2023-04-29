@@ -179,16 +179,19 @@ void setup() {
   pinMode(33, OUTPUT);
   pinMode(31, OUTPUT);
   pinMode(29, OUTPUT);
+  digitalWrite(33, LOW);
+  digitalWrite(31, LOW);
+  digitalWrite(29, LOW);
 
   pinMode(22, INPUT);
   pinMode(23, INPUT);
 
  //The following pins are for the driver comms:
-  pinMode(24, INPUT); //port for Extra2
-  pinMode(25, INPUT); //port for Extra1
-  pinMode(26, INPUT); //port for Go
-  pinMode(27, INPUT); //port for Pit
-  pinMode(28, INPUT); //port for Stop
+  pinMode(24, OUTPUT); //port for Extra2
+  pinMode(25, OUTPUT); //port for Extra1
+  pinMode(26, OUTPUT); //port for Go
+  pinMode(27, OUTPUT); //port for Pit
+  pinMode(28, OUTPUT); //port for Stop
 
 //This is setup for the Xbee:
   S1.begin(BAUD);
@@ -207,6 +210,17 @@ void setup() {
   btn.begin(6, INPUT_PULLUP);
   edge_detect.attach_input_block(btn, EDGE_FALLING);
   edge_detect.set_cb([](){ state = (state + 1)%3; });
+
+  // Turn on the three LED's as a fun startup
+  digitalWrite(33, HIGH);
+  delay(500);
+  digitalWrite(31, HIGH);
+  delay(500);
+  digitalWrite(29, HIGH);
+  delay(500);
+  digitalWrite(33, LOW);
+  digitalWrite(31, LOW);
+  digitalWrite(29, LOW);
   
   delay(100); // Good to delay for a bit just to allow hardware to initialize
 }
@@ -228,9 +242,10 @@ uint32_t timer = micros();
  
 void loop() {
     #ifdef RUN
+    digitalWrite(33, HIGH);
     btn.update();
-    // Serial.print("GPS Speed:");
-    // Serial.print(gps.speed.kmph());
+    Serial.print("GPS Speed:");
+    Serial.print(gps.speed.kmph());
     // Read speed sensors and update dials
     static uint32_t prev_change = 0;
     static uint32_t prev_update = 0;
@@ -318,6 +333,7 @@ void loop() {
     #endif
     
     #ifdef TEST
+    digitalWrite(29, HIGH);
     static uint32_t prev_update = 0;
     static uint32_t delay_update = 0;
     static uint16_t delay_state = 0;
@@ -355,6 +371,7 @@ void loop() {
     #endif
     
     #ifdef CALIBRATE
+    digitalWrite(31, HIGH);
     l_dash.calibrate_servo(3);
     r_dash.calibrate_servo(3);
     #endif
