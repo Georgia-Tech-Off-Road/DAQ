@@ -1,5 +1,5 @@
-#ifndef TESTINGDAYNOV19_H
-#define TESTINGDAYNOV19_H
+#ifndef COMPOSHKOSH_H
+#define COMPOSHKOSH_H
 
 // Communication Libraries
 #include "SerialComms.h"
@@ -44,7 +44,7 @@
 #define SPEED_SECONDARY     22
 #define SPEED_SECONDARY_PPR 30
 
-#define IMU 26
+#define IMU 27
 
 #define LED_ONBOARD       30
 #define LED_PANEL_WHITE   9
