@@ -244,8 +244,8 @@ void loop() {
     #ifdef RUN
     digitalWrite(33, HIGH);
     btn.update();
-    Serial.print("GPS Speed:");
-    Serial.print(gps.speed.kmph());
+    // Serial.print("GPS Speed:");
+    // Serial.print(gps.speed.kmph());
     // Read speed sensors and update dials
     static uint32_t prev_change = 0;
     static uint32_t prev_update = 0;
@@ -269,21 +269,21 @@ void loop() {
         l_dash.update();
         r_dash.update();
         prev_update = t;
-        Serial.print("\nEngine Speed 1  (RPM): ");
-        Serial.println(engine_rpm.get_data().speed);
-        Serial.print("Secondary Speed (RPM): ");
-        Serial.println(secondary_rpm.get_data().speed);
-        Serial.print("\nEngine Position 1: ");
-        Serial.println(engine_rpm.get_data().position);
-        Serial.print("Secondary Position: ");
-        Serial.println(secondary_rpm.get_data().position);
+        // Serial.print("\nEngine Speed 1  (RPM): ");
+        // Serial.println(engine_rpm.get_data().speed);
+        // Serial.print("Secondary Speed (RPM): ");
+        // Serial.println(secondary_rpm.get_data().speed);
+        // Serial.print("\nEngine Position 1: ");
+        // Serial.println(engine_rpm.get_data().position);
+        // Serial.print("Secondary Position: ");
+        // Serial.println(secondary_rpm.get_data().position);
     }
 
     //This code receives data from the Xbee
     if(S2.available()) {
       light = S2.read();
       //this line prints the value sent, used for testing
-      //Serial.println(light);
+      Serial.println(light);
     }
 
     //This code controls the lights for sending driver messages
