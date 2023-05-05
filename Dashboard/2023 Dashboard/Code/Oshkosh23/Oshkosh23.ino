@@ -32,7 +32,6 @@
 
 /* -- Library Inclusions -- */
 // Communication Libraries (all libraries in GTORHardwareLibaries>Comms)
-#include <SoftwareSerial.h>
 #include "SerialComms.h"   // Teensy <-> PC
 #include "WirelessComms.h" // Teensy<->XBEE <-......-> XBEE<->Teensy
 #include "UARTComms.h"     // Teensy <-> Teensy
@@ -81,6 +80,9 @@
 #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 
+// AuxDAQ
+#define AUXDAQ_SERIAL Serial4
+
 #define REAL 0
 #define FAKE 1
 #define SWEEP 2
@@ -117,7 +119,11 @@ ServoControl r_servo(9, 270);
 ServoControl l_servo(5, 270);
 DashDial l_dash(l_driver, l_servo, 0, 4500, 0, 100, 10, 265);
 DashDial r_dash(r_driver, r_servo, 0, 4, 0, 100, 10, 265);
-SoftwareSerial ss(7,8); // GPS pins (rx,tx)
+
+// AuxDAQ
+uint32_t prev_auxdaq_send = 0;
+std::vector<BaseBlock*> auxdaq_sensors = { &engine_rpm, &secondary_rpm, &gps };
+
 
 // Setup for Xbee Comms
 #define BAUD 230400
@@ -141,6 +147,8 @@ void setup() {
   serial.begin(2000000);
   serial.attach_output_block(time_sensor, TIME_DASH_US);
 
+  AUXDAQ_SERIAL.begin(9600);
+
   #if SD_CONNECTED
   sdcomm.begin(NULL);
   sdcomm.attach_output_block(time_sensor, TIME_DASH_US);
@@ -158,7 +166,6 @@ void setup() {
   // Clear the buffer
   display.clearDisplay();
 
-  ss.begin(9600);
   gps.begin();
 
   l_dash.begin();
@@ -323,6 +330,21 @@ void loop() {
       digitalWrite(26, LOW);
       digitalWrite(27, LOW);
       digitalWrite(28, LOW);
+    }
+    if (abs(t - prev_auxdaq_send) >= 20000) {
+        std::vector<uint8_t> packet;
+        for (BaseBlock *block : auxdaq_sensors) {
+          uint8_t data[block->get_packlen()];
+          block->pack(data);
+          for (int i = 0; i < block->get_packlen(); ++i) {
+            packet.push_back(data[i]);
+          }
+        }
+        for (int i = 0; i < 7; ++i) {
+          packet.push_back(0xff);
+        }
+        packet.push_back(0xf0);
+        AUXDAQ_SERIAL.write(packet.data(), packet.size());
     }
     #endif
     

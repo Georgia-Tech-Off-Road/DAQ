@@ -2,6 +2,7 @@
 #define COMPOSHKOSH_H
 
 // Communication Libraries
+#include "SoftwareSerial.h"
 #include "SerialComms.h"
 #include "WirelessComms.h"
 #include "SDComms.h"
@@ -17,6 +18,7 @@
 #include "VoltageSensor.h"
 #include "DigitalSensor.h"
 #include "BrakePressureSensor.h"
+#include "GPSSensor.h"
 
 // Control Libraries
 #include "DigitalOutput.h"
@@ -50,5 +52,8 @@
 #define LED_PANEL_WHITE   9
 #define LED_PANEL_RED     8
 #define BTN_PANEL         7
+
+// Dashboard
+#define DASHBOARD_SERIAL Serial6
 
 #endif

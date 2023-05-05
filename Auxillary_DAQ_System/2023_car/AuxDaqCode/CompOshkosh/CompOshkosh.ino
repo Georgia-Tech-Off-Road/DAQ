@@ -17,11 +17,16 @@ LDS<float> lds_pedal3(LDS_PEDAL_STROKE);
 LDS<float> lds_pedal4(LDS_PEDAL_STROKE);
 BrakePressureSensor brake_front;
 BrakePressureSensor brake_rear;
+GPSSensor gps(Serial1); // Serial doesn't matter, only getting data from dashboard 
 
 SpeedSensor speed_engine(SPEED_ENGINE_PPR);
 SpeedSensor speed_secondary(SPEED_SECONDARY_PPR);
 IMUSensor imu;
 TimeSensor ts;
+
+// Dashboard
+std::vector<uint8_t> dashboard_packet;
+std::vector<BaseBlock*> dashboard_sensors = { &speed_engine, &speed_secondary, &gps };
 
 // Control IO
 DigitalSensor btn_panel;
@@ -36,11 +41,33 @@ DigitalOutput sd_writecommand;
 
 ClockTimerf serial_timer(50);
 
+void read_dashboard() {
+  while (DASHBOARD_SERIAL.available()) {
+    dashboard_packet.push_back(DASHBOARD_SERIAL.read());
+    for (int i = 0; i < 7; ++i) {
+      if (dashboard_packet[dashboard_packet.size() - 8 + i] != 0xff) {
+        return;
+      }
+    }
+    if (dashboard_packet[dashboard_packet.size() - 1] == 0xf0) {
+      uint8_t *data = dashboard_packet.data();
+      int idx = 0;
+      for (BaseBlock *block : dashboard_sensors) {
+        block->unpack(data + idx);
+        idx += block->get_packlen();
+      }
+      dashboard_packet.clear();
+    }
+  }
+}
+
 void setup() {
   // Comms
   serial.begin(230400);
   wireless.begin(230400);
   sdcomms.set_sending_period(1000);
+
+  DASHBOARD_SERIAL.begin(9600);
 
   // Sensors
   SPI.begin();
@@ -60,7 +87,7 @@ void setup() {
 
   // Control IO
   btn_panel.begin(BTN_PANEL, INPUT_PULLUP);
-   led_onboard.begin(LED_ONBOARD);
+  led_onboard.begin(LED_ONBOARD);
   led_onboard.set_setcb(MAKE_CB(sd_writecommand.get_data()));
   led_panel_white.begin(LED_PANEL_WHITE);
   led_panel_white.set_flipcb(MAKE_CB(led_panel_white_ct.ready()));
@@ -83,6 +110,7 @@ void setup() {
   Comms::multiple_attach_output_block(imu,  IMU_SENSOR, all_comms);
   Comms::multiple_attach_output_block(ts, TIME_AUXDAQ_US, all_comms);
   Comms::multiple_attach_output_block(sd_writecommand, FLAG_AUXDAQ_SDWRITE, all_comms);
+  Comms::multiple_attach_output_block(gps, GPS_SENSOR, all_comms);
   
   edge_detect.attach_input_block(wireless_writecommand, EDGE_RISING);
   edge_detect.attach_input_block(btn_panel, EDGE_FALLING);
@@ -101,8 +129,8 @@ void loop() {
   lds_pedal4.update();
   //brake_front.update();
   //brake_rear.update();
-  speed_engine.update();
-  speed_secondary.update();
+  //speed_engine.update();
+  //speed_secondary.update();
   imu.update();
   ts.update(); 
 
@@ -114,6 +142,8 @@ void loop() {
 
   wireless.update();
   sdcomms.update();
+
+  read_dashboard();
   
   if(serial_timer.ready(ts.get_data())){
     btn_panel.update();
