@@ -46,7 +46,7 @@
 #define SPEED_SECONDARY     22
 #define SPEED_SECONDARY_PPR 30
 
-#define IMU 27
+#define IMU 26
 
 #define LED_ONBOARD       30
 #define LED_PANEL_WHITE   9
