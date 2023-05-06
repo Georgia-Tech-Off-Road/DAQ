@@ -1,6 +1,6 @@
 #include "CompOshkosh.h"
 
-#define DEBUG_PRINTING 1
+#define DEBUG_PRINTING 0
 #define USE_SERIAL 1
 
 // Communications
@@ -99,10 +99,10 @@ void setup() {
   
   wireless.attach_input_block(wireless_writecommand, COMMAND_AUXDAQ_SDWRITE);
   
-  Comms::multiple_attach_output_block(lds_pedal1, LDS_PEDAL_MM, all_comms);
-  Comms::multiple_attach_output_block(lds_pedal2, LDS_PEDAL_MM, all_comms);
-  Comms::multiple_attach_output_block(lds_pedal3, LDS_PEDAL_MM, all_comms);
-  Comms::multiple_attach_output_block(lds_pedal4, LDS_PEDAL_MM, all_comms);
+  Comms::multiple_attach_output_block(lds_pedal1, LDS_FRONTRIGHTSHOCK_MM , all_comms);
+  Comms::multiple_attach_output_block(lds_pedal2, LDS_FRONTLEFTSHOCK_MM , all_comms);
+  Comms::multiple_attach_output_block(lds_pedal3, LDS_BACKRIGHTSHOCK_MM, all_comms);
+  Comms::multiple_attach_output_block(lds_pedal4, LDS_BACKLEFTSHOCK_MM , all_comms);
   Comms::multiple_attach_output_block(brake_front, PRESSURE_FRONTBRAKE_PSI, all_comms);
   Comms::multiple_attach_output_block(brake_rear,  PRESSURE_REARBRAKE_PSI , all_comms);
   Comms::multiple_attach_output_block(speed_engine, SPEED_2021CAR_ENGINE600_RPM, all_comms);
