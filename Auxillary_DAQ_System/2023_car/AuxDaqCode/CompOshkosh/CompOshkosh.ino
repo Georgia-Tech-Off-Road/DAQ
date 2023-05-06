@@ -78,8 +78,8 @@ void setup() {
   adc.attach_sensor(lds_pedal2, LDS_PEDAL2);
   adc.attach_sensor(lds_pedal3, LDS_PEDAL3);
   adc.attach_sensor(lds_pedal4, LDS_PEDAL4);
-  //adc.attach_sensor(brake_front, BRAKE_FRONT);
-  //adc.attach_sensor(brake_rear , BRAKE_REAR );
+  adc.attach_sensor(brake_front, BRAKE_FRONT);
+  adc.attach_sensor(brake_rear , BRAKE_REAR );
 
   speed_engine.begin(SPEED_ENGINE);
   speed_secondary.begin(SPEED_SECONDARY);
@@ -103,8 +103,8 @@ void setup() {
   Comms::multiple_attach_output_block(lds_pedal2, LDS_PEDAL_MM, all_comms);
   Comms::multiple_attach_output_block(lds_pedal3, LDS_PEDAL_MM, all_comms);
   Comms::multiple_attach_output_block(lds_pedal4, LDS_PEDAL_MM, all_comms);
-  //Comms::multiple_attach_output_block(brake_front, PRESSURE_FRONTBRAKE_PSI, all_comms);
-  //Comms::multiple_attach_output_block(brake_rear,  PRESSURE_REARBRAKE_PSI , all_comms);
+  Comms::multiple_attach_output_block(brake_front, PRESSURE_FRONTBRAKE_PSI, all_comms);
+  Comms::multiple_attach_output_block(brake_rear,  PRESSURE_REARBRAKE_PSI , all_comms);
   Comms::multiple_attach_output_block(speed_engine, SPEED_2021CAR_ENGINE600_RPM, all_comms);
   Comms::multiple_attach_output_block(speed_secondary, SPEED_2021CAR_SECONDARY30_RPM, all_comms);
   Comms::multiple_attach_output_block(imu,  IMU_SENSOR, all_comms);
@@ -127,12 +127,13 @@ void loop() {
   lds_pedal2.update();
   lds_pedal3.update();
   lds_pedal4.update();
-  //brake_front.update();
-  //brake_rear.update();
+  brake_front.update();
+  brake_rear.update();
   //speed_engine.update();
   //speed_secondary.update();
   imu.update();
-  ts.update(); 
+  ts.update();
+  //gps.update();
 
   led_onboard.update();
   led_panel_white.update();
@@ -153,8 +154,8 @@ void loop() {
       Serial.print("PEDAL2:  "); Serial.println(lds_pedal2.get_data());
       Serial.print("PEDAL3:  "); Serial.println(lds_pedal3.get_data());
       Serial.print("PEDAL4:  "); Serial.println(lds_pedal4.get_data());
-      //Serial.print("FBRAKE: "); Serial.println(brake_front.get_data());
-      //Serial.print("RBRAKE: "); Serial.println(brake_rear.get_data());
+      Serial.print("FBRAKE: "); Serial.println(brake_front.get_data());
+      Serial.print("RBRAKE: "); Serial.println(brake_rear.get_data());
       Serial.print("ENGINE: "); Serial.println(speed_engine.get_data().speed);
       Serial.print("SECOND: "); Serial.print(speed_secondary.get_data().speed); Serial.print(", "); Serial.println(speed_secondary.get_data().position);
       Serial.print("IMU:    "); imu.printall(); Serial.println();

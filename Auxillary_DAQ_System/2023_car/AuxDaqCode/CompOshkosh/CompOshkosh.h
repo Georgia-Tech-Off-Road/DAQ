@@ -32,14 +32,14 @@
 #define ADC2 34
 #define ADC3 35
 
-#define LDS_PEDAL1        1
-#define LDS_PEDAL2        2
-#define LDS_PEDAL3        3
-#define LDS_PEDAL4        4
+#define LDS_PEDAL1        0
+#define LDS_PEDAL2        1
+#define LDS_PEDAL3        2
+#define LDS_PEDAL4        3
 #define LDS_PEDAL_STROKE 200
 
-// #define BRAKE_FRONT 0 // ADC3
-// #define BRAKE_REAR  1 // ADC3
+#define BRAKE_FRONT 4
+#define BRAKE_REAR  5
 
 #define SPEED_ENGINE        23
 #define SPEED_ENGINE_PPR    600
@@ -54,6 +54,6 @@
 #define BTN_PANEL         7
 
 // Dashboard
-#define DASHBOARD_SERIAL Serial6
+#define DASHBOARD_SERIAL Serial4
 
 #endif
