@@ -20,6 +20,9 @@
  *  - Create any global variables needed throughout the code
  */
 
+// Whether to print to Serial
+#define DEBUG_PRINTING 1
+
 // Tire RADIUS in inches
 #define TIRE_RADIUS 11
 // Gearbox ratio in transfer case from first gear
@@ -171,7 +174,6 @@ void setup() {
   l_dash.begin();
   r_dash.begin();
 
-  pinMode(17, INPUT);
   pinMode(33, OUTPUT);
   pinMode(31, OUTPUT);
   pinMode(29, OUTPUT);
@@ -264,20 +266,24 @@ void loop() {
         l_dash.update();
         r_dash.update();
         prev_update = t;
-        Serial.print("\nEngine Speed 1  (RPM): ");
-        Serial.println(engine_rpm.get_data().speed);
-        Serial.print("Secondary Speed (RPM): ");
-        Serial.println(secondary_rpm.get_data().speed);
-        Serial.print("\nEngine Position 1: ");
-        Serial.println(engine_rpm.get_data().position);
-        Serial.print("Secondary Position: ");
-        Serial.println(secondary_rpm.get_data().position);
-        Serial.print("\nGPS Speed: ");
-        Serial.println(gps.get_data().speed);
-        Serial.print("GPS Position: ");
-        Serial.print(gps.get_data().latitude);
-        Serial.print(", ");
-        Serial.println(gps.get_data().longitude);
+        if (DEBUG_PRINTING) {
+          Serial.print("\nEngine Speed 1  (RPM): ");
+          Serial.println(engine_rpm.get_data().speed);
+          Serial.print("Secondary Speed (RPM): ");
+          Serial.println(secondary_rpm.get_data().speed);
+          Serial.print("\nEngine Position 1: ");
+          Serial.println(engine_rpm.get_data().position);
+          Serial.print("Secondary Position: ");
+          Serial.println(secondary_rpm.get_data().position);
+          Serial.print("\nGPS Speed: ");
+          Serial.println(gps.get_data().speed);
+          Serial.print("GPS Position: ");
+          Serial.print(gps.get_data().latitude);
+          Serial.print(", ");
+          Serial.println(gps.get_data().longitude);
+          Serial.print("Last AuxDAQ Send: ");
+          Serial.println(prev_auxdaq_send);
+        }
     }
 
     //This code receives data from the Xbee
@@ -331,7 +337,7 @@ void loop() {
       digitalWrite(27, LOW);
       digitalWrite(28, LOW);
     }
-    if (abs(t - prev_auxdaq_send) >= 20000) {
+    if (abs(t - prev_auxdaq_send) >= 100000) {
         std::vector<uint8_t> packet;
         for (BaseBlock *block : auxdaq_sensors) {
           uint8_t data[block->get_packlen()];
@@ -345,6 +351,7 @@ void loop() {
         }
         packet.push_back(0xf0);
         AUXDAQ_SERIAL.write(packet.data(), packet.size());
+        prev_auxdaq_send = t;
     }
     #endif
     
