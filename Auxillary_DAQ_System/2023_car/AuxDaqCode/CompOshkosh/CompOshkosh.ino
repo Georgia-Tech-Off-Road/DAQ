@@ -1,6 +1,6 @@
 #include "CompOshkosh.h"
 
-#define DEBUG_PRINTING 0
+#define DEBUG_PRINTING 1
 #define USE_SERIAL 1
 
 // Communications
@@ -150,15 +150,16 @@ void loop() {
     btn_panel.update();
     if(DEBUG_PRINTING && USE_SERIAL){
       Serial.print("TIME:   "); Serial.println(ts.get_data());
-      Serial.print("PEDAL1:  "); Serial.println(lds_pedal1.get_data());
-      Serial.print("PEDAL2:  "); Serial.println(lds_pedal2.get_data());
-      Serial.print("PEDAL3:  "); Serial.println(lds_pedal3.get_data());
-      Serial.print("PEDAL4:  "); Serial.println(lds_pedal4.get_data());
+      Serial.print("PEDAL1: "); Serial.println(lds_pedal1.get_data());
+      Serial.print("PEDAL2: "); Serial.println(lds_pedal2.get_data());
+      Serial.print("PEDAL3: "); Serial.println(lds_pedal3.get_data());
+      Serial.print("PEDAL4: "); Serial.println(lds_pedal4.get_data());
       Serial.print("FBRAKE: "); Serial.println(brake_front.get_data());
       Serial.print("RBRAKE: "); Serial.println(brake_rear.get_data());
       Serial.print("ENGINE: "); Serial.println(speed_engine.get_data().speed);
       Serial.print("SECOND: "); Serial.print(speed_secondary.get_data().speed); Serial.print(", "); Serial.println(speed_secondary.get_data().position);
       Serial.print("IMU:    "); imu.printall(); Serial.println();
+      Serial.print("GPS:    "); Serial.print(gps.get_data().latitude); Serial.print(", "); Serial.println(gps.get_data().longitude);
       Serial.print("BUTTON: "); Serial.println(btn_panel.get_data());
       Serial.print("WRITE:  "); Serial.println(sd_writecommand.get_data());
       Serial.println();
