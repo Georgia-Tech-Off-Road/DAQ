@@ -127,7 +127,7 @@ DashDial r_dash(r_driver, r_servo, 0, 4, 0, 100, 10, 265);
 
 // AuxDAQ
 uint32_t prev_auxdaq_send = 0;
-std::vector<BaseBlock*> auxdaq_sensors = { &engine_rpm, &secondary_rpm, &gps };
+std::vector<BaseBlock*> auxdaq_sensors = { &engine_rpm, &secondary_rpm, &gps, &imu };
 
 
 // Setup for Xbee Comms
