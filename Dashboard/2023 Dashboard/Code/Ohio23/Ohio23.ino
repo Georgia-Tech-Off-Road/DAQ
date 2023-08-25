@@ -1,8 +1,8 @@
 /* -------- GTOR Dashboard Collection Template .ino File -------- *
  *
- * This file is for the dashboard during Oshkosh Comp, May 2023
+ * This file is for the dashboard during Ohio Comp, August/September 2023
  * 
- * Last updated: 05/04/2023
+ * Last updated: 08/24/2023
  * By: Param Pithadia
  */
 
@@ -59,6 +59,7 @@
 #include "DashDial.h"
 #include <Adafruit_SSD1306.h>
 #include "GPSSensor.h"
+#include "WT901.h"
 
 #include <Block.h>
 #include <SPI.h>
@@ -106,6 +107,7 @@ SpeedSensor engine_rpm(22);
 //600 PPR, Rotary Encoder
 SpeedSensor secondary_rpm(600);
 GPSSensor gps(Serial2);
+WT901 imu(Serial5);
 
 // Utility Libraries
 ClockTimerf debug(2); // Print debug messages at 2 Hz
@@ -161,6 +163,7 @@ void setup() {
   wireless.attach_output_block(secondary_rpm, SPEED_SECONDARY30_RPM);
   wireless.attach_output_block(engine_rpm, SPEED_ENGINE600_RPM);
   wireless.attach_output_block(gps, GPS_SENSOR);
+  wireless.attach_output_block(imu, DASHBOARD_IMU_WT901_TENNESSEE);
 
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
     Serial.println(F("SSD1306 allocation failed"));
@@ -170,6 +173,7 @@ void setup() {
   display.clearDisplay();
 
   gps.begin();
+  imu.begin(WT901::B4800);
 
   l_dash.begin();
   r_dash.begin();
@@ -245,11 +249,11 @@ void loop() {
     // Read speed sensors and update dials
     static uint32_t prev_change = 0;
     static uint32_t prev_update = 0;
-    static int16_t var = 0;
     uint32_t t = micros();
     secondary_rpm.update();
     engine_rpm.update();
     gps.update();
+    imu.update();
     if(abs(t - prev_change) >= 1000){
         // Calculate wheel speed in inches per minute
         float inches_per_min = engine_rpm.get_data().speed * 2 * 3.1415 * TIRE_RADIUS / GEARBOX_RATIO;
@@ -281,6 +285,8 @@ void loop() {
           Serial.print(gps.get_data().latitude);
           Serial.print(", ");
           Serial.println(gps.get_data().longitude);
+          Serial.print("\nAcc_mag: ");
+          Serial.println(imu.get_data().acc_mag);
           Serial.print("Last AuxDAQ Send: ");
           Serial.println(prev_auxdaq_send);
         }
