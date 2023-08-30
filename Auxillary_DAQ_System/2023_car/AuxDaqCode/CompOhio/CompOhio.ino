@@ -110,7 +110,7 @@ void setup() {
   Comms::multiple_attach_output_block(speed_engine, SPEED_2021CAR_ENGINE600_RPM, all_comms);
   Comms::multiple_attach_output_block(speed_secondary, SPEED_2021CAR_SECONDARY30_RPM, all_comms);
   Comms::multiple_attach_output_block(imu,  IMU_SENSOR, all_comms);
-  Comms::multiple_attach_output_block(imuDash,  DASHBOARD_IMU_WT901_TENNESSEE, all_comms);
+  // Comms::multiple_attach_output_block(imuDash,  DASHBOARD_IMU_WT901_TENNESSEE, all_comms);
   Comms::multiple_attach_output_block(ts, TIME_AUXDAQ_US, all_comms);
   Comms::multiple_attach_output_block(sd_writecommand, FLAG_AUXDAQ_SDWRITE, all_comms);
   Comms::multiple_attach_output_block(gps, GPS_SENSOR, all_comms);
@@ -163,7 +163,7 @@ void loop() {
       Serial.print("ENGINE: "); Serial.println(speed_engine.get_data().speed);
       Serial.print("SECOND: "); Serial.print(speed_secondary.get_data().speed); Serial.print(", "); Serial.println(speed_secondary.get_data().position);
       Serial.print("IMU:    "); imu.printall(); Serial.println();
-      // Serial.print("IMUDash:"); imuDash.printall(); Serial.println();
+      Serial.print("IMUDash:"); imuDash.printall(); Serial.println();
       Serial.print("GPS:    "); Serial.print(gps.get_data().latitude); Serial.print(", "); Serial.println(gps.get_data().longitude);
       Serial.print("BUTTON: "); Serial.println(btn_panel.get_data());
       Serial.print("WRITE:  "); Serial.println(sd_writecommand.get_data());
