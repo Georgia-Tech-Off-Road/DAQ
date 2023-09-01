@@ -110,7 +110,7 @@ void setup() {
   Comms::multiple_attach_output_block(speed_engine, SPEED_2021CAR_ENGINE600_RPM, all_comms);
   Comms::multiple_attach_output_block(speed_secondary, SPEED_2021CAR_SECONDARY30_RPM, all_comms);
   Comms::multiple_attach_output_block(imu,  IMU_SENSOR, all_comms);
-  // Comms::multiple_attach_output_block(imuDash,  DASHBOARD_IMU_WT901_TENNESSEE, all_comms);
+  Comms::multiple_attach_output_block(imuDash,  DASHBOARD_IMU_WT901_TENNESSEE, all_comms);
   Comms::multiple_attach_output_block(ts, TIME_AUXDAQ_US, all_comms);
   Comms::multiple_attach_output_block(sd_writecommand, FLAG_AUXDAQ_SDWRITE, all_comms);
   Comms::multiple_attach_output_block(gps, GPS_SENSOR, all_comms);

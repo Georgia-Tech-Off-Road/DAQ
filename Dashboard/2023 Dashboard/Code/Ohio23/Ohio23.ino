@@ -36,7 +36,6 @@
 /* -- Library Inclusions -- */
 // Communication Libraries (all libraries in GTORHardwareLibaries>Comms)
 #include "SerialComms.h"   // Teensy <-> PC
-#include "WirelessComms.h" // Teensy<->XBEE <-......-> XBEE<->Teensy
 #include "UARTComms.h"     // Teensy <-> Teensy
 #include "SDComms.h"       // Teensy -> SD Card
 #include "BlockId.h"       // Block Ids that are available for sensors
@@ -67,12 +66,6 @@
 
 
 /* -- Pin Definitions and Constants -- */
-// Change this definitions to change the mode that it operates in (only one should be uncommented at a time)
-// 1 = Send data over serial to DAATA application
-// 2 = Send debug information as print statements
-// 3 = Send debug information automatically collected from sensors to serial monitor
-#define OPERATION_MODE 0 // Send data over serial to DAATA application
-
 #define SD_CONNECTED false // Change this to true if you want to use an SD Card
 
 // If using aux daq then use the aux daq pin definition file
@@ -116,7 +109,6 @@ DigitalSensor btn;
 
 // Control Libraries
 LEDControl teensy_led(TEENSY_LED_PIN, 1); // Blink Teensy LED at 1 Hz
-WirelessComms wireless(Serial1);
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 TLC5952 r_driver(12, 11, 10);
 TLC5952 l_driver(3, 2, 4);
@@ -131,9 +123,6 @@ std::vector<BaseBlock*> auxdaq_sensors = { &engine_rpm, &secondary_rpm, &gps, &i
 
 
 // Setup for Xbee Comms
-#define BAUD 230400
-#define S1 Serial
-#define S2 Serial1
 ClockTimerf ct(1);
 DigitalOutput led;
 
@@ -149,8 +138,9 @@ char light;
  */
 
 void setup() {    
-  serial.begin(2000000);
-  serial.attach_output_block(time_sensor, TIME_DASH_US);
+  serial.begin(230400);
+  serial.attach_output_block(time_sensor, TIME_AUXDAQ_US);
+  serial.attach_output_block(imu, DASHBOARD_IMU_WT901_TENNESSEE);
 
   AUXDAQ_SERIAL.begin(9600);
 
@@ -158,12 +148,6 @@ void setup() {
   sdcomm.begin(NULL);
   sdcomm.attach_output_block(time_sensor, TIME_DASH_US);
   #endif
-
-  wireless.begin(115200);
-  wireless.attach_output_block(secondary_rpm, SPEED_SECONDARY30_RPM);
-  wireless.attach_output_block(engine_rpm, SPEED_ENGINE600_RPM);
-  wireless.attach_output_block(gps, GPS_SENSOR);
-  wireless.attach_output_block(imu, DASHBOARD_IMU_WT901_TENNESSEE);
 
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
     Serial.println(F("SSD1306 allocation failed"));
@@ -196,8 +180,6 @@ void setup() {
   pinMode(28, OUTPUT); //port for Stop
 
 //This is setup for the Xbee:
-  S1.begin(BAUD);
-  S2.begin(BAUD);
   led.begin(13);
   led.set_flipcb(MAKE_CB(ct.ready()));
 
@@ -287,16 +269,12 @@ void loop() {
           Serial.println(gps.get_data().longitude);
           Serial.print("\nAcc_mag: ");
           Serial.println(imu.get_data().acc_mag);
+          Serial.print("IMU: ");
+          imu.printall();
+          Serial.println();
           Serial.print("Last AuxDAQ Send: ");
           Serial.println(prev_auxdaq_send);
         }
-    }
-
-    //This code receives data from the Xbee
-    if(S2.available()) {
-      light = S2.read();
-      //this line prints the value sent, used for testing
-      Serial.println(light);
     }
 
     //This code controls the lights for sending driver messages
@@ -413,23 +391,13 @@ void loop() {
   // Update Control Objects
   teensy_led.update();
 
+  // Update Comms
+  // serial.update();
+
   // Update Communication Utilities
   #if SD_CONNECTED
   sdcomm.update();
   #endif
-  
-  #if OPERATION_MODE == 1
-  serial.update();
-  // Debug
-  #elif OPERATION_MODE == 2
-  serial.update_monitor();
-  #elif OPERATION_MODE == 3
-  if(debug.ready(current_time)){
-    Serial.println("Debug message...");
-  }
-  #endif
-
-  wireless.update();
 }
 
 void displaySpeed(uint32_t displayText, uint32_t displayTextTwo) {
