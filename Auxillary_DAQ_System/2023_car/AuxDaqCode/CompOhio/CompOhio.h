@@ -42,10 +42,10 @@
 #define BRAKE_FRONT 4
 #define BRAKE_REAR  5
 
-#define SPEED_ENGINE        23
-#define SPEED_ENGINE_PPR    600
-#define SPEED_SECONDARY     22
-#define SPEED_SECONDARY_PPR 30
+#define SPEED_ENGINE        22
+#define SPEED_ENGINE_PPR    30
+#define SPEED_SECONDARY     23
+#define SPEED_SECONDARY_PPR 600
 
 #define IMU 26
 
