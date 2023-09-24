@@ -69,6 +69,7 @@ void setup() {
   myScale.setSampleRate(NAU7802_SPS_320); //Increase to max sample rate
   myScale.calibrateAFE(); //Re-cal analog front end when we change gain, sample rate, or channel 
   myScale.setGain(NAU7802_GAIN_16);
+  myScale.setCalibrationFactor(1);
 
 
   serial.begin(115200);
