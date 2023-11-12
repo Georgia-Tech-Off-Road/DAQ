@@ -82,16 +82,18 @@ void loop() {
   if (motor_enable.get_data()) {
     motor_control.setSpeed(motor_speed.get_data());
   }
-
+  
   ads.update_sensors();
 
   tare_scale.update();
   motor_speed.update();
   motor_enable.update();
   load_cell_scale.update();
+  load_cell.update();
+  Serial.println(load_cell.get_data());
   
   //load_cell.set_scale(load_cell_scale.get_data());
-  serial_comms.update();
+  // serial_comms.update();
 }
 
 void startup_status() {
