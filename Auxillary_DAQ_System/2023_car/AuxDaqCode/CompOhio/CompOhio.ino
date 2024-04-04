@@ -11,14 +11,14 @@ SDComms sdcomms;
 // Sensors
 TeensyADC tadc;
 ADS8688 adc(ADC3);
-LDS<float> lds_pedal1(LDS_PEDAL_STROKE);
-LDS<float> lds_pedal2(LDS_PEDAL_STROKE);
-LDS<float> lds_pedal3(LDS_PEDAL_STROKE);
-LDS<float> lds_pedal4(LDS_PEDAL_STROKE);
+// LDS<float> lds_pedal1(LDS_PEDAL_STROKE);
+// LDS<float> lds_pedal2(LDS_PEDAL_STROKE);
+// LDS<float> lds_pedal3(LDS_PEDAL_STROKE);
+// LDS<float> lds_pedal4(LDS_PEDAL_STROKE);
 BrakePressureSensor brake_front;
 BrakePressureSensor brake_rear;
-GPSSensor gps(Serial1); // Serial doesn't matter, only getting data from dashboard 
-WT901 imuDash(Serial5); // Serial doesn't matter, only getting data from dashboard 
+// GPSSensor gps(Serial1); // Serial doesn't matter, only getting data from dashboard 
+// WT901 imuDash(Serial5); // Serial doesn't matter, only getting data from dashboard 
 
 SpeedSensor speed_engine(SPEED_ENGINE_PPR);
 SpeedSensor speed_secondary(SPEED_SECONDARY_PPR);
@@ -26,8 +26,8 @@ IMUSensor imu;
 TimeSensor ts;
 
 // Dashboard
-std::vector<uint8_t> dashboard_packet;
-std::vector<BaseBlock*> dashboard_sensors = { &speed_engine, &speed_secondary, &gps, &imuDash };
+// std::vector<uint8_t> dashboard_packet;
+// std::vector<BaseBlock*> dashboard_sensors = { &speed_engine, &speed_secondary, &gps, &imuDash };
 
 // Control IO
 DigitalSensor btn_panel;
@@ -42,25 +42,25 @@ DigitalOutput sd_writecommand;
 
 ClockTimerf serial_timer(50);
 
-void read_dashboard() {
-  while (DASHBOARD_SERIAL.available()) {
-    dashboard_packet.push_back(DASHBOARD_SERIAL.read());
-    for (int i = 0; i < 7; ++i) {
-      if (dashboard_packet[dashboard_packet.size() - 8 + i] != 0xff) {
-        return;
-      }
-    }
-    if (dashboard_packet[dashboard_packet.size() - 1] == 0xf0) {
-      uint8_t *data = dashboard_packet.data();
-      int idx = 0;
-      for (BaseBlock *block : dashboard_sensors) {
-        block->unpack(data + idx);
-        idx += block->get_packlen();
-      }
-      dashboard_packet.clear();
-    }
-  }
-}
+// void read_dashboard() {
+//   while (DASHBOARD_SERIAL.available()) {
+//     dashboard_packet.push_back(DASHBOARD_SERIAL.read());
+//     for (int i = 0; i < 7; ++i) {
+//       if (dashboard_packet[dashboard_packet.size() - 8 + i] != 0xff) {
+//         return;
+//       }
+//     }
+//     if (dashboard_packet[dashboard_packet.size() - 1] == 0xf0) {
+//       uint8_t *data = dashboard_packet.data();
+//       int idx = 0;
+//       for (BaseBlock *block : dashboard_sensors) {
+//         block->unpack(data + idx);
+//         idx += block->get_packlen();
+//       }
+//       dashboard_packet.clear();
+//     }
+//   }
+// }
 
 void setup() {
   // Comms
@@ -75,17 +75,17 @@ void setup() {
   adc.begin();
   pinMode(ADC1, OUTPUT); digitalWrite(ADC1, HIGH);
   pinMode(ADC2, OUTPUT); digitalWrite(ADC2, HIGH);
-  adc.attach_sensor(lds_pedal1, LDS_PEDAL1);
-  adc.attach_sensor(lds_pedal2, LDS_PEDAL2);
-  adc.attach_sensor(lds_pedal3, LDS_PEDAL3);
-  adc.attach_sensor(lds_pedal4, LDS_PEDAL4);
+  // adc.attach_sensor(lds_pedal1, LDS_PEDAL1);
+  // adc.attach_sensor(lds_pedal2, LDS_PEDAL2);
+  // adc.attach_sensor(lds_pedal3, LDS_PEDAL3);
+  // adc.attach_sensor(lds_pedal4, LDS_PEDAL4);
   adc.attach_sensor(brake_front, BRAKE_FRONT);
   adc.attach_sensor(brake_rear , BRAKE_REAR );
 
   speed_engine.begin(SPEED_ENGINE);
   speed_secondary.begin(SPEED_SECONDARY);
-  imu.begin(IMU);
-  imuDash.begin(WT901::B4800);
+  // imu.begin(IMU);
+  // imuDash.begin(WT901::B4800);
 
   // Control IO
   btn_panel.begin(BTN_PANEL, INPUT_PULLUP);
@@ -101,19 +101,19 @@ void setup() {
   
   wireless.attach_input_block(wireless_writecommand, COMMAND_AUXDAQ_SDWRITE);
   
-  Comms::multiple_attach_output_block(lds_pedal1, LDS_FRONTRIGHTSHOCK_MM , all_comms);
-  Comms::multiple_attach_output_block(lds_pedal2, LDS_FRONTLEFTSHOCK_MM , all_comms);
-  Comms::multiple_attach_output_block(lds_pedal3, LDS_BACKRIGHTSHOCK_MM, all_comms);
-  Comms::multiple_attach_output_block(lds_pedal4, LDS_BACKLEFTSHOCK_MM , all_comms);
+  // Comms::multiple_attach_output_block(lds_pedal1, LDS_FRONTRIGHTSHOCK_MM , all_comms);
+  // Comms::multiple_attach_output_block(lds_pedal2, LDS_FRONTLEFTSHOCK_MM , all_comms);
+  // Comms::multiple_attach_output_block(lds_pedal3, LDS_BACKRIGHTSHOCK_MM, all_comms);
+  // Comms::multiple_attach_output_block(lds_pedal4, LDS_BACKLEFTSHOCK_MM , all_comms);
   Comms::multiple_attach_output_block(brake_front, PRESSURE_FRONTBRAKE_PSI, all_comms);
   Comms::multiple_attach_output_block(brake_rear,  PRESSURE_REARBRAKE_PSI , all_comms);
   Comms::multiple_attach_output_block(speed_engine, SPEED_2021CAR_ENGINE600_RPM, all_comms);
   Comms::multiple_attach_output_block(speed_secondary, SPEED_2021CAR_SECONDARY30_RPM, all_comms);
-  Comms::multiple_attach_output_block(imu,  IMU_SENSOR, all_comms);
-  Comms::multiple_attach_output_block(imuDash,  DASHBOARD_IMU_WT901_TENNESSEE, all_comms);
+  // Comms::multiple_attach_output_block(imu,  IMU_SENSOR, all_comms);
+  // Comms::multiple_attach_output_block(imuDash,  DASHBOARD_IMU_WT901_TENNESSEE, all_comms);
   Comms::multiple_attach_output_block(ts, TIME_AUXDAQ_US, all_comms);
   Comms::multiple_attach_output_block(sd_writecommand, FLAG_AUXDAQ_SDWRITE, all_comms);
-  Comms::multiple_attach_output_block(gps, GPS_SENSOR, all_comms);
+  // Comms::multiple_attach_output_block(gps, GPS_SENSOR, all_comms);
   
   edge_detect.attach_input_block(wireless_writecommand, EDGE_RISING);
   edge_detect.attach_input_block(btn_panel, EDGE_FALLING);
@@ -126,16 +126,16 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  lds_pedal1.update();
-  lds_pedal2.update();
-  lds_pedal3.update();
-  lds_pedal4.update();
+  // lds_pedal1.update();
+  // lds_pedal2.update();
+  // lds_pedal3.update();
+  // lds_pedal4.update();
   brake_front.update();
   brake_rear.update();
-  //speed_engine.update();
-  //speed_secondary.update();
+  speed_engine.update();
+  speed_secondary.update();
   imu.update();
-  imuDash.update();
+  // imuDash.update();
   ts.update();
   //gps.update();
 
@@ -148,23 +148,23 @@ void loop() {
   wireless.update();
   sdcomms.update();
 
-  read_dashboard();
+  // read_dashboard();
   
   if(serial_timer.ready(ts.get_data())){
     btn_panel.update();
     if(DEBUG_PRINTING && USE_SERIAL){
       Serial.print("TIME:   "); Serial.println(ts.get_data());
-      Serial.print("PEDAL1: "); Serial.println(lds_pedal1.get_data());
-      Serial.print("PEDAL2: "); Serial.println(lds_pedal2.get_data());
-      Serial.print("PEDAL3: "); Serial.println(lds_pedal3.get_data());
-      Serial.print("PEDAL4: "); Serial.println(lds_pedal4.get_data());
+      // Serial.print("PEDAL1: "); Serial.println(lds_pedal1.get_data());
+      // Serial.print("PEDAL2: "); Serial.println(lds_pedal2.get_data());
+      // Serial.print("PEDAL3: "); Serial.println(lds_pedal3.get_data());
+      // Serial.print("PEDAL4: "); Serial.println(lds_pedal4.get_data());
       Serial.print("FBRAKE: "); Serial.println(brake_front.get_data());
       Serial.print("RBRAKE: "); Serial.println(brake_rear.get_data());
       Serial.print("ENGINE: "); Serial.println(speed_engine.get_data().speed);
       Serial.print("SECOND: "); Serial.print(speed_secondary.get_data().speed); Serial.print(", "); Serial.println(speed_secondary.get_data().position);
-      Serial.print("IMU:    "); imu.printall(); Serial.println();
-      Serial.print("IMUDash:"); imuDash.printall(); Serial.println();
-      Serial.print("GPS:    "); Serial.print(gps.get_data().latitude); Serial.print(", "); Serial.println(gps.get_data().longitude);
+      // Serial.print("IMU:    "); imu.printall(); Serial.println();
+      // Serial.print("IMUDash:"); imuDash.printall(); Serial.println();
+      // Serial.print("GPS:    "); Serial.print(gps.get_data().latitude); Serial.print(", "); Serial.println(gps.get_data().longitude);
       Serial.print("BUTTON: "); Serial.println(btn_panel.get_data());
       Serial.print("WRITE:  "); Serial.println(sd_writecommand.get_data());
       Serial.println();

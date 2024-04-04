@@ -39,14 +39,14 @@
 #define LDS_PEDAL4        3
 #define LDS_PEDAL_STROKE 200
 
-#define BRAKE_FRONT 4
-#define BRAKE_REAR  5
+#define BRAKE_FRONT 0
+#define BRAKE_REAR  2
 
-#define SPEED_ENGINE        22
+#define SPEED_ENGINE        17
 #define SPEED_ENGINE_PPR    30
-#define SPEED_SECONDARY     23
+#define SPEED_SECONDARY     16
 #define SPEED_SECONDARY_PPR 600
-
+,
 #define IMU 26
 
 #define LED_ONBOARD       30
