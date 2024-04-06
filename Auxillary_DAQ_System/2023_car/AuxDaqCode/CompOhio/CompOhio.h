@@ -46,8 +46,12 @@
 #define SPEED_ENGINE_PPR    30
 #define SPEED_SECONDARY     16
 #define SPEED_SECONDARY_PPR 600
-,
 #define IMU 26
+
+#define SPEED_WHEEL_L 21
+#define SPEED_WHEEL_R 20
+#define SPEED_WHEEL_PPR 30
+
 
 #define LED_ONBOARD       30
 #define LED_PANEL_WHITE   9

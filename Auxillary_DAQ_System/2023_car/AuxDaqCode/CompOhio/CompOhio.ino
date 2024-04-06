@@ -22,6 +22,8 @@ BrakePressureSensor brake_rear;
 
 SpeedSensor speed_engine(SPEED_ENGINE_PPR);
 SpeedSensor speed_secondary(SPEED_SECONDARY_PPR);
+SpeedSensor speed_wheel_l(SPEED_WHEEL_PPR);
+SpeedSensor speed_wheel_r(SPEED_WHEEL_PPR);
 IMUSensor imu;
 TimeSensor ts;
 
@@ -84,6 +86,8 @@ void setup() {
 
   speed_engine.begin(SPEED_ENGINE);
   speed_secondary.begin(SPEED_SECONDARY);
+  speed_wheel_l.begin(SPEED_WHEEL_L);
+   speed_wheel_l.begin(SPEED_WHEEL_R);
   // imu.begin(IMU);
   // imuDash.begin(WT901::B4800);
 
@@ -109,6 +113,8 @@ void setup() {
   Comms::multiple_attach_output_block(brake_rear,  PRESSURE_REARBRAKE_PSI , all_comms);
   Comms::multiple_attach_output_block(speed_engine, SPEED_2021CAR_ENGINE600_RPM, all_comms);
   Comms::multiple_attach_output_block(speed_secondary, SPEED_2021CAR_SECONDARY30_RPM, all_comms);
+  Comms::multiple_attach_output_block(speed_wheel_l, SPEED_WHEEL_FL, all_comms);
+  Comms::multiple_attach_output_block(speed_wheel_r, SPEED_WHEEL_FR, all_comms);
   // Comms::multiple_attach_output_block(imu,  IMU_SENSOR, all_comms);
   // Comms::multiple_attach_output_block(imuDash,  DASHBOARD_IMU_WT901_TENNESSEE, all_comms);
   Comms::multiple_attach_output_block(ts, TIME_AUXDAQ_US, all_comms);
@@ -153,20 +159,23 @@ void loop() {
   if(serial_timer.ready(ts.get_data())){
     btn_panel.update();
     if(DEBUG_PRINTING && USE_SERIAL){
-      Serial.print("TIME:   "); Serial.println(ts.get_data());
+      // Serial.print("TIME:   "); Serial.println(ts.get_data());
       // Serial.print("PEDAL1: "); Serial.println(lds_pedal1.get_data());
       // Serial.print("PEDAL2: "); Serial.println(lds_pedal2.get_data());
       // Serial.print("PEDAL3: "); Serial.println(lds_pedal3.get_data());
       // Serial.print("PEDAL4: "); Serial.println(lds_pedal4.get_data());
-      Serial.print("FBRAKE: "); Serial.println(brake_front.get_data());
-      Serial.print("RBRAKE: "); Serial.println(brake_rear.get_data());
+      // Serial.print("FBRAKE: "); Serial.println(brake_front.get_data());
+      // Serial.print("RBRAKE: "); Serial.println(brake_rear.get_data());
       Serial.print("ENGINE: "); Serial.println(speed_engine.get_data().speed);
       Serial.print("SECOND: "); Serial.print(speed_secondary.get_data().speed); Serial.print(", "); Serial.println(speed_secondary.get_data().position);
+      Serial.print("Wheel left: "); Serial.println(speed_wheel_l.get_data().speed);
+      Serial.print("wheel right: "); Serial.println(speed_wheel_r.get_data().speed);      
+      
       // Serial.print("IMU:    "); imu.printall(); Serial.println();
       // Serial.print("IMUDash:"); imuDash.printall(); Serial.println();
       // Serial.print("GPS:    "); Serial.print(gps.get_data().latitude); Serial.print(", "); Serial.println(gps.get_data().longitude);
-      Serial.print("BUTTON: "); Serial.println(btn_panel.get_data());
-      Serial.print("WRITE:  "); Serial.println(sd_writecommand.get_data());
+      // Serial.print("BUTTON: "); Serial.println(btn_panel.get_data());
+      // Serial.print("WRITE:  "); Serial.println(sd_writecommand.get_data());
       Serial.println();
     }
   } 
