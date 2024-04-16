@@ -8,8 +8,8 @@
 
 
 //set up
-const int numPins = 2;
-byte pinList[numPins] = { 14};
+const int numPins = 1;
+byte pinList[numPins] = { 22};
 const int ledsPerStrip = 144;
 const int bytesPerLED = 3;
 //buffers
@@ -25,6 +25,8 @@ int colors[] = { BLUE, GREEN, YELLOW, ORANGE, RED };
 int maxSignal=200;
 //speedSensor
 SpeedSensor speedSensor(SPEED_ENGINE_PPR);
+//TESTING XD
+int color=0;
 LED ledClass(&speedSensor, &leds, ledsPerStrip);
 void setup() {
   leds.begin();
@@ -34,5 +36,31 @@ void setup() {
 
 void loop() {
   speedSensor.update();
-  ledClass.SetStrip();
+  Serial.println(speedSensor.get_speed());
+  if(speedSensor.get_speed()/(double) MAX_RPM<0.2)
+  {
+    color=BLUE;
+  }
+  else if(speedSensor.get_speed()/(double) MAX_RPM<0.4)
+  {
+    color=GREEN;
+  }
+  else if(speedSensor.get_speed()/(double) MAX_RPM<0.6)
+  {
+    color=YELLOW;
+  }
+  
+  else if(speedSensor.get_speed()/(double) MAX_RPM<0.8)
+  {
+    color=ORANGE;
+  }
+  else
+  {
+    color=RED;
+  }
+  
+  
+  ledClass.SetStrip(color);
+  // leds.setPixel(1, RED);
+
 }
