@@ -168,7 +168,7 @@ void loop() {
   led_onboard.update();
   led_panel_white.update();
   led_panel_red.update();
-  ledStrip.SetStrip();
+  ledStrip.SetStrip(speed_engine.get_data().speed, MAX_RPM);
   edge_detect.update();
 
   wireless.update();
