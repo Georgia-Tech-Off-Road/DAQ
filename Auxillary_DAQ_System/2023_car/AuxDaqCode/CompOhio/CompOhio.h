@@ -27,8 +27,15 @@
 // Utility
 #include "ClockTimer.h"
 #include "EdgeDetector.h"
+#include "../../../../LED_strip/arduinoLED/arduinoLED.h"
+#include "../../../../LED_strip/OctoWS2811/OctoWS2811.h"
+
+
 
 // Pins and Constants
+#define LED_STRIP1 14
+#define BYTES_PER_LED
+
 #define ADC1 33
 #define ADC2 34
 #define ADC3 35

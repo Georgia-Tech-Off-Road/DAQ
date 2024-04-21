@@ -1,8 +1,22 @@
 #include "CompOhio.h"
-
 #define DEBUG_PRINTING 1
 #define USE_SERIAL 1
-
+////////////////////////////////////////////////////////Testing/////////////////////////////////////////////////////////////
+//LED
+//set up
+const int numPins = 1;
+byte pinList[numPins] = { LED_STRIP1 };
+const int ledsPerStrip = LED_STRIP_LENGTH;
+const int bytesPerLED = BYTES_PER_LED;
+//buffers
+DMAMEM int displayMemory[ledsPerStrip * numPins * bytesPerLED / 4];
+int drawingMemory[ledsPerStrip * numPins * bytesPerLED / 4];
+//set configuration as GRB and 800kHz
+const int config = WS2811_GRB | WS2811_800kHz;
+//create OctoWS2811 and strip object
+OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config, numPins, pinList);
+LED ledStrip(&leds, ledsPerStrip);
+//////////////////////////////////////////////////////////Testing///////////////////////////////////////////////////////////
 // Communications
 WirelessComms wireless(Serial1);
 SerialComms serial(Serial);
@@ -17,8 +31,8 @@ ADS8688 adc(ADC3);
 // LDS<float> lds_pedal4(LDS_PEDAL_STROKE);
 BrakePressureSensor brake_front;
 BrakePressureSensor brake_rear;
-// GPSSensor gps(Serial1); // Serial doesn't matter, only getting data from dashboard 
-// WT901 imuDash(Serial5); // Serial doesn't matter, only getting data from dashboard 
+// GPSSensor gps(Serial1); // Serial doesn't matter, only getting data from dashboard
+// WT901 imuDash(Serial5); // Serial doesn't matter, only getting data from dashboard
 
 SpeedSensor speed_engine(SPEED_ENGINE_PPR);
 SpeedSensor speed_secondary(SPEED_SECONDARY_PPR);
@@ -65,6 +79,10 @@ ClockTimerf serial_timer(50);
 // }
 
 void setup() {
+  //LED
+  leds.begin();
+  leds.show();
+
   // Comms
   serial.begin(230400);
   wireless.begin(230400);
@@ -75,19 +93,21 @@ void setup() {
   // Sensors
   SPI.begin();
   adc.begin();
-  pinMode(ADC1, OUTPUT); digitalWrite(ADC1, HIGH);
-  pinMode(ADC2, OUTPUT); digitalWrite(ADC2, HIGH);
+  pinMode(ADC1, OUTPUT);
+  digitalWrite(ADC1, HIGH);
+  pinMode(ADC2, OUTPUT);
+  digitalWrite(ADC2, HIGH);
   // adc.attach_sensor(lds_pedal1, LDS_PEDAL1);
   // adc.attach_sensor(lds_pedal2, LDS_PEDAL2);
   // adc.attach_sensor(lds_pedal3, LDS_PEDAL3);
   // adc.attach_sensor(lds_pedal4, LDS_PEDAL4);
   adc.attach_sensor(brake_front, BRAKE_FRONT);
-  adc.attach_sensor(brake_rear , BRAKE_REAR );
+  adc.attach_sensor(brake_rear, BRAKE_REAR);
 
   speed_engine.begin(SPEED_ENGINE);
   speed_secondary.begin(SPEED_SECONDARY);
   speed_wheel_l.begin(SPEED_WHEEL_L);
-   speed_wheel_l.begin(SPEED_WHEEL_R);
+  speed_wheel_l.begin(SPEED_WHEEL_R);
   // imu.begin(IMU);
   // imuDash.begin(WT901::B4800);
 
@@ -102,15 +122,15 @@ void setup() {
 
   // Communications
   std::vector<Comms*> all_comms = { &wireless, &serial, &sdcomms };
-  
+
   wireless.attach_input_block(wireless_writecommand, COMMAND_AUXDAQ_SDWRITE);
-  
+
   // Comms::multiple_attach_output_block(lds_pedal1, LDS_FRONTRIGHTSHOCK_MM , all_comms);
   // Comms::multiple_attach_output_block(lds_pedal2, LDS_FRONTLEFTSHOCK_MM , all_comms);
   // Comms::multiple_attach_output_block(lds_pedal3, LDS_BACKRIGHTSHOCK_MM, all_comms);
   // Comms::multiple_attach_output_block(lds_pedal4, LDS_BACKLEFTSHOCK_MM , all_comms);
   Comms::multiple_attach_output_block(brake_front, PRESSURE_FRONTBRAKE_PSI, all_comms);
-  Comms::multiple_attach_output_block(brake_rear,  PRESSURE_REARBRAKE_PSI , all_comms);
+  Comms::multiple_attach_output_block(brake_rear, PRESSURE_REARBRAKE_PSI, all_comms);
   Comms::multiple_attach_output_block(speed_engine, SPEED_2021CAR_ENGINE600_RPM, all_comms);
   Comms::multiple_attach_output_block(speed_secondary, SPEED_2021CAR_SECONDARY30_RPM, all_comms);
   Comms::multiple_attach_output_block(speed_wheel_l, SPEED_WHEEL_FL, all_comms);
@@ -120,10 +140,10 @@ void setup() {
   Comms::multiple_attach_output_block(ts, TIME_AUXDAQ_US, all_comms);
   Comms::multiple_attach_output_block(sd_writecommand, FLAG_AUXDAQ_SDWRITE, all_comms);
   // Comms::multiple_attach_output_block(gps, GPS_SENSOR, all_comms);
-  
+
   edge_detect.attach_input_block(wireless_writecommand, EDGE_RISING);
   edge_detect.attach_input_block(btn_panel, EDGE_FALLING);
-  edge_detect.set_cb([](){
+  edge_detect.set_cb([]() {
     sd_writecommand.flip();
     sdcomms.begin();
   });
@@ -148,17 +168,17 @@ void loop() {
   led_onboard.update();
   led_panel_white.update();
   led_panel_red.update();
-
+  ledStrip.SetStrip();
   edge_detect.update();
 
   wireless.update();
   sdcomms.update();
 
   // read_dashboard();
-  
-  if(serial_timer.ready(ts.get_data())){
+
+  if (serial_timer.ready(ts.get_data())) {
     btn_panel.update();
-    if(DEBUG_PRINTING && USE_SERIAL){
+    if (DEBUG_PRINTING && USE_SERIAL) {
       // Serial.print("TIME:   "); Serial.println(ts.get_data());
       // Serial.print("PEDAL1: "); Serial.println(lds_pedal1.get_data());
       // Serial.print("PEDAL2: "); Serial.println(lds_pedal2.get_data());
@@ -166,11 +186,17 @@ void loop() {
       // Serial.print("PEDAL4: "); Serial.println(lds_pedal4.get_data());
       // Serial.print("FBRAKE: "); Serial.println(brake_front.get_data());
       // Serial.print("RBRAKE: "); Serial.println(brake_rear.get_data());
-      Serial.print("ENGINE: "); Serial.println(speed_engine.get_data().speed);
-      Serial.print("SECOND: "); Serial.print(speed_secondary.get_data().speed); Serial.print(", "); Serial.println(speed_secondary.get_data().position);
-      Serial.print("Wheel left: "); Serial.println(speed_wheel_l.get_data().speed);
-      Serial.print("wheel right: "); Serial.println(speed_wheel_r.get_data().speed);      
-      
+      Serial.print("ENGINE: ");
+      Serial.println(speed_engine.get_data().speed);
+      Serial.print("SECOND: ");
+      Serial.print(speed_secondary.get_data().speed);
+      Serial.print(", ");
+      Serial.println(speed_secondary.get_data().position);
+      Serial.print("Wheel left: ");
+      Serial.println(speed_wheel_l.get_data().speed);
+      Serial.print("wheel right: ");
+      Serial.println(speed_wheel_r.get_data().speed);
+
       // Serial.print("IMU:    "); imu.printall(); Serial.println();
       // Serial.print("IMUDash:"); imuDash.printall(); Serial.println();
       // Serial.print("GPS:    "); Serial.print(gps.get_data().latitude); Serial.print(", "); Serial.println(gps.get_data().longitude);
@@ -178,8 +204,8 @@ void loop() {
       // Serial.print("WRITE:  "); Serial.println(sd_writecommand.get_data());
       Serial.println();
     }
-  } 
-  if(DEBUG_PRINTING && USE_SERIAL) {
+  }
+  if (DEBUG_PRINTING && USE_SERIAL) {
     serial.update();
   }
 }
